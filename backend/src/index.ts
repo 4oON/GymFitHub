@@ -100,7 +100,7 @@ app.get('/api/system/health', async (_req: Request, res: Response) => {
 app.get('/', (_req: Request, res: Response) => {
   res.json({
     message: 'ZenFit Backend API',
-    version: '1.0.1', // 更新版本号以触发Railway重新部署
+    version: '1.0.2', // GFH sync test
     status: 'running',
     endpoints: {
       systemHealth: '/api/system/health',
