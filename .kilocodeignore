@@ -1,0 +1,133 @@
+# Kilo Code Ignore File
+# 此文件用于排除不需要包含在AI上下文中的文件和目录
+# 减少上下文大小，提高响应速度
+
+# ===== 依赖和构建产物 =====
+node_modules/
+dist/
+build/
+.next/
+out/
+.cache/
+.turbo/
+.vercel/
+.netlify/
+
+# ===== 包管理器锁文件 =====
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+
+# ===== 环境和配置 =====
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# ===== IDE和编辑器 =====
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# ===== Git相关 =====
+.git/
+.gitignore
+
+# ===== 日志文件 =====
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ===== 测试覆盖率 =====
+coverage/
+.nyc_output/
+*.lcov
+
+# ===== 临时文件 =====
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# ===== 数据库文件 =====
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== 媒体文件（大文件） =====
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+*.flac
+
+# ===== 图片文件（可选，如果项目图片很多） =====
+# *.jpg
+# *.jpeg
+# *.png
+# *.gif
+# *.webp
+# *.svg
+
+# ===== 字体文件 =====
+Font/
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.eot
+
+# ===== 文档和指南（如果太多） =====
+ docs/
+ *.md
+
+# ===== 特定于项目的排除 =====
+# 排除大型数据文件
+backend/prisma/migrations/
+*.sql
+
+# 排除测试文件（如果不需要）
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+test/
+tests/
+
+# 排除示例和模板文件
+examples/
+templates/
+*.example
+
+# 排除备份文件
+*.backup
+*.bak
+*.old
+
+# ===== 其他大型或不必要的文件 =====
+# 排除HTML测试文件
+test_*.html
+*_test.html
+
+# 排除JSON数据文件（如果很大）
+# *.json
+
+# 排除TypeScript声明文件（如果自动生成）
+# *.d.ts
+
+# ===== 用户特定排除 =====
+# 添加你自己想要排除的文件或目录
+# 例如：
+# my-large-file.txt
+# my-large-directory/

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 布局调试器 - ZenFit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #f9fafb;
+        }
+
+        #root {
+            width: 100%;
+            height: 100vh;
+        }
+
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            color: #dc2626;
+            padding: 1rem;
+            background: #fee2e2;
+            border: 1px solid #fecaca;
+            border-radius: 0.5rem;
+            margin: 1rem;
+        }
+
+        .info {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+
+        .info h1 {
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .info p {
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .info ul {
+            margin-left: 1.5rem;
+            color: #6b7280;
+            line-height: 1.8;
+        }
+
+        .info code {
+            background: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">
+        <div class="loading">
+            <div class="spinner"></div>
+            <p>正在加载 PDF 调试器...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        // 显示使用说明
+        const showInfo = () => {
+            const root = document.getElementById('root');
+            root.innerHTML = `
+                <div class="info">
+                    <h1>📄 PDF 布局调试器</h1>
+                    <p>这是一个用于调试和优化 ZenFit PDF 导出布局的工具。</p>
+                    
+                    <h2 style="margin-top: 2rem; margin-bottom: 1rem; color: #111827;">🚀 如何使用</h2>
+                    <p>由于这是一个 React 组件，需要在 React 应用中使用。请按照以下步骤操作：</p>
+                    
+                    <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: #374151;">方法 1: 在开发者测试面板中使用</h3>
+                    <ul>
+                        <li>打开 <code>frontend/src/dev/components/DeveloperTestPanel.tsx</code></li>
+                        <li>添加一个新的标签页用于 PDF 调试器</li>
+                        <li>导入并使用 <code>PDFDebugger</code> 组件</li>
+                    </ul>
+
+                    <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: #374151;">方法 2: 创建独立路由</h3>
+                    <ul>
+                        <li>在 <code>frontend/src/App.tsx</code> 中添加新路由</li>
+                        <li>路径: <code>/pdf-debugger</code></li>
+                        <li>组件: <code>PDFDebugger</code></li>
+                    </ul>
+
+                    <h2 style="margin-top: 2rem; margin-bottom: 1rem; color: #111827;">📦 已创建的文件</h2>
+                    <ul>
+                        <li><code>frontend/src/features/export/types/PDFConfig.ts</code> - PDF 配置接口</li>
+                        <li><code>frontend/src/features/export/components/PDFDebugger.tsx</code> - 调试器组件</li>
+                        <li><code>frontend/src/features/export/services/PDFExportService.ts</code> - 已更新支持配置参数</li>
+                    </ul>
+
+                    <h2 style="margin-top: 2rem; margin-bottom: 1rem; color: #111827;">✨ 功能特性</h2>
+                    <ul>
+                        <li>左侧控制面板：使用滑动条实时调整布局参数</li>
+                        <li>右侧预览区域：实时显示 PDF 预览（防抖优化）</li>
+                        <li>快捷操作：重置为默认值、应用建议配置、下载 PDF</li>
+                        <li>可调参数包括：
+                            <ul style="margin-top: 0.5rem;">
+                                <li>Hero Metrics: 标签间距、字间距、分割线位置、字号等</li>
+                                <li>Table: 标题间距、表头字号、行高等</li>
+                                <li>Global: 页面边距、线条宽度</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h2 style="margin-top: 2rem; margin-bottom: 1rem; color: #111827;">🔧 已修复的问题</h2>
+                    <ul>
+                        <li>✅ SETS 指标右对齐，与顶部横线对齐</li>
+                        <li>✅ 删除了 MUSCLE ACTIVATION ANALYSIS 上方的多余分割线</li>
+                        <li>✅ 所有硬编码参数已提取为可配置对象</li>
+                        <li>✅ 支持实时预览和参数调整</li>
+                    </ul>
+
+                    <a href="/" class="button">返回主页</a>
+                </div>
+            `;
+        };
+
+        // 检查是否在 React 环境中
+        if (typeof React === 'undefined') {
+            showInfo();
+        } else {
+            // 如果在 React 环境中，尝试加载组件
+            import('./frontend/src/features/export/components/PDFDebugger.tsx')
+                .then(module => {
+                    console.log('PDFDebugger 组件已加载');
+                })
+                .catch(err => {
+                    console.error('加载失败:', err);
+                    showInfo();
+                });
+        }
+    </script>
+</body>
+
+</html>

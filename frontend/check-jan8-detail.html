@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1月8号记录详细信息</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #00ff00;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: #2d2d2d;
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #ffff00;
+            margin-bottom: 15px;
+        }
+
+        pre {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .key {
+            color: #ff6b6b;
+        }
+
+        .string {
+            color: #6bcf7f;
+        }
+
+        .number {
+            color: #ffd93d;
+        }
+
+        .boolean {
+            color: #4dabf7;
+        }
+
+        .null {
+            color: #868e96;
+        }
+
+        button {
+            background: #00ff00;
+            color: #1e1e1e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #00cc00;
+        }
+
+        .warning {
+            color: #ffd93d;
+            background: #3d3d00;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .error {
+            color: #ff6b6b;
+            background: #3d0000;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .success {
+            color: #6bcf7f;
+            background: #003d00;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔍 1月8号记录详细信息</h1>
+
+        <div class="section">
+            <h2>📋 原始数据</h2>
+            <div id="rawData"></div>
+        </div>
+
+        <div class="section">
+            <h2>🔬 数据分析</h2>
+            <div id="analysis"></div>
+        </div>
+
+        <div class="section">
+            <h2>🧪 日期验证测试</h2>
+            <div id="dateTests"></div>
+        </div>
+
+        <div class="section">
+            <h2>💡 问题诊断</h2>
+            <div id="diagnosis"></div>
+        </div>
+
+        <div class="section">
+            <h2>🛠️ 修复建议</h2>
+            <div id="recommendations"></div>
+        </div>
+    </div>
+
+    <script>
+        function syntaxHighlight(json) {
+            if (typeof json != 'string') {
+                json = JSON.stringify(json, null, 2);
+            }
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                var cls = 'number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'key';
+                    } else {
+                        cls = 'string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function analyzeJan8Data() {
+            const historyStr = localStorage.getItem('zenfit_history');
+
+            if (!historyStr) {
+                document.getElementById('rawData').innerHTML = '<div class="error">❌ localStorage 中没有 zenfit_history 数据</div>';
+                return;
+            }
+
+            try {
+                const history = JSON.parse(historyStr);
+
+                // 找到1月8号的记录
+                const jan8Records = history.filter(session => {
+                    const d = new Date(session.date);
+                    return d.getFullYear() === 2026 && d.getMonth() === 0 && d.getDate() === 8;
+                });
+
+                if (jan8Records.length === 0) {
+                    document.getElementById('rawData').innerHTML = '<div class="error">❌ 未找到1月8号的记录</div>';
+                    return;
+                }
+
+                // 显示原始数据
+                const record = jan8Records[0];
+                document.getElementById('rawData').innerHTML = `
+                    <pre>${syntaxHighlight(record)}</pre>
+                `;
+
+                // 数据分析
+                let analysisHTML = '<div class="success">✅ 找到1月8号的记录</div>';
+                analysisHTML += `<p><strong>记录ID:</strong> ${record.id}</p>`;
+                analysisHTML += `<p><strong>日期字段:</strong> ${record.date}</p>`;
+                analysisHTML += `<p><strong>日期类型:</strong> ${typeof record.date}</p>`;
+
+                const dateObj = new Date(record.date);
+                analysisHTML += `<p><strong>Date对象:</strong> ${dateObj.toString()}</p>`;
+                analysisHTML += `<p><strong>ISO字符串:</strong> ${dateObj.toISOString()}</p>`;
+                analysisHTML += `<p><strong>时间戳:</strong> ${dateObj.getTime()}</p>`;
+                analysisHTML += `<p><strong>是否有效:</strong> ${!isNaN(dateObj.getTime()) ? '✅ 有效' : '❌ 无效'}</p>`;
+
+                // 检查其他关键字段
+                analysisHTML += `<p><strong>名称:</strong> ${record.name || 'N/A'}</p>`;
+                analysisHTML += `<p><strong>时长:</strong> ${record.durationMinutes || record.durationMin || 0} 分钟</p>`;
+                analysisHTML += `<p><strong>动作数:</strong> ${record.exercises?.length || 0}</p>`;
+                analysisHTML += `<p><strong>Volume:</strong> ${record.volumeLoad || 0} kg</p>`;
+
+                document.getElementById('analysis').innerHTML = analysisHTML;
+
+                // 日期验证测试
+                let testsHTML = '';
+
+                // 测试1: 基本日期验证
+                const isValidDate = !isNaN(dateObj.getTime());
+                testsHTML += `<p>测试1 - 基本日期验证: ${isValidDate ? '✅ 通过' : '❌ 失败'}</p>`;
+
+                // 测试2: 日期范围检查
+                const year = dateObj.getFullYear();
+                const month = dateObj.getMonth();
+                const day = dateObj.getDate();
+                const isCorrectDate = year === 2026 && month === 0 && day === 8;
+                testsHTML += `<p>测试2 - 日期匹配 (2026-01-08): ${isCorrectDate ? '✅ 通过' : '❌ 失败'}</p>`;
+                testsHTML += `<p>  - 年份: ${year} ${year === 2026 ? '✅' : '❌'}</p>`;
+                testsHTML += `<p>  - 月份: ${month} (0=1月) ${month === 0 ? '✅' : '❌'}</p>`;
+                testsHTML += `<p>  - 日期: ${day} ${day === 8 ? '✅' : '❌'}</p>`;
+
+                // 测试3: 检查是否有date字段
+                const hasDateField = record.hasOwnProperty('date') && record.date !== null && record.date !== undefined;
+                testsHTML += `<p>测试3 - date字段存在: ${hasDateField ? '✅ 通过' : '❌ 失败'}</p>`;
+
+                // 测试4: 模拟ProgressView的过滤逻辑
+                const passesFilter = hasDateField && !isNaN(new Date(record.date).getTime());
+                testsHTML += `<p>测试4 - 通过ProgressView过滤: ${passesFilter ? '✅ 通过' : '❌ 失败'}</p>`;
+
+                document.getElementById('dateTests').innerHTML = testsHTML;
+
+                // 问题诊断
+                let diagnosisHTML = '';
+
+                if (!isValidDate) {
+                    diagnosisHTML += '<div class="error">❌ 问题：日期无效</div>';
+                    diagnosisHTML += '<p>date字段无法转换为有效的Date对象</p>';
+                } else if (!isCorrectDate) {
+                    diagnosisHTML += '<div class="error">❌ 问题：日期不匹配</div>';
+                    diagnosisHTML += '<p>date字段的值不是2026年1月8号</p>';
+                } else if (!passesFilter) {
+                    diagnosisHTML += '<div class="error">❌ 问题：无法通过前端过滤</div>';
+                    diagnosisHTML += '<p>虽然日期有效，但被ProgressView的过滤逻辑排除了</p>';
+                } else {
+                    diagnosisHTML += '<div class="success">✅ 数据看起来正常</div>';
+                    diagnosisHTML += '<p>记录应该能在Progress页面显示</p>';
+                    diagnosisHTML += '<div class="warning">⚠️ 如果仍然看不到，可能是其他原因：</div>';
+                    diagnosisHTML += '<ul>';
+                    diagnosisHTML += '<li>React组件渲染问题</li>';
+                    diagnosisHTML += '<li>数据加载时机问题</li>';
+                    diagnosisHTML += '<li>浏览器缓存问题</li>';
+                    diagnosisHTML += '</ul>';
+                }
+
+                document.getElementById('diagnosis').innerHTML = diagnosisHTML;
+
+                // 修复建议
+                let recsHTML = '';
+
+                if (!isValidDate || !isCorrectDate) {
+                    recsHTML += '<div class="warning">🔧 建议修复数据</div>';
+                    recsHTML += '<p>1. 备份当前数据</p>';
+                    recsHTML += '<p>2. 修正日期字段</p>';
+                    recsHTML += '<p>3. 重新保存到localStorage</p>';
+                } else {
+                    recsHTML += '<div class="success">💡 数据正常，尝试以下操作：</div>';
+                    recsHTML += '<p>1. 清除浏览器缓存并刷新</p>';
+                    recsHTML += '<p>2. 检查浏览器控制台是否有错误</p>';
+                    recsHTML += '<p>3. 检查ProgressView组件是否正确加载history数据</p>';
+                    recsHTML += '<p>4. 在Progress页面打开控制台，查看日志输出</p>';
+                }
+
+                document.getElementById('recommendations').innerHTML = recsHTML;
+
+            } catch (error) {
+                document.getElementById('rawData').innerHTML = `<div class="error">❌ 解析数据失败: ${error.message}</div>`;
+            }
+        }
+
+        // 页面加载时自动分析
+        window.addEventListener('load', analyzeJan8Data);
+    </script>
+</body>
+
+</html>

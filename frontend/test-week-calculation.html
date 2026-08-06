@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周数计算测试</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        h1 {
+            color: #f87171;
+            margin-bottom: 30px;
+        }
+
+        .test-section {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .test-result {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #334155;
+            border-radius: 8px;
+        }
+
+        .test-result.success {
+            background: #065f46;
+            border-left: 4px solid #10b981;
+        }
+
+        .test-result.error {
+            background: #7f1d1d;
+            border-left: 4px solid #ef4444;
+        }
+
+        button {
+            background: linear-gradient(to right, #dc2626, #f97316);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .info {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔧 周数计算修复测试</h1>
+
+    <div class="test-section">
+        <h2>当前日期测试</h2>
+        <div id="current-date-test"></div>
+        <button onclick="testCurrentDate()">测试当前日期</button>
+    </div>
+
+    <div class="test-section">
+        <h2>跨年周测试</h2>
+        <div id="cross-year-test"></div>
+        <button onclick="testCrossYearWeeks()">测试跨年周</button>
+    </div>
+
+    <div class="test-section">
+        <h2>2026年1月测试</h2>
+        <div id="jan-2026-test"></div>
+        <button onclick="testJan2026()">测试2026年1月</button>
+    </div>
+
+    <script>
+        // 🔧 修复后的getWeekInfo函数
+        function getWeekInfo(date) {
+            const d = new Date(date);
+            d.setHours(0, 0, 0, 0);
+
+            // Set to nearest Thursday (current date + 4 - current day number)
+            // Make Sunday = day 7
+            d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+
+            // Get first day of year
+            const yearStart = new Date(d.getFullYear(), 0, 1);
+
+            // Calculate full weeks to nearest Thursday
+            const weekNumber = Math.ceil((((d.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+
+            // 使用Thursday的年份
+            return {
+                year: d.getFullYear(),
+                weekNumber
+            };
+        }
+
+        function getWeekDateRange(year, weekNumber) {
+            // Jan 4 is always in week 1
+            const jan4 = new Date(year, 0, 4);
+
+            // Get Monday of week 1 (ISO week starts on Monday)
+            const week1Monday = new Date(jan4);
+            const jan4Day = jan4.getDay();
+            // If Sunday (0), treat as 7
+            const daysFromMonday = jan4Day === 0 ? 6 : jan4Day - 1;
+            week1Monday.setDate(jan4.getDate() - daysFromMonday);
+
+            // Get Monday of target week
+            const targetMonday = new Date(week1Monday);
+            targetMonday.setDate(week1Monday.getDate() + (weekNumber - 1) * 7);
+
+            // Get Sunday of target week
+            const targetSunday = new Date(targetMonday);
+            targetSunday.setDate(targetMonday.getDate() + 6);
+
+            const formatDate = (d) => {
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            return {
+                start: formatDate(targetMonday),
+                end: formatDate(targetSunday)
+            };
+        }
+
+        function displayResult(containerId, date, weekInfo, dateRange, expected = null) {
+            const container = document.getElementById(containerId);
+            const isCorrect = expected ?
+                (weekInfo.year === expected.year && weekInfo.weekNumber === expected.weekNumber) :
+                true;
+
+            const resultClass = expected ? (isCorrect ? 'success' : 'error') : '';
+
+            container.innerHTML += `
+                <div class="test-result ${resultClass}">
+                    <div>
+                        <strong>${date.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            })}</strong>
+                        <div class="info">
+                            Week ${weekInfo.weekNumber}, ${weekInfo.year}
+                            <br>
+                            ${dateRange.start} 至 ${dateRange.end}
+                        </div>
+                    </div>
+                    ${expected ? `<div>${isCorrect ? '✅' : '❌'}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function testCurrentDate() {
+            const container = document.getElementById('current-date-test');
+            container.innerHTML = '';
+
+            const now = new Date();
+            const weekInfo = getWeekInfo(now);
+            const dateRange = getWeekDateRange(weekInfo.year, weekInfo.weekNumber);
+
+            displayResult('current-date-test', now, weekInfo, dateRange);
+        }
+
+        function testCrossYearWeeks() {
+            const container = document.getElementById('cross-year-test');
+            container.innerHTML = '';
+
+            // 测试2025年12月29日 - 应该是2026年第1周
+            const testDates = [
+                { date: new Date(2025, 11, 29), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2025, 11, 30), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2025, 11, 31), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2026, 0, 1), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2026, 0, 2), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2026, 0, 3), expected: { year: 2026, weekNumber: 1 } },
+                { date: new Date(2026, 0, 4), expected: { year: 2026, weekNumber: 1 } },
+            ];
+
+            testDates.forEach(({ date, expected }) => {
+                const weekInfo = getWeekInfo(date);
+                const dateRange = getWeekDateRange(weekInfo.year, weekInfo.weekNumber);
+                displayResult('cross-year-test', date, weekInfo, dateRange, expected);
+            });
+        }
+
+        function testJan2026() {
+            const container = document.getElementById('jan-2026-test');
+            container.innerHTML = '';
+
+            // 测试2026年1月的所有周
+            const testDates = [
+                new Date(2026, 0, 5),  // Week 2
+                new Date(2026, 0, 12), // Week 3
+                new Date(2026, 0, 19), // Week 4
+                new Date(2026, 0, 26), // Week 5
+            ];
+
+            testDates.forEach(date => {
+                const weekInfo = getWeekInfo(date);
+                const dateRange = getWeekDateRange(weekInfo.year, weekInfo.weekNumber);
+                displayResult('jan-2026-test', date, weekInfo, dateRange);
+            });
+        }
+
+        // 自动运行所有测试
+        window.onload = () => {
+            testCurrentDate();
+            testCrossYearWeeks();
+            testJan2026();
+        };
+    </script>
+</body>
+
+</html>

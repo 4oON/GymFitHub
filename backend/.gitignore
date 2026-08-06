@@ -1,0 +1,12 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# Prisma generated files
+/generated/prisma
+
+# env files
+.env
+.env.local

@@ -1,0 +1,16 @@
+[phases.setup]
+nixPkgs = ['nodejs_20', 'openssl']
+
+[phases.install]
+cmds = [
+    'npm ci --include=dev --no-audit --no-fund',
+    'npx prisma generate'
+]
+
+[phases.build]
+cmds = [
+    'npm run build'
+]
+
+[start]
+cmd = 'npx prisma db push && npm start'

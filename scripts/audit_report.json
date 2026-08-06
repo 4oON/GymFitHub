@@ -1,0 +1,750 @@
+{
+  "total": 83,
+  "issues_count": 83,
+  "issues": [
+    {
+      "id": "bb-hip-thrust",
+      "name": "Barbell Hip Thrust",
+      "nameZh": "杠铃臀桥",
+      "problems": [
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "smith-hip-thrust",
+      "name": "Smith Machine Hip Thrust",
+      "nameZh": "史密斯机臀桥",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-hip-thrust",
+      "name": "Dumbbell Hip Thrust",
+      "nameZh": "哑铃臀桥",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-glute-kickback",
+      "name": "Machine Glute Kickback",
+      "nameZh": "器械臀部后踢",
+      "problems": [
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "cable-pull-through",
+      "name": "Cable Pull Through",
+      "nameZh": "绳索胯下后拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "cable-kickback",
+      "name": "Cable Kickback",
+      "nameZh": "绳索后踢",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-abduction",
+      "name": "Machine Hip Abduction",
+      "nameZh": "坐姿髋外展",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-glute-bridge",
+      "name": "Glute Bridge",
+      "nameZh": "徒手臀桥",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-romanian-deadlift",
+      "name": "Dumbbell Romanian Deadlift",
+      "nameZh": "哑铃罗马尼亚硬拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-bulgarian-split-squat",
+      "name": "Bulgarian Split Squat",
+      "nameZh": "保加利亚分腿蹲",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "smith-donkey-kick",
+      "name": "Smith Machine Donkey Kick",
+      "nameZh": "史密斯机驴式后踢",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "landmine-sumo",
+      "name": "Landmine Sumo Deadlift",
+      "nameZh": "地雷架相扑硬拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-bench-press",
+      "name": "Dumbbell Bench Press",
+      "nameZh": "哑铃卧推",
+      "problems": [
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-bench-press",
+      "name": "Barbell Bench Press",
+      "nameZh": "杠铃卧推",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-chest-press",
+      "name": "Machine Chest Press",
+      "nameZh": "坐姿推胸机",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-incline-fly",
+      "name": "Dumbbell Incline Chest Fly",
+      "nameZh": "上斜哑铃飞鸟",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "smith-bench",
+      "name": "Smith Machine Bench Press",
+      "nameZh": "史密斯机卧推",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "lat-pulldown",
+      "name": "Machine Pulldown",
+      "nameZh": "器械下拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-bent-over-row",
+      "name": "Barbell Bent Over Row",
+      "nameZh": "杠铃俯身划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-single-arm-row",
+      "name": "Dumbbell Single Arm Row",
+      "nameZh": "单臂哑铃划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "seated-cable-row",
+      "name": "Machine Seated Cable Row",
+      "nameZh": "器械坐姿划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "band-row",
+      "name": "Band Row",
+      "nameZh": "弹力带划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-pendlay-row",
+      "name": "Barbell Pendlay Row",
+      "nameZh": "杠铃潘德雷划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-t-bar-row",
+      "name": "T-Bar Row",
+      "nameZh": "T杠划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-pullover",
+      "name": "Dumbbell Pullover",
+      "nameZh": "哑铃仰卧上拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-renegade-row",
+      "name": "Dumbbell Renegade Row",
+      "nameZh": "哑铃叛逆划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-lat-pulldown-v-bar",
+      "name": "V-Bar Lat Pulldown",
+      "nameZh": "V把高位下拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-assisted-pullup",
+      "name": "Assisted Pull Up",
+      "nameZh": "辅助引体向上",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-wide-pullup",
+      "name": "Wide Grip Pull Up",
+      "nameZh": "宽握引体向上",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-scapular-pullup",
+      "name": "Scapular Pull Up",
+      "nameZh": "肩胛引体",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-shrug",
+      "name": "Barbell Shrug",
+      "nameZh": "杠铃耸肩",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-upright-row",
+      "name": "Barbell Upright Row",
+      "nameZh": "杠铃直立划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-shrug",
+      "name": "Dumbbell Shrug",
+      "nameZh": "哑铃耸肩",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-farmers-walk",
+      "name": "Farmers Walk",
+      "nameZh": "农夫行走",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "mach-shrug",
+      "name": "Machine Shrug",
+      "nameZh": "器械耸肩",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "band-shrug",
+      "name": "Band Shrug",
+      "nameZh": "弹力带耸肩",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-pike-shrug",
+      "name": "Pike Shrug",
+      "nameZh": "徒手倒V式耸肩",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-elevated-pike-shrug",
+      "name": "Elevated Pike Shoulder Shrug",
+      "nameZh": "抬脚倒V式肩耸",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-squat",
+      "name": "Barbell Squat",
+      "nameZh": "杠铃深蹲",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-goblet-squat",
+      "name": "Dumbbell Goblet Squat",
+      "nameZh": "哑铃高脚杯深蹲",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "leg-press",
+      "name": "Machine Leg Press",
+      "nameZh": "坐姿腿推机",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-deadlift",
+      "name": "Barbell Deadlift",
+      "nameZh": "杠铃硬拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "leg-extension",
+      "name": "Machine Leg Extension",
+      "nameZh": "坐姿腿屈伸",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "seated-leg-curl",
+      "name": "Seated Leg Curl",
+      "nameZh": "坐姿腿弯举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "calf-raise-standing",
+      "name": "Machine Standing Calf Raises",
+      "nameZh": "器械站姿提踵",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-overhead-press",
+      "name": "Barbell Overhead Press",
+      "nameZh": "杠铃推举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-shoulder-press",
+      "name": "Dumbbell Seated Overhead Press",
+      "nameZh": "坐姿哑铃推举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-lateral-raise",
+      "name": "Dumbbell Lateral Raise",
+      "nameZh": "哑铃侧平举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "band-face-pull",
+      "name": "Band Face Pull",
+      "nameZh": "弹力带面拉",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "smith-upright-row",
+      "name": "Smith Machine Upright Row",
+      "nameZh": "史密斯机直立划船",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bb-curl",
+      "name": "Barbell Curl",
+      "nameZh": "杠铃弯举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-hammer-curl",
+      "name": "Dumbbell Hammer Curl",
+      "nameZh": "哑铃锤式弯举",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "tricep-pushdown",
+      "name": "Machine Tricep Pushdown",
+      "nameZh": "器械三头肌下压",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "skullcrusher",
+      "name": "Barbell Skullcrusher",
+      "nameZh": "杠铃仰卧臂屈伸",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "db-kickback",
+      "name": "Dumbbell Tricep Kickback",
+      "nameZh": "哑铃三头肌后伸",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-push-up",
+      "name": "Push Up",
+      "nameZh": "标准俯卧撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-diamond-push-up",
+      "name": "Diamond Push Ups",
+      "nameZh": "钻石俯卧撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-pike-push-up",
+      "name": "Pike Push Up",
+      "nameZh": "折刀俯卧撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-decline-push-up",
+      "name": "Decline Push Up",
+      "nameZh": "下斜俯卧撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-incline-push-up",
+      "name": "Incline Push Up",
+      "nameZh": "上斜俯卧撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-dips-bench",
+      "name": "Bench Dips",
+      "nameZh": "椅上臂屈伸",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-pull-ups",
+      "name": "Pull Ups",
+      "nameZh": "正手引体向上",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-chin-ups",
+      "name": "Chin Ups",
+      "nameZh": "反手引体向上",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-inverted-row",
+      "name": "Inverted Row",
+      "nameZh": "澳洲引体向上",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-superman",
+      "name": "Supermans",
+      "nameZh": "超人式",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-dead-hang",
+      "name": "Dead Hang",
+      "nameZh": "悬垂",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-squat",
+      "name": "Bodyweight Squat",
+      "nameZh": "徒手深蹲",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-jump-squat",
+      "name": "Jump Squats",
+      "nameZh": "深蹲跳",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-forward-lunge",
+      "name": "Forward Lunge",
+      "nameZh": "前弓步",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-reverse-lunge",
+      "name": "Reverse Lunge",
+      "nameZh": "后弓步",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-wall-sit",
+      "name": "Wall Sit",
+      "nameZh": "靠墙静蹲",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-plank",
+      "name": "Forearm Plank",
+      "nameZh": "平板支撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-side-plank",
+      "name": "Side Plank",
+      "nameZh": "侧平板支撑",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-crunch",
+      "name": "Crunch",
+      "nameZh": "卷腹",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-leg-raise",
+      "name": "Laying Leg Raise",
+      "nameZh": "仰卧抬腿",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-bicycle-crunch",
+      "name": "Bicycle Crunch",
+      "nameZh": "自行车卷腹",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-russian-twist",
+      "name": "Russian Twist",
+      "nameZh": "俄罗斯转体",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-dead-bug",
+      "name": "Dead Bug",
+      "nameZh": "死虫式",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-burpee",
+      "name": "Burpee",
+      "nameZh": "波比跳",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-mountain-climber",
+      "name": "Mountain Climber",
+      "nameZh": "登山者",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-jumping-jacks",
+      "name": "Jumping Jacks",
+      "nameZh": "开合跳",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-high-knees",
+      "name": "High Knees",
+      "nameZh": "高抬腿",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    },
+    {
+      "id": "bw-skaters",
+      "name": "Skaters",
+      "nameZh": "滑冰跳",
+      "problems": [
+        "missing_difficulty",
+        "missing_muscle_ids"
+      ]
+    }
+  ]
+}

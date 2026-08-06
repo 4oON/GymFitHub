@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重新生成1月份Weekly Reports</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .log {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .log-entry {
+            margin-bottom: 8px;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .log-info {
+            color: #4fc3f7;
+        }
+
+        .log-success {
+            color: #81c784;
+        }
+
+        .log-error {
+            color: #e57373;
+        }
+
+        .log-warning {
+            color: #ffb74d;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .warning-icon {
+            color: #ffc107;
+            font-size: 24px;
+        }
+
+        .warning-text {
+            color: #856404;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔄 重新生成1月份Weekly Reports</h1>
+        <p class="subtitle">清除旧的12月报告，重新生成最新的1月份训练报告</p>
+
+        <div class="warning-box">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-text">
+                <strong>注意：</strong>此操作将删除所有现有的Weekly Reports并重新生成。请确保你已经导出了需要保存的报告。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
+                </svg>
+                当前状态
+            </h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-label">现有报告数量</div>
+                    <div class="info-value" id="existingCount">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">训练记录数量</div>
+                    <div class="info-value" id="workoutCount">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">最早训练日期</div>
+                    <div class="info-value" id="earliestDate">-</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">最晚训练日期</div>
+                    <div class="info-value" id="latestDate">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                操作
+            </h2>
+            <div class="button-group">
+                <button class="btn-secondary" onclick="loadStatus()">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    刷新状态
+                </button>
+                <button class="btn-danger" onclick="clearReports()" id="clearBtn">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                        </path>
+                    </svg>
+                    清除旧报告
+                </button>
+                <button class="btn-primary" onclick="regenerateReports()" id="regenBtn">
+                    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15">
+                        </path>
+                    </svg>
+                    重新生成
+                </button>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>
+                <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                </svg>
+                操作日志
+            </h2>
+            <div class="log" id="log"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { openDB } from 'https://cdn.jsdelivr.net/npm/idb@8/+esm';
+
+        let db;
+        const logs = [];
+
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString('zh-CN');
+            logs.push({ timestamp, message, type });
+            updateLogDisplay();
+        }
+
+        function updateLogDisplay() {
+            const logEl = document.getElementById('log');
+            logEl.innerHTML = logs.map(log =>
+                `<div class="log-entry log-${log.type}">[${log.timestamp}] ${log.message}</div>`
+            ).join('');
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function updateProgress(percent) {
+            document.getElementById('progressBar').style.width = `${percent}%`;
+        }
+
+        async function initDB() {
+            try {
+                db = await openDB('ZenFitDB', 1);
+                addLog('✅ 数据库连接成功', 'success');
+                return true;
+            } catch (error) {
+                addLog(`❌ 数据库连接失败: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function loadStatus() {
+            addLog('🔍 正在加载状态...', 'info');
+
+            if (!db && !await initDB()) {
+                return;
+            }
+
+            try {
+                // 获取报告数量
+                const reports = await db.getAll('weeklyReports');
+                document.getElementById('existingCount').textContent = reports.length;
+                addLog(`📊 找到 ${reports.length} 个现有报告`, 'info');
+
+                // 获取训练记录
+                const workouts = await db.getAll('workouts');
+                document.getElementById('workoutCount').textContent = workouts.length;
+                addLog(`💪 找到 ${workouts.length} 条训练记录`, 'info');
+
+                if (workouts.length > 0) {
+                    const dates = workouts.map(w => new Date(w.date)).sort((a, b) => a - b);
+                    const earliest = dates[0].toLocaleDateString('zh-CN');
+                    const latest = dates[dates.length - 1].toLocaleDateString('zh-CN');
+
+                    document.getElementById('earliestDate').textContent = earliest;
+                    document.getElementById('latestDate').textContent = latest;
+
+                    addLog(`📅 训练日期范围: ${earliest} - ${latest}`, 'info');
+                }
+
+                addLog('✅ 状态加载完成', 'success');
+            } catch (error) {
+                addLog(`❌ 加载状态失败: ${error.message}`, 'error');
+            }
+        }
+
+        async function clearReports() {
+            if (!confirm('确定要删除所有现有的Weekly Reports吗？此操作不可撤销！')) {
+                return;
+            }
+
+            addLog('🗑️ 开始清除旧报告...', 'warning');
+            document.getElementById('clearBtn').disabled = true;
+            updateProgress(0);
+
+            try {
+                const tx = db.transaction('weeklyReports', 'readwrite');
+                await tx.objectStore('weeklyReports').clear();
+                await tx.done;
+
+                updateProgress(100);
+                addLog('✅ 所有旧报告已清除', 'success');
+                await loadStatus();
+            } catch (error) {
+                addLog(`❌ 清除失败: ${error.message}`, 'error');
+            } finally {
+                document.getElementById('clearBtn').disabled = false;
+                updateProgress(0);
+            }
+        }
+
+        function getWeekNumber(date) {
+            const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+            const dayNum = d.getUTCDay() || 7;
+            d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+            const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+            return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+        }
+
+        function getWeekRange(year, week) {
+            const jan4 = new Date(Date.UTC(year, 0, 4));
+            const jan4Day = jan4.getUTCDay() || 7;
+            const weekStart = new Date(jan4);
+            weekStart.setUTCDate(jan4.getUTCDate() - jan4Day + 1 + (week - 1) * 7);
+
+            const weekEnd = new Date(weekStart);
+            weekEnd.setUTCDate(weekStart.getUTCDate() + 6);
+
+            return { start: weekStart, end: weekEnd };
+        }
+
+        async function regenerateReports() {
+            if (!confirm('确定要重新生成所有Weekly Reports吗？')) {
+                return;
+            }
+
+            addLog('🚀 开始重新生成报告...', 'info');
+            document.getElementById('regenBtn').disabled = true;
+            updateProgress(0);
+
+            try {
+                // 1. 获取所有训练记录
+                const workouts = await db.getAll('workouts');
+                addLog(`📊 找到 ${workouts.length} 条训练记录`, 'info');
+
+                if (workouts.length === 0) {
+                    addLog('⚠️ 没有训练记录，无法生成报告', 'warning');
+                    return;
+                }
+
+                // 2. 按周分组
+                const weekGroups = new Map();
+                workouts.forEach(workout => {
+                    const date = new Date(workout.date);
+                    const year = date.getFullYear();
+                    const week = getWeekNumber(date);
+                    const key = `${year}-W${week}`;
+
+                    if (!weekGroups.has(key)) {
+                        weekGroups.set(key, []);
+                    }
+                    weekGroups.get(key).push(workout);
+                });
+
+                addLog(`📅 找到 ${weekGroups.size} 个训练周`, 'info');
+
+                // 3. 为每周生成报告
+                let processed = 0;
+                const total = weekGroups.size;
+
+                for (const [weekKey, weekWorkouts] of weekGroups) {
+                    const [year, weekStr] = weekKey.split('-W');
+                    const week = parseInt(weekStr);
+                    const { start, end } = getWeekRange(parseInt(year), week);
+
+                    addLog(`📝 生成 ${weekKey} 报告 (${start.toLocaleDateString('zh-CN')} - ${end.toLocaleDateString('zh-CN')})`, 'info');
+
+                    // 计算统计数据
+                    const stats = calculateWeekStats(weekWorkouts);
+
+                    const report = {
+                        id: `${year}-W${week.toString().padStart(2, '0')}`,
+                        year: parseInt(year),
+                        week: week,
+                        startDate: start.toISOString(),
+                        endDate: end.toISOString(),
+                        ...stats,
+                        createdAt: new Date().toISOString()
+                    };
+
+                    // 保存报告
+                    await db.put('weeklyReports', report);
+
+                    processed++;
+                    updateProgress((processed / total) * 100);
+                    addLog(`✅ ${weekKey} 报告生成完成`, 'success');
+                }
+
+                addLog(`🎉 所有报告生成完成！共生成 ${total} 个报告`, 'success');
+                await loadStatus();
+            } catch (error) {
+                addLog(`❌ 生成失败: ${error.message}`, 'error');
+                console.error(error);
+            } finally {
+                document.getElementById('regenBtn').disabled = false;
+            }
+        }
+
+        function calculateWeekStats(workouts) {
+            let totalVolume = 0;
+            let totalSets = 0;
+            let totalReps = 0;
+            let totalDuration = 0;
+            const muscleGroups = new Map();
+            const exercises = new Set();
+
+            workouts.forEach(workout => {
+                // 计算时长
+                if (workout.startTime && workout.endTime) {
+                    const duration = (new Date(workout.endTime) - new Date(workout.startTime)) / 1000 / 60;
+                    totalDuration += duration;
+                }
+
+                // 处理每个动作
+                workout.exercises?.forEach(exercise => {
+                    exercises.add(exercise.name);
+
+                    exercise.sets?.forEach(set => {
+                        if (set.weight && set.reps) {
+                            const volume = set.weight * set.reps;
+                            totalVolume += volume;
+                            totalSets++;
+                            totalReps += set.reps;
+
+                            // 统计肌肉群
+                            exercise.muscleGroups?.forEach(mg => {
+                                const current = muscleGroups.get(mg) || 0;
+                                muscleGroups.set(mg, current + volume);
+                            });
+                        }
+                    });
+                });
+            });
+
+            // 转换肌肉群数据
+            const muscleDistribution = Array.from(muscleGroups.entries()).map(([name, volume]) => ({
+                name,
+                volume,
+                percentage: (volume / totalVolume) * 100
+            })).sort((a, b) => b.volume - a.volume);
+
+            return {
+                totalVolume: Math.round(totalVolume),
+                totalSets,
+                totalReps,
+                totalDuration: Math.round(totalDuration),
+                workoutCount: workouts.length,
+                exerciseCount: exercises.size,
+                muscleDistribution,
+                workouts: workouts.map(w => ({
+                    id: w.id,
+                    date: w.date,
+                    duration: w.startTime && w.endTime ?
+                        Math.round((new Date(w.endTime) - new Date(w.startTime)) / 1000 / 60) : 0,
+                    exercises: w.exercises?.length || 0
+                }))
+            };
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('load', async () => {
+            addLog('🚀 工具启动', 'info');
+            await initDB();
+            await loadStatus();
+        });
+
+        // 导出函数到全局
+        window.loadStatus = loadStatus;
+        window.clearReports = clearReports;
+        window.regenerateReports = regenerateReports;
+    </script>
+</body>
+
+</html>

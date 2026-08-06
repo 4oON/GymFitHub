@@ -1,0 +1,300 @@
+[
+    {
+        "date": "2026-01-06",
+        "name": "背部/肩部训练",
+        "description": "Lats 74%, Shoulders 14%, Traps 12%",
+        "durationMin": 30,
+        "exercises": [
+            {
+                "exerciseId": "barbell-bent-over-row",
+                "name": "Barbell Bent Over Row",
+                "muscleGroup": "lats",
+                "sets": [
+                    {
+                        "reps": 10,
+                        "weight": 80,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 80,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 80,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "dumbbell-seated-overhead-press",
+                "name": "Dumbbell Seated Overhead Press",
+                "muscleGroup": "shoulders",
+                "sets": [
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "barbell-shrug",
+                "name": "Barbell Shrug",
+                "muscleGroup": "traps",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 100,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 100,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 100,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "date": "2026-01-08",
+        "name": "胸部/肩部/腹肌训练",
+        "description": "Chest 59%, Shoulders 31%, Abs 10%",
+        "durationMin": 22,
+        "exercises": [
+            {
+                "exerciseId": "dumbbell-seated-overhead-press",
+                "name": "Dumbbell Seated Overhead Press",
+                "muscleGroup": "shoulders",
+                "sets": [
+                    {
+                        "reps": 9,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 11,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "barbell-bench-press",
+                "name": "Barbell Bench Press",
+                "muscleGroup": "chest",
+                "sets": [
+                    {
+                        "reps": 10,
+                        "weight": 40,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 60,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "machine-overhand-overhead-press",
+                "name": "Machine Overhand Overhead Press",
+                "muscleGroup": "abs",
+                "sets": [
+                    {
+                        "reps": 13,
+                        "weight": 42.5,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 42.5,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "machine-pec-fly",
+                "name": "Machine Pec Fly",
+                "muscleGroup": "chest",
+                "sets": [
+                    {
+                        "reps": 11,
+                        "weight": 70,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 85,
+                        "completed": true
+                    },
+                    {
+                        "reps": 9,
+                        "weight": 70,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 70,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "machine-assisted-parallel-bar-dip",
+                "name": "Machine Assisted Parallel Bar Dip",
+                "muscleGroup": "chest",
+                "sets": [
+                    {
+                        "reps": 11,
+                        "weight": 50,
+                        "completed": true
+                    },
+                    {
+                        "reps": 15,
+                        "weight": 46,
+                        "completed": true
+                    },
+                    {
+                        "reps": 6,
+                        "weight": 60,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "date": "2025-12-30",
+        "name": "腿部训练",
+        "description": "Glutes 40%, Quads 36%, Hamstrings 23%",
+        "durationMin": 15,
+        "exercises": [
+            {
+                "exerciseId": "barbell-squat",
+                "name": "Barbell Squat",
+                "muscleGroup": "quads",
+                "sets": [
+                    {
+                        "reps": 11,
+                        "weight": 115,
+                        "completed": true
+                    },
+                    {
+                        "reps": 11,
+                        "weight": 115,
+                        "completed": true
+                    },
+                    {
+                        "reps": 11,
+                        "weight": 115,
+                        "completed": true
+                    },
+                    {
+                        "reps": 11,
+                        "weight": 115,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "barbell-deadlift",
+                "name": "Barbell Deadlift",
+                "muscleGroup": "hamstrings",
+                "sets": [
+                    {
+                        "reps": 9,
+                        "weight": 120,
+                        "completed": true
+                    },
+                    {
+                        "reps": 9,
+                        "weight": 120,
+                        "completed": true
+                    },
+                    {
+                        "reps": 9,
+                        "weight": 120,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "machine-hip-and-glute-kickback",
+                "name": "Machine Hip And Glute Kickback",
+                "muscleGroup": "glutes",
+                "sets": [
+                    {
+                        "reps": 16,
+                        "weight": 109,
+                        "completed": true
+                    },
+                    {
+                        "reps": 16,
+                        "weight": 109,
+                        "completed": true
+                    },
+                    {
+                        "reps": 16,
+                        "weight": 109,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "exerciseId": "dumbbell-forward-lunge",
+                "name": "Dumbbell Forward Lunge",
+                "muscleGroup": "glutes",
+                "sets": [
+                    {
+                        "reps": 6,
+                        "weight": 28,
+                        "completed": true
+                    },
+                    {
+                        "reps": 6,
+                        "weight": 28,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    }
+]

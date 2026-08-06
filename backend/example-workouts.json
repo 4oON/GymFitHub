@@ -1,0 +1,215 @@
+[
+    {
+        "name": "胸部训练",
+        "description": "从PDF导入的训练记录",
+        "date": "2026-01-06",
+        "durationMin": 45,
+        "exercises": [
+            {
+                "name": "卧推",
+                "muscleGroup": "Chest",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 65,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 70,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "哑铃飞鸟",
+                "muscleGroup": "Chest",
+                "sets": [
+                    {
+                        "reps": 15,
+                        "weight": 20,
+                        "completed": true
+                    },
+                    {
+                        "reps": 15,
+                        "weight": 20,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 22,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "上斜卧推",
+                "muscleGroup": "Chest",
+                "sets": [
+                    {
+                        "reps": 10,
+                        "weight": 50,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 50,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 55,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "背部训练",
+        "description": "从PDF导入的训练记录",
+        "date": "2026-01-08",
+        "durationMin": 50,
+        "exercises": [
+            {
+                "name": "引体向上",
+                "muscleGroup": "Lats",
+                "sets": [
+                    {
+                        "reps": 10,
+                        "weight": 0,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 0,
+                        "completed": true
+                    },
+                    {
+                        "reps": 6,
+                        "weight": 0,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "杠铃划船",
+                "muscleGroup": "Lats",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 60,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 65,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 70,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "坐姿划船",
+                "muscleGroup": "Lats",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 50,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 50,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 55,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "腿部训练",
+        "description": "从PDF导入的训练记录",
+        "date": "2026-01-10",
+        "durationMin": 60,
+        "exercises": [
+            {
+                "name": "深蹲",
+                "muscleGroup": "Quads",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 80,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 90,
+                        "completed": true
+                    },
+                    {
+                        "reps": 8,
+                        "weight": 100,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "腿举",
+                "muscleGroup": "Quads",
+                "sets": [
+                    {
+                        "reps": 15,
+                        "weight": 120,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 140,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 160,
+                        "completed": true
+                    }
+                ]
+            },
+            {
+                "name": "腿弯举",
+                "muscleGroup": "Hamstrings",
+                "sets": [
+                    {
+                        "reps": 12,
+                        "weight": 40,
+                        "completed": true
+                    },
+                    {
+                        "reps": 12,
+                        "weight": 45,
+                        "completed": true
+                    },
+                    {
+                        "reps": 10,
+                        "weight": 50,
+                        "completed": true
+                    }
+                ]
+            }
+        ]
+    }
+]

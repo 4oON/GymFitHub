@@ -1,0 +1,2116 @@
+{
+    "total_exercise_count": 89,
+    "data": [
+        {
+            "original_url": "https://musclewiki.com/exercise/neutral-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/neutral-pulldown",
+            "exercise_name_zh": "中立握下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-neutral-pulldown-front.jpg",
+            "muscle_module_en": "Neutral Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-neutral-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-neutral-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-assisted-neutral-chin-up",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-neutral-chin-up",
+            "exercise_name_zh": "辅助中立握引体向上",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-assisted-neutral-chin-up-side.jpg",
+            "muscle_module_en": "Machine Assisted Neutral Chin Up",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-neutral-chin-up-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-neutral-chin-up-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-low-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-low-row",
+            "exercise_name_zh": "杠片式低位划船机",
+            "muscle_module_zh": "后束三角肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-low-row-front.jpg",
+            "muscle_module_en": "Machine Plate Loaded Low Row",
+            "muscle_ids": [
+                "lats",
+                "biceps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-low-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-low-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-horizontal-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-horizontal-leg-press",
+            "exercise_name_zh": "水平腿推机",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-horizontal-leg-press-side.jpg",
+            "muscle_module_en": "Machine Horizontal Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-assisted-narrow-pull-up",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-narrow-pull-up",
+            "exercise_name_zh": "辅助引体向上（窄握）",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-assisted-narrow-pull-up-front.jpg",
+            "muscle_module_en": "Machine Assisted Narrow Pull Up",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-narrow-pull-up-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-narrow-pull-up-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-decline-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-decline-chest-press",
+            "exercise_name_zh": "杠片式下斜卧推机",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-decline-chest-press-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Decline Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-decline-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-decline-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-back-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-back-extension",
+            "exercise_name_zh": "器械背部伸展",
+            "muscle_module_zh": "下背部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-back-extension-side.jpg",
+            "muscle_module_en": "Machine Back Extension",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-back-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-back-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-abduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-abduction",
+            "exercise_name_zh": "器械髋外展",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-abduction-front.jpg",
+            "muscle_module_en": "Machine Hip Abduction",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-abduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-abduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-donkey-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-donkey-calf-raise",
+            "exercise_name_zh": "器械驴式提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-donkey-calf-raise-front.jpg",
+            "muscle_module_en": "Machine Donkey Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-donkey-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-donkey-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-pullover",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-pullover",
+            "exercise_name_zh": "器械过顶拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-pullover-side.jpg",
+            "muscle_module_en": "Machine Pullover",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pullover-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pullover-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-goblet-sissy-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-goblet-sissy-squat",
+            "exercise_name_zh": "器械高脚杯式西西深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-goblet-sissy-squat-side.jpg",
+            "muscle_module_en": "Machine Goblet Sissy Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-goblet-sissy-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-goblet-sissy-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-seated-shrug",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-shrug",
+            "exercise_name_zh": "坐姿器械耸肩",
+            "muscle_module_zh": "斜方肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-seated-shrug-side.jpg",
+            "muscle_module_en": "Machine Seated Shrug",
+            "muscle_ids": [
+                "traps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [
+                "斜方肌上束",
+                "斜方肌中束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-shrug-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-shrug-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-horizontal-leg-press-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-horizontal-leg-press-calf-raise",
+            "exercise_name_zh": "水平腿举机提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-horizontal-leg-press-calf-raise-side.jpg",
+            "muscle_module_en": "Machine Horizontal Leg Press Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-squat-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-squat-press",
+            "exercise_name_zh": "器械深蹲推举",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-squat-press-side.jpg",
+            "muscle_module_en": "Machine Squat Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-squat-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-squat-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/vertical-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/vertical-leg-press",
+            "exercise_name_zh": "垂直腿举",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-vertical-leg-press-side.jpg",
+            "muscle_module_en": "Vertical Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-vertical-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-vertical-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-horizontal-sissy-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-horizontal-sissy-leg-press",
+            "exercise_name_zh": "水平式Sissy腿举机",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-horizontal-sissy-leg-press-side.jpg",
+            "muscle_module_en": "Sissy",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-sissy-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-sissy-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-standing-shrug",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-shrug",
+            "exercise_name_zh": "站姿器械耸肩",
+            "muscle_module_zh": "斜方肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-standing-shrug-side.jpg",
+            "muscle_module_en": "Machine Standing Shrug",
+            "muscle_ids": [
+                "traps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [
+                "斜方肌上束",
+                "斜方肌中束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-shrug-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-shrug-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-dips",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-dips",
+            "exercise_name_zh": "器械双杠臂屈伸",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-dips-front.jpg",
+            "muscle_module_en": "Machine Dips",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-dips-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-dips-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/narrow-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/narrow-pulldown",
+            "exercise_name_zh": "窄握下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-narrow-pulldown-front.jpg",
+            "muscle_module_en": "Narrow Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-narrow-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-narrow-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-pendulum-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-pendulum-squat",
+            "exercise_name_zh": "摆臂式深蹲机",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-pendulum-squat-front.jpg",
+            "muscle_module_en": "Machine Pendulum Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pendulum-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pendulum-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-and-glute-adduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-and-glute-adduction",
+            "exercise_name_zh": "器械髋/臀内收",
+            "muscle_module_zh": "大腿内侧",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-and-glute-adduction-side.jpg",
+            "muscle_module_en": "Machine Hip And Glute Adduction",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-adduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-adduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-seated-leg-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-leg-curl",
+            "exercise_name_zh": "坐姿腿弯举机",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-seated-leg-curl-front.jpg",
+            "muscle_module_en": "Machine Seated Leg Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-leg-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-leg-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/gluteator",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/gluteator",
+            "exercise_name_zh": "Gluteator",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-gluteator-front.jpg",
+            "muscle_module_en": "Gluteator",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-gluteator-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-gluteator-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-front-military-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-front-military-press",
+            "exercise_name_zh": "配重盘式前置肩上推举机",
+            "muscle_module_zh": "前肩",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-front-military-press-side.jpg",
+            "muscle_module_en": "Machine Front Military Press",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-front-military-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-front-military-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-neutral-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-neutral-row",
+            "exercise_name_zh": "器械中立握划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-neutral-row-front.jpg",
+            "muscle_module_en": "Machine Neutral Row",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-neutral-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-neutral-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/rower-knee-tuck",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/rower-knee-tuck",
+            "exercise_name_zh": "划船机屈膝收腹",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-rower-knee-tuck-side.jpg",
+            "muscle_module_en": "Rower Knee Tuck",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-rower-knee-tuck-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-rower-knee-tuck-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-overhand-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-overhand-row",
+            "exercise_name_zh": "器械正握划船",
+            "muscle_module_zh": "后束三角肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-overhand-row-side.jpg",
+            "muscle_module_en": "Machine Overhand Row",
+            "muscle_ids": [
+                "lats",
+                "biceps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhand-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhand-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-chest-press",
+            "exercise_name_zh": "坐姿推胸机",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-chest-press-side.jpg",
+            "muscle_module_en": "Machine Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-tricep-pushdown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-tricep-pushdown",
+            "exercise_name_zh": "器械三头肌下压",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-tricep-pushdown-side.jpg",
+            "muscle_module_en": "Machine Tricep Pushdown",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-tricep-pushdown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-tricep-pushdown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-assisted-chin-up",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-chin-up",
+            "exercise_name_zh": "器械辅助反手引体向上",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-assisted-chin-up-front.jpg",
+            "muscle_module_en": "Machine Assisted Chin Up",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-chin-up-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-chin-up-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-overhand-overhead-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-overhand-overhead-press",
+            "exercise_name_zh": "器械正握肩上推举",
+            "muscle_module_zh": "前肩",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-overhand-overhead-press-front.jpg",
+            "muscle_module_en": "Machine Overhand Overhead Press",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhand-overhead-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhand-overhead-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-incline-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-incline-chest-press",
+            "exercise_name_zh": "杠片式上斜卧推机",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-incline-chest-press-front.jpg",
+            "muscle_module_en": "Machine Plate Loaded Incline Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-incline-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-incline-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-leg-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-leg-extension",
+            "exercise_name_zh": "杠片式坐姿腿伸展机",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-leg-extension-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Leg Extension",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-leg-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-leg-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-belt-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-belt-squat",
+            "exercise_name_zh": "器械腰带深蹲",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-belt-squat-front.jpg",
+            "muscle_module_en": "Machine Belt Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-belt-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-belt-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-glute-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-glute-kickback",
+            "exercise_name_zh": "器械臀部后踢",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-glute-kickback-front.jpg",
+            "muscle_module_en": "Machine Glute Kickback",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-glute-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-glute-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-45-degree-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-45-degree-calf-raise",
+            "exercise_name_zh": "器械45度提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-45-degree-calf-raise-side.jpg",
+            "muscle_module_en": "Machine 45 Degree Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-45-degree-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-45-degree-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-bicep-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-bicep-curl",
+            "exercise_name_zh": "器械二头肌弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-bicep-curl-front.jpg",
+            "muscle_module_en": "Machine Bicep Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-bicep-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-bicep-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/underhand-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/underhand-pulldown",
+            "exercise_name_zh": "反握下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-underhand-pulldown-side.jpg",
+            "muscle_module_en": "Underhand Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-underhand-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-underhand-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/rower-pike",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/rower-pike",
+            "exercise_name_zh": "划船机屈髋",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-rower-pike-side.jpg",
+            "muscle_module_en": "Rower Pike",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-rower-pike-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-rower-pike-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-adduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-adduction",
+            "exercise_name_zh": "坐姿大腿内收机",
+            "muscle_module_zh": "大腿内侧",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-adduction-front.jpg",
+            "muscle_module_en": "Machine Hip Adduction",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-adduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-adduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/stretcher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/stretcher",
+            "exercise_name_zh": "拉伸器",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-stretcher-side.jpg",
+            "muscle_module_en": "Stretcher",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-stretcher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-stretcher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-standing-shrugs",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-standing-shrugs",
+            "exercise_name_zh": "史密斯机站姿耸肩",
+            "muscle_module_zh": "斜方肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-standing-smith-machine-shrugs-front.jpg",
+            "muscle_module_en": "Smith Machine Standing Shrugs",
+            "muscle_ids": [
+                "traps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [
+                "斜方肌上束",
+                "斜方肌中束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-standing-smith-machine-shrugs-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-standing-smith-machine-shrugs-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-reverse-hyperextension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-reverse-hyperextension",
+            "exercise_name_zh": "反向髋伸机",
+            "muscle_module_zh": "下背部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-reverse-hyperextension-side.jpg",
+            "muscle_module_en": "Machine Reverse Hyperextension",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-reverse-hyperextension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-reverse-hyperextension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-crunch",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-crunch",
+            "exercise_name_zh": "器械卷腹",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-crunch-front.jpg",
+            "muscle_module_en": "Machine Crunch",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-crunch-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-crunch-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/seated-leg-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/seated-leg-curl",
+            "exercise_name_zh": "坐姿腿弯举",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-seated-leg-curl-front.jpg",
+            "muscle_module_en": "Seated Leg Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-seated-leg-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-seated-leg-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-horizontal-leg-press-calf-jump",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-horizontal-leg-press-calf-jump",
+            "exercise_name_zh": "水平腿举机小腿跳",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-horizontal-leg-press-calf-jump-front.jpg",
+            "muscle_module_en": "Machine Horizontal Leg Press Calf Jump",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-calf-jump-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-horizontal-leg-press-calf-jump-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-standing-lateral-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-lateral-raise",
+            "exercise_name_zh": "站姿器械侧平举",
+            "muscle_module_zh": "前肩",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-standing-lateral-raise-side.jpg",
+            "muscle_module_en": "Machine Standing Lateral Raise",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-lateral-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-lateral-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-pulldown",
+            "exercise_name_zh": "配重式下拉机",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-pulldown-front.jpg",
+            "muscle_module_en": "Machine Plate Loaded Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-seal-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-seal-row",
+            "exercise_name_zh": "杠铃片加载靠板划船机",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-seal-row-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Seal Row",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-seal-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-seal-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-standing-hamstring-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-hamstring-curl",
+            "exercise_name_zh": "器械站立腿弯举",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-standing-hamstring-curl-front.jpg",
+            "muscle_module_en": "Machine Standing Hamstring Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-hamstring-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-hamstring-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-assisted-pull-up",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-pull-up",
+            "exercise_name_zh": "辅助引体向上",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-assisted-pull-up-side.jpg",
+            "muscle_module_en": "Machine Assisted Pull Up",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-pull-up-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-pull-up-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-pulldown",
+            "exercise_name_zh": "器械下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-pulldown-front.jpg",
+            "muscle_module_en": "Machine Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-chest-supported-t-bar-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-chest-supported-t-bar-row",
+            "exercise_name_zh": "胸部支撑式T杠划船机",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-chest-supported-t-bar-row-side.jpg",
+            "muscle_module_en": "Machine Chest Supported T Bar Row",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-chest-supported-t-bar-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-chest-supported-t-bar-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-standing-plate-loaded-preacher-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-plate-loaded-preacher-curl",
+            "exercise_name_zh": "站立式杠片负重牧师弯举机",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-standing-plate-loaded-preacher-curl-front.jpg",
+            "muscle_module_en": "Machine Standing Plate Loaded Preacher Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-plate-loaded-preacher-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-standing-plate-loaded-preacher-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-low-incline-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-low-incline-bench-press",
+            "exercise_name_zh": "配重式低斜卧推机",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-low-incline-bench-press-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Low Incline Bench Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-low-incline-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-low-incline-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-and-glute-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-and-glute-kickback",
+            "exercise_name_zh": "器械臀部后踢",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-and-glute-kickback-front.jpg",
+            "muscle_module_en": "Machine Hip And Glute Kickback",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-calf-raise",
+            "exercise_name_zh": "杠片式站姿提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-calf-raise-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-underhand-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-underhand-row",
+            "exercise_name_zh": "器械反手划船",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-underhand-row-side.jpg",
+            "muscle_module_en": "Machine Underhand Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-underhand-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-underhand-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-neutral-overhead-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-neutral-overhead-press",
+            "exercise_name_zh": "器械中性握肩上推",
+            "muscle_module_zh": "前肩",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-neutral-overhead-press-front.jpg",
+            "muscle_module_en": "Machine Neutral Overhead Press",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-neutral-overhead-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-neutral-overhead-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-overhead-tricep-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-overhead-tricep-extension",
+            "exercise_name_zh": "器械过顶三头肌伸展",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-overhead-tricep-extension-side.jpg",
+            "muscle_module_en": "Machine Overhead Tricep Extension",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhead-tricep-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-overhead-tricep-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-and-glute-abduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-and-glute-abduction",
+            "exercise_name_zh": "器械髋部与臀部外展",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-and-glute-abduction-side.jpg",
+            "muscle_module_en": "Machine Hip And Glute Abduction",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-abduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-and-glute-abduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-crunch",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-crunch",
+            "exercise_name_zh": "盘片负重卷腹机",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-crunch-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Crunch",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-crunch-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-crunch-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-single-leg-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-single-leg-leg-press",
+            "exercise_name_zh": "器械单腿腿举",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-single-leg-leg-press-front.jpg",
+            "muscle_module_en": "Machine Single Leg Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-single-leg-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-single-leg-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/neutral-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/neutral-chest-press",
+            "exercise_name_zh": "中立握卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-neutral-chest-press-front.jpg",
+            "muscle_module_en": "Neutral Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-neutral-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-neutral-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-rear-deltoid-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-rear-deltoid-row",
+            "exercise_name_zh": "器械后束划船",
+            "muscle_module_zh": "后束三角肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-rear-deltoid-row-front.jpg",
+            "muscle_module_en": "Machine Rear Deltoid Row",
+            "muscle_ids": [
+                "lats",
+                "biceps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-rear-deltoid-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-rear-deltoid-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-hip-thrust",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hip-thrust",
+            "exercise_name_zh": "器械臀推",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hip-thrust-side.jpg",
+            "muscle_module_en": "Machine Hip Thrust",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-thrust-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hip-thrust-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-t-bar-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-t-bar-row",
+            "exercise_name_zh": "杠片加载T杠划船机",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-t-bar-row-front.jpg",
+            "muscle_module_en": "Machine Plate Loaded T Bar Row",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-t-bar-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-t-bar-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-bent-arm-pec-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-bent-arm-pec-fly",
+            "exercise_name_zh": "器械弯臂飞鸟",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-bent-arm-pec-fly-front.jpg",
+            "muscle_module_en": "Machine Bent Arm Pec Fly",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-bent-arm-pec-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-bent-arm-pec-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-seated-hamstring-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-hamstring-curl",
+            "exercise_name_zh": "坐姿腿弯举机",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-seated-hamstring-curl-front.jpg",
+            "muscle_module_en": "Machine Seated Hamstring Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-hamstring-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-hamstring-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/horizontal-hack-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/horizontal-hack-squat",
+            "exercise_name_zh": "水平哈克深蹲",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-horizontal-hack-squat-front.jpg",
+            "muscle_module_en": "Horizontal Hack Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-horizontal-hack-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-horizontal-hack-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-plate-loaded-hip-thrust",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-hip-thrust",
+            "exercise_name_zh": "杠片式臀推机",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-hip-thrust-front.jpg",
+            "muscle_module_en": "Machine Plate Loaded Hip Thrust",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-hip-thrust-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-hip-thrust-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-seated-plate-loaded-preacher-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-plate-loaded-preacher-curl",
+            "exercise_name_zh": "坐姿杠片加载牧师凳弯举机",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-seated-plate-loaded-preacher-curl-side.jpg",
+            "muscle_module_en": "Machine Seated Plate Loaded Preacher Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-plate-loaded-preacher-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-seated-plate-loaded-preacher-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-seated-cable-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-cable-row",
+            "exercise_name_zh": "器械坐姿划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-seated-cable-row-front.jpg",
+            "muscle_module_en": "Machine Seated Cable Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-seated-cable-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-seated-cable-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/machine-sissy-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-sissy-squat",
+            "exercise_name_zh": "器械西西深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-sissy-squat-side.jpg",
+            "muscle_module_en": "Machine Sissy Squat",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "",
+            "equipment_type": "machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-sissy-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-sissy-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-cable-v-bar-push-downs",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-cable-v-bar-push-downs",
+            "exercise_name_zh": "滑轮V杆下压",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-cable-push-downs-front.jpg",
+            "muscle_module_en": "Machine Cable V Bar Push Downs",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": null,
+            "mechanic_raw": null,
+            "mechanic_source": null,
+            "difficulty": "初学者",
+            "notes": "mechanic not found; dd candidates: ['初学者', '双手正握滑轮杆，掌心向下，间距与肩同宽。', '站直，身体略微前倾。上臂靠近身体，缓慢将滑轮杆向下拉，直到手臂完全伸直。', '在动作收缩位停顿，然后慢慢将滑轮杆拉回起始位置。', '初学者']",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-cable-push-downs-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-cable-push-downs-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-calf-raises",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-seated-calf-raises",
+            "exercise_name_zh": "坐姿提踵（器械）",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-seated-calf-raise-front.jpg",
+            "muscle_module_en": "Machine Seated Calf Raises",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-seated-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-seated-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-kneeling-hamstring-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-kneeling-hamstring-curl",
+            "exercise_name_zh": "负重盘式跪姿腿弯举机",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-kneeling-hamstring-curl-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Kneeling Hamstring Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-kneeling-hamstring-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-kneeling-hamstring-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/glute-ham-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/glute-ham-raise",
+            "exercise_name_zh": "臀腿屈伸",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-glute-ham-raise-front.jpg",
+            "muscle_module_en": "Glute Ham Raise",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-glute-ham-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-glute-ham-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-hamstring-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hamstring-curl",
+            "exercise_name_zh": "器械腿弯举",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-hamstring-curl-front.jpg",
+            "muscle_module_en": "Machine Hamstring Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-hamstring-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-hamstring-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-pec-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-pec-fly",
+            "exercise_name_zh": "蝴蝶机夹胸",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-pec-fly-side.jpg",
+            "muscle_module_en": "Machine Pec Fly",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pec-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-pec-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-leg-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-leg-extension",
+            "exercise_name_zh": "坐姿腿屈伸",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-leg-extension-front.jpg",
+            "muscle_module_en": "Machine Leg Extension",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-leg-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-leg-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-leg-press",
+            "exercise_name_zh": "坐姿腿推机",
+            "muscle_module_zh": "臀部",
+            "img": null,
+            "muscle_module_en": "Machine Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "img parse failed",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-leg-press-front.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-roll-outs",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-roll-outs",
+            "exercise_name_zh": "器械滚轮前伸",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-roll-outs-front.jpg",
+            "muscle_module_en": "Machine Roll Outs",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": null,
+            "mechanic_raw": null,
+            "mechanic_source": null,
+            "difficulty": "中级",
+            "notes": "mechanic not found; dd candidates: ['中级', '双手握住腹轮，跪在地上，双脚抬起并交叉。', '缓慢将腹轮向前滚动，使身体呈一条直线。', '在拉伸位置停顿后，开始把身体拉回起始位置。动作应缓慢且受控。', '中级']",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-roll-outs-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-roll-outs-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-reverse-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-reverse-fly",
+            "exercise_name_zh": "器械反向飞鸟",
+            "muscle_module_zh": "后束三角肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-reverse-fly-front.jpg",
+            "muscle_module_en": "Machine Reverse Fly",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-reverse-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-reverse-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-hack-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-hack-squat",
+            "exercise_name_zh": "哈克深蹲机",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-hack-squat-side.jpg",
+            "muscle_module_en": "Machine Hack Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hack-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-hack-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-45-degree-back-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-45-degree-back-extension",
+            "exercise_name_zh": "45度背部伸展机",
+            "muscle_module_zh": "下背部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-back-extension-front.jpg",
+            "muscle_module_en": "Machine 45 Degree Back Extension",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-back-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-back-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-parallel-bar-dips",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-assisted-parallel-bar-dips",
+            "exercise_name_zh": "器械辅助双杠臂屈伸",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-assisted-parralel-bar-dips-front.jpg",
+            "muscle_module_en": "Machine Assisted Parallel Bar Dips",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-parralel-bar-dips-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-assisted-parralel-bar-dips-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-plate-loaded-row",
+            "exercise_name_zh": "杠片式坐姿划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Machine-machine-plate-loaded-row-side.jpg",
+            "muscle_module_en": "Machine Plate Loaded Row",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Machine-machine-plate-loaded-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-calf-raises",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/machine-standing-calf-raises",
+            "exercise_name_zh": "器械站姿提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-machine-standing-calf-raises-front.jpg",
+            "muscle_module_en": "Machine Standing Calf Raises",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "Machine",
+            "equipment_type_zh": "器械",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-standing-calf-raises-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-machine-standing-calf-raises-side.mp4"
+        }
+    ]
+}

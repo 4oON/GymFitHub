@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整数据检查工具 - 1月8号记录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status.ok {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        .workout-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .workout-date {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .workout-details {
+            font-size: 13px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .exercise-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .exercise-item {
+            font-size: 12px;
+            color: #555;
+            margin: 4px 0;
+        }
+
+        .log {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+        }
+
+        .log-entry.error {
+            color: #ff6b6b;
+        }
+
+        .log-entry.warning {
+            color: #ffd93d;
+        }
+
+        .log-entry.success {
+            color: #6bcf7f;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-color: #ffc107 !important;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔍 完整数据检查工具</h1>
+        <p class="subtitle">检查本地和后端的1月8号训练记录</p>
+
+        <!-- 统计概览 -->
+        <div class="section">
+            <h2>📊 数据统计</h2>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-value" id="localTotal">-</div>
+                    <div class="stat-label">本地总记录</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="localJan8">-</div>
+                    <div class="stat-label">本地1月8号记录</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="backendTotal">-</div>
+                    <div class="stat-label">后端总记录</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="backendJan8">-</div>
+                    <div class="stat-label">后端1月8号记录</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 本地数据检查 -->
+        <div class="section">
+            <h2>💾 本地数据 (localStorage)</h2>
+            <div id="localResults"></div>
+            <button onclick="checkLocalData()">🔍 检查本地数据</button>
+        </div>
+
+        <!-- 本地1月8号记录 -->
+        <div class="section" id="localJan8Section" style="display: none;">
+            <h2>📅 本地1月8号记录</h2>
+            <div id="localJan8Records"></div>
+        </div>
+
+        <!-- 后端数据检查 -->
+        <div class="section">
+            <h2>🌐 后端数据 (数据库)</h2>
+            <div id="backendResults"></div>
+            <button onclick="checkBackendData()">🔍 检查后端数据</button>
+            <button class="secondary" onclick="showTokenInput()">🔑 手动输入Token</button>
+            <div id="tokenInputDiv" style="display: none; margin-top: 15px;">
+                <input type="text" id="manualToken" placeholder="粘贴你的 Auth Token"
+                    style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;">
+                <button onclick="saveManualToken()" style="margin-top: 10px;">💾 保存Token</button>
+            </div>
+        </div>
+
+        <!-- 后端1月8号记录 -->
+        <div class="section" id="backendJan8Section" style="display: none;">
+            <h2>📅 后端1月8号记录</h2>
+            <div id="backendJan8Records"></div>
+        </div>
+
+        <!-- 对比分析 -->
+        <div class="section" id="comparisonSection" style="display: none;">
+            <h2>🔄 数据对比分析</h2>
+            <div id="comparisonResults"></div>
+        </div>
+
+        <!-- 日志 -->
+        <div class="section">
+            <h2>📝 操作日志</h2>
+            <div class="log" id="logOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'https://kilo-zenfit-production.up.railway.app';
+        let localData = null;
+        let backendData = null;
+
+        // 日志函数
+        function log(message, type = 'info') {
+            const logOutput = document.getElementById('logOutput');
+            const timestamp = new Date().toLocaleTimeString('zh-CN');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            logOutput.appendChild(entry);
+            logOutput.scrollTop = logOutput.scrollHeight;
+            console.log(message);
+        }
+
+        // 格式化日期
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) {
+                return '无效日期';
+            }
+            return date.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+
+        // 检查日期是否为1月8号
+        function isJan8(dateString) {
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return false;
+            return date.getFullYear() === 2026 && date.getMonth() === 0 && date.getDate() === 8;
+        }
+
+        // 显示Token输入框
+        function showTokenInput() {
+            const div = document.getElementById('tokenInputDiv');
+            div.style.display = div.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // 保存手动输入的Token
+        function saveManualToken() {
+            const token = document.getElementById('manualToken').value.trim();
+            if (token) {
+                localStorage.setItem('zenfit_auth_token', token);
+                log('✅ Token已保存到localStorage', 'success');
+                document.getElementById('tokenInputDiv').style.display = 'none';
+                document.getElementById('manualToken').value = '';
+            } else {
+                log('❌ 请输入有效的Token', 'error');
+            }
+        }
+
+        // 检查本地数据
+        function checkLocalData() {
+            log('🔍 开始检查本地数据...', 'info');
+
+            try {
+                const historyStr = localStorage.getItem('zenfit_history');
+
+                if (!historyStr) {
+                    document.getElementById('localResults').innerHTML = `
+                        <div class="info-box">
+                            <p style="color: #dc3545; font-weight: 600;">❌ 本地没有训练历史数据</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                localStorage 中未找到 zenfit_history
+                            </p>
+                        </div>
+                    `;
+                    log('❌ 本地没有训练历史数据', 'error');
+                    document.getElementById('localTotal').textContent = '0';
+                    document.getElementById('localJan8').textContent = '0';
+                    return;
+                }
+
+                localData = JSON.parse(historyStr);
+                const jan8Records = localData.filter(w => isJan8(w.date));
+
+                document.getElementById('localTotal').textContent = localData.length;
+                document.getElementById('localJan8').textContent = jan8Records.length;
+
+                if (jan8Records.length === 0) {
+                    document.getElementById('localResults').innerHTML = `
+                        <div class="info-box">
+                            <p style="color: #dc3545; font-weight: 600;">❌ 本地未找到1月8号的记录</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                总记录数: ${localData.length}<br>
+                                可能原因：记录已被删除或日期格式错误
+                            </p>
+                        </div>
+                    `;
+                    log(`❌ 本地未找到1月8号的记录（总共${localData.length}条）`, 'error');
+                } else {
+                    document.getElementById('localResults').innerHTML = `
+                        <div class="info-box">
+                            <p style="color: #28a745; font-weight: 600;">✅ 找到 ${jan8Records.length} 条1月8号的本地记录</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                总记录数: ${localData.length}
+                            </p>
+                        </div>
+                    `;
+                    log(`✅ 找到 ${jan8Records.length} 条1月8号的本地记录`, 'success');
+
+                    // 显示详细记录
+                    const localJan8Section = document.getElementById('localJan8Section');
+                    const localJan8Records = document.getElementById('localJan8Records');
+                    localJan8Records.innerHTML = '';
+
+                    jan8Records.forEach((workout, index) => {
+                        const exercises = workout.exercises || [];
+                        const exerciseList = exercises.map(ex =>
+                            `<div class="exercise-item">• ${ex.notes || ex.name || 'Unknown'}: ${ex.sets || 0} 组 × ${ex.reps || 0} 次 @ ${ex.weight || 0}kg</div>`
+                        ).join('');
+
+                        localJan8Records.innerHTML += `
+                            <div class="workout-item highlight">
+                                <div class="workout-date">记录 #${index + 1}: ${formatDate(workout.date)}</div>
+                                <div class="workout-details">
+                                    <strong>ID:</strong> ${workout.id || 'N/A'}<br>
+                                    <strong>名称:</strong> ${workout.name || 'N/A'}<br>
+                                    <strong>时长:</strong> ${workout.durationMin || 0} 分钟<br>
+                                    <strong>动作数:</strong> ${exercises.length}
+                                </div>
+                                ${exercises.length > 0 ? `
+                                    <div class="exercise-list">
+                                        <strong>动作列表:</strong>
+                                        ${exerciseList}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    });
+
+                    localJan8Section.style.display = 'block';
+                }
+
+            } catch (error) {
+                log(`❌ 检查本地数据失败: ${error.message}`, 'error');
+                document.getElementById('localResults').innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #dc3545; font-weight: 600;">❌ 检查失败</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            错误: ${error.message}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // 检查后端数据
+        async function checkBackendData() {
+            const token = localStorage.getItem('zenfit_auth_token');
+
+            if (!token) {
+                log('❌ 未找到 Auth Token，请先登录或手动输入Token', 'error');
+                document.getElementById('backendResults').innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #dc3545; font-weight: 600;">❌ 未找到认证Token</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            请先在应用中登录，或点击"手动输入Token"按钮
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            log('🔍 开始查询后端数据...', 'info');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/workouts`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                backendData = data.workouts || [];
+                const jan8Records = backendData.filter(w => isJan8(w.date));
+
+                document.getElementById('backendTotal').textContent = backendData.length;
+                document.getElementById('backendJan8').textContent = jan8Records.length;
+
+                if (jan8Records.length === 0) {
+                    document.getElementById('backendResults').innerHTML = `
+                        <div class="info-box">
+                            <p style="color: #dc3545; font-weight: 600;">❌ 后端未找到1月8号的记录</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                总记录数: ${backendData.length}<br>
+                                可能原因：记录未同步到后端或已被删除
+                            </p>
+                        </div>
+                    `;
+                    log(`❌ 后端未找到1月8号的记录（总共${backendData.length}条）`, 'error');
+                } else {
+                    document.getElementById('backendResults').innerHTML = `
+                        <div class="info-box">
+                            <p style="color: #28a745; font-weight: 600;">✅ 找到 ${jan8Records.length} 条1月8号的后端记录</p>
+                            <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                                总记录数: ${backendData.length}
+                            </p>
+                        </div>
+                    `;
+                    log(`✅ 找到 ${jan8Records.length} 条1月8号的后端记录`, 'success');
+
+                    // 显示详细记录
+                    const backendJan8Section = document.getElementById('backendJan8Section');
+                    const backendJan8Records = document.getElementById('backendJan8Records');
+                    backendJan8Records.innerHTML = '';
+
+                    jan8Records.forEach((workout, index) => {
+                        const exercises = workout.exercises || [];
+                        const exerciseList = exercises.map(ex =>
+                            `<div class="exercise-item">• ${ex.notes || ex.name || 'Unknown'}: ${ex.sets || 0} 组 × ${ex.reps || 0} 次 @ ${ex.weight || 0}kg</div>`
+                        ).join('');
+
+                        backendJan8Records.innerHTML += `
+                            <div class="workout-item highlight">
+                                <div class="workout-date">记录 #${index + 1}: ${formatDate(workout.date)}</div>
+                                <div class="workout-details">
+                                    <strong>ID:</strong> ${workout.id}<br>
+                                    <strong>名称:</strong> ${workout.name || 'N/A'}<br>
+                                    <strong>时长:</strong> ${workout.durationMin || 0} 分钟<br>
+                                    <strong>动作数:</strong> ${exercises.length}<br>
+                                    <strong>创建时间:</strong> ${formatDate(workout.createdAt)}
+                                </div>
+                                ${exercises.length > 0 ? `
+                                    <div class="exercise-list">
+                                        <strong>动作列表:</strong>
+                                        ${exerciseList}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    });
+
+                    backendJan8Section.style.display = 'block';
+                }
+
+                // 如果两边数据都有了，显示对比
+                if (localData && backendData) {
+                    showComparison();
+                }
+
+            } catch (error) {
+                log(`❌ 查询后端数据失败: ${error.message}`, 'error');
+                document.getElementById('backendResults').innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #dc3545; font-weight: 600;">❌ 查询失败</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            错误: ${error.message}<br>
+                            请检查网络连接和Token是否有效
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // 显示对比分析
+        function showComparison() {
+            const localJan8 = localData.filter(w => isJan8(w.date)).length;
+            const backendJan8 = backendData.filter(w => isJan8(w.date)).length;
+
+            let analysis = '';
+            let recommendation = '';
+
+            if (localJan8 > 0 && backendJan8 > 0) {
+                analysis = '✅ 本地和后端都有1月8号的记录';
+                recommendation = '数据正常。如果前端不显示，问题可能在显示逻辑中。';
+            } else if (localJan8 > 0 && backendJan8 === 0) {
+                analysis = '⚠️ 本地有记录，但后端没有';
+                recommendation = '需要将本地数据同步到后端。可能是同步失败或记录未上传。';
+            } else if (localJan8 === 0 && backendJan8 > 0) {
+                analysis = '⚠️ 后端有记录，但本地没有';
+                recommendation = '需要从后端重新加载数据到本地。可以清除本地缓存后刷新。';
+            } else {
+                analysis = '❌ 本地和后端都没有1月8号的记录';
+                recommendation = '数据可能已丢失。需要检查是否有备份或从其他来源恢复。';
+            }
+
+            document.getElementById('comparisonResults').innerHTML = `
+                <div class="info-box">
+                    <h3 style="margin-bottom: 10px;">${analysis}</h3>
+                    <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        <strong>本地:</strong> ${localJan8} 条 | <strong>后端:</strong> ${backendJan8} 条
+                    </p>
+                    <p style="font-size: 14px; color: #333; padding: 10px; background: #f8f9fa; border-radius: 6px;">
+                        💡 <strong>建议:</strong> ${recommendation}
+                    </p>
+                </div>
+            `;
+
+            document.getElementById('comparisonSection').style.display = 'block';
+            log(`📊 对比分析完成: 本地${localJan8}条, 后端${backendJan8}条`, 'success');
+        }
+
+        // 页面加载时自动检查本地数据
+        window.addEventListener('load', () => {
+            log('🚀 完整数据检查工具已启动', 'success');
+            checkLocalData();
+        });
+    </script>
+</body>
+
+</html>

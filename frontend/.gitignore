@@ -1,0 +1,49 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment variables
+.env.local
+.env.*.local
+.env
+# Allow production env template to be committed
+!.env.production
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# iOS / Capacitor
+ios/App/App/public
+ios/build
+ios/App/build
+ios/App/Pods
+ios/App/Podfile.lock
+ios/capacitor-cordova-ios-plugins/sources/CordovaPluginHealth/.build
+
+# Xcode user data / schemes
+ios/**/*.xcodeproj/project.xcworkspace/xcuserdata
+ios/**/*.xcodeproj/xcuserdata
+ios/**/*.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+ios/**/.swiftpm/xcode/xcuserdata
+ios/**/.swiftpm/xcode/xcschemes/xcschememanagement.plist
+*.xcuserstate
+*.xcarchive
+.DS_Store

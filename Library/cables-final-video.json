@@ -1,0 +1,2349 @@
+{
+  "metadata": {
+    "total_urls": 156,
+    "success_count": 156,
+    "failed_count": 12,
+    "scraped_at": "2025-11-27T08:39:33.477Z"
+  },
+  "exercises": [
+    {
+      "exercise_name": "Cable Bar Kneeling Crunch",
+      "exercise_name_zh": "绳索跪姿直杆卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-bar-kneeling-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-kneeling-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-kneeling-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Standing Crunch",
+      "exercise_name_zh": "绳索站姿直杆卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-bar-standing-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-standing-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-standing-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling High To Low Wood Chopper",
+      "exercise_name_zh": "绳索跪姿高位",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-kneeling-high-to-low-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-high-to-low-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-high-to-low-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Kneeling Crunch",
+      "exercise_name_zh": "跪姿绳索卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-rope-kneeling-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Kneeling Oblique Crunch",
+      "exercise_name_zh": "绳索跪姿侧腹卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-rope-kneeling-oblique-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-oblique-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-oblique-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Standing Crunch",
+      "exercise_name_zh": "绳索站姿卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-rope-standing-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-standing-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-standing-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Row Bar Kneeling Crunch",
+      "exercise_name_zh": "绳索跪姿卷腹（划杆）",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-row-bar-kneeling-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-row-bar-kneeling-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-row-bar-kneeling-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Crunch",
+      "exercise_name_zh": "站姿绳索卷腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-standing-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing High To Low Wood Chopper",
+      "exercise_name_zh": "绳索站姿高位",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-standing-high-to-low-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-high-to-low-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-high-to-low-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Low To High Wood Chopper",
+      "exercise_name_zh": "绳索站姿高位",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/abdominals/cable-standing-low-to-high-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-low-to-high-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-low-to-high-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Abdominals"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bench Press",
+      "exercise_name_zh": "绳索卧推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Chest Press",
+      "exercise_name_zh": "绳索胸推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-chest-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-chest-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-chest-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Decline Bench Press",
+      "exercise_name_zh": "下斜绳索卧推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-decline-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Decline Single Arm Bench Press",
+      "exercise_name_zh": "下斜单臂拉力器卧推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-decline-single-arm-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-single-arm-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-single-arm-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Bench Press",
+      "exercise_name_zh": "单臂绳索卧推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-single-arm-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Chest Press",
+      "exercise_name_zh": "绳索站姿单臂胸推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-standing-single-arm-chest-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-chest-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-chest-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Incline Chest Press",
+      "exercise_name_zh": "绳索站姿上斜单臂胸推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/anterior-deltoid/cable-standing-single-arm-incline-chest-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-incline-chest-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-incline-chest-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Anterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Archer Row",
+      "exercise_name_zh": "绳索弓箭划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-archer-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-archer-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-archer-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Curl",
+      "exercise_name_zh": "绳索直杆弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-bar-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bilateral Bayesian Curl",
+      "exercise_name_zh": "绳索贝叶斯弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-bilateral-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bilateral-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bilateral-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Hammer Bayesian Curl",
+      "exercise_name_zh": "绳索锤式弯举（Bayesian）",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-hammer-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-hammer-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-hammer-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Bayesian Curl",
+      "exercise_name_zh": "高位绳索Bayesian弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Hammer Bayesian Curl",
+      "exercise_name_zh": "绳索高位单臂贝叶斯",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-single-arm-hammer-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-hammer-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-hammer-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Hammer Rolling Curl",
+      "exercise_name_zh": "绳索高位单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-single-arm-hammer-rolling-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-hammer-rolling-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-hammer-rolling-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Reverse Bayesian Curl",
+      "exercise_name_zh": "绳索高位单臂反握贝叶斯",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-single-arm-reverse-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-reverse-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-reverse-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Reverse Rolling Curl",
+      "exercise_name_zh": "绳索高位单臂反握",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-single-arm-reverse-rolling-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-reverse-rolling-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-reverse-rolling-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Rolling Curl",
+      "exercise_name_zh": "绳索高位单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-high-single-arm-rolling-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-rolling-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-rolling-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pull Around",
+      "exercise_name_zh": "绳索绕拉",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-pull-around",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-around-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-around-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pull In",
+      "exercise_name_zh": "绳索收腹",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-pull-in",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-in-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-in-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Reverse Bayesian Curl",
+      "exercise_name_zh": "绳索反握贝叶斯弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-reverse-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-reverse-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-reverse-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Hammer Curl",
+      "exercise_name_zh": "绳索锤式弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-rope-hammer-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-hammer-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-hammer-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Row Bar Standing Row",
+      "exercise_name_zh": "坐姿滑轮划船（直杆） 站姿划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-row-bar-standing-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-row-bar-standing-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-row-bar-standing-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Bayesian Curl",
+      "exercise_name_zh": "坐姿绳索贝叶斯弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-seated-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Bayesian Hammer Curl",
+      "exercise_name_zh": "坐姿绳索 Bayesian 锤式弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-seated-bayesian-hammer-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-hammer-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-hammer-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Bayesian Reverse Curl",
+      "exercise_name_zh": "坐姿绳索 Bayesian 反握弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-seated-bayesian-reverse-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-reverse-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bayesian-reverse-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Bayesian Curl",
+      "exercise_name_zh": "贝叶斯式单臂绳索弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-single-arm-bayesian-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bayesian-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bayesian-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Neutral Grip Row",
+      "exercise_name_zh": "绳索单臂中立握划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-single-arm-neutral-grip-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-neutral-grip-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-neutral-grip-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Reverse Curl",
+      "exercise_name_zh": "绳索单臂反握",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-single-arm-reverse-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-reverse-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-reverse-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Underhand Grip Row",
+      "exercise_name_zh": "绳索单臂划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-single-arm-underhand-grip-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-underhand-grip-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-underhand-grip-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Cross Rear Delt Row",
+      "exercise_name_zh": "绳索站姿单臂划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-standing-single-arm-cross-rear-delt-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-cross-rear-delt-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-cross-rear-delt-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Supinating Row",
+      "exercise_name_zh": "绳索划船",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-supinating-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-supinating-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-supinating-row-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Twisting Curl",
+      "exercise_name_zh": "绳索扭转弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/biceps/cable-twisting-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-twisting-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-twisting-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Biceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Calve Raise",
+      "exercise_name_zh": "绳索直杆提踵",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/calves/cable-bar-calve-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-calve-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-calve-raise-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Calves"
+      ]
+    },
+    {
+      "exercise_name": "Cable Belt Calf Raise",
+      "exercise_name_zh": "绳索提踵",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/calves/cable-belt-calf-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-calf-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-calf-raise-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Calves"
+      ]
+    },
+    {
+      "exercise_name": "Cable Calve Raise",
+      "exercise_name_zh": "绳索提踵",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/calves/cable-calve-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-calve-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-calve-raise-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Calves"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bench Chest Fly",
+      "exercise_name_zh": "平板绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-bench-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Braced Single Arm Chest Fly",
+      "exercise_name_zh": "绳索单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-braced-single-arm-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Braced Single Arm Chest Press",
+      "exercise_name_zh": "绳索单臂胸推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-braced-single-arm-chest-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-chest-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-chest-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Braced Single Arm Internally Rotated Chest Fly",
+      "exercise_name_zh": "绳索单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-braced-single-arm-internally-rotated-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-internally-rotated-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-single-arm-internally-rotated-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Decline Bench Chest Fly",
+      "exercise_name_zh": "下斜绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-decline-bench-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-bench-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-bench-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Decline Press Around",
+      "exercise_name_zh": "绳索下斜",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-decline-press-around",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-press-around-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-decline-press-around-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Incline Bench Press",
+      "exercise_name_zh": "上斜绳索卧推",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-incline-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Incline Chest Fly",
+      "exercise_name_zh": "上斜绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-incline-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Incline Fly Around",
+      "exercise_name_zh": "绳索上斜",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-incline-fly-around",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-fly-around-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-fly-around-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Incline Press Around",
+      "exercise_name_zh": "绳索上斜",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-incline-press-around",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-press-around-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-press-around-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pec Fly",
+      "exercise_name_zh": "绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-pec-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pec-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pec-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Bench Chest Fly",
+      "exercise_name_zh": "单臂缆绳平板飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-single-arm-bench-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bench-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-bench-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Decline Bench Chest Fly",
+      "exercise_name_zh": "下斜单臂绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-single-arm-decline-bench-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-decline-bench-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-decline-bench-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Incline Chest Fly",
+      "exercise_name_zh": "上斜单臂绳索飞鸟",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-single-arm-incline-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-incline-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-incline-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Chest Fly",
+      "exercise_name_zh": "绳索站姿单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-standing-single-arm-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Incline Chest Fly",
+      "exercise_name_zh": "绳索站姿上斜单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-standing-single-arm-incline-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-incline-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-incline-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Internally Rotated Chest Fly",
+      "exercise_name_zh": "绳索站姿单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-standing-single-arm-internally-rotated-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-internally-rotated-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-internally-rotated-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Single Arm Internally Rotated Incline Chest Fly",
+      "exercise_name_zh": "绳索站姿上斜单臂",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/chest/cable-standing-single-arm-internally-rotated-incline-chest-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-internally-rotated-incline-chest-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-single-arm-internally-rotated-incline-chest-fly-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Chest"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Reverse Grip Curl",
+      "exercise_name_zh": "绳索直杆反握弯举",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/forearms/cable-bar-reverse-grip-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-reverse-grip-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-reverse-grip-curl-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Forearms"
+      ]
+    },
+    {
+      "exercise_name": "Cable Braced Wrist Curl",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/forearms/cable-braced-wrist-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-wrist-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-wrist-curl-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索支撑腕弯举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Forearms"
+      ]
+    },
+    {
+      "exercise_name": "Cable Braced Wrist Extension",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/forearms/cable-braced-wrist-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-wrist-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-braced-wrist-extension-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索支撑腕伸展",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Forearms"
+      ]
+    },
+    {
+      "exercise_name": "Cable Wrist Curl",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/forearms/cable-wrist-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wrist-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wrist-curl-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索腕弯举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Forearms"
+      ]
+    },
+    {
+      "exercise_name": "Cable Wrist Extension",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/forearms/cable-wrist-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wrist-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wrist-extension-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索腕伸展",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Forearms"
+      ]
+    },
+    {
+      "exercise_name": "Cable Internal Rotation",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/front-shoulders/cable-internal-rotation",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-internal-rotation-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-internal-rotation-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索内旋",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Front Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Belt Split Squat",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-belt-split-squat",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-split-squat-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-split-squat-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索腰带分腿深蹲",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Belt Squat",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-belt-squat",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-squat-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-belt-squat-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索腰带深蹲",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Quadruped Hip Abduction",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-quadruped-hip-abduction",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-quadruped-hip-abduction-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-quadruped-hip-abduction-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索四点支撑髋外展",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Split Squat",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-split-squat",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-split-squat-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-split-squat-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索分腿深蹲",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Glute Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-standing-glute-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-glute-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-glute-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Hip Abduction",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-standing-hip-abduction",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-hip-abduction-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-hip-abduction-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Hip Adduction",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/glutes/cable-standing-hip-adduction",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-hip-adduction-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-hip-adduction-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Glutes"
+      ]
+    },
+    {
+      "exercise_name": "Cable Hamstring Curl",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/hamstrings/cable-hamstring-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-hamstring-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-hamstring-curl-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索腿后肌弯举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Hamstrings"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Leg Curl",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/hamstrings/cable-seated-leg-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-leg-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-leg-curl-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索坐姿腿弯举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Hamstrings"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Leg Laying Leg Curl",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/hamstrings/cable-single-leg-laying-leg-curl",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-leg-laying-leg-curl-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-leg-laying-leg-curl-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单腿俯卧腿弯举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Hamstrings"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bent Over Bar Pullover",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-bent-over-bar-pullover",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bent-over-bar-pullover-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bent-over-bar-pullover-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kayak Row",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-kayak-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kayak-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kayak-row-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索划船",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Lat Prayer",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-lat-prayer",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-lat-prayer-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-lat-prayer-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索背阔肌祈祷式下拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Lat Prayer",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-rope-lat-prayer",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-lat-prayer-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-lat-prayer-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索背阔肌祈祷式下拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Pullover",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-rope-pullover",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-pullover-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-pullover-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索上拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Lat Prayer",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-single-arm-lat-prayer",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-lat-prayer-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-lat-prayer-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Straight Arm Pull In",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lats/cable-straight-arm-pull-in",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-straight-arm-pull-in-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-straight-arm-pull-in-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直臂下拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lats"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Romanian Deadlift",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-bar-romanian-deadlift",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-romanian-deadlift-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-romanian-deadlift-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Staggered Romanian Deadlift",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-bar-staggered-romanian-deadlift",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-staggered-romanian-deadlift-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-staggered-romanian-deadlift-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bench Straight Leg Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-bench-straight-leg-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-straight-leg-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bench-straight-leg-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索长凳直腿后踢",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Elevated Deadlift",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-elevated-deadlift",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-elevated-deadlift-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-elevated-deadlift-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高位硬拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Goblet Squat",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-goblet-squat",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-goblet-squat-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-goblet-squat-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高脚杯深蹲",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Incline Bench Straight Leg Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-incline-bench-straight-leg-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-bench-straight-leg-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-incline-bench-straight-leg-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索上斜",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pull Through",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-pull-through",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-through-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pull-through-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索穿越硬拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Leg Deadlift",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-single-leg-deadlift",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-leg-deadlift-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-leg-deadlift-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单腿硬拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Mid Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-standing-mid-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-mid-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-mid-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Straight Leg Glute Glute Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-standing-straight-leg-glute-glute-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-straight-leg-glute-glute-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-straight-leg-glute-glute-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Straight Leg Mid Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-standing-straight-leg-mid-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-straight-leg-mid-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-straight-leg-mid-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索站姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Zercher Good Morning",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-zercher-good-morning",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-zercher-good-morning-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-zercher-good-morning-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索泽彻早安式前屈",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Zercher Squat",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/lowerback/cable-zercher-squat",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-zercher-squat-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-zercher-squat-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索泽彻深蹲",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Lowerback"
+      ]
+    },
+    {
+      "exercise_name": "Cable Half Kneeling High To Low Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-half-kneeling-high-to-low-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-high-to-low-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-high-to-low-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿高位",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Half Kneeling Low To High Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-half-kneeling-low-to-high-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-low-to-high-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-low-to-high-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿高位",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Half Kneeling Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-half-kneeling-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-half-kneeling-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling Low To High Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-kneeling-low-to-high-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-low-to-high-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-low-to-high-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿高位",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling Oblique Crunch",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-kneeling-oblique-crunch",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-oblique-crunch-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-oblique-crunch-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿侧腹卷腹",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling Pallof Press",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-kneeling-pallof-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-pallof-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-pallof-press-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling Pallof Press To Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-kneeling-pallof-press-to-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-pallof-press-to-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-pallof-press-to-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Kneeling Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-kneeling-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-kneeling-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Oblique Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-oblique-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-oblique-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-oblique-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索斜向下压",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pallof Press",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-pallof-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pallof-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pallof-press-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索帕洛夫抗旋转推举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Pallof Press Rotation",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-pallof-press-rotation",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pallof-press-rotation-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-pallof-press-rotation-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索帕洛夫抗旋转推举（旋转变化式）",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Side Bend",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-side-bend",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-side-bend-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-side-bend-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索侧弯",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Wood Chopper",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/obliques/cable-wood-chopper",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wood-chopper-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-wood-chopper-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索砍木式旋转",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Obliques"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Kneeling Face Pull",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/posterior-deltoid/cable-rope-kneeling-face-pull",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-face-pull-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-kneeling-face-pull-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索跪姿",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Posterior Deltoid"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Leg Extension",
+      "exercise_name_zh": "绳索坐姿腿伸展",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/quads/cable-seated-leg-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-leg-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-leg-extension-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Quads"
+      ]
+    },
+    {
+      "exercise_name": "Cable Standing Leg Extension",
+      "exercise_name_zh": "绳索站姿",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/quads/cable-standing-leg-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-leg-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-standing-leg-extension-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Quads"
+      ]
+    },
+    {
+      "exercise_name": "Cable External Rotation",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/rear-shoulders/cable-external-rotation",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-external-rotation-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-external-rotation-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索外旋",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Rear Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Face Pull",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-bar-face-pull",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-face-pull-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-face-pull-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Front Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-bar-front-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-front-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-front-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Behind The Back Lateral Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-behind-the-back-lateral-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-behind-the-back-lateral-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-behind-the-back-lateral-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索背后侧平举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Internally Rotated Reverse Fly",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-high-internally-rotated-reverse-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-internally-rotated-reverse-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-internally-rotated-reverse-fly-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高位反握",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Reverse Fly",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-high-reverse-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-reverse-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-reverse-fly-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高位反握",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable High Single Arm Rear Delt Fly",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-high-single-arm-rear-delt-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-rear-delt-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-high-single-arm-rear-delt-fly-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高位单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Low Bilateral Lateral Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-low-bilateral-lateral-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-low-bilateral-lateral-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-low-bilateral-lateral-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索低位双侧侧平举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Low Single Arm Lateral Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-low-single-arm-lateral-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-low-single-arm-lateral-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-low-single-arm-lateral-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Overhead Press",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-overhead-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-overhead-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-overhead-press-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索过头推举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Front Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-rope-front-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-front-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-front-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索前平举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Mid Lateral Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-rope-mid-lateral-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-mid-lateral-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-mid-lateral-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索中段侧平举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Single Arm Low Lateral Raise",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-rope-single-arm-low-lateral-raise",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-single-arm-low-lateral-raise-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-single-arm-low-lateral-raise-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Upright Row",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-rope-upright-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-upright-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-upright-row-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索划船",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Bar Face Pull",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-seated-bar-face-pull",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bar-face-pull-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-bar-face-pull-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Rope Face Pull",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-seated-rope-face-pull",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-rope-face-pull-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-rope-face-pull-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索坐姿绳索面拉",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Seated Single Arm Face Pull",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-seated-single-arm-face-pull",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-single-arm-face-pull-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-seated-single-arm-face-pull-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Internally Rotated High Reverse Fly",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-single-arm-internally-rotated-high-reverse-fly",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-internally-rotated-high-reverse-fly-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-internally-rotated-high-reverse-fly-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索高位单臂反握",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable Upright Row",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/cable-upright-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-upright-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-upright-row-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索划船",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Machine Face Pulls",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/shoulders/machine-face-pulls",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-machine-face-pulls-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-machine-face-pulls-side.mp4",
+      "mechanic": "Isolation",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Shoulders"
+      ]
+    },
+    {
+      "exercise_name": "Cable 30 Degree Shrug",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/traps/cable-30-degree-shrug",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-30-degree-shrug-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-30-degree-shrug-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索30 度耸肩",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Traps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm 30 Degree Shrug",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/traps/cable-single-arm-30-degree-shrug",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-30-degree-shrug-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-30-degree-shrug-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Traps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Silverback Shrug",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/traps-middle/cable-silverback-shrug",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-silverback-shrug-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-silverback-shrug-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索银背耸肩",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Traps Middle"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Rear Delt Row",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/traps-middle/cable-single-arm-rear-delt-row",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-rear-delt-row-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-rear-delt-row-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂划船",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Traps Middle"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-bar-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Reverse Grip Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-bar-reverse-grip-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-reverse-grip-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-reverse-grip-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索反握直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bar Skullcrusher",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-bar-skullcrusher",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-skullcrusher-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bar-skullcrusher-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索直杆",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Bent Over Single Arm Overhead Tricep Extension",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-bent-over-single-arm-overhead-tricep-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bent-over-single-arm-overhead-tricep-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-bent-over-single-arm-overhead-tricep-extension-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Cross Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-cross-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-cross-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-cross-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索交叉下压",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Leaning Single Arm Skullover",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-leaning-single-arm-skullover",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-leaning-single-arm-skullover-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-leaning-single-arm-skullover-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Overhead Tricep Press",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-overhead-tricep-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-overhead-tricep-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-overhead-tricep-press-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索过头三头肌推举",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Overhead Tricep Extension",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-rope-overhead-tricep-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-overhead-tricep-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-overhead-tricep-extension-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索过头三头肌伸展",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-rope-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索下压",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Rope Skullcrusher",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-rope-skullcrusher",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-skullcrusher-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-rope-skullcrusher-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索仰卧臂屈伸",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Cross Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-cross-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-cross-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-cross-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Incline Bench Press",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-incline-bench-press",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-incline-bench-press-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-incline-bench-press-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索上斜单臂卧推",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Overhead Tricep Extension",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-overhead-tricep-extension",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-overhead-tricep-extension-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-overhead-tricep-extension-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Rope Pushdown",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-rope-pushdown",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-rope-pushdown-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-rope-pushdown-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Single Arm Skullcrusher",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-single-arm-skullcrusher",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-skullcrusher-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-single-arm-skullcrusher-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索单臂",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    },
+    {
+      "exercise_name": "Cable Tricep Kickback",
+      "secondary_muscles": [],
+      "difficulty": "Beginner",
+      "url": "https://musclewiki.com/cables/male/triceps/cable-tricep-kickback",
+      "url-video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-tricep-kickback-front.mp4",
+      "url-video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Cables-cable-tricep-kickback-side.mp4",
+      "mechanic": "Isolation",
+      "exercise_name_zh": "绳索三头肌后踢",
+      "equipment_type": "cables",
+      "equipment_type_zh": "绳索",
+      "muscle_ids": [
+        "Triceps"
+      ]
+    }
+  ]
+}

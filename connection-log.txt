@@ -1,0 +1,20 @@
+Testing connection to: postgresql:****@db.yvjulwfjgzligbqcvsfj.supabase.co:5432/postgres?sslmode=require
+Connection failed: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Can't reach database server at `db.yvjulwfjgzligbqcvsfj.supabase.co:5432`
+
+Please make sure your database server is running at `db.yvjulwfjgzligbqcvsfj.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.$queryRaw()` invocation:
+
+
+Can't reach database server at `db.yvjulwfjgzligbqcvsfj.supabase.co:5432`
+
+Please make sure your database server is running at `db.yvjulwfjgzligbqcvsfj.supabase.co:5432`.
+    at ei.handleRequestError (C:\zenfit\backend\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\zenfit\backend\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\zenfit\backend\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\zenfit\backend\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+    at async main (C:\zenfit\backend\src\test-connection.ts:17:24)

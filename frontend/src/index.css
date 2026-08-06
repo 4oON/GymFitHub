@@ -1,0 +1,306 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    height: 100%;
+    background-color: #020617;
+    overscroll-behavior: none;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #020617;
+    color: #f8fafc;
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+    /* Prevent pull-to-refresh on mobile */
+    /* Disable text selection to make it feel like an app */
+    -webkit-user-select: none;
+    user-select: none;
+    /* iOS Safe Area Support */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* iOS: Prevent callout menu */
+    -webkit-touch-callout: none;
+}
+
+#root {
+    background-color: #020617;
+    min-height: 100%;
+    min-height: -webkit-fill-available;
+    overscroll-behavior: none;
+}
+
+/* 标题字体 - 科技感 */
+.heading-font {
+    font-family: 'Orbitron', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* 数据字体 - 等宽 */
+.mono-font {
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+/* Allow text selection in inputs */
+input,
+textarea {
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+/* Hide scrollbar for clean look in specific containers */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Ensure overscroll shows dark background on all scrollable containers */
+.overflow-y-auto,
+.overflow-auto,
+.overflow-y-scroll {
+    overscroll-behavior: contain;
+    background-color: inherit;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+.custom-scrollbar {
+    /* iOS smooth scrolling */
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 全息网格背景 */
+.holographic-grid {
+    background-image: 
+        linear-gradient(rgba(0,245,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,255,0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* 全息扫描线动画 */
+@keyframes holographic-scan {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes breath {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes flip {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+/* Tailwind Custom Animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Apply animations via Tailwind classes */
+.animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+}
+
+.animate-slide-down {
+    animation: slide-down 0.3s ease-out;
+}
+
+/* Modal scroll fix */
+.modal-scroll-container {
+    /* Ensure proper scrolling behavior within modals */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Fix for modal scrolling issues */
+.modal-overlay {
+    /* Prevent background scrolling when modal is open */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+/* ============================================
+   iOS Safe Area Utilities
+   ============================================ */
+
+/* Safe area top spacing */
+.h-safe-top {
+    height: env(safe-area-inset-top);
+    min-height: 0px;
+}
+
+/* Safe area bottom spacing */
+.pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Safe area horizontal spacing */
+.px-safe {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+/* Modal safe container for iOS */
+.modal-safe-container {
+    /* Account for iOS safe areas */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+/* Fixed bottom button container with safe area */
+.fixed-bottom-safe {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    background: inherit;
+    z-index: 50;
+}
+
+/* iOS: Prevent elastic scroll/bounce on body */
+@supports (-webkit-touch-callout: none) {
+    /* iOS specific styles */
+    body.modal-open {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    /* iOS momentum scrolling for modal content */
+    .ios-scroll {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+    
+    /* iOS: Fix for 100vh being wrong in mobile Safari */
+    .h-screen-ios {
+        height: 100vh;
+        height: -webkit-fill-available;
+    }
+    
+    /* iOS: Prevent callout menu on long press */
+    .no-callout {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+    }
+}
+
+/* ============================================
+   Scroll Lock Utilities
+   ============================================ */
+
+.scroll-lock {
+    overflow: hidden !important;
+    touch-action: none !important;
+}
+
+.scroll-lock-x {
+    overflow-x: hidden !important;
+}
+
+.scroll-lock-y {
+    overflow-y: hidden !important;
+}
+
+/* ============================================
+   Touch Action Utilities
+   ============================================ */
+
+.touch-pan-y {
+    touch-action: pan-y;
+}
+
+.touch-none {
+    touch-action: none;
+}
+
+.touch-manipulation {
+    touch-action: manipulation;
+}

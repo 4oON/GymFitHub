@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fix Weekly Reports Data Format</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+
+        h1 {
+            color: #4CAF50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            background: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        button.danger {
+            background: #f44336;
+        }
+
+        button.danger:hover {
+            background: #da190b;
+        }
+
+        .log-entry {
+            padding: 8px;
+            margin: 4px 0;
+            border-left: 3px solid #666;
+            background: #222;
+        }
+
+        .log-entry.info {
+            border-left-color: #2196F3;
+        }
+
+        .log-entry.success {
+            border-left-color: #4CAF50;
+        }
+
+        .log-entry.error {
+            border-left-color: #f44336;
+        }
+
+        .log-entry.warning {
+            border-left-color: #ff9800;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔧 Fix Weekly Reports Data Format</h1>
+
+    <div class="section">
+        <h2>问题说明</h2>
+        <p>诊断工具生成的报告中，<code>muscleDistribution.percentage</code> 字段是字符串类型，但应用期望它是数字类型。</p>
+        <p>这个工具会修复所有已生成的报告，将 <code>percentage</code> 从字符串转换为数字。</p>
+    </div>
+
+    <div class="section">
+        <h2>操作</h2>
+        <button onclick="fixReports()">🔧 修复所有报告</button>
+        <button class="danger" onclick="deleteAllReports()">🗑️ 删除所有报告（重新生成）</button>
+    </div>
+
+    <div class="section">
+        <h2>📝 日志</h2>
+        <div id="log"></div>
+    </div>
+
+    <script>
+        let debugLogs = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLogs.push({ timestamp, message, type });
+            updateLog();
+        }
+
+        function updateLog() {
+            const logContainer = document.getElementById('log');
+            logContainer.innerHTML = debugLogs.map(log =>
+                `<div class="log-entry ${log.type}">
+                    <strong>[${log.timestamp}]</strong> ${log.message}
+                </div>`
+            ).reverse().join('');
+        }
+
+        async function fixReports() {
+            log('开始修复报告...', 'info');
+
+            try {
+                // Open IndexedDB
+                const db = await new Promise((resolve, reject) => {
+                    const request = indexedDB.open('ZenFitReports', 1);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+
+                // Load all reports
+                const reports = await new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['reports'], 'readonly');
+                    const store = transaction.objectStore('reports');
+                    const request = store.getAll();
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+
+                log(`找到 ${reports.length} 个报告`, 'info');
+
+                let fixedCount = 0;
+
+                for (const report of reports) {
+                    let needsFix = false;
+
+                    // Check if muscleDistribution needs fixing
+                    if (report.muscleDistribution && Array.isArray(report.muscleDistribution)) {
+                        report.muscleDistribution = report.muscleDistribution.map(muscle => {
+                            if (typeof muscle.percentage === 'string') {
+                                needsFix = true;
+                                return {
+                                    ...muscle,
+                                    percentage: parseFloat(muscle.percentage)
+                                };
+                            }
+                            return muscle;
+                        });
+                    }
+
+                    if (needsFix) {
+                        // Update the report
+                        await new Promise((resolve, reject) => {
+                            const transaction = db.transaction(['reports'], 'readwrite');
+                            const store = transaction.objectStore('reports');
+                            const request = store.put(report);
+                            request.onsuccess = () => resolve();
+                            request.onerror = () => reject(request.error);
+                        });
+
+                        fixedCount++;
+                        log(`✅ 修复了 Week ${report.weekNumber}, ${report.year}`, 'success');
+                    } else {
+                        log(`⏭️ Week ${report.weekNumber}, ${report.year} 不需要修复`, 'info');
+                    }
+                }
+
+                log(`🎉 完成！修复了 ${fixedCount} 个报告`, 'success');
+
+            } catch (error) {
+                log(`❌ 错误: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        async function deleteAllReports() {
+            if (!confirm('确定要删除所有报告吗？这个操作不可撤销！')) {
+                return;
+            }
+
+            log('开始删除所有报告...', 'warning');
+
+            try {
+                const db = await new Promise((resolve, reject) => {
+                    const request = indexedDB.open('ZenFitReports', 1);
+                    request.onsuccess = () => resolve(request.result);
+                    request.onerror = () => reject(request.error);
+                });
+
+                await new Promise((resolve, reject) => {
+                    const transaction = db.transaction(['reports'], 'readwrite');
+                    const store = transaction.objectStore('reports');
+                    const request = store.clear();
+                    request.onsuccess = () => resolve();
+                    request.onerror = () => reject(request.error);
+                });
+
+                log('✅ 所有报告已删除', 'success');
+                log('💡 现在可以返回应用重新生成报告', 'info');
+
+            } catch (error) {
+                log(`❌ 错误: ${error.message}`, 'error');
+                console.error(error);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            log('🚀 修复工具已初始化', 'success');
+        });
+    </script>
+</body>
+
+</html>

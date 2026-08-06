@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Workout Sync</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        button.danger {
+            background: #dc2626;
+        }
+        button.danger:hover {
+            background: #b91c1c;
+        }
+        pre {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .info { color: #60a5fa; }
+        .warning { color: #fbbf24; }
+    </style>
+</head>
+<body>
+    <h1>Workout Sync Test Tool</h1>
+    
+    <div>
+        <button onclick="checkLocalStorage()">1. Check localStorage</button>
+        <button onclick="syncToBackend()">2. Sync to Backend</button>
+        <button onclick="checkBackend()">3. Check Backend Data</button>
+        <button class="danger" onclick="clearLocal()">Clear localStorage</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        const API_URL = 'https://kilo-zenfit-production.up.railway.app';
+        const TOKEN = localStorage.getItem('zenfit-token');
+
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = `<pre>${message}</pre>`;
+            output.appendChild(div);
+        }
+
+        function checkLocalStorage() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Checking localStorage ===', 'info');
+            
+            const sessions = localStorage.getItem('workout-sessions');
+            if (!sessions) {
+                log('No workout-sessions found in localStorage', 'error');
+                return;
+            }
+
+            const data = JSON.parse(sessions);
+            log(`Found ${data.length} local workout records`, 'success');
+            
+            data.forEach((session, index) => {
+                const date = new Date(session.date);
+                log(`\nRecord ${index + 1}:
+ID: ${session.id}
+Date: ${date.toLocaleString('en-US')}
+Duration: ${session.durationMinutes} minutes
+Volume: ${session.volumeLoad} kg
+Exercises: ${session.exercises?.length || 0}
+Sync Status: ${session.syncStatus || 'unknown'}
+Created At: ${new Date(session.createdAt).toLocaleString('en-US')}`, 'info');
+            });
+        }
+
+        async function syncToBackend() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Starting Backend Sync ===', 'info');
+
+            if (!TOKEN) {
+                log('No login token found. Please login first.', 'error');
+                return;
+            }
+
+            const sessions = localStorage.getItem('workout-sessions');
+            if (!sessions) {
+                log('No local data to sync', 'error');
+                return;
+            }
+
+            const data = JSON.parse(sessions);
+            log(`Preparing to sync ${data.length} records...`, 'info');
+
+            // 转换数据格式
+            const workouts = data.map(session => ({
+                name: generateWorkoutName(session),
+                date: new Date(session.date).toISOString(),
+                createdAt: new Date(session.createdAt).toISOString(),
+                status: 'completed',
+                durationMin: session.durationMinutes,
+                notes: `Volume: ${session.volumeLoad}kg`,
+                exercises: session.exercises.map((ex, index) => ({
+                    exerciseId: ex.exerciseId,
+                    sets: ex.sets.filter(s => s.completed).length,
+                    reps: calculateAverageReps(ex),
+                    weight: calculateAverageWeight(ex),
+                    notes: ex.exerciseName,
+                    order: index
+                }))
+            }));
+
+            try {
+                const response = await fetch(`${API_URL}/api/workout/batch-sync`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${TOKEN}`
+                    },
+                    body: JSON.stringify({ workouts })
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    log(`Sync Successful!`, 'success');
+                    log(`Statistics:
+Total: ${result.stats.total}
+Created: ${result.stats.created}
+Skipped: ${result.stats.skipped}
+Failed: ${result.stats.failed}`, 'success');
+
+                    if (result.errors && result.errors.length > 0) {
+                        log('\nError Details:', 'error');
+                        result.errors.forEach(err => {
+                            log(`- ${err.workout}: ${err.error}`, 'error');
+                        });
+                    }
+                } else {
+                    log(`Sync Failed: ${result.message || result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network Error: ${error.message}`, 'error');
+            }
+        }
+
+        async function checkBackend() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Checking Backend Data ===', 'info');
+
+            if (!TOKEN) {
+                log('No login token found. Please login first.', 'error');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/api/workout?status=completed`, {
+                    headers: {
+                        'Authorization': `Bearer ${TOKEN}`
+                    }
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    log(`Backend has ${result.count} records`, 'success');
+                    
+                    result.workouts.forEach((workout, index) => {
+                        const date = new Date(workout.createdAt);
+                        log(`\nRecord ${index + 1}:
+ID: ${workout.id}
+Name: ${workout.name}
+Created: ${date.toLocaleString('en-US')}
+Exercises: ${workout.exercises?.length || 0}`, 'info');
+                    });
+                } else {
+                    log(`Failed to fetch: ${result.message || result.error}`, 'error');
+                }
+            } catch (error) {
+                log(`Network Error: ${error.message}`, 'error');
+            }
+        }
+
+        function clearLocal() {
+            if (confirm('Are you sure you want to clear local data? This cannot be undone!')) {
+                localStorage.removeItem('workout-sessions');
+                log('Local data cleared', 'success');
+            }
+        }
+
+        // 辅助函数
+        function generateWorkoutName(session) {
+            const date = new Date(session.date);
+            const muscles = new Set(session.exercises.map(ex => ex.muscleGroup));
+            const muscleList = Array.from(muscles).join(', ');
+            return `${muscleList} - ${date.toLocaleDateString()}`;
+        }
+
+        function calculateAverageReps(exercise) {
+            const completedSets = exercise.sets.filter(s => s.completed);
+            if (completedSets.length === 0) return 0;
+            const totalReps = completedSets.reduce((sum, s) => sum + s.reps, 0);
+            return Math.round(totalReps / completedSets.length);
+        }
+
+        function calculateAverageWeight(exercise) {
+            const completedSets = exercise.sets.filter(s => s.completed);
+            if (completedSets.length === 0) return 0;
+            const totalWeight = completedSets.reduce((sum, s) => sum + s.weight, 0);
+            return Math.round(totalWeight / completedSets.length);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡路里计算调试工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #60a5fa;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #60a5fa;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .workout-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .workout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .workout-date {
+            font-weight: 600;
+            color: #60a5fa;
+        }
+
+        .workout-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .stat-item {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .stat-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .comparison {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .old-value {
+            color: #f87171;
+            text-decoration: line-through;
+        }
+
+        .new-value {
+            color: #34d399;
+            font-weight: 700;
+        }
+
+        .diff {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(52, 211, 153, 0.1);
+            color: #34d399;
+        }
+
+        .diff.negative {
+            background: rgba(248, 113, 113, 0.1);
+            color: #f87171;
+        }
+
+        button {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            color: #f87171;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: #34d399;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+        }
+
+        .spinner {
+            border: 3px solid rgba(148, 163, 184, 0.2);
+            border-top: 3px solid #60a5fa;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .debug-info {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #94a3b8;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .debug-info pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 卡路里计算调试工具</h1>
+        <p class="subtitle">检查实际的卡路里计算逻辑和结果</p>
+
+        <div id="status"></div>
+
+        <div class="section">
+            <div class="section-title">📊 系统信息</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">训练记录数</div>
+                    <div class="info-value" id="totalSessions">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">用户体重</div>
+                    <div class="info-value" id="userWeight">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">LocalStorage键名</div>
+                    <div class="info-value" id="storageKey">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🧮 卡路里计算对比</div>
+            <div id="workoutList"></div>
+        </div>
+    </div>
+
+    <script>
+        // 旧的简单计算方法（基于时间）
+        function calculateOldCalories(session, weight) {
+            const duration = session.durationMinutes || 0;
+            return Math.round((duration / 60) * 5 * weight);
+        }
+
+        // 新的科学计算方法（基于MET）
+        function calculateNewCalories(session, weight) {
+            const duration = session.durationMinutes || 0;
+            const exerciseCount = session.exercises?.length || 0;
+            const totalSets = session.exercises?.reduce((sum, ex) => 
+                sum + ex.sets.filter(s => s.completed).length, 0) || 0;
+
+            if (duration <= 0 || weight <= 0) return 0;
+
+            // 动态MET计算
+            let met = 5.0; // 基础MET
+
+            // 根据训练特征调整
+            if (totalSets > 20) met += 1.0; // 高容量
+            if (session.volumeLoad > weight * 10) met += 0.5; // 高强度
+            if (exerciseCount > 8) met += 0.5; // 高多样性
+
+            // 确保合理范围
+            met = Math.max(4.0, Math.min(8.0, met));
+
+            const calories = (duration / 60) * met * weight;
+            return Math.round(calories);
+        }
+
+        // 加载和分析数据
+        async function loadAndAnalyze() {
+            const statusDiv = document.getElementById('status');
+            const workoutListDiv = document.getElementById('workoutList');
+
+            try {
+                // 尝试多个可能的键名
+                const possibleKeys = ['zenfit_history', 'workout-sessions', 'workouts'];
+                let sessions = null;
+                let usedKey = null;
+
+                for (const key of possibleKeys) {
+                    const data = localStorage.getItem(key);
+                    if (data) {
+                        try {
+                            sessions = JSON.parse(data);
+                            if (Array.isArray(sessions) && sessions.length > 0) {
+                                usedKey = key;
+                                break;
+                            }
+                        } catch (e) {
+                            console.error(`解析 ${key} 失败:`, e);
+                        }
+                    }
+                }
+
+                if (!sessions || sessions.length === 0) {
+                    statusDiv.innerHTML = '<div class="error">❌ 未找到训练记录</div>';
+                    return;
+                }
+
+                // 获取用户资料
+                const profileKeys = ['zenfit_user_profile', 'user-profile', 'userProfile'];
+                let userProfile = null;
+                for (const key of profileKeys) {
+                    const data = localStorage.getItem(key);
+                    if (data) {
+                        try {
+                            userProfile = JSON.parse(data);
+                            if (userProfile.weight) break;
+                        } catch (e) {}
+                    }
+                }
+
+                const weight = userProfile?.weight || 75;
+
+                // 更新系统信息
+                document.getElementById('totalSessions').textContent = sessions.length;
+                document.getElementById('userWeight').textContent = `${weight} kg`;
+                document.getElementById('storageKey').textContent = usedKey;
+
+                statusDiv.innerHTML = '<div class="success">✅ 数据加载成功</div>';
+
+                // 分析每个训练记录
+                const sortedSessions = [...sessions].sort((a, b) => 
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+                );
+
+                let html = '';
+                sortedSessions.slice(0, 10).forEach(session => {
+                    const oldCalories = calculateOldCalories(session, weight);
+                    const newCalories = calculateNewCalories(session, weight);
+                    const diff = newCalories - oldCalories;
+                    const diffPercent = oldCalories > 0 ? ((diff / oldCalories) * 100).toFixed(1) : 0;
+
+                    const date = new Date(session.date);
+                    const dateStr = date.toLocaleDateString('zh-CN', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        weekday: 'short'
+                    });
+
+                    html += `
+                        <div class="workout-card">
+                            <div class="workout-header">
+                                <div class="workout-date">${dateStr}</div>
+                                <div class="comparison">
+                                    <span class="old-value">${oldCalories} kcal</span>
+                                    <span>→</span>
+                                    <span class="new-value">${newCalories} kcal</span>
+                                    <span class="diff ${diff < 0 ? 'negative' : ''}">${diff > 0 ? '+' : ''}${diff} (${diffPercent}%)</span>
+                                </div>
+                            </div>
+                            <div class="workout-stats">
+                                <div class="stat-item">
+                                    <div class="stat-label">时长</div>
+                                    <div class="stat-value">${session.durationMinutes || 0} 分钟</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">总负荷</div>
+                                    <div class="stat-value">${session.volumeLoad || 0} kg</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">动作数</div>
+                                    <div class="stat-value">${session.exercises?.length || 0}</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-label">总组数</div>
+                                    <div class="stat-value">${session.exercises?.reduce((sum, ex) => sum + ex.sets.filter(s => s.completed).length, 0) || 0}</div>
+                                </div>
+                            </div>
+                            <div class="debug-info">
+                                <pre>${JSON.stringify({
+                                    id: session.id,
+                                    date: session.date,
+                                    duration: session.durationMinutes,
+                                    volumeLoad: session.volumeLoad,
+                                    exercises: session.exercises?.length,
+                                    oldMethod: `(${session.durationMinutes}/60) * 5 * ${weight} = ${oldCalories}`,
+                                    newMethod: `MET-based calculation = ${newCalories}`
+                                }, null, 2)}</pre>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                workoutListDiv.innerHTML = html || '<div class="loading">没有训练记录</div>';
+
+            } catch (error) {
+                console.error('分析失败:', error);
+                statusDiv.innerHTML = `<div class="error">❌ 分析失败: ${error.message}</div>`;
+            }
+        }
+
+        // 页面加载时执行
+        window.addEventListener('DOMContentLoaded', loadAndAnalyze);
+    </script>
+</body>
+</html>

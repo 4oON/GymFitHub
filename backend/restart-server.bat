@@ -1,0 +1,6 @@
+@echo off
+echo Stopping any process on port 3001...
+for /f "tokens=5" %%a in ('netstat -aon ^| findstr :3001') do taskkill /F /PID %%a 2>nul
+timeout /t 2 /nobreak >nul
+echo Starting server...
+npm run dev

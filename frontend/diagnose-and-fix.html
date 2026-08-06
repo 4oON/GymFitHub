@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenFit 数据诊断与修复工具</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .info-box h3 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-box p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 5px 0;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status.ok {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        button.danger {
+            background: #dc3545;
+        }
+
+        .workout-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .workout-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .workout-date {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .workout-details {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .log {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+        }
+
+        .log-entry.error {
+            color: #ff6b6b;
+        }
+
+        .log-entry.warning {
+            color: #ffd93d;
+        }
+
+        .log-entry.success {
+            color: #6bcf7f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔧 ZenFit 数据诊断与修复工具</h1>
+        <p class="subtitle">诊断并修复训练记录和Progress页面问题</p>
+
+        <!-- 诊断结果 -->
+        <div class="section">
+            <h2>📊 数据诊断结果</h2>
+            <div id="diagnosticResults"></div>
+        </div>
+
+        <!-- 1月8号记录 -->
+        <div class="section">
+            <h2>📅 1月8号训练记录</h2>
+            <div id="jan8Records"></div>
+        </div>
+
+        <!-- Recovery State -->
+        <div class="section">
+            <h2>💪 Recovery State 状态</h2>
+            <div id="recoveryState"></div>
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="section">
+            <h2>🛠️ 修复操作</h2>
+            <button onclick="runDiagnostics()">🔍 重新诊断</button>
+            <button onclick="fixInvalidDates()">📅 修复无效日期</button>
+            <button onclick="fixRecoveryState()">💪 修复Recovery State</button>
+            <button onclick="exportData()" class="secondary">💾 导出数据备份</button>
+            <button onclick="viewAllWorkouts()">📋 查看所有记录</button>
+        </div>
+
+        <!-- 所有训练记录 -->
+        <div class="section" id="allWorkoutsSection" style="display: none;">
+            <h2>📋 所有训练记录</h2>
+            <div class="workout-list" id="allWorkoutsList"></div>
+        </div>
+
+        <!-- 日志 -->
+        <div class="section">
+            <h2>📝 操作日志</h2>
+            <div class="log" id="logOutput"></div>
+        </div>
+    </div>
+
+    <script>
+        // 日志函数
+        function log(message, type = 'info') {
+            const logOutput = document.getElementById('logOutput');
+            const timestamp = new Date().toLocaleTimeString('zh-CN');
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${timestamp}] ${message}`;
+            logOutput.appendChild(entry);
+            logOutput.scrollTop = logOutput.scrollHeight;
+            console.log(message);
+        }
+
+        // 格式化日期
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            if (isNaN(date.getTime())) {
+                return '无效日期';
+            }
+            return date.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // 检查日期是否为1月8号
+        function isJan8(timestamp) {
+            const date = new Date(timestamp);
+            if (isNaN(date.getTime())) return false;
+            return date.getMonth() === 0 && date.getDate() === 8;
+        }
+
+        // 运行诊断
+        function runDiagnostics() {
+            log('🔍 开始诊断...', 'info');
+
+            // 读取数据
+            const historyJson = localStorage.getItem('zenfit_history');
+            const recoveryJson = localStorage.getItem('zenfit_recovery');
+
+            const diagnosticResults = document.getElementById('diagnosticResults');
+            diagnosticResults.innerHTML = '';
+
+            // 诊断 History
+            let history = [];
+            let historyStatus = 'ok';
+            let historyMessage = '';
+
+            if (!historyJson) {
+                historyStatus = 'error';
+                historyMessage = '未找到训练历史数据';
+                log('❌ 未找到训练历史数据', 'error');
+            } else {
+                try {
+                    history = JSON.parse(historyJson);
+                    log(`✅ 成功加载 ${history.length} 条训练记录`, 'success');
+
+                    // 检查无效日期
+                    const invalidDates = history.filter(s => {
+                        const date = new Date(s.date);
+                        return isNaN(date.getTime());
+                    });
+
+                    if (invalidDates.length > 0) {
+                        historyStatus = 'warning';
+                        historyMessage = `发现 ${invalidDates.length} 条无效日期记录`;
+                        log(`⚠️ 发现 ${invalidDates.length} 条无效日期记录`, 'warning');
+                    } else {
+                        historyMessage = `${history.length} 条记录，日期格式正常`;
+                    }
+                } catch (e) {
+                    historyStatus = 'error';
+                    historyMessage = '数据格式错误';
+                    log(`❌ 数据格式错误: ${e.message}`, 'error');
+                }
+            }
+
+            diagnosticResults.innerHTML += `
+                <div class="info-box">
+                    <h3>训练历史 <span class="status ${historyStatus}">${historyMessage}</span></h3>
+                    <p>总记录数: ${history.length}</p>
+                </div>
+            `;
+
+            // 诊断 Recovery State
+            let recoveryState = [];
+            let recoveryStatus = 'ok';
+            let recoveryMessage = '';
+
+            if (!recoveryJson) {
+                recoveryStatus = 'error';
+                recoveryMessage = '未找到恢复状态数据';
+                log('❌ 未找到恢复状态数据', 'error');
+            } else {
+                try {
+                    recoveryState = JSON.parse(recoveryJson);
+                    log(`✅ 成功加载 ${recoveryState.length} 个肌肉群恢复状态`, 'success');
+
+                    // 检查数据完整性
+                    const invalidRecovery = recoveryState.filter(s =>
+                        !s.muscle || typeof s.lastWorked !== 'number'
+                    );
+
+                    if (invalidRecovery.length > 0) {
+                        recoveryStatus = 'warning';
+                        recoveryMessage = `发现 ${invalidRecovery.length} 个无效恢复状态`;
+                        log(`⚠️ 发现 ${invalidRecovery.length} 个无效恢复状态`, 'warning');
+                    } else if (recoveryState.length === 0) {
+                        recoveryStatus = 'error';
+                        recoveryMessage = '恢复状态为空';
+                        log('❌ 恢复状态为空', 'error');
+                    } else {
+                        recoveryMessage = `${recoveryState.length} 个肌肉群，数据正常`;
+                    }
+                } catch (e) {
+                    recoveryStatus = 'error';
+                    recoveryMessage = '数据格式错误';
+                    log(`❌ Recovery State 格式错误: ${e.message}`, 'error');
+                }
+            }
+
+            diagnosticResults.innerHTML += `
+                <div class="info-box">
+                    <h3>恢复状态 <span class="status ${recoveryStatus}">${recoveryMessage}</span></h3>
+                    <p>肌肉群数量: ${recoveryState.length}</p>
+                </div>
+            `;
+
+            // 查找1月8号记录
+            findJan8Records(history);
+
+            // 显示Recovery State
+            displayRecoveryState(recoveryState);
+
+            log('✅ 诊断完成', 'success');
+        }
+
+        // 查找1月8号记录
+        function findJan8Records(history) {
+            const jan8Records = history.filter(s => isJan8(s.date));
+            const jan8Container = document.getElementById('jan8Records');
+
+            if (jan8Records.length === 0) {
+                jan8Container.innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #dc3545;">❌ 未找到1月8号的训练记录</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            可能原因：<br>
+                            1. 记录被数据合并逻辑误删<br>
+                            2. 日期格式无效被过滤<br>
+                            3. 数据同步时丢失
+                        </p>
+                    </div>
+                `;
+                log('❌ 未找到1月8号的训练记录', 'error');
+            } else {
+                jan8Container.innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #28a745;">✅ 找到 ${jan8Records.length} 条1月8号的训练记录</p>
+                    </div>
+                `;
+
+                jan8Records.forEach((record, index) => {
+                    jan8Container.innerHTML += `
+                        <div class="workout-item">
+                            <div>
+                                <div class="workout-date">${formatDate(record.date)}</div>
+                                <div class="workout-details">
+                                    ${record.exercises.length} 个动作 | 
+                                    ${record.volumeLoad}kg 总容量 | 
+                                    ${record.durationMinutes} 分钟
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                log(`✅ 找到 ${jan8Records.length} 条1月8号的训练记录`, 'success');
+            }
+        }
+
+        // 显示Recovery State
+        function displayRecoveryState(recoveryState) {
+            const container = document.getElementById('recoveryState');
+
+            if (recoveryState.length === 0) {
+                container.innerHTML = `
+                    <div class="info-box">
+                        <p style="color: #dc3545;">❌ Recovery State 为空 - 这会导致Progress页面黑屏！</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+                recoveryState.forEach(state => {
+                    const lastWorkedDate = state.lastWorked > 0 ? formatDate(state.lastWorked) : '从未训练';
+                    const percentage = state.recoveryPercentage || 100;
+
+                    container.innerHTML += `
+                        <div class="info-box">
+                            <h3>${state.muscle}</h3>
+                            <p>恢复度: ${percentage}%</p>
+                            <p>上次训练: ${lastWorkedDate}</p>
+                        </div>
+                    `;
+                });
+            }
+        }
+
+        // 修复无效日期
+        function fixInvalidDates() {
+            log('🔧 开始修复无效日期...', 'info');
+
+            const historyJson = localStorage.getItem('zenfit_history');
+            if (!historyJson) {
+                log('❌ 未找到训练历史数据', 'error');
+                return;
+            }
+
+            try {
+                let history = JSON.parse(historyJson);
+                const originalCount = history.length;
+
+                // 过滤掉无效日期
+                history = history.filter(s => {
+                    const date = new Date(s.date);
+                    return !isNaN(date.getTime());
+                });
+
+                const removedCount = originalCount - history.length;
+
+                if (removedCount > 0) {
+                    localStorage.setItem('zenfit_history', JSON.stringify(history));
+                    log(`✅ 已移除 ${removedCount} 条无效日期记录`, 'success');
+                    log(`✅ 保留 ${history.length} 条有效记录`, 'success');
+                } else {
+                    log('✅ 没有发现无效日期记录', 'success');
+                }
+
+                runDiagnostics();
+            } catch (e) {
+                log(`❌ 修复失败: ${e.message}`, 'error');
+            }
+        }
+
+        // 修复Recovery State
+        function fixRecoveryState() {
+            log('🔧 开始修复Recovery State...', 'info');
+
+            const defaultRecoveryState = [
+                { muscle: 'Chest', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Lats', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Quads', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Glutes', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Shoulders', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Biceps', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Triceps', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Abs', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 72 },
+                { muscle: 'Cardio', lastWorked: 0, recoveryPercentage: 100, recoveryDurationHours: 24 }
+            ];
+
+            const recoveryJson = localStorage.getItem('zenfit_recovery');
+            let recoveryState = [];
+
+            if (recoveryJson) {
+                try {
+                    recoveryState = JSON.parse(recoveryJson);
+                } catch (e) {
+                    log(`⚠️ 无法解析现有Recovery State: ${e.message}`, 'warning');
+                }
+            }
+
+            if (recoveryState.length === 0) {
+                // 完全重建
+                localStorage.setItem('zenfit_recovery', JSON.stringify(defaultRecoveryState));
+                log('✅ 已重建Recovery State（使用默认值）', 'success');
+            } else {
+                // 修复缺失的肌肉群
+                const existingMuscles = new Set(recoveryState.map(s => s.muscle));
+                const missingMuscles = defaultRecoveryState.filter(s => !existingMuscles.has(s.muscle));
+
+                if (missingMuscles.length > 0) {
+                    recoveryState = [...recoveryState, ...missingMuscles];
+                    localStorage.setItem('zenfit_recovery', JSON.stringify(recoveryState));
+                    log(`✅ 已添加 ${missingMuscles.length} 个缺失的肌肉群`, 'success');
+                } else {
+                    log('✅ Recovery State 完整，无需修复', 'success');
+                }
+            }
+
+            runDiagnostics();
+        }
+
+        // 导出数据
+        function exportData() {
+            log('💾 导出数据备份...', 'info');
+
+            const data = {
+                history: JSON.parse(localStorage.getItem('zenfit_history') || '[]'),
+                recovery: JSON.parse(localStorage.getItem('zenfit_recovery') || '[]'),
+                routines: JSON.parse(localStorage.getItem('zenfit_routines') || '[]'),
+                profile: JSON.parse(localStorage.getItem('zenfit_user_profile') || '{}'),
+                exportTime: new Date().toISOString()
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `zenfit-backup-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            log('✅ 数据已导出', 'success');
+        }
+
+        // 查看所有训练记录
+        function viewAllWorkouts() {
+            const section = document.getElementById('allWorkoutsSection');
+            const list = document.getElementById('allWorkoutsList');
+
+            if (section.style.display === 'none') {
+                const historyJson = localStorage.getItem('zenfit_history');
+                if (!historyJson) {
+                    log('❌ 未找到训练历史数据', 'error');
+                    return;
+                }
+
+                const history = JSON.parse(historyJson);
+                list.innerHTML = '';
+
+                // 按日期排序（最新的在前）
+                history.sort((a, b) => b.date - a.date);
+
+                history.forEach(record => {
+                    const date = new Date(record.date);
+                    const isValid = !isNaN(date.getTime());
+                    const dateStr = isValid ? formatDate(record.date) : '无效日期';
+                    const statusClass = isValid ? 'ok' : 'error';
+
+                    list.innerHTML += `
+                        <div class="workout-item">
+                            <div>
+                                <div class="workout-date">
+                                    ${dateStr}
+                                    <span class="status ${statusClass}">${isValid ? '✓' : '✗'}</span>
+                                </div>
+                                <div class="workout-details">
+                                    ${record.exercises.length} 个动作 | 
+                                    ${record.volumeLoad}kg | 
+                                    ${record.durationMinutes} 分钟 |
+                                    ID: ${record.id}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                section.style.display = 'block';
+                log(`✅ 显示 ${history.length} 条训练记录`, 'success');
+            } else {
+                section.style.display = 'none';
+            }
+        }
+
+        // 页面加载时自动运行诊断
+        window.addEventListener('load', () => {
+            log('🚀 ZenFit 数据诊断工具已启动', 'success');
+            runDiagnostics();
+        });
+    </script>
+</body>
+
+</html>

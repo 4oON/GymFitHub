@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Reports Debug Tool</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button.danger {
+            background: #f44336;
+        }
+        button.danger:hover {
+            background: #da190b;
+        }
+        pre {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+            font-size: 14px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Weekly Reports Debug Tool</h1>
+        
+        <div class="section">
+            <h2>1. 检查本地IndexedDB</h2>
+            <button onclick="checkLocalReports()">检查本地报告</button>
+            <div id="localResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>2. 检查后端API</h2>
+            <label>Backend URL:</label>
+            <input type="text" id="backendUrl" value="http://localhost:3001" placeholder="http://localhost:3001">
+            <br><br>
+            <label>Auth Token:</label>
+            <input type="text" id="authToken" placeholder="从localStorage获取或手动输入">
+            <button onclick="getTokenFromStorage()">从localStorage获取Token</button>
+            <br><br>
+            <button onclick="checkBackendReports()">检查后端报告</button>
+            <button onclick="testBackendConnection()">测试后端连接</button>
+            <div id="backendResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>3. 同步操作</h2>
+            <button onclick="syncLocalToBackend()">同步本地报告到后端</button>
+            <button onclick="syncBackendToLocal()">从后端拉取到本地</button>
+            <div id="syncResult"></div>
+        </div>
+
+        <div class="section">
+            <h2>4. 清理操作</h2>
+            <button class="danger" onclick="clearLocalReports()">清空本地报告</button>
+            <div id="clearResult"></div>
+        </div>
+    </div>
+
+    <script>
+        const DB_NAME = 'ZenFitReports';
+        const DB_VERSION = 1;
+        const REPORTS_STORE = 'reports';
+
+        // 打开IndexedDB
+        function openDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // 检查本地报告
+        async function checkLocalReports() {
+            const resultDiv = document.getElementById('localResult');
+            resultDiv.innerHTML = '<div class="status info">正在检查...</div>';
+
+            try {
+                const db = await openDB();
+                const transaction = db.transaction([REPORTS_STORE], 'readonly');
+                const store = transaction.objectStore(REPORTS_STORE);
+                const request = store.getAll();
+
+                request.onsuccess = () => {
+                    const reports = request.result;
+                    if (reports.length === 0) {
+                        resultDiv.innerHTML = `
+                            <div class="status error">❌ 本地没有任何报告</div>
+                        `;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <div class="status success">✅ 找到 ${reports.length} 个本地报告</div>
+                            <pre>${JSON.stringify(reports, null, 2)}</pre>
+                        `;
+                    }
+                };
+
+                request.onerror = () => {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ 读取失败: ${request.error}</div>
+                    `;
+                };
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 错误: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 从localStorage获取token
+        function getTokenFromStorage() {
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                document.getElementById('authToken').value = token;
+                alert('✅ Token已获取');
+            } else {
+                alert('❌ localStorage中没有找到authToken');
+            }
+        }
+
+        // 测试后端连接
+        async function testBackendConnection() {
+            const resultDiv = document.getElementById('backendResult');
+            const backendUrl = document.getElementById('backendUrl').value;
+            
+            resultDiv.innerHTML = '<div class="status info">正在测试连接...</div>';
+
+            try {
+                const response = await fetch(`${backendUrl}/api/system/health`);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <div class="status success">✅ 后端连接成功</div>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 连接失败: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 检查后端报告
+        async function checkBackendReports() {
+            const resultDiv = document.getElementById('backendResult');
+            const backendUrl = document.getElementById('backendUrl').value;
+            const token = document.getElementById('authToken').value;
+
+            if (!token) {
+                resultDiv.innerHTML = '<div class="status error">❌ 请先输入Auth Token</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="status info">正在检查后端...</div>';
+
+            try {
+                const response = await fetch(`${backendUrl}/api/weekly-reports`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const reports = await response.json();
+                
+                if (reports.length === 0) {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ 后端没有任何报告</div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ 找到 ${reports.length} 个后端报告</div>
+                        <pre>${JSON.stringify(reports, null, 2)}</pre>
+                    `;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 错误: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 同步本地到后端
+        async function syncLocalToBackend() {
+            const resultDiv = document.getElementById('syncResult');
+            const backendUrl = document.getElementById('backendUrl').value;
+            const token = document.getElementById('authToken').value;
+
+            if (!token) {
+                resultDiv.innerHTML = '<div class="status error">❌ 请先输入Auth Token</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="status info">正在同步...</div>';
+
+            try {
+                // 1. 获取本地报告
+                const db = await openDB();
+                const transaction = db.transaction([REPORTS_STORE], 'readonly');
+                const store = transaction.objectStore(REPORTS_STORE);
+                const request = store.getAll();
+
+                request.onsuccess = async () => {
+                    const localReports = request.result;
+                    
+                    if (localReports.length === 0) {
+                        resultDiv.innerHTML = '<div class="status error">❌ 本地没有报告可同步</div>';
+                        return;
+                    }
+
+                    // 2. 批量同步到后端
+                    const response = await fetch(`${backendUrl}/api/weekly-reports/batch-sync`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ reports: localReports })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ 同步完成</div>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    `;
+                };
+
+                request.onerror = () => {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ 读取本地报告失败: ${request.error}</div>
+                    `;
+                };
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 错误: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 从后端拉取到本地
+        async function syncBackendToLocal() {
+            const resultDiv = document.getElementById('syncResult');
+            const backendUrl = document.getElementById('backendUrl').value;
+            const token = document.getElementById('authToken').value;
+
+            if (!token) {
+                resultDiv.innerHTML = '<div class="status error">❌ 请先输入Auth Token</div>';
+                return;
+            }
+
+            resultDiv.innerHTML = '<div class="status info">正在拉取...</div>';
+
+            try {
+                // 1. 从后端获取报告
+                const response = await fetch(`${backendUrl}/api/weekly-reports`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const backendReports = await response.json();
+
+                if (backendReports.length === 0) {
+                    resultDiv.innerHTML = '<div class="status error">❌ 后端没有报告可拉取</div>';
+                    return;
+                }
+
+                // 2. 转换格式并保存到本地
+                const db = await openDB();
+                const transaction = db.transaction([REPORTS_STORE], 'readwrite');
+                const store = transaction.objectStore(REPORTS_STORE);
+
+                for (const report of backendReports) {
+                    const localReport = {
+                        id: report.id,
+                        weekNumber: report.weekNumber,
+                        year: report.year,
+                        dateRange: {
+                            start: report.dateRangeStart,
+                            end: report.dateRangeEnd
+                        },
+                        stats: report.stats,
+                        muscleDistribution: report.muscleDistribution,
+                        weeklyProgress: report.weeklyProgress,
+                        sessions: report.sessions,
+                        createdAt: report.createdAt,
+                        syncStatus: 'synced'
+                    };
+                    store.put(localReport);
+                }
+
+                transaction.oncomplete = () => {
+                    resultDiv.innerHTML = `
+                        <div class="status success">✅ 成功拉取 ${backendReports.length} 个报告到本地</div>
+                    `;
+                };
+
+                transaction.onerror = () => {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ 保存到本地失败: ${transaction.error}</div>
+                    `;
+                };
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 错误: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 清空本地报告
+        async function clearLocalReports() {
+            if (!confirm('确定要清空所有本地报告吗?此操作不可恢复!')) {
+                return;
+            }
+
+            const resultDiv = document.getElementById('clearResult');
+            resultDiv.innerHTML = '<div class="status info">正在清空...</div>';
+
+            try {
+                const db = await openDB();
+                const transaction = db.transaction([REPORTS_STORE], 'readwrite');
+                const store = transaction.objectStore(REPORTS_STORE);
+                const request = store.clear();
+
+                request.onsuccess = () => {
+                    resultDiv.innerHTML = '<div class="status success">✅ 本地报告已清空</div>';
+                };
+
+                request.onerror = () => {
+                    resultDiv.innerHTML = `
+                        <div class="status error">❌ 清空失败: ${request.error}</div>
+                    `;
+                };
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="status error">❌ 错误: ${error.message}</div>
+                `;
+            }
+        }
+
+        // 页面加载时自动获取token
+        window.onload = () => {
+            getTokenFromStorage();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Storage Inspector</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        pre {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .info { color: #60a5fa; }
+        .warning { color: #fbbf24; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #2563eb;
+        }
+        tr:hover {
+            background: #2a2a2a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Storage Inspector</h1>
+    
+    <div>
+        <button onclick="inspectAll()">Inspect All Storage</button>
+        <button onclick="findWorkouts()">Find Workout Data</button>
+        <button onclick="exportData()">Export All Data</button>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        function log(message, type = 'info') {
+            const output = document.getElementById('output');
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = `<pre>${message}</pre>`;
+            output.appendChild(div);
+        }
+
+        function inspectAll() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Inspecting All localStorage ===', 'info');
+            
+            if (localStorage.length === 0) {
+                log('localStorage is EMPTY', 'error');
+                return;
+            }
+
+            log(`Found ${localStorage.length} items in localStorage`, 'success');
+            
+            let table = '<table><tr><th>Key</th><th>Size</th><th>Preview</th></tr>';
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                const size = new Blob([value]).size;
+                const preview = value.length > 100 ? value.substring(0, 100) + '...' : value;
+                
+                table += `<tr>
+                    <td><strong>${key}</strong></td>
+                    <td>${(size / 1024).toFixed(2)} KB</td>
+                    <td>${preview}</td>
+                </tr>`;
+            }
+            
+            table += '</table>';
+            
+            const div = document.createElement('div');
+            div.innerHTML = table;
+            document.getElementById('output').appendChild(div);
+        }
+
+        function findWorkouts() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Searching for Workout Data ===', 'info');
+            
+            const possibleKeys = [
+                'workout-sessions',
+                'workoutSessions',
+                'workouts',
+                'sessions',
+                'training-sessions',
+                'workout-history',
+                'zenfit-workouts'
+            ];
+            
+            let found = false;
+            
+            for (const key of possibleKeys) {
+                const data = localStorage.getItem(key);
+                if (data) {
+                    found = true;
+                    log(`\nFound data in key: "${key}"`, 'success');
+                    
+                    try {
+                        const parsed = JSON.parse(data);
+                        if (Array.isArray(parsed)) {
+                            log(`  - Type: Array`, 'info');
+                            log(`  - Length: ${parsed.length} items`, 'info');
+                            
+                            if (parsed.length > 0) {
+                                log(`\n  First item structure:`, 'info');
+                                log(JSON.stringify(parsed[0], null, 2), 'info');
+                                
+                                // Check for dates
+                                parsed.forEach((item, index) => {
+                                    if (item.date) {
+                                        const date = new Date(item.date);
+                                        log(`\n  Item ${index + 1}: ${date.toLocaleString('en-US')}`, 'info');
+                                    }
+                                });
+                            }
+                        } else {
+                            log(`  - Type: Object`, 'info');
+                            log(JSON.stringify(parsed, null, 2), 'info');
+                        }
+                    } catch (e) {
+                        log(`  - Type: String (not JSON)`, 'warning');
+                        log(`  - Value: ${data.substring(0, 200)}`, 'info');
+                    }
+                }
+            }
+            
+            if (!found) {
+                log('\nNo workout data found in common keys', 'error');
+                log('Checking ALL localStorage keys...', 'warning');
+                
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    const value = localStorage.getItem(key);
+                    
+                    // Check if value contains workout-related keywords
+                    if (value && (
+                        value.includes('exercise') ||
+                        value.includes('workout') ||
+                        value.includes('durationMinutes') ||
+                        value.includes('volumeLoad')
+                    )) {
+                        log(`\nPossible workout data in: "${key}"`, 'warning');
+                        log(`Preview: ${value.substring(0, 200)}...`, 'info');
+                    }
+                }
+            }
+        }
+
+        function exportData() {
+            document.getElementById('output').innerHTML = '';
+            log('=== Exporting All Data ===', 'info');
+            
+            const allData = {};
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                
+                try {
+                    allData[key] = JSON.parse(value);
+                } catch (e) {
+                    allData[key] = value;
+                }
+            }
+            
+            const json = JSON.stringify(allData, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `localStorage-export-${Date.now()}.json`;
+            a.click();
+            
+            log('Data exported to file', 'success');
+            log(`Total size: ${(new Blob([json]).size / 1024).toFixed(2)} KB`, 'info');
+        }
+    </script>
+</body>
+</html>

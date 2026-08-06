@@ -1,0 +1,1822 @@
+{
+    "total_exercise_count": 74,
+    "data": [
+        {
+            "original_url": "https://musclewiki.com/exercise/band-crunch",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-crunch",
+            "exercise_name_zh": "弹力带卷腹",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-crunch-side.jpg",
+            "muscle_module_en": "Band Crunch",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-crunch-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-crunch-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-high-hammer-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-high-hammer-curl",
+            "exercise_name_zh": "弹力带高位锤式弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-high-hammer-curl-front.jpg",
+            "muscle_module_en": "Band High Hammer Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-hammer-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-hammer-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-side-bend",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-side-bend",
+            "exercise_name_zh": "Band Side Bend",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-side-bend-front.jpg",
+            "muscle_module_en": "Band Side Bend",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-side-bend-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-side-bend-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-leg-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-leg-curl",
+            "exercise_name_zh": "阻力带腿弯举",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-leg-curl-front.jpg",
+            "muscle_module_en": "Band Leg Curl",
+            "muscle_ids": [
+                "hamstrings"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-leg-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-leg-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-tricep-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-tricep-kickback",
+            "exercise_name_zh": "弹力带俯身臂屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-tricep-kickback-front.jpg",
+            "muscle_module_en": "Band Tricep Kickback",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-tricep-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-tricep-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-pull-apart",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pull-apart",
+            "exercise_name_zh": "弹力带拉开",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pull-apart-front.jpg",
+            "muscle_module_en": "Band Pull Apart",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pull-apart-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pull-apart-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-squat-hold-single-arm-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-squat-hold-single-arm-row",
+            "exercise_name_zh": "弹力带深蹲保持 单臂划船",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-squat-hold-single-arm-row-side.jpg",
+            "muscle_module_en": "Band Squat Hold Single Arm Row",
+            "muscle_ids": [
+                "quads",
+                "biceps",
+                "glutes",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "肱二头肌",
+                "臀大肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-hold-single-arm-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-hold-single-arm-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-pallof-press-to-wood-chopper",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pallof-press-to-wood-chopper",
+            "exercise_name_zh": "Band Pallof Press To Wood Chopper",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pallof-press-to-wood-chopper-front.jpg",
+            "muscle_module_en": "Band Pallof Press To Wood Chopper",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pallof-press-to-wood-chopper-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pallof-press-to-wood-chopper-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-overhead-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-overhead-press",
+            "exercise_name_zh": "阻力带肩上推举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-overhead-press-front.jpg",
+            "muscle_module_en": "Band Overhead Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-overhead-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-overhead-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-standing-good-morning",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-standing-good-morning",
+            "exercise_name_zh": "Band Standing Good Morning",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-standing-good-morning-side.jpg",
+            "muscle_module_en": "Band Standing Good Morning",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-standing-good-morning-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-standing-good-morning-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-skullcrusher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-skullcrusher",
+            "exercise_name_zh": "弹力带单臂仰卧臂屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-single-arm-skullcrusher-front.jpg",
+            "muscle_module_en": "Band Single Arm Skullcrusher",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-skullcrusher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-skullcrusher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-calf-raise",
+            "exercise_name_zh": "弹力带提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-calf-raise-side.jpg",
+            "muscle_module_en": "Band Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-high-face-pull",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-high-face-pull",
+            "exercise_name_zh": "高位弹力带面拉",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-face-pull-front_Rw6dM9Q.jpg",
+            "muscle_module_en": "Band High Face Pull",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-face-pull-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-face-pull-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-low-lateral-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-low-lateral-raise",
+            "exercise_name_zh": "弹力带低位侧平举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-low-lateral-raise-front.jpg",
+            "muscle_module_en": "Band Low Lateral Raise",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-low-lateral-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-low-lateral-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-goblet-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-goblet-squat",
+            "exercise_name_zh": "阻力带杯式深蹲",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-goblet-squat-front.jpg",
+            "muscle_module_en": "Band Goblet Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-goblet-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-goblet-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-front-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-front-raise",
+            "exercise_name_zh": "弹力带前平举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-front-raise-front.jpg",
+            "muscle_module_en": "Band Front Raise",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-front-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-front-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-chest-press",
+            "exercise_name_zh": "弹力带单臂卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-chest-press-front.jpg",
+            "muscle_module_en": "Band Single Arm Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-leg-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-leg-extension",
+            "exercise_name_zh": "弹力带腿伸展",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-leg-extension-front.jpg",
+            "muscle_module_en": "Band Leg Extension",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-leg-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-leg-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-hip-adduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-hip-adduction",
+            "exercise_name_zh": "弹力带大腿内收",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-hip-adduction-front.jpg",
+            "muscle_module_en": "Band Hip Adduction",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-hip-adduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-hip-adduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-lateral-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-lateral-raise",
+            "exercise_name_zh": "Band Single Arm Lateral Raise",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-single-arm-lateral-raise-front.jpg",
+            "muscle_module_en": "Band Single Arm Lateral Raise",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-lateral-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-lateral-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-row",
+            "exercise_name_zh": "弹力带划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-row-side.jpg",
+            "muscle_module_en": "Band Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-pulldown",
+            "exercise_name_zh": "弹力带单臂下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-single-arm-pulldown-front.jpg",
+            "muscle_module_en": "Band Single Arm Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-bent-over-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-bent-over-row",
+            "exercise_name_zh": "Band Bent Over Row",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-bent-over-row-front.jpg",
+            "muscle_module_en": "Band Bent Over Row",
+            "muscle_ids": [
+                "forearms",
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "前臂肌群",
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bent-over-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bent-over-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-overhead-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-overhead-press",
+            "exercise_name_zh": "单臂阻力带肩上推举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-single-arm-overhead-press-front.jpg",
+            "muscle_module_en": "Band Single Arm Overhead Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "traps",
+                "triceps",
+                "traps-middle",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "斜方肌上束",
+                "肱三头肌",
+                "斜方肌中束",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-overhead-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-overhead-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-rear-delt-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-rear-delt-fly",
+            "exercise_name_zh": "弹力带后束飞鸟",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-rear-delt-fly-front.jpg",
+            "muscle_module_en": "Band Rear Delt Fly",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-rear-delt-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-rear-delt-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-bench-press",
+            "exercise_name_zh": "Band Bench Press",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-bench-press-front.jpg",
+            "muscle_module_en": "Band Bench Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-floor-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-floor-press",
+            "exercise_name_zh": "Band Floor Press",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-floor-press-side.jpg",
+            "muscle_module_en": "Band Floor Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-floor-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-floor-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-squat-hold-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-squat-hold-row",
+            "exercise_name_zh": "弹力带静态深蹲划船",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-squat-hold-row-side.jpg",
+            "muscle_module_en": "Band Squat Hold Row",
+            "muscle_ids": [
+                "quads",
+                "biceps",
+                "glutes",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "肱二头肌",
+                "臀大肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-hold-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-hold-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-squat",
+            "exercise_name_zh": "弹力带深蹲",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-squat-front.jpg",
+            "muscle_module_en": "Band Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-shrug",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-shrug",
+            "exercise_name_zh": "弹力带耸肩",
+            "muscle_module_zh": "斜方肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-shrug-front.jpg",
+            "muscle_module_en": "Band Shrug",
+            "muscle_ids": [
+                "traps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [
+                "斜方肌上束",
+                "斜方肌中束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-shrug-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-shrug-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-seated-single-arm-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-seated-single-arm-pulldown",
+            "exercise_name_zh": "Band Seated Single Arm Pulldown",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-seated-single-arm-pulldown-front.jpg",
+            "muscle_module_en": "Band Seated Single Arm Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-seated-single-arm-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-seated-single-arm-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-good-morning",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-good-morning",
+            "exercise_name_zh": "弹力带俯身挺髋",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-good-morning-front_8qJRfbm.jpg",
+            "muscle_module_en": "Band Good Morning",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-good-morning-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-good-morning-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-curl",
+            "exercise_name_zh": "阻力带弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-curl-front_1YwVVEx.jpg",
+            "muscle_module_en": "Band Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-pullthrough",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pullthrough",
+            "exercise_name_zh": "阻力带穿裆拉",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pullthrough-side.jpg",
+            "muscle_module_en": "Band Pullthrough",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pullthrough-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pullthrough-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-spanish-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-spanish-squat",
+            "exercise_name_zh": "弹力带西班牙深蹲",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-spanish-squat-front.jpg",
+            "muscle_module_en": "Band Spanish Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-spanish-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-spanish-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-hip-abduction",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-hip-abduction",
+            "exercise_name_zh": "弹力带髋外展",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-hip-abduction-front.jpg",
+            "muscle_module_en": "Band Hip Abduction",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-hip-abduction-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-hip-abduction-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-press-around",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-press-around",
+            "exercise_name_zh": "Band Press Around",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-press-around-side.jpg",
+            "muscle_module_en": "Band Press Around",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-press-around-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-press-around-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-glute-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-glute-kickback",
+            "exercise_name_zh": "弹力带臀部后踢",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-glute-kickback-front.jpg",
+            "muscle_module_en": "Band Glute Kickback",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-glute-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-glute-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-rapunzel-pushdown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-rapunzel-pushdown",
+            "exercise_name_zh": "弹力带下压（Rapunzel 变式）",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-rapunzel-pushdown-front.jpg",
+            "muscle_module_en": "Rapunzel",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-rapunzel-pushdown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-rapunzel-pushdown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-pull-around",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pull-around",
+            "exercise_name_zh": "Band Pull Around",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pull-around-front.jpg",
+            "muscle_module_en": "Band Pull Around",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pull-around-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pull-around-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-half-kneeling-single-arm-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-half-kneeling-single-arm-pulldown",
+            "exercise_name_zh": "Band Half Kneeling Single Arm Pulldown",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-half-kneeling-single-arm-pulldown-front.jpg",
+            "muscle_module_en": "Band Half Kneeling Single Arm Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-half-kneeling-single-arm-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-half-kneeling-single-arm-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-pushdown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-pushdown",
+            "exercise_name_zh": "弹力带单臂下压",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-single-arm-pushdown-front.jpg",
+            "muscle_module_en": "Band Single Arm Pushdown",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-pushdown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-pushdown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-overhead-tricep-extension",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-overhead-tricep-extension",
+            "exercise_name_zh": "弹力带过顶三头肌伸展",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-overhead-tricep-extension-front.jpg",
+            "muscle_module_en": "Band Overhead Tricep Extension",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-overhead-tricep-extension-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-overhead-tricep-extension-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-high-reverse-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-high-reverse-curl",
+            "exercise_name_zh": "高位弹力带反握弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-high-reverse-curl-front.jpg",
+            "muscle_module_en": "Band High Reverse Curl",
+            "muscle_ids": [
+                "forearms",
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "前臂肌群",
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-reverse-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-reverse-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-high-to-low-pallof-press-wood-chopper",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-high-to-low-pallof-press-wood-chopper",
+            "exercise_name_zh": "Band High To Low Pallof Press Wood Chopper",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-high-to-low-pallof-press-wood-chopper-side.jpg",
+            "muscle_module_en": "Band High To Low Pallof Press Wood Chopper",
+            "muscle_ids": [
+                "abdominals",
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌",
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-high-to-low-pallof-press-wood-chopper-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-high-to-low-pallof-press-wood-chopper-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/single-arm-rapunzel-pushdown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/single-arm-rapunzel-pushdown",
+            "exercise_name_zh": "单臂Rapunzel式绳索三头肌下压",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-single-arm-rapunzel-pushdown-front.jpg",
+            "muscle_module_en": "Rapunzel",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-rapunzel-pushdown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-single-arm-rapunzel-pushdown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-bent-over-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-bent-over-row",
+            "exercise_name_zh": "Band Single Arm Bent Over Row",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-single-arm-bent-over-row-side.jpg",
+            "muscle_module_en": "Band Single Arm Bent Over Row",
+            "muscle_ids": [
+                "forearms",
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "前臂肌群",
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-bent-over-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-bent-over-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-chest-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-chest-fly",
+            "exercise_name_zh": "弹力带飞鸟",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-chest-fly-front_EjlOhyB.jpg",
+            "muscle_module_en": "Band Chest Fly",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-chest-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-chest-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-internally-rotated-chest-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-internally-rotated-chest-fly",
+            "exercise_name_zh": "Band Single Arm Internally Rotated Chest Fly",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-single-arm-internally-rotated-chest-fly-side.jpg",
+            "muscle_module_en": "Band Single Arm Internally Rotated Chest Fly",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-internally-rotated-chest-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-internally-rotated-chest-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-low-to-high-pallof-press-wood-chopper",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-low-to-high-pallof-press-wood-chopper",
+            "exercise_name_zh": "Band Low To High Pallof Press Wood Chopper",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-low-to-high-pallof-press-wood-chopper-front.jpg",
+            "muscle_module_en": "Band Low To High Pallof Press Wood Chopper",
+            "muscle_ids": [
+                "abdominals",
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌",
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-low-to-high-pallof-press-wood-chopper-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-low-to-high-pallof-press-wood-chopper-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-high-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-high-curl",
+            "exercise_name_zh": "高位弹力带弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-high-curl-front.jpg",
+            "muscle_module_en": "Band High Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-high-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-seated-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-seated-pulldown",
+            "exercise_name_zh": "Band Seated Pulldown",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-seated-pulldown-side.jpg",
+            "muscle_module_en": "Band Seated Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-seated-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-seated-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-single-arm-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-single-arm-row",
+            "exercise_name_zh": "弹力带单臂划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-single-arm-row-side.jpg",
+            "muscle_module_en": "Band Single Arm Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-single-arm-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-wood-chopper",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-wood-chopper",
+            "exercise_name_zh": "弹力带木材劈砍",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-wood-chopper-front.jpg",
+            "muscle_module_en": "Band Wood Chopper",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-wood-chopper-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-wood-chopper-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-mid-lateral-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-mid-lateral-raise",
+            "exercise_name_zh": "弹力带中束侧平举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-mid-lateral-raise-front.jpg",
+            "muscle_module_en": "Band Mid Lateral Raise",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-mid-lateral-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-mid-lateral-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/side-walks-resisted",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/side-walks-resisted",
+            "exercise_name_zh": "弹力带侧步",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Recovery-side-walks-resisted-front.jpg",
+            "muscle_module_en": "Side Walks Resisted",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Recovery-side-walks-resisted-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Recovery-side-walks-resisted-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/band-kneeling-single-arm-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-kneeling-single-arm-pulldown",
+            "exercise_name_zh": "跪姿单臂弹力带下拉",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-kneeling-single-arm-pulldown-front.jpg",
+            "muscle_module_en": "Band Kneeling Single Arm Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-kneeling-single-arm-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-kneeling-single-arm-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-internally-rotated-chest-fly",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-internally-rotated-chest-fly",
+            "exercise_name_zh": "弹力带内旋飞鸟",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-internally-rotated-chest-fly-front.jpg",
+            "muscle_module_en": "Band Internally Rotated Chest Fly",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-internally-rotated-chest-fly-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-internally-rotated-chest-fly-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-bayesian-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-bayesian-curl",
+            "exercise_name_zh": "弹力带贝叶斯弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-bayesian-curl-front.jpg",
+            "muscle_module_en": "Band Bayesian Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bayesian-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bayesian-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-face-pull",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-face-pull",
+            "exercise_name_zh": "弹力带面拉",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-face-pull-side.jpg",
+            "muscle_module_en": "Band Face Pull",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": null,
+            "mechanic_raw": null,
+            "mechanic_source": null,
+            "difficulty": "新手",
+            "notes": "mechanic not found; dd candidates: ['新手', '将弹力带固定在与眼睛同高的位置。向后退几步，直到弹力带绷紧。', '双手正握弹力带（掌心向下）。将其拉到鼻梁处，同时肘部向外张开。', '新手']",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-face-pull-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-face-pull-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-bayesian-hammer-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-bayesian-hammer-curl",
+            "exercise_name_zh": "弹力带 Bayesian 锤式弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-bayesian-hammer-curl-front.jpg",
+            "muscle_module_en": "Bayesian",
+            "muscle_ids": [
+                "forearms",
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "前臂肌群",
+                "肱二头肌"
+            ],
+            "mechanic": null,
+            "mechanic_raw": null,
+            "mechanic_source": null,
+            "difficulty": "中级",
+            "notes": "mechanic not found; dd candidates: ['中级', '将阻力带固定在低位固定点。使用中立握法。', '屈肘，直到感觉二头肌收缩。然后完全伸直肘部。', '中级']",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bayesian-hammer-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-bayesian-hammer-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-pullover",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pullover",
+            "exercise_name_zh": "弹力带仰卧拉举",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pullover-side.jpg",
+            "muscle_module_en": "Band Pullover",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pullover-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pullover-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-leg-press",
+            "exercise_name_zh": "弹力带腿推",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-leg-press-side.jpg",
+            "muscle_module_en": "Band Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-reverse-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-reverse-curl",
+            "exercise_name_zh": "弹力带反手弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-reverse-curl-front_iQSuy66.jpg",
+            "muscle_module_en": "Band Reverse Curl",
+            "muscle_ids": [
+                "forearms",
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "前臂肌群",
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-reverse-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-reverse-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-horizontal-shrug",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-horizontal-shrug",
+            "exercise_name_zh": "弹力带水平耸肩",
+            "muscle_module_zh": "斜方肌（中背）",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-horizontal-shrug-side.jpg",
+            "muscle_module_en": "Band Horizontal Shrug",
+            "muscle_ids": [
+                "traps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-horizontal-shrug-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-horizontal-shrug-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-pushdown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pushdown",
+            "exercise_name_zh": "弹力带下压",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-pushdown-front.jpg",
+            "muscle_module_en": "Band Pushdown",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": null,
+            "mechanic_raw": null,
+            "mechanic_source": null,
+            "difficulty": "新手",
+            "notes": "mechanic not found; dd candidates: ['新手', '将弹力带放在略高于眼平线的位置。后退几步，直到弹力带绷紧。', '稍微把臀部向后推。肘部伸直并弯曲。', '新手']",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-pushdown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-pushdown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-kneeling-pulldown",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-kneeling-pulldown",
+            "exercise_name_zh": "Band Kneeling Pulldown",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-kneeling-pulldown-side.jpg",
+            "muscle_module_en": "Band Kneeling Pulldown",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-kneeling-pulldown-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-kneeling-pulldown-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-pushup",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pushup",
+            "exercise_name_zh": "阻力带俯卧撑",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-pushup-front.jpg",
+            "muscle_module_en": "Band Pushup",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-pushup-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-pushup-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-upright-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-upright-row",
+            "exercise_name_zh": "弹力带直立划船",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-upright-row-side.jpg",
+            "muscle_module_en": "Band Upright Row",
+            "muscle_ids": [
+                "front-shoulders",
+                "traps",
+                "traps-middle",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "斜方肌上束",
+                "斜方肌中束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-upright-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-upright-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-lateral-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-lateral-raise",
+            "exercise_name_zh": "弹力带侧平举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-band-lateral-raise-front.jpg",
+            "muscle_module_en": "Band Lateral Raise",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-lateral-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-band-lateral-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-skullcrusher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-skullcrusher",
+            "exercise_name_zh": "弹力带仰卧臂屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-skullcrusher-front.jpg",
+            "muscle_module_en": "Band Skullcrusher",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-skullcrusher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-skullcrusher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-standing-chest-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-standing-chest-press",
+            "exercise_name_zh": "站立阻力带胸推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-standing-chest-press-front.jpg",
+            "muscle_module_en": "Band Standing Chest Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-standing-chest-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-standing-chest-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-pallof-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-pallof-press",
+            "exercise_name_zh": "弹力带 Pallof 按压",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-pallof-press-side.jpg",
+            "muscle_module_en": "Pallof",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pallof-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-pallof-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/zh-cn/exercise/band-romanian-deadlift",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/band-romanian-deadlift",
+            "exercise_name_zh": "弹力带罗马尼亚硬拉",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Band-band-romanian-deadlift-front.jpg",
+            "muscle_module_en": "Band Romanian Deadlift",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "",
+            "equipment_type": "band",
+            "equipment_type_zh": "弹力带",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-romanian-deadlift-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Band-band-romanian-deadlift-side.mp4"
+        }
+    ]
+}

@@ -1,0 +1,1260 @@
+{
+    "total_exercise_count": 52,
+    "data": [
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-side-bend",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-side-bend",
+            "exercise_name_zh": "史密斯机侧弯",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-side-bend-front.jpg",
+            "muscle_module_en": "Smith Machine Side Bend",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-bend-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-bend-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-pushup",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-pushup",
+            "exercise_name_zh": "史密斯机俯卧撑",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-pushup-front.jpg",
+            "muscle_module_en": "Smith Machine Pushup",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-pushup-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-pushup-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-narrow-stance-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-narrow-stance-squat",
+            "exercise_name_zh": "史密斯机窄距深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-narrow-stance-squat-front.jpg",
+            "muscle_module_en": "Smith Machine Narrow Stance Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-narrow-stance-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-narrow-stance-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-single-leg-hip-thrust",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-single-leg-hip-thrust",
+            "exercise_name_zh": "史密斯机单腿臀桥",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-single-leg-hip-thrust-side.jpg",
+            "muscle_module_en": "Smith Machine Single Leg Hip Thrust",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-single-leg-hip-thrust-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-single-leg-hip-thrust-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-glute-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-glute-kickback",
+            "exercise_name_zh": "史密斯机臀部后踢",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-glute-kickback-front.jpg",
+            "muscle_module_en": "Smith Machine Glute Kickback",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-glute-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-glute-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-assisted-pullup",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-assisted-pullup",
+            "exercise_name_zh": "史密斯机辅助引体向上",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-assisted-pullup-front.jpg",
+            "muscle_module_en": "Smith Machine Assisted Pullup",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-assisted-pullup-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-assisted-pullup-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-guillotine-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-guillotine-bench-press",
+            "exercise_name_zh": "史密斯机斩首卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-guillotine-bench-press-front.jpg",
+            "muscle_module_en": "Smith Machine Guillotine Bench Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-guillotine-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-guillotine-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-split-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-split-squat",
+            "exercise_name_zh": "史密斯机弓步蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-split-squat-side.jpg",
+            "muscle_module_en": "Smith Machine Split Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-split-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-split-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-underhand-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-underhand-row",
+            "exercise_name_zh": "史密斯机反握划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-underhand-row-side.jpg",
+            "muscle_module_en": "Smith Machine Underhand Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-underhand-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-underhand-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-inverted-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-inverted-row",
+            "exercise_name_zh": "史密斯机反向划船",
+            "muscle_module_zh": "斜方肌（中背）",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-inverted-row-side.jpg",
+            "muscle_module_en": "Smith Machine Inverted Row",
+            "muscle_ids": [
+                "lats",
+                "biceps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-inverted-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-inverted-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-situp",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-situp",
+            "exercise_name_zh": "史密斯机仰卧起坐",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-situp-front.jpg",
+            "muscle_module_en": "Smith Machine Situp",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-situp-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-situp-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-squat",
+            "exercise_name_zh": "史密斯机深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-squat-side.jpg",
+            "muscle_module_en": "Smith Machine Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-drag-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-drag-curl",
+            "exercise_name_zh": "史密斯机拖拽弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-drag-curl-front.jpg",
+            "muscle_module_en": "Smith Machine Drag Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-drag-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-drag-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-sissy-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-sissy-squat",
+            "exercise_name_zh": "史密斯机西西深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-sissy-squat-front.jpg",
+            "muscle_module_en": "Smith Machine Sissy Squat",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sissy-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sissy-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-oblique-crunch",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-oblique-crunch",
+            "exercise_name_zh": "史密斯机侧腹卷腹",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-oblique-crunch-side.jpg",
+            "muscle_module_en": "Smith Machine Oblique Crunch",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-oblique-crunch-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-oblique-crunch-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-side-plank-up-down",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-side-plank-up-down",
+            "exercise_name_zh": "史密斯机侧平板支撑上下",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-side-plank-up-down-front.jpg",
+            "muscle_module_en": "Smith Machine Side Plank Up Down",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-plank-up-down-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-plank-up-down-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-bodyweight-skullcrusher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-bodyweight-skullcrusher",
+            "exercise_name_zh": "史密斯机体重法式臂屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-bodyweight-skullcrusher-front.jpg",
+            "muscle_module_en": "Smith Machine Bodyweight Skullcrusher",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bodyweight-skullcrusher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bodyweight-skullcrusher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-leg-press",
+            "exercise_name_zh": "史密斯机腿推",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-leg-press-side.jpg",
+            "muscle_module_en": "Smith Machine Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-incline-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-incline-bench-press",
+            "exercise_name_zh": "史密斯机上斜卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-incline-bench-press-side.jpg",
+            "muscle_module_en": "Smith Machine Incline Bench Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-incline-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-incline-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-side-bend",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-side-bend",
+            "exercise_name_zh": "史密斯机侧弯",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-side-bend-front.jpg",
+            "muscle_module_en": "Smith Machine Side Bend",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-bend-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-bend-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-pushup",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-pushup",
+            "exercise_name_zh": "史密斯机俯卧撑",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-pushup-front.jpg",
+            "muscle_module_en": "Smith Machine Pushup",
+            "muscle_ids": [
+                "chest"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-pushup-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-pushup-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-narrow-stance-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-narrow-stance-squat",
+            "exercise_name_zh": "史密斯机窄距深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-narrow-stance-squat-front.jpg",
+            "muscle_module_en": "Smith Machine Narrow Stance Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-narrow-stance-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-narrow-stance-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-single-leg-hip-thrust",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-single-leg-hip-thrust",
+            "exercise_name_zh": "史密斯机单腿臀桥",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-single-leg-hip-thrust-side.jpg",
+            "muscle_module_en": "Smith Machine Single Leg Hip Thrust",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-single-leg-hip-thrust-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-single-leg-hip-thrust-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-glute-kickback",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-glute-kickback",
+            "exercise_name_zh": "史密斯机臀部后踢",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-glute-kickback-front.jpg",
+            "muscle_module_en": "Smith Machine Glute Kickback",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-glute-kickback-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-glute-kickback-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-assisted-pullup",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-assisted-pullup",
+            "exercise_name_zh": "史密斯机辅助引体向上",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-assisted-pullup-front.jpg",
+            "muscle_module_en": "Smith Machine Assisted Pullup",
+            "muscle_ids": [
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-assisted-pullup-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-assisted-pullup-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-guillotine-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-guillotine-bench-press",
+            "exercise_name_zh": "史密斯机斩首卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-guillotine-bench-press-front.jpg",
+            "muscle_module_en": "Smith Machine Guillotine Bench Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-guillotine-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-guillotine-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-split-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-split-squat",
+            "exercise_name_zh": "史密斯机弓步蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-split-squat-side.jpg",
+            "muscle_module_en": "Smith Machine Split Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-split-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-split-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-underhand-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-underhand-row",
+            "exercise_name_zh": "史密斯机反握划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-underhand-row-side.jpg",
+            "muscle_module_en": "Smith Machine Underhand Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-underhand-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-underhand-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-inverted-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-inverted-row",
+            "exercise_name_zh": "史密斯机反向划船",
+            "muscle_module_zh": "斜方肌（中背）",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-inverted-row-side.jpg",
+            "muscle_module_en": "Smith Machine Inverted Row",
+            "muscle_ids": [
+                "lats",
+                "biceps",
+                "traps-middle"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-inverted-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-inverted-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-situp",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-situp",
+            "exercise_name_zh": "史密斯机仰卧起坐",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-situp-front.jpg",
+            "muscle_module_en": "Smith Machine Situp",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-situp-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-situp-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-squat",
+            "exercise_name_zh": "史密斯机深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-squat-side.jpg",
+            "muscle_module_en": "Smith Machine Squat",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-drag-curl",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-drag-curl",
+            "exercise_name_zh": "史密斯机拖拽弯举",
+            "muscle_module_zh": "二头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-drag-curl-front.jpg",
+            "muscle_module_en": "Smith Machine Drag Curl",
+            "muscle_ids": [
+                "biceps"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-drag-curl-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-drag-curl-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-sissy-squat",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-sissy-squat",
+            "exercise_name_zh": "史密斯机西西深蹲",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-sissy-squat-front.jpg",
+            "muscle_module_en": "Smith Machine Sissy Squat",
+            "muscle_ids": [
+                "quads"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sissy-squat-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sissy-squat-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-oblique-crunch",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-oblique-crunch",
+            "exercise_name_zh": "史密斯机侧腹卷腹",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-oblique-crunch-side.jpg",
+            "muscle_module_en": "Smith Machine Oblique Crunch",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "高级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-oblique-crunch-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-oblique-crunch-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-side-plank-up-down",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-side-plank-up-down",
+            "exercise_name_zh": "史密斯机侧平板支撑上下",
+            "muscle_module_zh": "腹斜肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-side-plank-up-down-front.jpg",
+            "muscle_module_en": "Smith Machine Side Plank Up Down",
+            "muscle_ids": [
+                "obliques"
+            ],
+            "muscle_ids_zh": [
+                "腹外斜肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-plank-up-down-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-side-plank-up-down-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-bodyweight-skullcrusher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-bodyweight-skullcrusher",
+            "exercise_name_zh": "史密斯机体重法式臂屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-bodyweight-skullcrusher-front.jpg",
+            "muscle_module_en": "Smith Machine Bodyweight Skullcrusher",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bodyweight-skullcrusher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bodyweight-skullcrusher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-leg-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-leg-press",
+            "exercise_name_zh": "史密斯机腿推",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-leg-press-side.jpg",
+            "muscle_module_en": "Smith Machine Leg Press",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-leg-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-leg-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-incline-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-incline-bench-press",
+            "exercise_name_zh": "史密斯机上斜卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-incline-bench-press-side.jpg",
+            "muscle_module_en": "Smith Machine Incline Bench Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-incline-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-incline-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-seated-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-seated-calf-raise",
+            "exercise_name_zh": "史密斯机坐姿提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-seated-calf-raise-side.jpg",
+            "muscle_module_en": "Smith Machine Seated Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-seated-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-seated-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-calf-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-calf-raise",
+            "exercise_name_zh": "史密斯机站姿提踵",
+            "muscle_module_zh": "小腿",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-calf-raise-front.jpg",
+            "muscle_module_en": "Smith Machine Calf Raise",
+            "muscle_ids": [
+                "calves"
+            ],
+            "muscle_ids_zh": [
+                "小腿三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-calf-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-calf-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-skullcrusher",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-skullcrusher",
+            "exercise_name_zh": "史密斯机仰卧三头肌屈伸",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-skullcrusher-side.jpg",
+            "muscle_module_en": "Smith Machine Skullcrusher",
+            "muscle_ids": [
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "肱三头肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-skullcrusher-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-skullcrusher-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-bench-press",
+            "exercise_name_zh": "史密斯机卧推",
+            "muscle_module_zh": "胸部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-bench-press-side.jpg",
+            "muscle_module_en": "Smith Machine Bench Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "chest",
+                "triceps",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "胸大肌",
+                "肱三头肌",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-hanging-knee-tuck",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-hanging-knee-tuck",
+            "exercise_name_zh": "史密斯机悬垂屈膝收腹",
+            "muscle_module_zh": "腹肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-hanging-knee-tuck-side.jpg",
+            "muscle_module_en": "Smith Machine Hanging Knee Tuck",
+            "muscle_ids": [
+                "abdominals"
+            ],
+            "muscle_ids_zh": [
+                "腹直肌"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-hanging-knee-tuck-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-hanging-knee-tuck-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-staggered-deadlift",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-staggered-deadlift",
+            "exercise_name_zh": "Smith Machine 分腿硬拉",
+            "muscle_module_zh": "腿后肌群",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-staggered-deadlift-side.jpg",
+            "muscle_module_en": "Smith Machine",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-staggered-deadlift-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-staggered-deadlift-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-close-grip-bench-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-close-grip-bench-press",
+            "exercise_name_zh": "史密斯机窄握卧推",
+            "muscle_module_zh": "三头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-close-grip-bench-press-side.jpg",
+            "muscle_module_en": "Smith Machine Close Grip Bench Press",
+            "muscle_ids": [
+                "chest",
+                "triceps"
+            ],
+            "muscle_ids_zh": [
+                "胸大肌",
+                "肱三头肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-close-grip-bench-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-close-grip-bench-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-upright-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-upright-row",
+            "exercise_name_zh": "史密斯机直立划船",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-upright-row-front.jpg",
+            "muscle_module_en": "Smith Machine Upright Row",
+            "muscle_ids": [
+                "front-shoulders",
+                "traps",
+                "traps-middle",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "斜方肌上束",
+                "斜方肌中束",
+                "三角肌后束"
+            ],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-upright-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-upright-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-reverse-crunch-hip-raise",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-reverse-crunch-hip-raise",
+            "exercise_name_zh": "Smith Machine 反向卷腹臀部抬举",
+            "muscle_module_zh": "下腹部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-reverse-crunch-hip-raise-front.jpg",
+            "muscle_module_en": "Smith Machine",
+            "muscle_ids": [
+                "lats",
+                "biceps"
+            ],
+            "muscle_ids_zh": [],
+            "mechanic": "孤立动作",
+            "mechanic_raw": "孤立动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-reverse-crunch-hip-raise-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-reverse-crunch-hip-raise-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-sumo-romanian-deadlift",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-sumo-romanian-deadlift",
+            "exercise_name_zh": "史密斯机相扑式罗马尼亚硬拉",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-sumo-romanian-deadlift-front.jpg",
+            "muscle_module_en": "Smith Machine Sumo Romanian Deadlift",
+            "muscle_ids": [
+                "hamstrings",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "腘绳肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sumo-romanian-deadlift-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-sumo-romanian-deadlift-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-seated-overhead-press",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-seated-overhead-press",
+            "exercise_name_zh": "史密斯机坐姿肩上推举",
+            "muscle_module_zh": "肩部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-seated-overhead-press-front.jpg",
+            "muscle_module_en": "Smith Machine Seated Overhead Press",
+            "muscle_ids": [
+                "front-shoulders",
+                "rear-shoulders"
+            ],
+            "muscle_ids_zh": [
+                "三角肌前束",
+                "三角肌后束"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-seated-overhead-press-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-seated-overhead-press-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-reverse-lunge",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-reverse-lunge",
+            "exercise_name_zh": "史密斯机后退弓步",
+            "muscle_module_zh": "股四头肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-reverse-lunge-side.jpg",
+            "muscle_module_en": "Smith Machine Reverse Lunge",
+            "muscle_ids": [
+                "quads",
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "股四头肌",
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "中级",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-reverse-lunge-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-reverse-lunge-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-overhand-row",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-overhand-row",
+            "exercise_name_zh": "史密斯机正握划船",
+            "muscle_module_zh": "背阔肌",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-overhand-row-front.jpg",
+            "muscle_module_en": "Smith Machine Overhand Row",
+            "muscle_ids": [
+                "biceps",
+                "lats"
+            ],
+            "muscle_ids_zh": [
+                "肱二头肌",
+                "背阔肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "初学者",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-overhand-row-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-overhand-row-side.mp4"
+        },
+        {
+            "original_url": "https://musclewiki.com/exercise/smith-machine-hip-thrust",
+            "zh_url": "https://musclewiki.com/zh-cn/exercise/smith-machine-hip-thrust",
+            "exercise_name_zh": "史密斯机臀桥",
+            "muscle_module_zh": "臀部",
+            "img": "https://media.musclewiki.com/media/uploads/og-male-Smithmachine-hip-thrust-side.jpg",
+            "muscle_module_en": "Smith Machine Hip Thrust",
+            "muscle_ids": [
+                "glutes"
+            ],
+            "muscle_ids_zh": [
+                "臀大肌"
+            ],
+            "mechanic": "复合动作",
+            "mechanic_raw": "复合动作",
+            "mechanic_source": "from_dt:机制",
+            "difficulty": "新手",
+            "notes": "fallback",
+            "equipment_type": "smith",
+            "equipment_type_zh": "史密斯机",
+            "video-front": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-hip-thrust-front.mp4",
+            "video-side": "https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-hip-thrust-side.mp4"
+        }
+    ]
+}

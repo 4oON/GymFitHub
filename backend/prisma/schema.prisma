@@ -1,0 +1,221 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  profile  UserProfile?
+  workouts Workout[]
+  routines Routine[]
+  weeklyReports WeeklyReport[]
+  aiProviderConfigs AIProviderConfig[]
+  aiCoachConversations AICoachConversation[]
+  aiCoachRoutines AICoachRoutine[]
+
+  @@map("users")
+}
+
+model UserProfile {
+  id               String    @id @default(uuid())
+  userId           String    @unique @map("user_id")
+  age              Int?
+  gender           String?
+  weight           Float?
+  height           Float?
+  fitnessGoal      String?   @map("fitness_goal")
+  experienceLevel  String?   @map("experience_level")
+  
+  // iOS健康数据同步相关字段
+  healthSyncEnabled   Boolean   @default(false) @map("health_sync_enabled")
+  healthSyncConsent   Boolean   @default(false) @map("health_sync_consent")
+  healthSyncConsentDate DateTime? @map("health_sync_consent_date")
+  bodyFatPercent      Float?    @map("body_fat_percent")
+  lastHealthSync      DateTime? @map("last_health_sync")
+  autoSyncEnabled     Boolean   @default(true) @map("auto_sync_enabled")
+  
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+// iOS健康数据记录表
+model HealthData {
+  id              String   @id @default(uuid())
+  userId          String   @map("user_id")
+  weight          Float?
+  bodyFatPercent  Float?   @map("body_fat_percent")
+  gender          String?
+  syncDate        DateTime @default(now()) @map("sync_date")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@index([userId, syncDate])
+  @@map("health_data")
+}
+
+model Workout {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  name        String
+  description String?
+  date        DateTime? // 训练日期（可选，默认使用createdAt）
+  durationMin Int?     @default(0) @map("duration_min") // 训练时长（分钟）
+  exercises   Json // 存储练习数据的JSON
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("workouts")
+}
+
+model Routine {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  name        String
+  description String?
+  workouts    Json // 存储训练计划的JSON数据
+  isActive    Boolean  @default(false) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("routines")
+}
+
+// 周报告表
+model WeeklyReport {
+  id                String   @id @default(uuid())
+  userId            String   @map("user_id")
+  weekNumber        Int      @map("week_number")
+  year              Int
+  dateRangeStart    String   @map("date_range_start") // YYYY-MM-DD
+  dateRangeEnd      String   @map("date_range_end")   // YYYY-MM-DD
+  
+  // 统计数据 (JSON格式存储详细数据)
+  stats             Json     // WeeklyStats
+  muscleDistribution Json    @map("muscle_distribution") // MuscleDistributionData[]
+  weeklyProgress    Json?    @map("weekly_progress") // WeeklyProgress
+  sessions          Json     // WorkoutSession[] (简化版本,只存储必要信息)
+  
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, year, weekNumber])
+  @@index([userId, year, weekNumber])
+  @@map("weekly_reports")
+}
+
+// AI 配置表 - 支持用户保存多个 AI 提供商配置
+model AIProviderConfig {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  name        String   // 配置名称，如 "Moonshot CN", "OpenAI" 等
+  isDefault   Boolean  @default(false) @map("is_default") // 是否为默认配置
+  
+  // AI 提供商信息
+  provider    String   // 提供商类型: perplexity, kimi, openai, anthropic, custom
+  baseUrl     String?  @map("base_url") // 自定义 Base URL
+  apiKey      String   @map("api_key") // API Key（加密存储）
+  modelId     String   @map("model_id") // 模型 ID
+  temperature Float    @default(0.2) // 温度参数
+  
+  // 可选：缓存的模型列表
+  cachedModels Json?   @map("cached_models")
+  
+  // 余额信息（可选，用于显示）
+  balanceInfo  Json?   @map("balance_info") // { totalBalance, availableBalance, currency, lastUpdated }
+  lastBalanceCheck DateTime? @map("last_balance_check")
+  
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, isDefault])
+  @@map("ai_provider_configs")
+}
+
+// AI教练对话会话表
+model AICoachConversation {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  title       String   // 对话标题（自动生成或用户设置）
+  context     Json?    // 对话上下文信息（如：针对的肌肉群、训练目标等）
+  isActive    Boolean  @default(true) @map("is_active")
+  lastMessageAt DateTime @default(now()) @map("last_message_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user     User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages AICoachMessage[]
+  routines AICoachRoutine[]
+
+  @@index([userId])
+  @@index([userId, isActive])
+  @@index([lastMessageAt])
+  @@map("ai_coach_conversations")
+}
+
+// AI教练消息表
+model AICoachMessage {
+  id             String   @id @default(uuid())
+  conversationId String   @map("conversation_id")
+  role           String   // 'user' | 'assistant' | 'system'
+  content        String   // 消息内容
+  type           String   @default("text") // 'text' | 'routine_suggestion' | 'exercise_suggestion'
+  metadata       Json?    // 额外元数据（如：token用量、关联的训练计划ID等）
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  conversation AICoachConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@index([conversationId, createdAt])
+  @@map("ai_coach_messages")
+}
+
+// AI教练生成的客制化训练计划表
+model AICoachRoutine {
+  id             String   @id @default(uuid())
+  userId         String   @map("user_id")
+  conversationId String   @map("conversation_id")
+  name           String   // 训练计划名称
+  description    String?  // 描述
+  focusMuscles   String[] @map("focus_muscles") // 目标肌肉群
+  routineType    String   @map("routine_type") // 'compound_focus' | 'isolation_focus' | 'balanced' | 'custom'
+  exercises      Json     // 训练动作列表（包含复合动作和孤立动作的合理搭配）
+  estimatedDuration Int?  @map("estimated_duration") // 预计训练时长（分钟）
+  difficulty     String?  // 'beginner' | 'intermediate' | 'advanced'
+  isSaved        Boolean  @default(false) @map("is_saved") // 用户是否保存了这个计划
+  isUsed         Boolean  @default(false) @map("is_used") // 用户是否使用过这个计划
+  feedback       Json?    // 用户反馈
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user         User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversation AICoachConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, isSaved])
+  @@index([conversationId])
+  @@map("ai_coach_routines")
+}
