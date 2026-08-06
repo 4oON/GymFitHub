@@ -1,0 +1,47 @@
+name: Sync Backend to kilo-zenfit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'backend/**'
+
+jobs:
+  sync-backend:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout GFH repo (this repo)
+      - name: Checkout GFH
+        uses: actions/checkout@v4
+        with:
+          path: gfh
+
+      # Checkout kilo-zenfit repo
+      - name: Checkout kilo-zenfit
+        uses: actions/checkout@v4
+        with:
+          repository: 4oON/kilo-zenfit
+          token: ${{ secrets.KILO_ZENFIT_TOKEN }}
+          path: kilo-zenfit
+          ref: feature/ai-coach-chat
+
+      # Sync backend folder
+      - name: Sync backend/
+        run: |
+          rsync -av --delete gfh/backend/ kilo-zenfit/backend/
+
+      # Commit and push if there are changes
+      - name: Commit and push changes
+        working-directory: kilo-zenfit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            git add -A
+            git commit -m "sync: backend from GFH ($(date +'%Y-%m-%d %H:%M'))"
+            git push
+            echo "✅ Backend synced and pushed to kilo-zenfit"
+          else
+            echo "ℹ️ No changes to sync"
+          fi
