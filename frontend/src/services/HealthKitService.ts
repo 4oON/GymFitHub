@@ -132,9 +132,31 @@ const WRITE_DATA_TYPES: string[] = [
 
 // ===== 工具函数 =====
 
+function waitForCordovaReady(): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof document === 'undefined') {
+      resolve();
+      return;
+    }
+    if ((window as any).cordova) {
+      document.addEventListener('deviceready', () => resolve(), { once: true });
+      // fallback: if deviceready already fired, resolve immediately
+      setTimeout(() => resolve(), 100);
+    } else {
+      resolve();
+    }
+  });
+}
+
 function getHealthPlugin(): CordovaHealth | undefined {
   if (typeof navigator === 'undefined' || typeof window === 'undefined') {
     return undefined;
+  }
+
+  const cordovaHealth = (window as any).cordova?.plugins?.health;
+  if (cordovaHealth) {
+    console.log('[HealthKit] found window.cordova.plugins.health');
+    return cordovaHealth;
   }
 
   if (navigator.health) {
@@ -147,12 +169,17 @@ function getHealthPlugin(): CordovaHealth | undefined {
     return (window as any).plugins.health;
   }
 
+  if ((window as any).plugins?.healthkit) {
+    console.log('[HealthKit] found window.plugins.healthkit');
+    return (window as any).plugins.healthkit;
+  }
+
   if ((window as any).health) {
     console.log('[HealthKit] found window.health');
     return (window as any).health;
   }
 
-  console.warn('[HealthKit] cordova-plugin-health not available. navigator.health:', !!(navigator as any).health, 'window.plugins:', !!(window as any).plugins, 'window.plugins.health:', !!(window as any).plugins?.health);
+  console.warn('[HealthKit] cordova-plugin-health not available. navigator.health:', !!(navigator as any).health, 'window.plugins:', !!(window as any).plugins, 'window.plugins.health:', !!(window as any).plugins?.health, 'cordova.plugins.health:', !!(window as any).cordova?.plugins?.health, 'window.plugins.healthkit:', !!(window as any).plugins?.healthkit);
   return undefined;
 }
 
@@ -252,12 +279,17 @@ class HealthKitService {
       return false;
     }
 
+    // Cordova plugins are injected asynchronously after deviceready
+    await waitForCordovaReady();
+    console.log('[HealthKit] deviceready passed, checking plugin...');
+
     const available = await this.isAvailable();
     this.initialized = true;
     return available;
   }
 
   async requestAuthorization(): Promise<boolean> {
+    await this.initialize();
     const plugin = getHealthPlugin();
     if (!plugin) {
       console.warn('[HealthKit] plugin 不存在，无法请求授权');
@@ -382,6 +414,7 @@ class HealthKitService {
   }
 
   async syncAllHealthData(date: Date = new Date()): Promise<SyncHealthResult> {
+    await this.initialize();
     const plugin = getHealthPlugin();
     if (!plugin) {
       return {

@@ -55,6 +55,7 @@ const HealthSettingsPage: React.FC = () => {
         error,
         healthData,
         lastSync,
+        initialize,
         requestAuthorization,
         syncData,
         saveWeight,
@@ -67,12 +68,17 @@ const HealthSettingsPage: React.FC = () => {
     const isNative = Capacitor.isNativePlatform();
 
     useEffect(() => {
-        if (typeof window === 'undefined') return;
-        const nav = (navigator as any).health;
-        const wp = (window as any).plugins?.health;
-        const wh = (window as any).health;
-        setPluginDebug(`nav:${!!nav} plugins:${!!wp} win:${!!wh}`);
-    }, []);
+        const check = async () => {
+            await initialize();
+            if (typeof window === 'undefined') return;
+            const nav = (navigator as any).health;
+            const wp = (window as any).plugins?.health;
+            const whk = (window as any).plugins?.healthkit;
+            const cp = (window as any).cordova?.plugins?.health;
+            setPluginDebug(`nav:${!!nav} plugins.health:${!!wp} plugins.healthkit:${!!whk} cordova.plugins.health:${!!cp}`);
+        };
+        check();
+    }, [initialize]);
 
     const handleEnableSync = async () => {
         const success = await requestAuthorization();
