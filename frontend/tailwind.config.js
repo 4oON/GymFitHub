@@ -48,9 +48,6 @@ export default {
                     '100%': { transform: 'rotateY(180deg)' },
                 },
             },
-            padding: {
-                'safe': 'env(safe-area-inset-bottom)',
-            }
         },
     },
     plugins: [],

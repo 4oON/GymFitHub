@@ -11,9 +11,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // 直接在 AppDelegate 创建 window，绕过 Scene 机制
         // 这是最可靠的方式，不依赖 Info.plist 的 Scene 配置
-        let bridgeVC = CAPBridgeViewController()
+        let bridgeVC = BridgeViewController()
 
         window = UIWindow(frame: UIScreen.main.bounds)
+        window?.backgroundColor = UIColor(red: 0x0F/255, green: 0x11/255, blue: 0x15/255, alpha: 1)
         window?.rootViewController = bridgeVC
         window?.makeKeyAndVisible()
 

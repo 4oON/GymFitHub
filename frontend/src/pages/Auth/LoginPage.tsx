@@ -34,21 +34,21 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="h-full bg-slate-950 flex flex-col p-4 relative overflow-y-auto overflow-x-hidden">
       {/* Background atmosphere */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.15),transparent_50%)]" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.15),transparent_50%)] pointer-events-none" />
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="fixed inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `linear-gradient(rgba(16,185,129,0.5) 1px, transparent 1px),
                             linear-gradient(90deg, rgba(16,185,129,0.5) 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-      <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="fixed -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="fixed -bottom-40 -left-40 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-md w-full relative z-10">
+      <div className="max-w-md w-full relative z-10 mx-auto pt-8 pb-8">
         {/* Logo and Title */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6 relative">

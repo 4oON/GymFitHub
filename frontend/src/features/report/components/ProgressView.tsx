@@ -561,7 +561,7 @@ const ProgressView: React.FC<ProgressViewProps> = ({ history, recoveryState, use
     }, [recoveryState, now]);
 
     return (
-        <div className="animate-fade-in h-full flex flex-col pb-24 overflow-y-auto no-scrollbar p-4 space-y-6">
+        <div className="animate-fade-in flex flex-col pb-20 px-4 space-y-6">
             {/* 🏆 ACHIEVEMENT HALL - New Achievement System */}
             <section>
                 <AchievementHall workouts={history} />

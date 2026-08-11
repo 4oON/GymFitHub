@@ -376,7 +376,7 @@ export const MobileWorkoutReportModal: React.FC<WorkoutReportModalProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[9999] bg-slate-950"
+                    className="fixed inset-0 z-[9999] bg-slate-950 pt-safe"
                 >
                     {/* Header - Fixed */}
                     <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800">

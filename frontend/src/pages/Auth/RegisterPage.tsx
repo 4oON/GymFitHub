@@ -67,8 +67,8 @@ const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+    <div className="h-full bg-slate-950 overflow-y-auto overflow-x-hidden p-4">
+      <div className="max-w-md w-full mx-auto pt-8 pb-8">
         {/* Logo and Title */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-purple-600 rounded-full mb-4">

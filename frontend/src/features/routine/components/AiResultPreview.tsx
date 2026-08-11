@@ -94,7 +94,7 @@ const AiResultPreview: React.FC<AiResultPreviewProps> = ({
     };
 
     return (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[70] flex flex-col animate-fade-in">
+        <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[70] flex flex-col animate-fade-in pt-safe">
 
             {/* Header */}
             <div className="w-full max-w-md mx-auto p-4 border-b border-slate-800 flex justify-between items-center bg-slate-950 z-10">

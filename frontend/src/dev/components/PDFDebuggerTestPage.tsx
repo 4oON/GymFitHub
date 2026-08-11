@@ -103,7 +103,7 @@ const PDFDebuggerTestPage: React.FC = () => {
     };
 
     return (
-        <div className="w-full h-screen">
+        <div className="w-full h-full">
             <PDFDebugger session={mockSession} userProfile={mockProfile} />
         </div>
     );

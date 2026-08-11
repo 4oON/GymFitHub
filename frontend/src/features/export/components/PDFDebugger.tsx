@@ -157,7 +157,7 @@ export const PDFDebugger: React.FC<PDFDebuggerProps> = ({ session, userProfile }
     }, []);
 
     return (
-        <div className="flex h-screen bg-gray-50">
+        <div className="flex h-full bg-gray-50">
             {/* 左侧控制面板 */}
             <div className="w-96 bg-white shadow-lg overflow-y-auto p-6">
                 <div className="mb-6">

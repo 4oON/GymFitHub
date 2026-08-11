@@ -237,7 +237,7 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
         {/* Toast Notifications */}
         <ToastContainer toasts={toasts} onRemoveToast={removeToast} />
 
-        <div className="px-6 pt-6 mb-2 flex justify-between items-start z-10">
+        <div className="px-6 pt-2 mb-2 flex justify-between items-start z-10">
           <div>
             <div className="flex items-center gap-2">
               {onClose && (
@@ -298,7 +298,7 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
       )}
 
       <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 shadow-xl">
-        <div className="px-4 pt-4 pb-2">
+        <div className="px-4 pt-2 pb-2">
           <div className="flex items-center gap-3 mb-4">
             <button onClick={selectedMuscleGroup ? onClose : handleBack} className="p-2 -ml-2 text-slate-400 hover:text-white"><ChevronLeft size={24} /></button>
             <h2 className="text-xl font-bold text-white">{selectedCategory === 'All' ? 'All Exercises' : selectedCategory}</h2>

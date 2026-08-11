@@ -359,7 +359,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
             </div>
 
             {/* Exercise Cards */}
-            <div className="flex-1 overflow-auto space-y-4 px-4 pb-24">
+            <div className="flex-1 min-h-0 overflow-auto space-y-4 px-4 pb-24">
                 {exercises.map((exercise, exIndex) => {
                     const timer = timers[exercise.id];
                     const isTimerRunning = timer?.targetTime ? timer.targetTime > now : false;

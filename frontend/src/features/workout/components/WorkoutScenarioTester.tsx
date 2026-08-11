@@ -194,7 +194,7 @@ const WorkoutScenarioTester: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row gap-6 p-6 bg-slate-900 min-h-screen">
+        <div className="flex flex-col lg:flex-row gap-6 p-6 bg-slate-900 h-full overflow-y-auto">
             {/* Left Panel - Scenario Selection and Results */}
             <div className="lg:w-1/3 space-y-6">
                 {/* Scenario Selection */}

@@ -15,6 +15,18 @@ import MobileReportTestPage from './pages/MobileReportTestPage';
 import ShareCardDemoPage from './pages/ShareCardDemoPage';
 import { MainApp } from './pages/MainApp'; // 导入旧UI作为主应用
 
+/**
+ * 统一的"屏幕边界"容器：整个 app 唯一的视口高度定义点。
+ * 所有页面在此边界内渲染，由各自页面根容器（h-full + overflow-y-auto）承担滚动。
+ */
+function Screen({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="max-w-md mx-auto h-[100dvh] flex flex-col relative overflow-hidden bg-slate-950 shadow-2xl shadow-black">
+      {children}
+    </div>
+  );
+}
+
 function App() {
   const [notification, setNotification] = useState<string | null>(null);
 
@@ -24,7 +36,7 @@ function App() {
   };
 
   return (
-    <div className="bg-slate-950 min-h-screen text-slate-200 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="bg-slate-950 min-h-[100dvh] text-slate-200 font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
       <Routes>
         {/* Development Test Routes - 全屏显示 */}
         <Route path="/dev/auth-test" element={<AuthProfileTestPanel />} />
@@ -32,47 +44,47 @@ function App() {
         <Route path="/dev/detail1-analyzer" element={<Detail1PathAnalyzer />} />
         <Route path="/dev/pdf-debugger" element={<PDFDebuggerTestPage />} />
         <Route path="/dev/ui-test" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <DashboardPage onNotify={handleNotify} />
-          </div>
+          </Screen>
         } />
         <Route path="/dev/workout-test" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <WorkoutTestPanel />
-          </div>
+          </Screen>
         } />
         <Route path="/dev/mobile-report-test" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <MobileReportTestPage />
-          </div>
+          </Screen>
         } />
         <Route path="/dev/share-card-demo" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <ShareCardDemoPage />
-          </div>
+          </Screen>
         } />
 
         {/* Public Routes */}
         <Route path="/login" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <LoginPage />
-          </div>
+          </Screen>
         } />
         <Route path="/register" element={
-          <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+          <Screen>
             <RegisterPage />
-          </div>
+          </Screen>
         } />
 
         {/* Protected Routes - 使用旧UI作为主应用 */}
         <Route
           path="/app/*"
           element={
-            <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+            <Screen>
               <PrivateRoute>
                 <MainApp />
               </PrivateRoute>
-            </div>
+            </Screen>
           }
         />
 
@@ -80,31 +92,31 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+            <Screen>
               <PrivateRoute>
                 <DashboardPage onNotify={handleNotify} />
               </PrivateRoute>
-            </div>
+            </Screen>
           }
         />
         <Route
           path="/profile"
           element={
-            <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+            <Screen>
               <PrivateRoute>
                 <ProfilePage />
               </PrivateRoute>
-            </div>
+            </Screen>
           }
         />
         <Route
           path="/health-settings"
           element={
-            <div className="max-w-md mx-auto min-h-screen flex flex-col relative shadow-2xl shadow-black bg-slate-950">
+            <Screen>
               <PrivateRoute>
                 <HealthSettingsPage />
               </PrivateRoute>
-            </div>
+            </Screen>
           }
         />
 

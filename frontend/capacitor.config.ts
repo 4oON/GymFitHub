@@ -4,12 +4,13 @@ const config: CapacitorConfig = {
   appId: 'com.zenfit.app',
   appName: 'ZenFit',
   webDir: 'dist',
+  backgroundColor: '#020617',
   server: {
     androidScheme: 'https'
   },
   ios: {
-    contentInset: 'always',
-    scrollEnabled: false,
+    contentInset: 'never',
+    scrollEnabled: true,
     // HealthKit 权限配置
     permissions: {
       'NSHealthShareUsageDescription': 'ZenFit需要访问您的健康数据来提供个性化的训练建议和体重追踪',

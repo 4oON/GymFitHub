@@ -182,7 +182,7 @@ const WorkoutLogger: React.FC<WorkoutLoggerProps> = ({
   const activeTimers = activeWorkout.filter(ex => timers[ex.id]?.targetTime > 0);
 
   return (
-    <div className="flex flex-col h-full animate-fade-in overflow-y-auto no-scrollbar max-w-md mx-auto w-full bg-slate-950 pb-24">
+    <div className="flex flex-col animate-fade-in max-w-md mx-auto w-full bg-slate-950 px-4 pb-20">
       {/* Active Timers */}
       {activeTimers.length > 0 && (
         <div className="sticky top-0 z-30 mb-4">

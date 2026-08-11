@@ -443,7 +443,7 @@ const WeeklySummaryModal: React.FC<WeeklySummaryModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] bg-slate-950"
+          className="fixed inset-0 z-[9999] bg-slate-950 pt-safe"
         >
           <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800">
             <div className="flex items-center justify-between px-3 py-3">
@@ -509,7 +509,7 @@ const WeeklySummaryModal: React.FC<WeeklySummaryModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[9999] bg-slate-950"
+          className="fixed inset-0 z-[9999] bg-slate-950 pt-safe"
         >
           <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800">
             <div className="flex items-center justify-between px-3 py-3">
@@ -564,7 +564,7 @@ const WeeklySummaryModal: React.FC<WeeklySummaryModalProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col"
+        className="fixed inset-0 z-[9999] bg-slate-950 flex flex-col pt-safe"
       >
         {/* Header */}
         <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 flex-shrink-0">

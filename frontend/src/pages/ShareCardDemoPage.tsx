@@ -103,7 +103,7 @@ const ShareCardDemoPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="h-full overflow-y-auto bg-slate-950">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800">
         <div className="flex items-center justify-between px-4 py-3">

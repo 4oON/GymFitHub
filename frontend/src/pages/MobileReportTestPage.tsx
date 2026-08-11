@@ -72,7 +72,7 @@ export const MobileReportTestPage: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-slate-900 p-4">
+        <div className="h-full overflow-y-auto bg-slate-900 p-4">
             <div className="max-w-md mx-auto">
                 <h1 className="text-2xl font-bold text-white mb-6 text-center">移动端报告组件测试</h1>
 
