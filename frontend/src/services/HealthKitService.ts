@@ -330,9 +330,24 @@ class HealthKitService {
     const plugin = getHealthPlugin();
     if (!plugin) return undefined;
 
+    // Body measurements (weight/height/BMI/body fat etc.) change infrequently,
+    // so search all historical data back to 2020 to catch the latest record
+    // even if the user hasn't weighed in for months.
+    const isBodyMeasurement = [
+      'weight',
+      'height',
+      'bmi',
+      'fat_percentage',
+      'waist_circumference',
+      'lean_body_mass',
+    ].includes(dataType);
+    const earliestStart = isBodyMeasurement
+      ? new Date('2020-01-01T00:00:00Z')
+      : new Date(date.getTime() - 90 * 24 * 60 * 60 * 1000);
+
     const options: CordovaHealthQueryOptions = {
       dataType,
-      startDate: getStartOfDay(new Date(date.getTime() - 90 * 24 * 60 * 60 * 1000)),
+      startDate: getStartOfDay(earliestStart),
       endDate: getEndOfDay(date),
       limit: 1,
     };
