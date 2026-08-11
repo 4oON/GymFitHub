@@ -133,12 +133,26 @@ const WRITE_DATA_TYPES: string[] = [
 // ===== 工具函数 =====
 
 function getHealthPlugin(): CordovaHealth | undefined {
-  if (typeof navigator !== 'undefined' && navigator.health) {
+  if (typeof navigator === 'undefined' || typeof window === 'undefined') {
+    return undefined;
+  }
+
+  if (navigator.health) {
+    console.log('[HealthKit] found navigator.health');
     return navigator.health;
   }
-  if (typeof window !== 'undefined' && window.plugins?.health) {
-    return window.plugins.health;
+
+  if ((window as any).plugins?.health) {
+    console.log('[HealthKit] found window.plugins.health');
+    return (window as any).plugins.health;
   }
+
+  if ((window as any).health) {
+    console.log('[HealthKit] found window.health');
+    return (window as any).health;
+  }
+
+  console.warn('[HealthKit] cordova-plugin-health not available. navigator.health:', !!(navigator as any).health, 'window.plugins:', !!(window as any).plugins, 'window.plugins.health:', !!(window as any).plugins?.health);
   return undefined;
 }
 

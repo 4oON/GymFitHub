@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHealthKit } from '../hooks/useHealthKit';
 import { Capacitor } from '@capacitor/core';
@@ -63,7 +63,16 @@ const HealthSettingsPage: React.FC = () => {
         openHealthSettings,
     } = useHealthKit();
 
+    const [pluginDebug, setPluginDebug] = useState<string>('checking...');
     const isNative = Capacitor.isNativePlatform();
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const nav = (navigator as any).health;
+        const wp = (window as any).plugins?.health;
+        const wh = (window as any).health;
+        setPluginDebug(`nav:${!!nav} plugins:${!!wp} win:${!!wh}`);
+    }, []);
 
     const handleEnableSync = async () => {
         const success = await requestAuthorization();
@@ -113,7 +122,7 @@ const HealthSettingsPage: React.FC = () => {
     };
 
     return (
-        <div className="h-full overflow-y-auto bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        <div className="h-full overflow-y-auto bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 pt-safe">
             {/* Header */}
             <header className="bg-slate-900/50 backdrop-blur-xl border-b border-slate-800/50 sticky top-0 z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -176,6 +185,10 @@ const HealthSettingsPage: React.FC = () => {
                         <div className="flex justify-between items-center">
                             <span className="text-slate-400">最后同步</span>
                             <span className="text-white font-medium">{formatDate(lastSync)}</span>
+                            <div className="flex justify-between items-center">
+                                <span className="text-slate-400">Health plugin</span>
+                                <span className="text-white font-medium text-xs">{pluginDebug}</span>
+                            </div>
                         </div>
                     </div>
 
