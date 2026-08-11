@@ -7,6 +7,27 @@ class BridgeViewController: CAPBridgeViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDarkBackground()
+        setupNativeIntegrations()
+    }
+
+    /// 原生集成：注册自定义计时器插件 + 激活 WatchConnectivity 会话
+    private func setupNativeIntegrations() {
+        // 手动注册自定义插件（规避 cap sync 覆盖 packageClassList 的问题）
+        if let bridge = bridge {
+            let timerPlugin = WorkoutTimerPlugin()
+            bridge.registerPluginInstance(timerPlugin)
+        }
+
+        // 激活 Apple Watch 会话
+        WatchSessionManager.shared.activate()
+
+        // 手表请求结束计时 → 通知计时引擎
+        WatchSessionManager.shared.onWatchFinishRequest = { exerciseId in
+            TimerEngine.shared.finishRest(exerciseId: exerciseId)
+        }
+
+        // 申请通知权限（后台提醒）
+        TimerEngine.shared.requestNotificationPermissionIfNeeded()
     }
 
     override func viewDidLayoutSubviews() {
