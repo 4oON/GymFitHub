@@ -1,7 +1,10 @@
 import React from 'react';
 import { X, User, Save, ArrowRight } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 import type { UserProfile } from '@/shared/types';
 import { ExperienceLevel, TrainingGoal } from '@/shared/types';
+import { healthKitService } from '@/services/HealthKitService';
+import apiClient from '@/services/apiClient';
 
 interface ProfileEditorModalProps {
     isOpen: boolean;
@@ -17,6 +20,7 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({
     onSave
 }) => {
     const [profile, setProfile] = React.useState<UserProfile>(currentProfile);
+    const [importingHealth, setImportingHealth] = React.useState(false);
 
     if (!isOpen) return null;
 
@@ -27,6 +31,54 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({
     const handleSave = () => {
         onSave(profile);
         onClose();
+    };
+
+    const handleImportFromHealth = async () => {
+        if (!Capacitor.isNativePlatform()) {
+            alert('Apple Health 导入仅在 iOS App 中可用');
+            return;
+        }
+
+        try {
+            setImportingHealth(true);
+
+            const available = await healthKitService.initialize();
+            if (!available) {
+                alert('HealthKit 当前不可用');
+                return;
+            }
+
+            const granted = await healthKitService.requestAuthorization();
+            if (!granted) {
+                alert('需要授权访问 Apple Health 才能导入数据');
+                return;
+            }
+
+            try {
+                await apiClient.enableHealthSync();
+            } catch (enableErr) {
+                console.warn('[ProfileEditor] 启用后端健康同步失败:', enableErr);
+            }
+
+            const result = await healthKitService.syncAllHealthData();
+            if (!result.success || !result.data) {
+                alert(result.error || '从 Apple Health 读取数据失败');
+                return;
+            }
+
+            const { body } = result.data;
+            const updates: Partial<UserProfile> = {};
+            if (body.weight !== undefined) updates.weight = Math.round(body.weight * 10) / 10;
+            if (body.bodyFatPercent !== undefined) updates.bodyFatPercentage = Math.round(body.bodyFatPercent * 10) / 10;
+            if (Object.keys(updates).length > 0) {
+                updateProfile(updates);
+            }
+        } catch (err) {
+            console.error('[ProfileEditor] 从 Apple Health 导入失败:', err);
+            alert(err instanceof Error ? err.message : '从 Apple Health 导入失败');
+        } finally {
+            setImportingHealth(false);
+        }
     };
 
     return (
@@ -48,6 +100,33 @@ const ProfileEditorModal: React.FC<ProfileEditorModalProps> = ({
 
                 {/* Content */}
                 <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
+
+                    {Capacitor.isNativePlatform() && (
+                        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4">
+                            <div className="flex items-center justify-between gap-3">
+                                <div>
+                                    <p className="text-sm font-bold text-emerald-300">从 Apple Health 导入</p>
+                                    <p className="text-xs text-emerald-300/70">一键导入体重、体脂等基础数据</p>
+                                </div>
+                                <button
+                                    onClick={handleImportFromHealth}
+                                    disabled={importingHealth}
+                                    className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-all flex items-center gap-2"
+                                >
+                                    {importingHealth ? (
+                                        <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                    ) : (
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    )}
+                                    {importingHealth ? '导入中...' : '导入'}
+                                </button>
+                            </div>
+                        </div>
+                    )}
 
                     {/* Name */}
                     <div>

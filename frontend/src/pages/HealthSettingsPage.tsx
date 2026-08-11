@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHealthKit } from '../hooks/useHealthKit';
+import apiClient from '../services/apiClient';
 import { Capacitor } from '@capacitor/core';
 
 interface MetricCardProps {
@@ -83,6 +84,12 @@ const HealthSettingsPage: React.FC = () => {
     const handleEnableSync = async () => {
         const success = await requestAuthorization();
         if (success) {
+            try {
+                await apiClient.enableHealthSync();
+                console.log('[HealthSettings] 后端健康同步已启用');
+            } catch (err) {
+                console.warn('[HealthSettings] 启用后端健康同步失败:', err);
+            }
             await syncData();
         }
     };

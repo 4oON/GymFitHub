@@ -10,6 +10,7 @@
 
 import { Capacitor } from '@capacitor/core';
 import { iOSStorage } from '@/services/iOSStorageService';
+import apiClient from '@/services/apiClient';
 import type {
   CordovaHealth,
   CordovaHealthSample,
@@ -224,6 +225,25 @@ function parseNumeric(value: unknown): number | undefined {
     return isNaN(parsed) ? undefined : parsed;
   }
   return undefined;
+}
+
+/**
+ * HealthKit 把体脂率存储为 0-1 的小数（20% = 0.2），而 App 内部统一使用 0-100。
+ * 这里做双向归一化：读取时如果 <=1 就乘以 100；写入时如果 >1 就除以 100。
+ */
+function normalizeBodyFatFromHealth(value: number): number {
+  if (value > 1 && value <= 100) return value;
+  if (value >= 0 && value <= 1) return value * 100;
+  return value;
+}
+
+function normalizeBodyFatForHealth(value: number): number {
+  return value > 1 ? value / 100 : value;
+}
+
+function round1(value: number | undefined): number | undefined {
+  if (value === undefined || value === null || Number.isNaN(value)) return undefined;
+  return Math.round(value * 10) / 10;
 }
 
 function ensureDate(value: unknown): Date | undefined {
@@ -458,18 +478,21 @@ class HealthKitService {
       const fatSample = await this.queryLatest('fat_percentage', date);
       const waistSample = await this.queryLatest('waist_circumference', date);
 
-      const weight = parseNumeric(weightSample?.value);
-      const height = parseNumeric(heightSample?.value);
-      const bodyFatPercent = parseNumeric(fatSample?.value);
+      const weight = round1(parseNumeric(weightSample?.value));
+      const height = round1(parseNumeric(heightSample?.value));
+      const rawBodyFatPercent = parseNumeric(fatSample?.value);
+      const bodyFatPercent = round1(rawBodyFatPercent !== undefined
+        ? normalizeBodyFatFromHealth(rawBodyFatPercent)
+        : undefined);
 
-      let bmi = parseNumeric(bmiSample?.value);
+      let bmi = round1(parseNumeric(bmiSample?.value));
       if (!bmi && weight && height) {
-        bmi = weight / (height * height);
+        bmi = round1(weight / (height * height));
       }
 
       let leanBodyMass: number | undefined;
       if (weight && bodyFatPercent !== undefined) {
-        leanBodyMass = weight * (1 - bodyFatPercent / 100);
+        leanBodyMass = round1(weight * (1 - bodyFatPercent / 100));
       }
 
       const body: BodyMeasurements = {
@@ -478,13 +501,24 @@ class HealthKitService {
         bodyFatPercent,
         bmi,
         leanBodyMass,
-        waistCircumference: parseNumeric(waistSample?.value),
+        waistCircumference: round1(parseNumeric(waistSample?.value)),
       };
 
       lastSampleDates.weight = weightSample?.endDate?.toISOString?.();
       lastSampleDates.height = heightSample?.endDate?.toISOString?.();
       lastSampleDates.bmi = bmiSample?.endDate?.toISOString?.();
       lastSampleDates.fat_percentage = fatSample?.endDate?.toISOString?.();
+
+      // 尝试把本地 Health 数据同步到后端 profile（体重/体脂）
+      try {
+        await apiClient.syncHealthData({
+          weight,
+          bodyFatPercent,
+        });
+        console.log('[HealthKit] 已同步到后端 profile');
+      } catch (syncErr) {
+        console.warn('[HealthKit] 同步到后端失败（可能尚未开启后端健康同步）:', syncErr);
+      }
 
       // Heart
       const hrSample = await this.queryLatest('heart_rate', date);
@@ -576,6 +610,7 @@ class HealthKitService {
   async saveWeight(weight: number, date: Date = new Date()): Promise<boolean> {
     const plugin = getHealthPlugin();
     const cached = await this.getCachedHealthData();
+    const roundedWeight = round1(weight) ?? weight;
     const updated: SyncedHealthData = {
       ...(cached ?? {
         body: {},
@@ -585,7 +620,7 @@ class HealthKitService {
         nutrition: {},
         lastSampleDates: {},
       } as unknown as SyncedHealthData),
-      body: { ...(cached?.body ?? {}), weight },
+      body: { ...(cached?.body ?? {}), weight: roundedWeight },
       syncedAt: new Date(),
     };
     iOSStorage.setItem(HEALTH_STORAGE_KEY, JSON.stringify(updated));
@@ -594,7 +629,7 @@ class HealthKitService {
       try {
         await promisifyVoid((success, error) =>
           plugin.store(
-            { dataType: 'weight', value: weight, startDate: date, endDate: date },
+            { dataType: 'weight', value: roundedWeight, startDate: date, endDate: date },
             success,
             error
           )
@@ -610,6 +645,7 @@ class HealthKitService {
   async saveBodyFat(percentage: number, date: Date = new Date()): Promise<boolean> {
     const plugin = getHealthPlugin();
     const cached = await this.getCachedHealthData();
+    const roundedPercentage = round1(percentage) ?? percentage;
     const updated: SyncedHealthData = {
       ...(cached ?? {
         body: {},
@@ -619,16 +655,17 @@ class HealthKitService {
         nutrition: {},
         lastSampleDates: {},
       } as unknown as SyncedHealthData),
-      body: { ...(cached?.body ?? {}), bodyFatPercent: percentage },
+      body: { ...(cached?.body ?? {}), bodyFatPercent: roundedPercentage },
       syncedAt: new Date(),
     };
     iOSStorage.setItem(HEALTH_STORAGE_KEY, JSON.stringify(updated));
 
     if (plugin) {
       try {
+        const pluginValue = normalizeBodyFatForHealth(roundedPercentage);
         await promisifyVoid((success, error) =>
           plugin.store(
-            { dataType: 'fat_percentage', value: percentage, startDate: date, endDate: date },
+            { dataType: 'fat_percentage', value: pluginValue, startDate: date, endDate: date },
             success,
             error
           )
@@ -644,6 +681,7 @@ class HealthKitService {
   async saveHeight(height: number, date: Date = new Date()): Promise<boolean> {
     const plugin = getHealthPlugin();
     const cached = await this.getCachedHealthData();
+    const roundedHeight = round1(height) ?? height;
     const updated: SyncedHealthData = {
       ...(cached ?? {
         body: {},
@@ -653,7 +691,7 @@ class HealthKitService {
         nutrition: {},
         lastSampleDates: {},
       } as unknown as SyncedHealthData),
-      body: { ...(cached?.body ?? {}), height },
+      body: { ...(cached?.body ?? {}), height: roundedHeight },
       syncedAt: new Date(),
     };
     iOSStorage.setItem(HEALTH_STORAGE_KEY, JSON.stringify(updated));
@@ -662,7 +700,7 @@ class HealthKitService {
       try {
         await promisifyVoid((success, error) =>
           plugin.store(
-            { dataType: 'height', value: height, startDate: date, endDate: date },
+            { dataType: 'height', value: roundedHeight, startDate: date, endDate: date },
             success,
             error
           )

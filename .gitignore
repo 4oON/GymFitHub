@@ -363,7 +363,6 @@ pnpm-lock.yaml
 .agent/skills/xlsx/LICENSE.txt
 .agent/skills/xlsx/recalc.py
 .agent/skills/xlsx/SKILL.md
-frontend/src/pages/MainApp.tsx
 screenshots/login-page.png
 screenshots/mobile-holographic-report-closed.png
 screenshots/mobile-holographic-report-modal-opened.png

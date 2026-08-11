@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
 import apiClient from '../services/apiClient';
+import { healthKitService } from '../services/HealthKitService';
 import WorkoutSyncService from '../services/WorkoutSyncService';
 import type { Profile, CreateProfileInput } from '../types/api';
 import type { HealthData } from '../types/health';
@@ -15,6 +17,7 @@ const ProfilePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [syncing, setSyncing] = useState(false);
+  const [importingHealth, setImportingHealth] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
@@ -125,6 +128,67 @@ const ProfilePage: React.FC = () => {
       setError(err.message || '同步失败');
     } finally {
       setSyncing(false);
+    }
+  };
+
+  const handleImportFromHealth = async () => {
+    if (!Capacitor.isNativePlatform()) {
+      setError('Apple Health 导入仅在 iOS App 中可用');
+      return;
+    }
+
+    try {
+      setImportingHealth(true);
+      setError('');
+      setSuccess('');
+
+      const available = await healthKitService.initialize();
+      if (!available) {
+        setError('HealthKit 当前不可用');
+        return;
+      }
+
+      const granted = await healthKitService.requestAuthorization();
+      if (!granted) {
+        setError('需要授权访问 Apple Health 才能导入数据');
+        return;
+      }
+
+      // 确保后端同步 consent 已开启
+      try {
+        await apiClient.enableHealthSync();
+      } catch (enableErr: any) {
+        console.warn('[ProfilePage] 启用后端健康同步失败:', enableErr);
+      }
+
+      const result = await healthKitService.syncAllHealthData();
+      if (!result.success || !result.data) {
+        setError(result.error || '从 Apple Health 读取数据失败');
+        return;
+      }
+
+      const { body } = result.data;
+      setFormData((prev) => ({
+        ...prev,
+        weight: body.weight ?? prev.weight,
+        height: body.height ? Math.round(body.height * 100) : prev.height,
+      }));
+
+      // 刷新后端健康数据，让体脂率卡片显示最新值
+      try {
+        const healthResponse = await apiClient.getLatestHealthData();
+        setHealthData(healthResponse.data);
+      } catch (healthErr: any) {
+        if (!healthErr.message?.includes('404')) {
+          console.warn('[ProfilePage] 刷新健康数据失败:', healthErr);
+        }
+      }
+
+      setSuccess('已从 Apple Health 导入体重、身高数据');
+    } catch (err: any) {
+      setError(err.message || '从 Apple Health 导入失败');
+    } finally {
+      setImportingHealth(false);
     }
   };
 
@@ -354,6 +418,33 @@ const ProfilePage: React.FC = () => {
               </div>
 
               <div className="space-y-4">
+                {Capacitor.isNativePlatform() && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4">
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-bold text-emerald-300">从 Apple Health 导入</p>
+                        <p className="text-xs text-emerald-300/70">一键导入体重、身高、体脂等基础数据</p>
+                      </div>
+                      <button
+                        onClick={handleImportFromHealth}
+                        disabled={importingHealth}
+                        className="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-bold rounded-xl transition-all flex items-center gap-2"
+                      >
+                        {importingHealth ? (
+                          <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                          </svg>
+                        ) : (
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                        )}
+                        {importingHealth ? '导入中...' : '导入'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-bold text-slate-300 mb-2">Age</label>
