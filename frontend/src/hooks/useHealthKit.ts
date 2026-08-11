@@ -1,55 +1,47 @@
 import { useState, useEffect, useCallback } from 'react';
-import { healthKitService, type HealthKitData, type AuthorizationStatus } from '../services/HealthKitService';
+import {
+  healthKitService,
+  type SyncedHealthData,
+  type HealthAuthorizationStatus,
+} from '@/services/HealthKitService';
 
 export interface UseHealthKitReturn {
-  // 状态
   isAvailable: boolean;
   isAuthorized: boolean;
   isLoading: boolean;
   error: string | null;
-  healthData: HealthKitData | null;
+  healthData: SyncedHealthData | null;
   lastSync: Date | null;
-  
-  // 方法
+
   initialize: () => Promise<boolean>;
   requestAuthorization: () => Promise<boolean>;
   syncData: () => Promise<boolean>;
   refreshStatus: () => Promise<void>;
-  
-  // 保存数据
+  openHealthSettings: () => Promise<void>;
+
   saveWeight: (weight: number) => Promise<boolean>;
   saveBodyFat: (percentage: number) => Promise<boolean>;
+  saveHeight: (height: number) => Promise<boolean>;
 }
 
-/**
- * React Hook for iOS HealthKit integration
- * Provides easy access to Apple Health data
- */
 export function useHealthKit(): UseHealthKitReturn {
   const [isAvailable, setIsAvailable] = useState(false);
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [healthData, setHealthData] = useState<HealthKitData | null>(null);
+  const [healthData, setHealthData] = useState<SyncedHealthData | null>(null);
   const [lastSync, setLastSync] = useState<Date | null>(null);
 
-  /**
-   * 初始化 HealthKit
-   */
   const initialize = useCallback(async (): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
-    
     try {
       const available = await healthKitService.initialize();
       setIsAvailable(available);
-      
       if (available) {
-        // 检查授权状态
-        const authStatus = await healthKitService.checkAuthorizationStatus();
-        setIsAuthorized(authStatus.isAuthorized);
+        const status = await healthKitService.checkAuthorizationStatus();
+        setIsAuthorized(status.isAuthorized);
       }
-      
       return available;
     } catch (err) {
       setError(err instanceof Error ? err.message : '初始化失败');
@@ -59,13 +51,9 @@ export function useHealthKit(): UseHealthKitReturn {
     }
   }, []);
 
-  /**
-   * 请求授权
-   */
   const requestAuthorization = useCallback(async (): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
-    
     try {
       const granted = await healthKitService.requestAuthorization();
       setIsAuthorized(granted);
@@ -78,24 +66,24 @@ export function useHealthKit(): UseHealthKitReturn {
     }
   }, []);
 
-  /**
-   * 同步健康数据
-   */
   const syncData = useCallback(async (): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
-    
     try {
-      const result = await healthKitService.getLatestHealthData();
-      
+      const result = await healthKitService.syncAllHealthData();
+
       if (result.success && result.data) {
         setHealthData(result.data);
         setLastSync(new Date());
         return true;
+      }
+
+      if (!result.authorized) {
+        setError(result.error || '请先启用 HealthKit 授权');
       } else {
         setError(result.error || '同步失败');
-        return false;
       }
+      return false;
     } catch (err) {
       setError(err instanceof Error ? err.message : '同步失败');
       return false;
@@ -104,9 +92,6 @@ export function useHealthKit(): UseHealthKitReturn {
     }
   }, []);
 
-  /**
-   * 刷新授权状态
-   */
   const refreshStatus = useCallback(async (): Promise<void> => {
     try {
       const status = await healthKitService.checkAuthorizationStatus();
@@ -116,48 +101,73 @@ export function useHealthKit(): UseHealthKitReturn {
     }
   }, []);
 
-  /**
-   * 保存体重
-   */
-  const saveWeight = useCallback(async (weight: number): Promise<boolean> => {
-    setIsLoading(true);
+  const openHealthSettings = useCallback(async (): Promise<void> => {
     try {
-      const success = await healthKitService.saveWeight(weight);
-      if (success) {
-        // 保存成功后刷新数据
-        await syncData();
-      }
-      return success;
+      await healthKitService.openHealthSettings();
     } catch (err) {
-      setError(err instanceof Error ? err.message : '保存失败');
-      return false;
-    } finally {
-      setIsLoading(false);
+      setError(err instanceof Error ? err.message : '无法打开健康设置');
     }
-  }, [syncData]);
+  }, []);
 
-  /**
-   * 保存体脂率
-   */
-  const saveBodyFat = useCallback(async (percentage: number): Promise<boolean> => {
-    setIsLoading(true);
-    try {
-      const success = await healthKitService.saveBodyFat(percentage);
-      if (success) {
-        await syncData();
+  const saveWeight = useCallback(
+    async (weight: number): Promise<boolean> => {
+      setIsLoading(true);
+      try {
+        const success = await healthKitService.saveWeight(weight);
+        if (success) await syncData();
+        return success;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '保存失败');
+        return false;
+      } finally {
+        setIsLoading(false);
       }
-      return success;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : '保存失败');
-      return false;
-    } finally {
-      setIsLoading(false);
-    }
-  }, [syncData]);
+    },
+    [syncData]
+  );
 
-  // 初始化时自动检查
+  const saveBodyFat = useCallback(
+    async (percentage: number): Promise<boolean> => {
+      setIsLoading(true);
+      try {
+        const success = await healthKitService.saveBodyFat(percentage);
+        if (success) await syncData();
+        return success;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '保存失败');
+        return false;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [syncData]
+  );
+
+  const saveHeight = useCallback(
+    async (height: number): Promise<boolean> => {
+      setIsLoading(true);
+      try {
+        const success = await healthKitService.saveHeight(height);
+        if (success) await syncData();
+        return success;
+      } catch (err) {
+        setError(err instanceof Error ? err.message : '保存失败');
+        return false;
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [syncData]
+  );
+
   useEffect(() => {
     initialize();
+    healthKitService.getCachedHealthData().then((data) => {
+      if (data) {
+        setHealthData(data);
+        setLastSync(data.syncedAt);
+      }
+    });
   }, [initialize]);
 
   return {
@@ -171,8 +181,10 @@ export function useHealthKit(): UseHealthKitReturn {
     requestAuthorization,
     syncData,
     refreshStatus,
+    openHealthSettings,
     saveWeight,
-    saveBodyFat
+    saveBodyFat,
+    saveHeight,
   };
 }
 

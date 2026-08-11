@@ -1,13 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useHealthKit } from '../hooks/useHealthKit';
 import { Capacitor } from '@capacitor/core';
+
+interface MetricCardProps {
+    label: string;
+    value?: number;
+    unit: string;
+    color: string;
+}
+
+const colorMap: Record<string, { text: string; border: string; bg: string }> = {
+    emerald: { text: 'text-emerald-400', border: 'border-emerald-700/50', bg: 'from-emerald-900/30' },
+    amber: { text: 'text-amber-400', border: 'border-amber-700/50', bg: 'from-amber-900/30' },
+    purple: { text: 'text-purple-400', border: 'border-purple-700/50', bg: 'from-purple-900/30' },
+    teal: { text: 'text-teal-400', border: 'border-teal-700/50', bg: 'from-teal-900/30' },
+    blue: { text: 'text-blue-400', border: 'border-blue-700/50', bg: 'from-blue-900/30' },
+    rose: { text: 'text-rose-400', border: 'border-rose-700/50', bg: 'from-rose-900/30' },
+    red: { text: 'text-red-400', border: 'border-red-700/50', bg: 'from-red-900/30' },
+    pink: { text: 'text-pink-400', border: 'border-pink-700/50', bg: 'from-pink-900/30' },
+    cyan: { text: 'text-cyan-400', border: 'border-cyan-700/50', bg: 'from-cyan-900/30' },
+    orange: { text: 'text-orange-400', border: 'border-orange-700/50', bg: 'from-orange-900/30' },
+    indigo: { text: 'text-indigo-400', border: 'border-indigo-700/50', bg: 'from-indigo-900/30' },
+    violet: { text: 'text-violet-400', border: 'border-violet-700/50', bg: 'from-violet-900/30' },
+    yellow: { text: 'text-yellow-400', border: 'border-yellow-700/50', bg: 'from-yellow-900/30' },
+    lime: { text: 'text-lime-400', border: 'border-lime-700/50', bg: 'from-lime-900/30' },
+};
+
+const MetricCard: React.FC<MetricCardProps> = ({ label, value, unit, color }) => {
+    const c = colorMap[color] ?? colorMap.emerald;
+    const display = value !== undefined ? value.toFixed(1) : '--';
+    return (
+        <div className={`bg-gradient-to-br ${c.bg} to-slate-900 p-4 rounded-2xl border ${c.border}`}>
+            <div className="text-slate-400 text-xs font-medium uppercase tracking-wide mb-1">{label}</div>
+            <div className="flex items-end gap-1">
+                <div className="text-2xl font-black text-white">{display}</div>
+                {unit && <div className={`text-sm font-bold ${c.text} mb-1`}>{unit}</div>}
+            </div>
+        </div>
+    );
+};
 
 const HealthSettingsPage: React.FC = () => {
     const navigate = useNavigate();
     const [showManualInput, setShowManualInput] = useState(false);
     const [manualWeight, setManualWeight] = useState('');
     const [manualBodyFat, setManualBodyFat] = useState('');
+    const [manualHeight, setManualHeight] = useState('');
 
     const {
         isAvailable,
@@ -19,30 +58,32 @@ const HealthSettingsPage: React.FC = () => {
         requestAuthorization,
         syncData,
         saveWeight,
-        saveBodyFat
+        saveBodyFat,
+        saveHeight,
+        openHealthSettings,
     } = useHealthKit();
 
-    // 检查是否在 iOS 原生环境
     const isNative = Capacitor.isNativePlatform();
 
-    // 处理授权请求
     const handleEnableSync = async () => {
         const success = await requestAuthorization();
         if (success) {
-            // 授权成功后立即同步数据
             await syncData();
         }
     };
 
-    // 处理手动同步
     const handleManualSync = async () => {
         await syncData();
     };
 
-    // 处理保存手动输入
+    const handleOpenHealthSettings = async () => {
+        await openHealthSettings();
+    };
+
     const handleSaveManual = async () => {
         const weight = parseFloat(manualWeight);
         const bodyFat = parseFloat(manualBodyFat);
+        const heightCm = parseFloat(manualHeight);
 
         if (!isNaN(weight)) {
             await saveWeight(weight);
@@ -50,13 +91,16 @@ const HealthSettingsPage: React.FC = () => {
         if (!isNaN(bodyFat)) {
             await saveBodyFat(bodyFat);
         }
+        if (!isNaN(heightCm)) {
+            await saveHeight(heightCm / 100);
+        }
 
         setShowManualInput(false);
         setManualWeight('');
         setManualBodyFat('');
+        setManualHeight('');
     };
 
-    // 格式化日期
     const formatDate = (date: Date | null) => {
         if (!date) return '从未';
         return date.toLocaleString('zh-CN', {
@@ -89,7 +133,6 @@ const HealthSettingsPage: React.FC = () => {
 
             {/* Main Content */}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* 平台提示 */}
                 {!isNative && (
                     <div className="bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-3 rounded-2xl mb-6 backdrop-blur-sm">
                         <div className="flex items-center gap-2">
@@ -101,7 +144,6 @@ const HealthSettingsPage: React.FC = () => {
                     </div>
                 )}
 
-                {/* 错误提示 */}
                 {error && (
                     <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 px-4 py-3 rounded-2xl mb-6 backdrop-blur-sm">
                         {error}
@@ -125,25 +167,19 @@ const HealthSettingsPage: React.FC = () => {
                     <div className="space-y-3 text-sm">
                         <div className="flex justify-between items-center">
                             <span className="text-slate-400">平台支持</span>
-                            <span className="text-white font-medium">
-                                {isNative ? 'iOS 原生应用' : 'Web 浏览器'}
-                            </span>
+                            <span className="text-white font-medium">{isNative ? 'iOS 原生应用' : 'Web 浏览器'}</span>
                         </div>
                         <div className="flex justify-between items-center">
                             <span className="text-slate-400">授权状态</span>
-                            <span className="text-white font-medium">
-                                {isAuthorized ? '已授权' : '未授权'}
-                            </span>
+                            <span className="text-white font-medium">{isAuthorized ? '已授权' : '未授权'}</span>
                         </div>
                         <div className="flex justify-between items-center">
                             <span className="text-slate-400">最后同步</span>
-                            <span className="text-white font-medium">
-                                {formatDate(lastSync)}
-                            </span>
+                            <span className="text-white font-medium">{formatDate(lastSync)}</span>
                         </div>
                     </div>
 
-                    <div className="mt-6 flex gap-3">
+                    <div className="mt-6 flex gap-3 flex-wrap">
                         {!isAuthorized ? (
                             <button
                                 onClick={handleEnableSync}
@@ -167,6 +203,12 @@ const HealthSettingsPage: React.FC = () => {
                                 >
                                     {isLoading ? '同步中...' : '立即同步'}
                                 </button>
+                                <button
+                                    onClick={handleOpenHealthSettings}
+                                    className="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-xl transition-all shadow-lg shadow-slate-900/50"
+                                >
+                                    健康权限
+                                </button>
                             </>
                         )}
                     </div>
@@ -177,42 +219,22 @@ const HealthSettingsPage: React.FC = () => {
                     <div className="bg-slate-900/50 backdrop-blur-xl border border-slate-800/50 rounded-3xl p-6">
                         <h2 className="text-xl font-bold text-white mb-4">最新健康数据</h2>
 
-                        <div className="grid grid-cols-3 gap-4">
-                            <div className="bg-gradient-to-br from-emerald-900/30 to-slate-900 p-4 rounded-2xl border border-emerald-700/50">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <svg className="text-emerald-400" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                                    </svg>
-                                    <span className="text-slate-400 text-xs font-medium uppercase tracking-wide">体重</span>
-                                </div>
-                                <div className="flex items-end gap-1">
-                                    <div className="text-3xl font-black text-white">{healthData.weight?.toFixed(1) || '--'}</div>
-                                    <div className="text-lg font-bold text-emerald-400 mb-1">kg</div>
-                                </div>
-                            </div>
-
-                            <div className="bg-gradient-to-br from-amber-900/30 to-slate-900 p-4 rounded-2xl border border-amber-700/50">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <svg className="text-amber-400" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                    <span className="text-slate-400 text-xs font-medium uppercase tracking-wide">体脂率</span>
-                                </div>
-                                <div className="flex items-end gap-1">
-                                    <div className="text-3xl font-black text-white">{healthData.bodyFatPercent?.toFixed(1) || '--'}</div>
-                                    <div className="text-lg font-bold text-amber-400 mb-1">%</div>
-                                </div>
-                            </div>
-
-                            <div className="bg-gradient-to-br from-purple-900/30 to-slate-900 p-4 rounded-2xl border border-purple-700/50">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <svg className="text-purple-400" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                    <span className="text-slate-400 text-xs font-medium uppercase tracking-wide">BMI</span>
-                                </div>
-                                <div className="text-3xl font-black text-white">{healthData.bmi?.toFixed(1) || '--'}</div>
-                            </div>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            <MetricCard label="体重" value={healthData.body.weight} unit="kg" color="emerald" />
+                            <MetricCard label="体脂率" value={healthData.body.bodyFatPercent} unit="%" color="amber" />
+                            <MetricCard label="BMI" value={healthData.body.bmi} unit="" color="purple" />
+                            <MetricCard label="瘦体重" value={healthData.body.leanBodyMass} unit="kg" color="teal" />
+                            <MetricCard label="身高" value={healthData.body.height ? healthData.body.height * 100 : undefined} unit="cm" color="blue" />
+                            <MetricCard label="腰围" value={healthData.body.waistCircumference ? healthData.body.waistCircumference * 100 : undefined} unit="cm" color="rose" />
+                            <MetricCard label="静息心率" value={healthData.heart.restingHeartRate} unit="bpm" color="red" />
+                            <MetricCard label="心率变异性" value={healthData.heart.heartRateVariability} unit="ms" color="pink" />
+                            <MetricCard label="血氧" value={healthData.heart.oxygenSaturation} unit="%" color="cyan" />
+                            <MetricCard label="步数" value={healthData.activity.steps} unit="步" color="emerald" />
+                            <MetricCard label="活动能量" value={healthData.activity.activeEnergyBurned} unit="kcal" color="orange" />
+                            <MetricCard label="运动时长" value={healthData.activity.appleExerciseTime} unit="min" color="indigo" />
+                            <MetricCard label="睡眠时长" value={healthData.sleep.totalSleepTime ? Math.round(healthData.sleep.totalSleepTime) : undefined} unit="min" color="violet" />
+                            <MetricCard label="卡路里" value={healthData.nutrition.calories} unit="kcal" color="yellow" />
+                            <MetricCard label="蛋白质" value={healthData.nutrition.protein} unit="g" color="lime" />
                         </div>
 
                         <div className="mt-4 text-xs text-slate-500">
@@ -284,6 +306,18 @@ const HealthSettingsPage: React.FC = () => {
                                     onChange={(e) => setManualBodyFat(e.target.value)}
                                     className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                                     placeholder="20.5"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-300 mb-2">身高 (cm)</label>
+                                <input
+                                    type="number"
+                                    step="0.1"
+                                    value={manualHeight}
+                                    onChange={(e) => setManualHeight(e.target.value)}
+                                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
+                                    placeholder="175"
                                 />
                             </div>
 

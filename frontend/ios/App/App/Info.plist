@@ -25,9 +25,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>ZenFit需要访问您的健康数据来提供个性化的训练建议和体重追踪</string>
+	<string>ZenFit需要读取您的健康数据（体重、体脂、身高、BMI、心率、睡眠、活动等），用于生成个性化的训练计划、恢复建议和进度追踪。所有数据仅在您的设备上使用，并经过HealthKit安全API访问。</string>
 	<key>NSHealthUpdateUsageDescription</key>
-	<string>ZenFit需要写入训练数据到健康应用</string>
+	<string>ZenFit需要写入您手动记录的训练相关身体数据（如体重、体脂）到健康应用，方便您在同一处查看所有健康数据。</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -13,7 +13,9 @@ import Detail1PathAnalyzer from './dev/components/Detail1PathAnalyzer';
 import PDFDebuggerTestPage from './dev/components/PDFDebuggerTestPage';
 import MobileReportTestPage from './pages/MobileReportTestPage';
 import ShareCardDemoPage from './pages/ShareCardDemoPage';
-import { MainApp } from './pages/MainApp'; // 导入旧UI作为主应用
+import { MainApp } from './pages/MainApp';
+import { useHealthSyncPrompt } from './hooks/useHealthSyncPrompt';
+import ConfirmDialog from './shared/components/ui/ConfirmDialog';
 
 /**
  * 统一的"屏幕边界"容器：整个 app 唯一的视口高度定义点。
@@ -29,6 +31,7 @@ function Screen({ children }: { children: React.ReactNode }) {
 
 function App() {
   const [notification, setNotification] = useState<string | null>(null);
+  const { showPrompt, onConfirm, onCancel } = useHealthSyncPrompt();
 
   const handleNotify = (message: string) => {
     setNotification(message);
@@ -126,6 +129,17 @@ function App() {
         {/* 404 Route */}
         <Route path="*" element={<Navigate to="/app" replace />} />
       </Routes>
+
+      <ConfirmDialog
+        isOpen={showPrompt}
+        title="同步 Apple Health 数据"
+        message="ZenFit 可以从 Apple Health 读取您的体重、体脂、心率、睡眠等数据，用于生成更个性化的训练计划。是否立即同步？"
+        confirmText="立即同步"
+        cancelText="稍后再说"
+        variant="info"
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+      />
     </div>
   );
 }
