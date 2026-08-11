@@ -1,0 +1,736 @@
+{
+  "App.tsx": [
+    "main.tsx"
+  ],
+  "components/PrivateRoute.tsx": [
+    "App.tsx"
+  ],
+  "components/Toast.tsx": [
+    "features/exercise/components/ExerciseSelector.tsx",
+    "features/export/components/PDFDebugger.tsx",
+    "features/export/services/JSONExportService.ts",
+    "features/export/services/PDFExportService.ts",
+    "hooks/useToast.ts"
+  ],
+  "context/AuthContext.tsx": [
+    "components/PrivateRoute.tsx",
+    "main.tsx",
+    "pages/Auth/LoginPage.tsx",
+    "pages/Auth/RegisterPage.tsx",
+    "pages/DashboardPage.tsx",
+    "pages/MainApp.tsx",
+    "pages/ProfilePage.tsx"
+  ],
+  "data/predefined-routines.ts": [
+    "pages/MainApp.tsx"
+  ],
+  "dev/components/AuthProfileTestPanel.tsx": [
+    "App.tsx"
+  ],
+  "dev/components/Detail1PathAnalyzer.tsx": [
+    "App.tsx"
+  ],
+  "dev/components/PDFDebuggerTestPage.tsx": [
+    "App.tsx"
+  ],
+  "dev/components/PDFSVGPathTester.tsx": [
+    "App.tsx"
+  ],
+  "dev/components/WorkoutTestPanel.tsx": [
+    "App.tsx"
+  ],
+  "features/ai/components/AIBalanceDisplay.tsx": [
+    "features/ai/index.ts"
+  ],
+  "features/ai/components/AICoachChatModal.tsx": [
+    "features/ai/index.ts"
+  ],
+  "features/ai/components/AIControlBar.tsx": [
+    "features/ai/index.ts"
+  ],
+  "features/ai/components/AICustomRoutineCard.tsx": [
+    "features/ai/components/AICoachChatModal.tsx",
+    "features/ai/index.ts"
+  ],
+  "features/ai/components/AIMessageContent.tsx": [
+    "features/ai/components/AICoachChatModal.tsx"
+  ],
+  "features/ai/components/AIProviderConfigManager.tsx": [
+    "features/ai/components/AIControlBar.tsx",
+    "features/ai/index.ts"
+  ],
+  "features/ai/components/AIRecommendationPanel.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/components/AiRecommendationCard.tsx": [
+    "features/ai/components/AiResultPreview.tsx"
+  ],
+  "features/ai/components/AiResultPreview.tsx": [
+    "features/routine/components/RoutineCreator.tsx"
+  ],
+  "features/ai/components/EnhancedAIRecommendationPanel.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/components/HistoryBasedAIRecommendationPanel.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/components/TokenUsageBadge.tsx": [
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx"
+  ],
+  "features/ai/index.ts": [
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/services/AICoachService.ts": [
+    "features/ai/components/AICoachChatModal.tsx",
+    "features/ai/components/AICustomRoutineCard.tsx",
+    "features/ai/index.ts",
+    "features/ai/index.ts"
+  ],
+  "features/ai/services/AIConfigBackendService.ts": [
+    "features/ai/components/AIBalanceDisplay.tsx",
+    "features/ai/components/AICoachChatModal.tsx",
+    "features/ai/components/AIControlBar.tsx",
+    "features/ai/components/AIProviderConfigManager.tsx",
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/ai/index.ts",
+    "features/ai/index.ts",
+    "features/ai/services/AIWorkoutRecommendationService.ts",
+    "features/ai/services/perplexityService.ts",
+    "features/report/services/WeeklySummaryService.ts"
+  ],
+  "features/ai/services/AIConfigStorageService.ts": [
+    "features/ai/components/AIProviderConfigManager.tsx",
+    "features/ai/index.ts",
+    "features/ai/services/perplexityService.ts"
+  ],
+  "features/ai/services/AIRecommendationService.ts": [
+    "features/ai/components/AIRecommendationPanel.tsx",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/services/AIWorkoutRecommendationService.ts": [
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/ai/components/TokenUsageBadge.tsx",
+    "features/report/services/WeeklySummaryService.ts"
+  ],
+  "features/ai/services/EnhancedAIRecommendationService.ts": [
+    "features/ai/components/EnhancedAIRecommendationPanel.tsx",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/services/EnhancedAIRecommendationServiceV2.ts": [
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/services/HistoricalDataQueryService.ts": [
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/ai/services/EnhancedAIRecommendationServiceV2.ts",
+    "features/workout/components/InProgressWorkout.tsx"
+  ],
+  "features/ai/services/TokenCalculationService.ts": [
+    "features/ai/services/TokenCalculationService.ts",
+    "features/report/services/WeeklySummaryService.ts"
+  ],
+  "features/ai/services/geminiService.ts": [
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/ai/services/perplexityService.ts": [
+    "features/ai/components/AiResultPreview.tsx",
+    "features/ai/index.ts",
+    "features/routine/components/RoutineCreator.tsx"
+  ],
+  "features/anatomy/components/MuscleAnatomyViewer.tsx": [
+    "features/exercise/components/ExerciseLibraryView.tsx",
+    "features/exercise/components/ExerciseSelector.tsx",
+    "features/routine/components/AiConfigModal.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/anatomy/constants/muscleColors.ts": [
+    "features/anatomy/services/MuscleHighlightService.ts",
+    "features/export/services/JSONExportService.ts",
+    "features/export/services/PDFExportService.ts",
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/WorkoutReportModal.tsx"
+  ],
+  "features/anatomy/constants/musclePaths.ts": [
+    "dev/components/Detail1PathAnalyzer.tsx",
+    "dev/components/PDFSVGPathTester.tsx",
+    "features/anatomy/components/MuscleAnatomyViewer.tsx",
+    "features/anatomy/services/MuscleHighlightService.ts",
+    "features/anatomy/services/MuscleHighlightService.ts",
+    "features/export/services/PDFExportService.ts",
+    "features/report/components/BodyHeatmap.tsx",
+    "features/report/components/RecoveryHeatmapView.tsx"
+  ],
+  "features/anatomy/services/MuscleHighlightService.ts": [
+    "features/anatomy/components/MuscleAnatomyViewer.tsx",
+    "features/export/services/PDFExportService.ts"
+  ],
+  "features/exercise/components/ExerciseLibraryView.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/exercise/components/ExerciseSelector.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/exercise/components/HeroExerciseCard.tsx": [
+    "features/ai/components/AIRecommendationPanel.tsx",
+    "features/ai/components/AiRecommendationCard.tsx",
+    "features/exercise/components/ExerciseLibraryView.tsx",
+    "features/exercise/components/ExerciseSelector.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/exercise/components/VideoPlayer.tsx": [
+    "features/ai/components/AICustomRoutineCard.tsx",
+    "features/ai/components/AIMessageContent.tsx",
+    "features/exercise/components/HeroExerciseCard.tsx",
+    "features/report/components/RecommendedExerciseCard.tsx",
+    "features/routine/components/RoutineBuilder.tsx",
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx"
+  ],
+  "features/exercise/data/comprehensive_exercises.ts": [
+    "pages/MainApp.tsx",
+    "services/ExerciseLookupService.ts"
+  ],
+  "features/exercise/services/ExerciseNameMappingService.ts": [
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/WeeklySummaryModal.tsx",
+    "features/report/components/WorkoutReportModal.tsx"
+  ],
+  "features/exercise/utils/exerciseMatching.ts": [
+    "features/ai/components/AICustomRoutineCard.tsx",
+    "features/ai/components/AIMessageContent.tsx"
+  ],
+  "features/export/components/JSONExportOptionsModal.tsx": [
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/components/WorkoutReportModal.tsx"
+  ],
+  "features/export/components/PDFDebugger.tsx": [
+    "dev/components/PDFDebuggerTestPage.tsx"
+  ],
+  "features/export/components/PDFExportOptionsModal.tsx": [
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/WorkoutReportModal.tsx"
+  ],
+  "features/export/constants/pdfStyles.ts": [
+    "features/export/services/PDFExportService.ts"
+  ],
+  "features/export/services/JSONExportService.ts": [
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/components/WorkoutReportModal.tsx"
+  ],
+  "features/export/services/PDFExportService.ts": [
+    "features/export/components/PDFDebugger.tsx",
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/WorkoutReportModal.tsx",
+    "shared/hooks/usePDFExport.ts"
+  ],
+  "features/export/services/SVGExportService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx"
+  ],
+  "features/export/services/VectorPDFExportService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx"
+  ],
+  "features/export/types/PDFConfig.ts": [
+    "features/export/components/PDFDebugger.tsx",
+    "features/export/components/PDFDebugger.tsx",
+    "features/export/services/PDFExportService.ts",
+    "features/export/services/PDFExportService.ts"
+  ],
+  "features/pr/components/AchievementDetailModal.tsx": [
+    "features/pr/components/AchievementHall.tsx"
+  ],
+  "features/pr/components/AchievementHall.tsx": [
+    "features/pr/index.ts"
+  ],
+  "features/pr/components/PRBadgeCard.tsx": [
+    "features/pr/index.ts"
+  ],
+  "features/pr/index.ts": [
+    "features/report/components/ProgressView.tsx"
+  ],
+  "features/pr/services/AIWeightComparisonService.ts": [
+    "features/pr/components/AchievementDetailModal.tsx",
+    "features/pr/components/AchievementHall.tsx"
+  ],
+  "features/pr/services/AchievementService.ts": [
+    "features/pr/components/AchievementDetailModal.tsx",
+    "features/pr/components/AchievementHall.tsx",
+    "features/pr/index.ts",
+    "features/pr/index.ts"
+  ],
+  "features/pr/services/PersonalRecordService.ts": [
+    "features/pr/components/PRBadgeCard.tsx",
+    "features/pr/index.ts",
+    "features/pr/index.ts"
+  ],
+  "features/pr/services/WeightComparisonDB.ts": [
+    "features/pr/services/AIWeightComparisonService.ts"
+  ],
+  "features/profile/components/ProfileEditorModal.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/profile/components/ProfileSetup.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/profile/components/ProfileView.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/profile/services/CalorieCalculationService.ts": [
+    "features/export/services/JSONExportService.ts",
+    "features/export/services/PDFExportService.ts"
+  ],
+  "features/report/components/BodyHeatmap.tsx": [
+    "features/report/components/WeeklySummaryModal.tsx"
+  ],
+  "features/report/components/MobileWorkoutReportModal.tsx": [
+    "pages/MobileReportTestPage.tsx"
+  ],
+  "features/report/components/MuscleFeedbackModal.tsx": [
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx"
+  ],
+  "features/report/components/ProgressView.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/report/components/RecommendedExerciseCard.tsx": [
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx"
+  ],
+  "features/report/components/RecoveryHeatmapView.tsx": [
+    "features/report/components/ProgressView.tsx"
+  ],
+  "features/report/components/WeeklyReportViewer.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/report/components/WeeklySummaryCard.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/report/components/WeeklySummaryModal.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/report/components/WeeklyTrainingCoachCardWithAI.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/report/components/WorkoutReportModal.tsx": [
+    "features/report/components/ProgressView.tsx"
+  ],
+  "features/report/hooks/useMuscleFeedback.ts": [
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx"
+  ],
+  "features/report/services/MuscleFeedbackService.ts": [
+    "features/report/components/MuscleFeedbackModal.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/hooks/useMuscleFeedback.ts",
+    "features/report/services/WeeklyTrainingCoachService.ts"
+  ],
+  "features/report/services/ReportStorageService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/services/WeeklyReportService.ts",
+    "features/report/services/WeeklySummaryService.ts"
+  ],
+  "features/report/services/WeeklyReportBackendService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/services/ReportStorageService.ts"
+  ],
+  "features/report/services/WeeklyReportService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/services/WeeklySummaryService.ts",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "features/report/services/WeeklySummaryService.ts": [
+    "features/report/components/WeeklySummaryCard.tsx",
+    "features/report/components/WeeklySummaryCard.tsx",
+    "features/report/components/WeeklySummaryModal.tsx",
+    "features/report/components/WeeklySummaryModal.tsx",
+    "features/share/utils/dataTransformer.ts",
+    "pages/MainApp.tsx"
+  ],
+  "features/report/services/WeeklyTrainingCoachService.ts": [
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx"
+  ],
+  "features/routine/components/AiConfigModal.tsx": [
+    "features/routine/components/RoutineCreator.tsx"
+  ],
+  "features/routine/components/RoutineBuilder.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/routine/components/RoutineCreator.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/share/components/ShareButton.tsx": [
+    "features/share/index.ts"
+  ],
+  "features/share/components/ShareCardCanvas.tsx": [
+    "features/share/components/ShareCardModal.tsx",
+    "features/share/index.ts"
+  ],
+  "features/share/components/ShareCardModal.tsx": [
+    "features/share/components/ShareButton.tsx",
+    "features/share/index.ts",
+    "features/share/index.ts"
+  ],
+  "features/share/hooks/useShareImage.ts": [
+    "features/share/components/ShareCardModal.tsx",
+    "features/share/index.ts"
+  ],
+  "features/share/index.ts": [
+    "features/report/components/WeeklySummaryCard.tsx",
+    "pages/ShareCardDemoPage.tsx",
+    "pages/ShareCardDemoPage.tsx"
+  ],
+  "features/share/services/TokenUsageService.ts": [
+    "features/share/components/ShareCardModal.tsx",
+    "features/share/index.ts",
+    "features/share/index.ts"
+  ],
+  "features/share/types.ts": [
+    "features/share/components/ShareButton.tsx",
+    "features/share/components/ShareCardCanvas.tsx",
+    "features/share/components/ShareCardModal.tsx",
+    "features/share/index.ts",
+    "features/share/utils/dataTransformer.ts"
+  ],
+  "features/share/utils/dataTransformer.ts": [
+    "features/share/index.ts"
+  ],
+  "features/share/utils/shareCardStyles.ts": [
+    "features/share/index.ts"
+  ],
+  "features/workout/components/GlobalTimer.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/workout/components/InProgressWorkout.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/workout/components/SwipeableCard.tsx": [
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx"
+  ],
+  "features/workout/components/WorkoutLogger.tsx": [
+    "pages/MainApp.tsx"
+  ],
+  "features/workout/services/ExerciseIdentificationService.ts": [
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx",
+    "features/workout/services/VolumeCalculationService.ts"
+  ],
+  "features/workout/services/VolumeCalculationService.ts": [
+    "features/profile/services/CalorieCalculationService.ts",
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/WorkoutReportModal.tsx",
+    "features/report/services/WeeklyTrainingCoachService.ts",
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx",
+    "services/CalorieCalculationService.ts",
+    "services/WorkoutSyncService.ts"
+  ],
+  "hooks/useActiveWorkoutPersistence.ts": [
+    "pages/MainApp.tsx"
+  ],
+  "hooks/useHealthKit.ts": [
+    "pages/HealthSettingsPage.tsx"
+  ],
+  "hooks/usePreventBackGesture.ts": [
+    "pages/MainApp.tsx"
+  ],
+  "hooks/useToast.ts": [
+    "features/exercise/components/ExerciseSelector.tsx"
+  ],
+  "main.tsx": [],
+  "pages/Auth/LoginPage.tsx": [
+    "App.tsx"
+  ],
+  "pages/Auth/RegisterPage.tsx": [
+    "App.tsx"
+  ],
+  "pages/DashboardPage.tsx": [
+    "App.tsx"
+  ],
+  "pages/HealthSettingsPage.tsx": [
+    "App.tsx"
+  ],
+  "pages/MainApp.tsx": [
+    "App.tsx"
+  ],
+  "pages/MobileReportTestPage.tsx": [
+    "App.tsx"
+  ],
+  "pages/ProfilePage.tsx": [
+    "App.tsx"
+  ],
+  "pages/ShareCardDemoPage.tsx": [
+    "App.tsx"
+  ],
+  "services/CalorieCalculationService.ts": [
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/WorkoutReportModal.tsx",
+    "features/report/services/WeeklyReportService.ts"
+  ],
+  "services/ExerciseLookupService.ts": [
+    "services/WorkoutSyncService.ts"
+  ],
+  "services/HealthKitService.ts": [
+    "hooks/useHealthKit.ts"
+  ],
+  "services/RecoveryCalculationService.ts": [
+    "pages/MainApp.tsx"
+  ],
+  "services/RoutineSyncService.ts": [
+    "pages/MainApp.tsx"
+  ],
+  "services/WorkoutSyncService.ts": [
+    "features/report/components/WeeklyReportViewer.tsx",
+    "pages/MainApp.tsx",
+    "pages/ProfilePage.tsx"
+  ],
+  "services/apiClient.ts": [
+    "context/AuthContext.tsx",
+    "dev/components/AuthProfileTestPanel.tsx",
+    "dev/components/WorkoutTestPanel.tsx",
+    "features/ai/services/AIWorkoutRecommendationService.ts",
+    "features/ai/services/geminiService.ts",
+    "features/ai/services/perplexityService.ts",
+    "features/pr/services/AIWeightComparisonService.ts",
+    "features/report/services/WeeklyReportBackendService.ts",
+    "features/report/services/WeeklySummaryService.ts",
+    "pages/MainApp.tsx",
+    "pages/ProfilePage.tsx",
+    "services/RoutineSyncService.ts",
+    "services/WorkoutSyncService.ts"
+  ],
+  "services/iOSStorageService.ts": [
+    "features/ai/components/AICoachChatModal.tsx",
+    "features/ai/components/AIControlBar.tsx",
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/ai/services/AICoachService.ts",
+    "features/ai/services/AIConfigBackendService.ts",
+    "features/ai/services/AIConfigStorageService.ts",
+    "features/ai/services/AIWorkoutRecommendationService.ts",
+    "features/ai/services/EnhancedAIRecommendationService.ts",
+    "features/ai/services/EnhancedAIRecommendationServiceV2.ts",
+    "features/ai/services/HistoricalDataQueryService.ts",
+    "features/report/components/BodyHeatmap.tsx",
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/components/WeeklySummaryCard.tsx",
+    "features/report/components/WeeklySummaryModal.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/services/MuscleFeedbackService.ts",
+    "features/report/services/WeeklySummaryService.ts",
+    "features/share/components/ShareCardModal.tsx",
+    "features/share/services/TokenUsageService.ts",
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx",
+    "hooks/useActiveWorkoutPersistence.ts",
+    "pages/MainApp.tsx",
+    "services/HealthKitService.ts",
+    "services/WorkoutSyncService.ts",
+    "services/apiClient.ts"
+  ],
+  "shared/components/layout/AdaptiveHeightContainer.tsx": [
+    "pages/MainApp.tsx",
+    "shared/components/layout/CollapsibleSection.tsx"
+  ],
+  "shared/components/layout/CollapsibleSection.tsx": [
+    "features/ai/components/AIRecommendationPanel.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "shared/components/ui/AIThinkingLoader.tsx": [
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/report/components/WeeklySummaryCard.tsx"
+  ],
+  "shared/components/ui/ConfirmDialog.tsx": [
+    "dev/components/WorkoutTestPanel.tsx",
+    "pages/MainApp.tsx"
+  ],
+  "shared/constants/initial_exercises.ts": [
+    "features/exercise/components/ExerciseSelector.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/services/WeeklyTrainingCoachService.ts",
+    "pages/MainApp.tsx",
+    "services/ExerciseLookupService.ts"
+  ],
+  "shared/hooks/useAdaptiveHeight.ts": [
+    "shared/components/layout/AdaptiveHeightContainer.tsx"
+  ],
+  "shared/hooks/useBodyScrollLock.ts": [
+    "features/pr/components/AchievementDetailModal.tsx"
+  ],
+  "shared/hooks/usePDFExport.ts": [
+    "features/report/components/ProgressView.tsx"
+  ],
+  "shared/types/feedback.ts": [
+    "features/report/components/MuscleFeedbackModal.tsx",
+    "features/report/components/MuscleFeedbackModal.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/hooks/useMuscleFeedback.ts",
+    "features/report/services/MuscleFeedbackService.ts",
+    "features/report/services/WeeklyTrainingCoachService.ts"
+  ],
+  "shared/types/index.ts": [
+    "data/predefined-routines.ts",
+    "data/predefined-routines.ts",
+    "dev/components/PDFDebuggerTestPage.tsx",
+    "dev/components/PDFDebuggerTestPage.tsx",
+    "features/ai/components/AICoachChatModal.tsx",
+    "features/ai/components/AICustomRoutineCard.tsx",
+    "features/ai/components/AIMessageContent.tsx",
+    "features/ai/components/AIProviderConfigManager.tsx",
+    "features/ai/components/AiRecommendationCard.tsx",
+    "features/ai/components/AiResultPreview.tsx",
+    "features/ai/components/EnhancedAIRecommendationPanel.tsx",
+    "features/ai/components/HistoryBasedAIRecommendationPanel.tsx",
+    "features/ai/index.ts",
+    "features/ai/index.ts",
+    "features/ai/services/AIConfigStorageService.ts",
+    "features/ai/services/AIConfigStorageService.ts",
+    "features/ai/services/AIRecommendationService.ts",
+    "features/ai/services/AIRecommendationService.ts",
+    "features/ai/services/AIWorkoutRecommendationService.ts",
+    "features/ai/services/AIWorkoutRecommendationService.ts",
+    "features/ai/services/EnhancedAIRecommendationService.ts",
+    "features/ai/services/EnhancedAIRecommendationService.ts",
+    "features/ai/services/EnhancedAIRecommendationServiceV2.ts",
+    "features/ai/services/EnhancedAIRecommendationServiceV2.ts",
+    "features/ai/services/HistoricalDataQueryService.ts",
+    "features/ai/services/geminiService.ts",
+    "features/ai/services/perplexityService.ts",
+    "features/ai/services/perplexityService.ts",
+    "features/anatomy/components/MuscleAnatomyViewer.tsx",
+    "features/anatomy/components/MuscleAnatomyViewer.tsx",
+    "features/anatomy/constants/muscleColors.ts",
+    "features/anatomy/services/MuscleHighlightService.ts",
+    "features/anatomy/services/MuscleHighlightService.ts",
+    "features/exercise/components/ExerciseLibraryView.tsx",
+    "features/exercise/components/ExerciseLibraryView.tsx",
+    "features/exercise/components/ExerciseSelector.tsx",
+    "features/exercise/components/ExerciseSelector.tsx",
+    "features/exercise/components/HeroExerciseCard.tsx",
+    "features/exercise/data/comprehensive_exercises.ts",
+    "features/exercise/data/comprehensive_exercises.ts",
+    "features/exercise/utils/exerciseMatching.ts",
+    "features/export/components/PDFDebugger.tsx",
+    "features/export/services/JSONExportService.ts",
+    "features/export/services/JSONExportService.ts",
+    "features/export/services/PDFExportService.ts",
+    "features/export/services/PDFExportService.ts",
+    "features/export/services/SVGExportService.ts",
+    "features/export/services/SVGExportService.ts",
+    "features/export/services/VectorPDFExportService.ts",
+    "features/export/services/VectorPDFExportService.ts",
+    "features/pr/components/AchievementHall.tsx",
+    "features/pr/components/PRBadgeCard.tsx",
+    "features/pr/services/AchievementService.ts",
+    "features/pr/services/PersonalRecordService.ts",
+    "features/profile/components/ProfileEditorModal.tsx",
+    "features/profile/components/ProfileEditorModal.tsx",
+    "features/profile/components/ProfileSetup.tsx",
+    "features/profile/components/ProfileSetup.tsx",
+    "features/profile/components/ProfileView.tsx",
+    "features/profile/services/CalorieCalculationService.ts",
+    "features/profile/services/CalorieCalculationService.ts",
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/MobileWorkoutReportModal.tsx",
+    "features/report/components/MuscleFeedbackModal.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/ProgressView.tsx",
+    "features/report/components/RecommendedExerciseCard.tsx",
+    "features/report/components/RecoveryHeatmapView.tsx",
+    "features/report/components/RecoveryHeatmapView.tsx",
+    "features/report/components/WeeklyReportViewer.tsx",
+    "features/report/components/WeeklySummaryCard.tsx",
+    "features/report/components/WeeklySummaryModal.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/components/WeeklyTrainingCoachCardWithAI.tsx",
+    "features/report/components/WorkoutReportModal.tsx",
+    "features/report/components/WorkoutReportModal.tsx",
+    "features/report/hooks/useMuscleFeedback.ts",
+    "features/report/services/MuscleFeedbackService.ts",
+    "features/report/services/MuscleFeedbackService.ts",
+    "features/report/services/ReportStorageService.ts",
+    "features/report/services/WeeklyReportBackendService.ts",
+    "features/report/services/WeeklyReportService.ts",
+    "features/report/services/WeeklyReportService.ts",
+    "features/report/services/WeeklySummaryService.ts",
+    "features/report/services/WeeklyTrainingCoachService.ts",
+    "features/report/services/WeeklyTrainingCoachService.ts",
+    "features/report/services/WeeklyTrainingCoachService.ts",
+    "features/routine/components/AiConfigModal.tsx",
+    "features/routine/components/AiConfigModal.tsx",
+    "features/routine/components/RoutineBuilder.tsx",
+    "features/routine/components/RoutineCreator.tsx",
+    "features/routine/components/RoutineCreator.tsx",
+    "features/share/utils/dataTransformer.ts",
+    "features/workout/components/GlobalTimer.tsx",
+    "features/workout/components/InProgressWorkout.tsx",
+    "features/workout/components/WorkoutLogger.tsx",
+    "features/workout/services/ExerciseIdentificationService.ts",
+    "features/workout/services/VolumeCalculationService.ts",
+    "hooks/useActiveWorkoutPersistence.ts",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx",
+    "pages/MainApp.tsx",
+    "pages/MobileReportTestPage.tsx",
+    "pages/MobileReportTestPage.tsx",
+    "services/CalorieCalculationService.ts",
+    "services/ExerciseLookupService.ts",
+    "services/ExerciseLookupService.ts",
+    "services/RecoveryCalculationService.ts",
+    "services/RoutineSyncService.ts",
+    "services/WorkoutSyncService.ts",
+    "shared/constants/initial_exercises.ts",
+    "shared/constants/initial_exercises.ts",
+    "shared/hooks/usePDFExport.ts",
+    "shared/types/feedback.ts",
+    "utils/WorkoutDurationCalculator.ts"
+  ],
+  "shared/types/json.d.ts": [],
+  "shared/utils/uuid.ts": [
+    "features/report/services/WeeklyReportService.ts",
+    "pages/MainApp.tsx"
+  ],
+  "shared/video/VideoPlayer.tsx": [
+    "features/exercise/components/VideoPlayer.tsx"
+  ],
+  "shared/video/useScrollState.ts": [
+    "shared/video/VideoPlayer.tsx"
+  ],
+  "shared/video/useSharedIntersectionObserver.ts": [
+    "shared/video/VideoPlayer.tsx"
+  ],
+  "types/api.ts": [
+    "context/AuthContext.tsx",
+    "dev/components/AuthProfileTestPanel.tsx",
+    "pages/ProfilePage.tsx",
+    "services/apiClient.ts"
+  ],
+  "types/health.ts": [
+    "pages/ProfilePage.tsx",
+    "services/apiClient.ts"
+  ],
+  "types/routine.ts": [
+    "services/RoutineSyncService.ts",
+    "services/apiClient.ts"
+  ],
+  "types/workout.ts": [
+    "dev/components/WorkoutTestPanel.tsx",
+    "services/WorkoutSyncService.ts",
+    "services/apiClient.ts"
+  ],
+  "utils/WorkoutDurationCalculator.ts": [
+    "pages/MainApp.tsx"
+  ]
+}
