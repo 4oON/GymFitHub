@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { showToast } from '@/components/Toast';
 import { X, Copy, Download, CheckCircle, AlertCircle, FileImage } from 'lucide-react';
 
 type MuscleId = 'chest' | 'shoulders' | 'biceps' | 'forearms' | 'abs' | 'obliques' | 'quads' |
@@ -220,7 +221,7 @@ const SVGPathImporter: React.FC<SVGPathImporterProps> = ({ onClose }) => {
             ? generateTypeScriptExport()
             : generateJSONExport();
         navigator.clipboard.writeText(content);
-        alert('已复制到剪贴板！');
+        showToast('已复制到剪贴板！');
     };
 
     // Download file

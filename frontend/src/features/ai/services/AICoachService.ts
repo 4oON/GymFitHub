@@ -1,3 +1,4 @@
+import { iOSStorage } from '@/services/iOSStorageService';
 /**
  * AI Coach Service
  * 
@@ -77,7 +78,7 @@ export interface GenerateRoutineRequest {
 
 // Helper to get auth headers
 const getAuthHeaders = (): Record<string, string> => {
-  const token = localStorage.getItem('zenfit-token');
+  const token = iOSStorage.getItem('zenfit-token');
   return {
     'Content-Type': 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),

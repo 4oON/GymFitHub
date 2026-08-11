@@ -1,5 +1,6 @@
 import type { Exercise, ActiveExercise, UserProfile, RecoveryStatus, WorkoutSession } from '@/shared/types';
 import { MuscleGroup } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 export interface HistoricalPerformance {
     exerciseName: string;
@@ -436,9 +437,9 @@ export class EnhancedAIRecommendationService {
 
         // 存储反馈数据 (iOS-safe)
         try {
-            const existingFeedback = JSON.parse(localStorage.getItem('ai_recommendation_feedback') || '[]');
+            const existingFeedback = JSON.parse(iOSStorage.getItem('ai_recommendation_feedback') || '[]');
             existingFeedback.push(feedbackData);
-            localStorage.setItem('ai_recommendation_feedback', JSON.stringify(existingFeedback));
+            iOSStorage.setItem('ai_recommendation_feedback', JSON.stringify(existingFeedback));
         } catch {
             console.warn('⚠️ Cannot save feedback (storage restricted)');
         }

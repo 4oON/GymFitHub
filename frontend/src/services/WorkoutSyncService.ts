@@ -10,6 +10,7 @@ import ExerciseLookupService from './ExerciseLookupService';
 import { VolumeCalculationService } from '@/features/workout/services/VolumeCalculationService';
 import type { WorkoutSession, ActiveExercise } from '@/shared/types';
 import type { CreateWorkoutInput, UpdateWorkoutInput } from '../types/workout';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 export class WorkoutSyncService {
     /**
@@ -337,7 +338,7 @@ export class WorkoutSyncService {
             console.log('🔄 Starting batch sync of local workouts...');
 
             // 从localStorage加载所有本地训练记录
-            const localWorkoutsJson = localStorage.getItem('workout-sessions');
+            const localWorkoutsJson = iOSStorage.getItem('workout-sessions');
             if (!localWorkoutsJson) {
                 return {
                     success: true,

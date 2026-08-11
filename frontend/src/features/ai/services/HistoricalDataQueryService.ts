@@ -6,6 +6,7 @@
  */
 
 import type { WorkoutSession, ActiveExercise, WorkoutSet, WeeklyReport } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 export interface ExerciseHistoryData {
     exerciseId: string;
@@ -34,7 +35,7 @@ export class HistoricalDataQueryService {
     private static loadWorkoutSessions(): WorkoutSession[] {
         try {
             // 使用正确的localStorage键名
-            const sessionsJson = localStorage.getItem('zenfit_history');
+            const sessionsJson = iOSStorage.getItem('zenfit_history');
             if (!sessionsJson) return [];
 
             const sessions: WorkoutSession[] = JSON.parse(sessionsJson);

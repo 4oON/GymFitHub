@@ -1,4 +1,5 @@
 import html2canvas from 'html2canvas';
+import { showToast } from '@/components/Toast';
 import type { WeeklyReport } from '@/shared/types';
 import { generateWeeklyReportSVG } from './SVGExportService';
 
@@ -229,7 +230,7 @@ export const sharePNG = async (
             // Fallback: copy text to clipboard and download image
             if (navigator.clipboard) {
                 await navigator.clipboard.writeText(shareText);
-                alert('Share text copied to clipboard! The image will be downloaded.');
+                showToast('分享文案已复制到剪贴板！图片将开始下载。');
             }
 
             // Download the image

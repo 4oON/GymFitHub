@@ -1,3 +1,4 @@
+import { iOSStorage } from '@/services/iOSStorageService';
 // 确保 BASE_URL 包含 /api 前缀
 const RAW_API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 const API_BASE_URL = RAW_API_URL.endsWith('/api') ? RAW_API_URL : `${RAW_API_URL}/api`;
@@ -12,7 +13,7 @@ const memoryStorage: Record<string, string> = {};
 const safeStorage = {
     getItem(key: string): string | null {
         try {
-            return localStorage.getItem(key);
+            return iOSStorage.getItem(key);
         } catch {
             // iOS 隐私模式或禁用 localStorage，使用内存回退
             return memoryStorage[key] || null;
@@ -20,7 +21,7 @@ const safeStorage = {
     },
     setItem(key: string, value: string): boolean {
         try {
-            localStorage.setItem(key, value);
+            iOSStorage.setItem(key, value);
             return true;
         } catch {
             // iOS 隐私模式，保存到内存
@@ -31,7 +32,7 @@ const safeStorage = {
     },
     removeItem(key: string): boolean {
         try {
-            localStorage.removeItem(key);
+            iOSStorage.removeItem(key);
             return true;
         } catch {
             delete memoryStorage[key];

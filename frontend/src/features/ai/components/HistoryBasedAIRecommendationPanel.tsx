@@ -36,6 +36,7 @@ import {
     type TokenUsage
 } from '../services/AIWorkoutRecommendationService';
 import { TokenUsageBadge } from './TokenUsageBadge';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface HistoryBasedAIRecommendationPanelProps {
     context: EnhancedRecommendationContext;
@@ -206,7 +207,7 @@ export const HistoryBasedAIRecommendationPanel: React.FC<HistoryBasedAIRecommend
             // Check AI Coach toggle state
             let enabled = true;
             try {
-                enabled = localStorage.getItem('zenfit_ai_enabled') !== 'false';
+                enabled = iOSStorage.getItem('zenfit_ai_enabled') !== 'false';
             } catch {
                 enabled = true;
             }

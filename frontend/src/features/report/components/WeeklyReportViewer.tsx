@@ -23,6 +23,7 @@ import { JSONExportOptionsModal } from '../../export/components/JSONExportOption
 import WorkoutSyncService from '@/services/WorkoutSyncService';
 import { WeeklyReportBackendService } from '../services/WeeklyReportBackendService';
 import { generateAllMissingWeeklyReports } from '../services/WeeklyReportService';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface WeeklyReportViewerProps {
     isOpen: boolean;
@@ -106,7 +107,7 @@ const WeeklyReportViewer: React.FC<WeeklyReportViewerProps> = ({ isOpen, onClose
     // 安全解析 localStorage 数据
     const safeParse = <T,>(key: string, fallback: T): T => {
         try {
-            const saved = localStorage.getItem(key);
+            const saved = iOSStorage.getItem(key);
             return saved ? JSON.parse(saved) : fallback;
         } catch (e) {
             console.error(`Error parsing ${key}:`, e);

@@ -1,3 +1,4 @@
+import { iOSStorage } from '@/services/iOSStorageService';
 /**
  * Token 用量服务
  * 获取本周 AI Token 总用量
@@ -18,7 +19,7 @@ export interface WeeklyTokenUsage {
  */
 export const getWeeklyTokenUsage = async (): Promise<WeeklyTokenUsage | null> => {
   try {
-    const token = localStorage.getItem('zenfit-token');
+    const token = iOSStorage.getItem('zenfit-token');
     const response = await fetch(`${API_BASE_URL}/api/ai/weekly-token-usage`, {
       headers: {
         'Authorization': `Bearer ${token || ''}`,

@@ -41,6 +41,7 @@ import MuscleFeedbackModal from './MuscleFeedbackModal';
 import useMuscleFeedback from '../hooks/useMuscleFeedback';
 import muscleFeedbackService from '../services/MuscleFeedbackService';
 import type { MuscleFeedback } from '@/shared/types/feedback';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface WeeklyTrainingCoachCardProps {
   currentWeekSessions: WorkoutSession[];
@@ -102,13 +103,13 @@ const translations = {
 // iOS Safe localStorage wrapper
 const safeStorage = {
   getItem: (key: string): string | null => {
-    try { return localStorage.getItem(key); } catch { return null; }
+    try { return iOSStorage.getItem(key); } catch { return null; }
   },
   setItem: (key: string, value: string): boolean => {
-    try { localStorage.setItem(key, value); return true; } catch { return false; }
+    try { iOSStorage.setItem(key, value); return true; } catch { return false; }
   },
   removeItem: (key: string): boolean => {
-    try { localStorage.removeItem(key); return true; } catch { return false; }
+    try { iOSStorage.removeItem(key); return true; } catch { return false; }
   }
 };
 

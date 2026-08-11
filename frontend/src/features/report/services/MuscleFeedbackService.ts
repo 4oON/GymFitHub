@@ -12,6 +12,7 @@ import type {
 } from '@/shared/types/feedback';
 import type { WorkoutSession, Exercise } from '@/shared/types';
 import type { MuscleGroup } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 const STORAGE_KEYS = {
   FEEDBACKS: 'zenfit_muscle_feedbacks',
@@ -24,7 +25,7 @@ const STORAGE_KEYS = {
 const safeStorage = {
   getItem: <T>(key: string, defaultValue: T): T => {
     try {
-      const item = localStorage.getItem(key);
+      const item = iOSStorage.getItem(key);
       return item ? JSON.parse(item) : defaultValue;
     } catch {
       return defaultValue;
@@ -32,7 +33,7 @@ const safeStorage = {
   },
   setItem: (key: string, value: unknown): boolean => {
     try {
-      localStorage.setItem(key, JSON.stringify(value));
+      iOSStorage.setItem(key, JSON.stringify(value));
       return true;
     } catch {
       return false;

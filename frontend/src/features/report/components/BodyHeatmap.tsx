@@ -8,6 +8,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { BODY_PATHS, MUSCLE_PATHS } from '@/features/anatomy/constants/musclePaths';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface MuscleData {
   muscle: string;
@@ -149,7 +150,7 @@ const BodyHeatmap: React.FC<BodyHeatmapProps> = ({ muscleData, className = '', l
   // 加载语言设置
   useEffect(() => {
     try {
-      const savedLang = localStorage.getItem('zenfit_summary_language') as 'zh' | 'en';
+      const savedLang = iOSStorage.getItem('zenfit_summary_language') as 'zh' | 'en';
       if (savedLang) {
         setInternalLanguage(savedLang);
       }

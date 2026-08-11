@@ -17,6 +17,7 @@ import muscleFeedbackService from '@/features/report/services/MuscleFeedbackServ
 
 // 肌肉群的基准恢复时间（小时）
 import { MuscleGroup as MG } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 const BASE_RECOVERY_HOURS: Record<MuscleGroup, number> = {
   [MG.CHEST]: 72,
   [MG.LATS]: 72,
@@ -539,7 +540,7 @@ class EnhancedRecoveryService {
     };
     
     // 保存到 localStorage
-    localStorage.setItem('zenfit_muscle_adaptation_profiles', JSON.stringify(profiles));
+    iOSStorage.setItem('zenfit_muscle_adaptation_profiles', JSON.stringify(profiles));
   }
 
   // 兼容旧接口的方法

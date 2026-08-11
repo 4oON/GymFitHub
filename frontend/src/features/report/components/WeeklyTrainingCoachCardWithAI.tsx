@@ -43,6 +43,7 @@ import muscleFeedbackService from '../services/MuscleFeedbackService';
 import type { MuscleFeedback } from '@/shared/types/feedback';
 import { AICoachChatModal, AICustomRoutineCard, AICoachService } from '@/features/ai';
 import type { AICustomRoutine } from '@/features/ai';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 // Related muscle groups for generating switchable options
 const SYNERGY_MUSCLE_GROUPS: Record<string, string[]> = {
@@ -139,13 +140,13 @@ const translations = {
 // iOS Safe localStorage wrapper
 const safeStorage = {
   getItem: (key: string): string | null => {
-    try { return localStorage.getItem(key); } catch { return null; }
+    try { return iOSStorage.getItem(key); } catch { return null; }
   },
   setItem: (key: string, value: string): boolean => {
-    try { localStorage.setItem(key, value); return true; } catch { return false; }
+    try { iOSStorage.setItem(key, value); return true; } catch { return false; }
   },
   removeItem: (key: string): boolean => {
-    try { localStorage.removeItem(key); return true; } catch { return false; }
+    try { iOSStorage.removeItem(key); return true; } catch { return false; }
   }
 };
 

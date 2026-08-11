@@ -35,6 +35,7 @@ import WeeklySummaryService from '../services/WeeklySummaryService';
 import type { UserProfile, RecoveryStatus, WeeklyReport, WorkoutSession } from '@/shared/types';
 import BodyHeatmap from './BodyHeatmap';
 import { exerciseNameMapping } from '@/features/exercise/services/ExerciseNameMappingService';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface WeeklySummaryModalProps {
   isOpen: boolean;
@@ -335,7 +336,7 @@ const WeeklySummaryModal: React.FC<WeeklySummaryModalProps> = ({
   // 加载语言设置
   useEffect(() => {
     try {
-      const savedLang = localStorage.getItem('zenfit_language') as 'zh' | 'en';
+      const savedLang = iOSStorage.getItem('zenfit_language') as 'zh' | 'en';
       if (savedLang) setLanguage(savedLang);
     } catch {}
   }, []);
@@ -345,7 +346,7 @@ const WeeklySummaryModal: React.FC<WeeklySummaryModalProps> = ({
     const newLang = language === 'zh' ? 'en' : 'zh';
     setLanguage(newLang);
     try {
-      localStorage.setItem('zenfit_language', newLang);
+      iOSStorage.setItem('zenfit_language', newLang);
     } catch {}
     // 刷新数据以应用新语言
     loadData(true);

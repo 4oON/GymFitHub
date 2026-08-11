@@ -1,4 +1,5 @@
 import type { WorkoutSession, UserProfile, WeeklyReport } from '@/shared/types';
+import { showToast } from '@/components/Toast';
 import { MuscleGroup } from '@/shared/types';
 import { calculateAdvancedCalories } from '../../profile/services/CalorieCalculationService';
 import { getMuscleColorRGB } from '../../anatomy/constants/muscleColors';
@@ -612,7 +613,7 @@ export const shareJSONToOtherApps = async (blob: Blob, fileName: string): Promis
 
         if (!navigator.share) {
             console.warn('⚠️ 当前浏览器不支持分享功能');
-            alert('您的浏览器不支持分享功能，请使用"保存到设备"选项');
+            showToast('您的浏览器不支持分享功能，请使用"保存到设备"选项');
             return false;
         }
 
@@ -620,7 +621,7 @@ export const shareJSONToOtherApps = async (blob: Blob, fileName: string): Promis
 
         if (navigator.canShare && !navigator.canShare({ files: [file] })) {
             console.warn('⚠️ 无法分享JSON文件');
-            alert('无法分享JSON文件，请使用"保存到设备"选项');
+            showToast('无法分享JSON文件，请使用"保存到设备"选项');
             return false;
         }
 
@@ -640,7 +641,7 @@ export const shareJSONToOtherApps = async (blob: Blob, fileName: string): Promis
         }
 
         console.error('❌ 分享失败:', error);
-        alert('分享失败，请重试');
+        showToast('分享失败，请重试');
         return false;
     }
 };

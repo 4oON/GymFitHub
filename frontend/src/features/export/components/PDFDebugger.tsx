@@ -3,6 +3,7 @@ import { generateWorkoutPDF } from '../services/PDFExportService';
 import type { PDFConfig } from '../types/PDFConfig';
 import { DEFAULT_PDF_CONFIG, SUGGESTED_PDF_CONFIG } from '../types/PDFConfig';
 import type { WorkoutSession, UserProfile } from '@/shared/types';
+import { showToast } from '@/components/Toast';
 
 /**
  * 简单的 debounce 函数实现
@@ -121,7 +122,7 @@ export const PDFDebugger: React.FC<PDFDebuggerProps> = ({ session, userProfile }
     const copyConfig = () => {
         const configText = JSON.stringify(config, null, 2);
         navigator.clipboard.writeText(configText).then(() => {
-            alert('✅ 配置已复制到剪贴板！\n\n你可以将配置发送给我，我会帮你更新代码。');
+            showToast('✅ 配置已复制到剪贴板！你可以将配置发送给我，我会帮你更新代码。');
         }).catch(err => {
             console.error('复制失败:', err);
             // 如果剪贴板 API 失败，显示配置让用户手动复制
@@ -131,7 +132,7 @@ export const PDFDebugger: React.FC<PDFDebuggerProps> = ({ session, userProfile }
             textarea.select();
             document.execCommand('copy');
             document.body.removeChild(textarea);
-            alert('✅ 配置已复制到剪贴板！');
+            showToast('✅ 配置已复制到剪贴板！');
         });
     };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Bot, ChevronRight, Wallet, Plus, AlertCircle, Loader2, Zap } from 'lucide-react';
 import { aiConfigBackendService, type AIProviderConfig } from '../services/AIConfigBackendService';
 import AIProviderConfigManager from './AIProviderConfigManager';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 const AIControlBar: React.FC = () => {
     const [configs, setConfigs] = useState<AIProviderConfig[]>([]);
@@ -9,7 +10,7 @@ const AIControlBar: React.FC = () => {
     const [showManager, setShowManager] = useState(false);
     const [aiEnabled, setAiEnabled] = useState(() => {
         try {
-            return localStorage.getItem('zenfit_ai_enabled') !== 'false';
+            return iOSStorage.getItem('zenfit_ai_enabled') !== 'false';
         } catch {
             return true; // iOS 隐私模式下默认启用 AI
         }
@@ -59,7 +60,7 @@ const AIControlBar: React.FC = () => {
         const newState = !aiEnabled;
         setAiEnabled(newState);
         try {
-            localStorage.setItem('zenfit_ai_enabled', String(newState));
+            iOSStorage.setItem('zenfit_ai_enabled', String(newState));
             // Trigger storage event for other components to detect change
             window.dispatchEvent(new StorageEvent('storage', {
                 key: 'zenfit_ai_enabled',

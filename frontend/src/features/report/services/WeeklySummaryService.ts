@@ -18,6 +18,7 @@ import apiClient from '@/services/apiClient';
 import type { TokenUsage } from '@/features/ai/services/AIWorkoutRecommendationService';
 import { aiConfigBackendService } from '@/features/ai/services/AIConfigBackendService';
 import { tokenCalculationService } from '@/features/ai/services/TokenCalculationService';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 
 // 突破记录类型
@@ -152,7 +153,7 @@ const translations = {
 // 获取当前语言
 const getCurrentLanguage = (): 'zh' | 'en' => {
   try {
-    return (localStorage.getItem('zenfit_language') as 'zh' | 'en') || 'zh';
+    return (iOSStorage.getItem('zenfit_language') as 'zh' | 'en') || 'zh';
   } catch {
     return 'zh';
   }
@@ -608,7 +609,7 @@ const generateLocalSummary = (
 // 检查AI是否启用
 const isAIEnabled = (): boolean => {
   try {
-    return localStorage.getItem('zenfit_ai_enabled') !== 'false';
+    return iOSStorage.getItem('zenfit_ai_enabled') !== 'false';
   } catch {
     return true;
   }
@@ -630,7 +631,7 @@ const callAIOnce = async (prompt: string): Promise<{ content: string; usage?: an
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('zenfit-token') || ''}`
+        'Authorization': `Bearer ${iOSStorage.getItem('zenfit-token') || ''}`
       },
       body: JSON.stringify({
         messages: [{ role: 'user', content: prompt }],
@@ -769,7 +770,7 @@ export class WeeklySummaryService {
       // 4. 如果AI被禁用，直接返回本地分析
       if (!aiEnabled) {
         console.log('[WeeklySummary] AI is disabled, using local summary');
-        localStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
+        iOSStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
           summary: localSummary,
           cachedAt: Date.now(),
           weekNumber: current.weekNumber,
@@ -898,7 +899,7 @@ export class WeeklySummaryService {
             actualCost,
             currency: balanceCurrency
           };
-          localStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
+          iOSStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
             summary: fallbackSummary,
             cachedAt: Date.now(),
             weekNumber: current.weekNumber,
@@ -940,7 +941,7 @@ export class WeeklySummaryService {
         });
         
         // 缓存结果
-        localStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
+        iOSStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
           summary: mergedSummary,
           cachedAt: Date.now(),
           weekNumber: current.weekNumber,
@@ -963,7 +964,7 @@ export class WeeklySummaryService {
           actualCost,
           currency: balanceCurrency
         };
-        localStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
+        iOSStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
           summary: fallbackSummary,
           cachedAt: Date.now(),
           weekNumber: current.weekNumber,
@@ -981,7 +982,7 @@ export class WeeklySummaryService {
         isAIGenerated: true  // 标记为true表示尝试过AI
         // 不设置 tokenLoading，让前端8秒后自动显示 Timeout
       };
-      localStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
+      iOSStorage.setItem('zenfit_weekly_summary_cache', JSON.stringify({
         summary: localWithMeta,
         cachedAt: Date.now(),
         weekNumber: current.weekNumber,
@@ -1046,7 +1047,7 @@ export class WeeklySummaryService {
    */
   static getCachedSummary(language?: 'zh' | 'en'): AIWeeklySummary | null {
     try {
-      const cached = localStorage.getItem('zenfit_weekly_summary_cache');
+      const cached = iOSStorage.getItem('zenfit_weekly_summary_cache');
       if (!cached) return null;
       
       const { summary, cachedAt, weekNumber, year, language: cachedLanguage } = JSON.parse(cached);
@@ -1055,21 +1056,21 @@ export class WeeklySummaryService {
       const validated = this.validateSummary(summary);
       if (!validated) {
         console.log('Invalid cached summary structure, clearing cache');
-        localStorage.removeItem('zenfit_weekly_summary_cache');
+        iOSStorage.removeItem('zenfit_weekly_summary_cache');
         return null;
       }
       
       // 检查语言是否匹配（如果指定了语言）
       if (language && cachedLanguage && cachedLanguage !== language) {
         console.log('[WeeklySummary] Language mismatch, clearing cache');
-        localStorage.removeItem('zenfit_weekly_summary_cache');
+        iOSStorage.removeItem('zenfit_weekly_summary_cache');
         return null;
       }
       
       // 检查是否过期（6小时）
       const cacheAge = Date.now() - cachedAt;
       if (cacheAge > 6 * 60 * 60 * 1000) {
-        localStorage.removeItem('zenfit_weekly_summary_cache');
+        iOSStorage.removeItem('zenfit_weekly_summary_cache');
         return null;
       }
       
@@ -1091,7 +1092,7 @@ export class WeeklySummaryService {
    * 清除缓存
    */
   static clearCache(): void {
-    localStorage.removeItem('zenfit_weekly_summary_cache');
+    iOSStorage.removeItem('zenfit_weekly_summary_cache');
   }
 }
 

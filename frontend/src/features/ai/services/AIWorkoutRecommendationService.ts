@@ -10,6 +10,7 @@ import type { Exercise, ActiveExercise, UserProfile, RecoveryStatus, WorkoutSess
 import { MuscleGroup } from '@/shared/types';
 import { aiConfigBackendService } from './AIConfigBackendService';
 import { apiClient } from '@/services/apiClient';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
@@ -312,7 +313,7 @@ export const isAICoachAvailable = async (): Promise<boolean> => {
         // Check if AI Coach is enabled (iOS-safe)
         let enabled = true;
         try {
-            enabled = localStorage.getItem('zenfit_ai_enabled') !== 'false';
+            enabled = iOSStorage.getItem('zenfit_ai_enabled') !== 'false';
         } catch {
             enabled = true; // iOS 隐私模式下默认启用
         }

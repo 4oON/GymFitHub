@@ -7,6 +7,7 @@
 
 import CalorieCalculationService from './CalorieCalculationService';
 import type { WorkoutSession, UserProfile, WeeklyReport } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 export class CalorieMigrationService {
     /**
@@ -99,7 +100,7 @@ export class CalorieMigrationService {
             console.log('🚀 开始卡路里计算方法迁移...');
 
             // 1. 加载所有workout sessions
-            const sessionsJson = localStorage.getItem('workout-sessions');
+            const sessionsJson = iOSStorage.getItem('workout-sessions');
             if (!sessionsJson) {
                 return {
                     success: true,
@@ -115,10 +116,10 @@ export class CalorieMigrationService {
             const updatedSessions = this.recalculateAllWorkoutCalories(sessions, userProfile);
 
             // 3. 保存更新后的sessions
-            localStorage.setItem('workout-sessions', JSON.stringify(updatedSessions));
+            iOSStorage.setItem('workout-sessions', JSON.stringify(updatedSessions));
 
             // 4. 加载所有weekly reports
-            const reportsJson = localStorage.getItem('weekly-reports');
+            const reportsJson = iOSStorage.getItem('weekly-reports');
             let reportsUpdated = 0;
 
             if (reportsJson) {
@@ -132,7 +133,7 @@ export class CalorieMigrationService {
                 );
 
                 // 6. 保存更新后的reports
-                localStorage.setItem('weekly-reports', JSON.stringify(updatedReports));
+                iOSStorage.setItem('weekly-reports', JSON.stringify(updatedReports));
                 reportsUpdated = updatedReports.length;
             }
 

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import type { ActiveExercise } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 const STORAGE_KEY = 'zenfit_active_workout';
 const START_TIME_KEY = 'zenfit_workout_start_time';
@@ -21,7 +22,7 @@ export function useActiveWorkoutPersistence(
   const [activeWorkout, setActiveWorkout] = useState<ActiveExercise[]>(() => {
     // Try to load from localStorage on initial mount
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = iOSStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed: PersistedWorkoutState = JSON.parse(saved);
         // Only restore if data is less than 24 hours old
@@ -39,7 +40,7 @@ export function useActiveWorkoutPersistence(
 
   const [workoutStartTime, setWorkoutStartTime] = useState<number | null>(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = iOSStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed: PersistedWorkoutState = JSON.parse(saved);
         const maxAge = 24 * 60 * 60 * 1000;
@@ -64,7 +65,7 @@ export function useActiveWorkoutPersistence(
         workoutStartTime: startTime,
         lastUpdated: Date.now()
       };
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      iOSStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch (e) {
       console.error('❌ Error persisting workout:', e);
     }
@@ -115,7 +116,7 @@ export function useActiveWorkoutPersistence(
   // Check for restored data on mount
   useEffect(() => {
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = iOSStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed: PersistedWorkoutState = JSON.parse(saved);
         const maxAge = 24 * 60 * 60 * 1000;
@@ -131,7 +132,7 @@ export function useActiveWorkoutPersistence(
   // Clear persisted data (call when workout is finished or cleared)
   const clearPersistedWorkout = useCallback(() => {
     try {
-      localStorage.removeItem(STORAGE_KEY);
+      iOSStorage.removeItem(STORAGE_KEY);
       setActiveWorkout([]);
       setWorkoutStartTime(null);
       setHasRestoredData(false);

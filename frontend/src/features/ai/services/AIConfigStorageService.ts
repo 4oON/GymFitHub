@@ -1,5 +1,6 @@
 import type { AIConfig, AIModel } from '@/shared/types';
 import { AIProvider } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 /**
  * AI Configuration Storage Service
@@ -101,7 +102,7 @@ class AIConfigStorageService {
      */
     getConfig(): AIConfig {
         try {
-            const stored = localStorage.getItem(STORAGE_KEY);
+            const stored = iOSStorage.getItem(STORAGE_KEY);
             if (stored) {
                 const parsed = JSON.parse(stored);
                 // Merge with defaults to ensure all fields exist
@@ -118,7 +119,7 @@ class AIConfigStorageService {
      */
     saveConfig(config: AIConfig): void {
         try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(config));
+            iOSStorage.setItem(STORAGE_KEY, JSON.stringify(config));
         } catch (error) {
             console.error('Failed to save AI config:', error);
         }
@@ -380,7 +381,7 @@ class AIConfigStorageService {
      */
     clearConfig(): void {
         try {
-            localStorage.removeItem(STORAGE_KEY);
+            iOSStorage.removeItem(STORAGE_KEY);
         } catch (error) {
             console.error('Failed to clear AI config:', error);
         }

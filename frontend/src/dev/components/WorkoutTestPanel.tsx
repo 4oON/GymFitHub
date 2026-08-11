@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import apiClient from '../../services/apiClient';
-import type { 
-  Workout, 
-  CreateWorkoutInput, 
+import ConfirmDialog from '../../shared/components/ui/ConfirmDialog';
+import type {
+  Workout,
+  CreateWorkoutInput,
   UpdateWorkoutInput,
-  WorkoutStatus 
+  WorkoutStatus
 } from '../../types/workout';
 
 const WorkoutTestPanel: React.FC = () => {
@@ -27,6 +28,7 @@ const WorkoutTestPanel: React.FC = () => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [response, setResponse] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
 
   // Load workouts on mount if authenticated
   useEffect(() => {
@@ -139,16 +141,21 @@ const WorkoutTestPanel: React.FC = () => {
     setSelectedWorkout(result.workout);
   };
 
-  const handleDeleteWorkout = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this workout?')) {
-      return;
-    }
-    
+  const handleDeleteWorkout = (id: string) => {
+    // 打开自定义确认框（iOS WebView 会屏蔽原生 confirm()）
+    setPendingDeleteId(id);
+  };
+
+  const confirmDeleteWorkout = async () => {
+    const id = pendingDeleteId;
+    setPendingDeleteId(null);
+    if (!id) return;
+
     await handleApiCall(
       () => apiClient.deleteWorkout(id),
       'Workout deleted successfully'
     );
-    
+
     setWorkouts(workouts.filter(w => w.id !== id));
     if (selectedWorkout?.id === id) {
       setSelectedWorkout(null);
@@ -455,6 +462,17 @@ const WorkoutTestPanel: React.FC = () => {
           </p>
         )}
       </div>
+
+      <ConfirmDialog
+        isOpen={pendingDeleteId !== null}
+        title="删除训练"
+        message="确定要删除这条训练记录吗？此操作无法撤销。"
+        confirmText="删除 / Delete"
+        cancelText="取消 / Cancel"
+        variant="danger"
+        onConfirm={confirmDeleteWorkout}
+        onCancel={() => setPendingDeleteId(null)}
+      />
     </div>
   );
 };

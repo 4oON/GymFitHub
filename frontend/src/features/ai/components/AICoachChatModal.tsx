@@ -41,6 +41,7 @@ import { aiConfigBackendService, type AIProviderConfig } from '../services/AICon
 import AICustomRoutineCard from './AICustomRoutineCard';
 import AIMessageContent from './AIMessageContent';
 import type { Exercise, Routine } from '@/shared/types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface AICoachChatModalProps {
   isOpen: boolean;
@@ -74,10 +75,10 @@ type ViewMode = 'list' | 'chat' | 'loading';
 // iOS Safe localStorage wrapper
 const safeStorage = {
   getItem: (key: string): string | null => {
-    try { return localStorage.getItem(key); } catch { return null; }
+    try { return iOSStorage.getItem(key); } catch { return null; }
   },
   setItem: (key: string, value: string): boolean => {
-    try { localStorage.setItem(key, value); return true; } catch { return false; }
+    try { iOSStorage.setItem(key, value); return true; } catch { return false; }
   },
 };
 

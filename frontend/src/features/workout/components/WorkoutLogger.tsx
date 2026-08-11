@@ -7,6 +7,7 @@ import SwipeableCard from './SwipeableCard';
 import { VolumeCalculationService } from '../services/VolumeCalculationService';
 import { ExerciseIdentificationService } from '../services/ExerciseIdentificationService';
 import VideoPlayer from '@/features/exercise/components/VideoPlayer';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface WorkoutLoggerProps {
   activeWorkout: ActiveExercise[];
@@ -50,7 +51,7 @@ const WorkoutLogger: React.FC<WorkoutLoggerProps> = ({
     sets: Array<{ weight: number; reps: number }>;
   }>>(() => {
     try {
-      return JSON.parse(localStorage.getItem('zenfit_exercise_history') || '{}');
+      return JSON.parse(iOSStorage.getItem('zenfit_exercise_history') || '{}');
     } catch {
       return {};
     }

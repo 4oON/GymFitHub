@@ -7,6 +7,7 @@
  */
 
 import { Capacitor } from '@capacitor/core';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 // HealthKit 数据类型定义
 export interface HealthKitData {
@@ -79,7 +80,7 @@ class HealthKitService {
     if (!this.isNativePlatform()) {
       console.log('HealthKit: Web 模式，模拟授权成功');
       // Web 模式下使用本地存储
-      localStorage.setItem('zenfit_health_authorized', 'true');
+      iOSStorage.setItem('zenfit_health_authorized', 'true');
       return true;
     }
 
@@ -90,7 +91,7 @@ class HealthKitService {
       
       // 这里会通过原生桥接调用 HealthKit
       // 实际调用需要在 iOS 项目中配置
-      localStorage.setItem('zenfit_health_authorized', 'true');
+      iOSStorage.setItem('zenfit_health_authorized', 'true');
       return true;
     } catch (error) {
       console.error('HealthKit: 授权失败', error);
@@ -104,7 +105,7 @@ class HealthKitService {
   async checkAuthorizationStatus(): Promise<AuthorizationStatus> {
     if (!this.isNativePlatform()) {
       // Web 模式下检查本地存储
-      const authorized = localStorage.getItem('zenfit_health_authorized') === 'true';
+      const authorized = iOSStorage.getItem('zenfit_health_authorized') === 'true';
       return {
         isAuthorized: authorized,
         readPermissions: authorized ? ['weight', 'body_fat_percentage'] : [],
@@ -113,7 +114,7 @@ class HealthKitService {
     }
 
     try {
-      const authorized = localStorage.getItem('zenfit_health_authorized') === 'true';
+      const authorized = iOSStorage.getItem('zenfit_health_authorized') === 'true';
       return {
         isAuthorized: authorized,
         readPermissions: authorized ? ['weight', 'body_fat_percentage', 'height'] : [],
@@ -137,7 +138,7 @@ class HealthKitService {
     // Web 模式：从 localStorage 读取
     if (!this.isNativePlatform()) {
       try {
-        const savedData = localStorage.getItem('zenfit_health_data');
+        const savedData = iOSStorage.getItem('zenfit_health_data');
         if (savedData) {
           const parsed = JSON.parse(savedData);
           return {
@@ -167,7 +168,7 @@ class HealthKitService {
 
     // iOS 模式：从 localStorage 读取（实际 iOS 构建时会通过原生桥接）
     try {
-      const savedData = localStorage.getItem('zenfit_health_data');
+      const savedData = iOSStorage.getItem('zenfit_health_data');
       if (savedData) {
         const parsed = JSON.parse(savedData);
         return {
@@ -201,11 +202,11 @@ class HealthKitService {
    */
   async saveWeight(weight: number, date: Date = new Date()): Promise<boolean> {
     try {
-      const existingData = localStorage.getItem('zenfit_health_data');
+      const existingData = iOSStorage.getItem('zenfit_health_data');
       const data = existingData ? JSON.parse(existingData) : {};
       data.weight = weight;
       data.lastUpdated = date.toISOString();
-      localStorage.setItem('zenfit_health_data', JSON.stringify(data));
+      iOSStorage.setItem('zenfit_health_data', JSON.stringify(data));
       
       console.log('HealthKit: 保存体重成功', weight);
       return true;
@@ -220,11 +221,11 @@ class HealthKitService {
    */
   async saveBodyFat(percentage: number, date: Date = new Date()): Promise<boolean> {
     try {
-      const existingData = localStorage.getItem('zenfit_health_data');
+      const existingData = iOSStorage.getItem('zenfit_health_data');
       const data = existingData ? JSON.parse(existingData) : {};
       data.bodyFatPercent = percentage;
       data.lastUpdated = date.toISOString();
-      localStorage.setItem('zenfit_health_data', JSON.stringify(data));
+      iOSStorage.setItem('zenfit_health_data', JSON.stringify(data));
       
       console.log('HealthKit: 保存体脂率成功', percentage);
       return true;
@@ -239,10 +240,10 @@ class HealthKitService {
    */
   async saveHeight(height: number): Promise<boolean> {
     try {
-      const existingData = localStorage.getItem('zenfit_health_data');
+      const existingData = iOSStorage.getItem('zenfit_health_data');
       const data = existingData ? JSON.parse(existingData) : {};
       data.height = height;
-      localStorage.setItem('zenfit_health_data', JSON.stringify(data));
+      iOSStorage.setItem('zenfit_health_data', JSON.stringify(data));
       
       console.log('HealthKit: 保存身高成功', height);
       return true;
@@ -259,7 +260,7 @@ class HealthKitService {
     try {
       // 从 localStorage 读取历史记录
       const historyKey = 'zenfit_health_history';
-      const history = localStorage.getItem(historyKey);
+      const history = iOSStorage.getItem(historyKey);
       
       if (history) {
         const parsed = JSON.parse(history);
@@ -282,7 +283,7 @@ class HealthKitService {
   async addWeightHistory(weight: number, date: Date = new Date()): Promise<boolean> {
     try {
       const historyKey = 'zenfit_health_history';
-      const existingHistory = localStorage.getItem(historyKey);
+      const existingHistory = iOSStorage.getItem(historyKey);
       const history = existingHistory ? JSON.parse(existingHistory) : [];
       
       history.push({
@@ -298,7 +299,7 @@ class HealthKitService {
         new Date(item.date) > cutoffDate
       );
       
-      localStorage.setItem(historyKey, JSON.stringify(filteredHistory));
+      iOSStorage.setItem(historyKey, JSON.stringify(filteredHistory));
       return true;
     } catch (error) {
       console.error('HealthKit: 添加历史记录失败', error);

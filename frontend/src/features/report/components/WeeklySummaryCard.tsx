@@ -29,17 +29,18 @@ import WeeklySummaryService from '../services/WeeklySummaryService';
 import type { UserProfile, RecoveryStatus } from '@/shared/types';
 import { ShareButton, fromAIWeeklySummary } from '@/features/share';
 import { AIThinkingCard } from '@/shared/components/ui/AIThinkingLoader';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 // iOS Safe localStorage wrapper
 const safeStorage = {
   getItem: (key: string): string | null => {
-    try { return localStorage.getItem(key); } catch { return null; }
+    try { return iOSStorage.getItem(key); } catch { return null; }
   },
   setItem: (key: string, value: string): boolean => {
-    try { localStorage.setItem(key, value); return true; } catch { return false; }
+    try { iOSStorage.setItem(key, value); return true; } catch { return false; }
   },
   removeItem: (key: string): boolean => {
-    try { localStorage.removeItem(key); return true; } catch { return false; }
+    try { iOSStorage.removeItem(key); return true; } catch { return false; }
   }
 };
 

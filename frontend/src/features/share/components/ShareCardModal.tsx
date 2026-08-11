@@ -12,6 +12,7 @@ import { ShareCardCanvas } from './ShareCardCanvas';
 import { useShareImage } from '../hooks/useShareImage';
 import { getWeeklyTokenTotal } from '../services/TokenUsageService';
 import type { ShareCardData } from '../types';
+import { iOSStorage } from '@/services/iOSStorageService';
 
 interface ShareCardModalProps {
   isOpen: boolean;
@@ -88,7 +89,7 @@ export const ShareCardModal: React.FC<ShareCardModalProps> = ({
       setLanguage(propLanguage);
     } else {
       try {
-        const savedLang = localStorage.getItem('zenfit_language') as 'zh' | 'en';
+        const savedLang = iOSStorage.getItem('zenfit_language') as 'zh' | 'en';
         if (savedLang) setLanguage(savedLang);
       } catch {}
     }

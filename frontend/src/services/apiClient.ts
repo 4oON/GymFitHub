@@ -17,6 +17,7 @@ import type {
   UpdateRoutineResponse,
   DeleteRoutineResponse
 } from '../types/routine';
+import { iOSStorage } from '@/services/iOSStorageService';
 import type {
   HealthAuthorizationResponse,
   HealthSyncRequest,
@@ -55,19 +56,19 @@ class ApiClient {
   // Token Management
   setToken(token: string): void {
     this.token = token;
-    localStorage.setItem(TOKEN_KEY, token);
+    iOSStorage.setItem(TOKEN_KEY, token);
   }
 
   getToken(): string | null {
     if (!this.token) {
-      this.token = localStorage.getItem(TOKEN_KEY);
+      this.token = iOSStorage.getItem(TOKEN_KEY);
     }
     return this.token;
   }
 
   clearToken(): void {
     this.token = null;
-    localStorage.removeItem(TOKEN_KEY);
+    iOSStorage.removeItem(TOKEN_KEY);
   }
 
   // Private helper for making requests
