@@ -509,15 +509,16 @@ class HealthKitService {
       lastSampleDates.bmi = bmiSample?.endDate?.toISOString?.();
       lastSampleDates.fat_percentage = fatSample?.endDate?.toISOString?.();
 
-      // 尝试把本地 Health 数据同步到后端 profile（体重/体脂）
-      try {
-        await apiClient.syncHealthData({
+      // 尝试把本地 Health 数据同步到后端 profile（体重/体脂）—— 非阻塞，避免网络问题卡住 HealthKit 同步
+      if (weight !== undefined || bodyFatPercent !== undefined) {
+        void apiClient.syncHealthData({
           weight,
           bodyFatPercent,
+        }).then(() => {
+          console.log('[HealthKit] 已同步到后端 profile');
+        }).catch((syncErr) => {
+          console.warn('[HealthKit] 同步到后端失败（可能尚未开启后端健康同步）:', syncErr);
         });
-        console.log('[HealthKit] 已同步到后端 profile');
-      } catch (syncErr) {
-        console.warn('[HealthKit] 同步到后端失败（可能尚未开启后端健康同步）:', syncErr);
       }
 
       // Heart

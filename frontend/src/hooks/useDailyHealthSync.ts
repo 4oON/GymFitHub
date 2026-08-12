@@ -100,7 +100,8 @@ export function useDailyHealthSync(): DailyHealthSyncState {
         return;
       }
 
-      await sync();
+      // 启动后台同步，不阻塞 UI 初始化
+      void sync();
     };
 
     init();
