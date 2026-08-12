@@ -75,7 +75,7 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
 
     // MARK: - 接收来自 Watch
 
-    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+    public func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
         DispatchQueue.main.async {
             guard let type = message["type"] as? String else { return }
 
@@ -85,7 +85,6 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
                     self.onWatchFinishRequest?(exerciseId)
                 }
             case "getState":
-                // 手表请求当前状态：把全部计时器推过去
                 for timer in TimerEngine.shared.snapshot() {
                     let id = timer["exerciseId"] as? String ?? ""
                     let name = timer["exerciseName"] as? String ?? ""
@@ -101,7 +100,7 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
 
     // MARK: - WCSessionDelegate
 
-    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         if let error = error {
             print("⚡️ [WatchSession] 激活失败: \(error.localizedDescription)")
         } else {
@@ -109,16 +108,16 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
         }
     }
 
-    func sessionDidBecomeInactive(_ session: WCSession) {
+    public func sessionDidBecomeInactive(_ session: WCSession) {
         print("⚡️ [WatchSession] 会话进入非活跃")
     }
 
-    func sessionDidDeactivate(_ session: WCSession) {
+    public func sessionDidDeactivate(_ session: WCSession) {
         print("⚡️ [WatchSession] 会话失效，重新激活")
         session.activate()
     }
 
-    func sessionReachabilityDidChange(_ session: WCSession) {
+    public func sessionReachabilityDidChange(_ session: WCSession) {
         print("⚡️ [WatchSession] 可达性变化: \(session.isReachable)")
         if session.isReachable {
             // 恢复可达后，把当前状态推送给手表
