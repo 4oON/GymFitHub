@@ -120,6 +120,14 @@
 						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 					};
+					WATCH000000000011 = {
+						CreatedOnToolsVersion = 1600;
+						ProvisioningStyle = Automatic;
+					};
+					WATCH000000000012 = {
+						CreatedOnToolsVersion = 1600;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 504EC2FF1FED79650016851F /* Build configuration list for PBXProject "App" */;
