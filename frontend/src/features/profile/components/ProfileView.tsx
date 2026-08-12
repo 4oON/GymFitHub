@@ -8,13 +8,28 @@ interface ProfileViewProps {
     profile: UserProfile;
     onEdit: () => void;
     onHealthSettings?: () => void;
+    healthTimestamps?: Record<string, string | undefined>;
+    staleMetrics?: string[];
 }
 
-const ProfileView: React.FC<ProfileViewProps> = ({ isOpen, onClose, profile, onEdit, onHealthSettings }) => {
+const formatSampleTime = (isoString?: string): string | null => {
+    if (!isoString) return null;
+    const d = new Date(isoString);
+    if (isNaN(d.getTime())) return null;
+    return d.toLocaleString('zh-CN', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+};
+
+const ProfileView: React.FC<ProfileViewProps> = ({ isOpen, onClose, profile, onEdit, onHealthSettings, healthTimestamps, staleMetrics }) => {
     if (!isOpen) return null;
 
     // Helper to check if a value exists
     const hasValue = (val: any) => val !== undefined && val !== null && val !== '';
+    const isStale = (metric: string) => staleMetrics?.includes(metric) ?? false;
 
     return (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
@@ -67,12 +82,20 @@ const ProfileView: React.FC<ProfileViewProps> = ({ isOpen, onClose, profile, onE
                             <div className="flex items-center gap-2 mb-2">
                                 <Dumbbell className="text-emerald-400" size={16} />
                                 <span className="text-slate-400 text-[10px] font-medium uppercase tracking-wide">Weight</span>
+                                {isStale('体重') && (
+                                    <span className="text-[9px] text-rose-400 font-medium ml-auto">48h 未更新</span>
+                                )}
                             </div>
                             <div>
                                 <div className="flex items-end gap-2">
                                     <div className="text-4xl font-black text-white">{profile.weight}</div>
                                     <div className="text-xl font-bold text-emerald-400 mb-1">{profile.unit}</div>
                                 </div>
+                                {formatSampleTime(healthTimestamps?.weight) && (
+                                    <div className="text-[10px] text-slate-500 mt-1">
+                                        更新于 {formatSampleTime(healthTimestamps?.weight)}
+                                    </div>
+                                )}
                             </div>
                         </div>
 
@@ -113,11 +136,19 @@ const ProfileView: React.FC<ProfileViewProps> = ({ isOpen, onClose, profile, onE
                                 <div className="flex items-center gap-2 mb-2">
                                     <Activity className="text-amber-400" size={14} />
                                     <span className="text-slate-400 text-[10px] font-medium uppercase tracking-wide">Body Fat</span>
+                                    {isStale('体脂') && (
+                                        <span className="text-[9px] text-rose-400 font-medium ml-auto">48h 未更新</span>
+                                    )}
                                 </div>
                                 <div className="flex items-end gap-1">
                                     <div className="text-3xl font-black text-white">{profile.bodyFatPercentage}</div>
                                     <div className="text-lg font-bold text-amber-400 mb-1">%</div>
                                 </div>
+                                {formatSampleTime(healthTimestamps?.fat_percentage) && (
+                                    <div className="text-[10px] text-slate-500 mt-1">
+                                        更新于 {formatSampleTime(healthTimestamps?.fat_percentage)}
+                                    </div>
+                                )}
                             </div>
                         )}
 
