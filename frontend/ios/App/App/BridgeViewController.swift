@@ -1,12 +1,26 @@
 import UIKit
 import Capacitor
 import WebKit
+import CapApp_SPM
 
 class BridgeViewController: CAPBridgeViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         applyDarkBackground()
+        setupNativeIntegrations()
+    }
+
+    /// 原生集成：注册自定义计时器插件 + 激活 WatchConnectivity 会话
+    private func setupNativeIntegrations() {
+        guard let bridge = bridge else { return }
+        let timerPlugin = WorkoutTimerPlugin()
+        bridge.registerPluginInstance(timerPlugin)
+        WatchSessionManager.shared.activate()
+        WatchSessionManager.shared.onWatchFinishRequest = { exerciseId in
+            TimerEngine.shared.finishRest(exerciseId: exerciseId)
+        }
+        TimerEngine.shared.requestNotificationPermissionIfNeeded()
     }
 
     override func viewDidLayoutSubviews() {

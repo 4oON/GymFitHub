@@ -7,12 +7,12 @@ import WatchConnectivity
 /// - 与 watchOS App 建立会话（WCSession）
 /// - 把倒计时状态（剩余秒数、动作名、总时长）实时推送到手表
 /// - 接收手表发来的"结束休息"指令，转交 TimerEngine
-final class WatchSessionManager: NSObject, WCSessionDelegate {
+public final class WatchSessionManager: NSObject, WCSessionDelegate {
 
-    static let shared = WatchSessionManager()
+    public static let shared = WatchSessionManager()
 
     /// 手表请求结束某个计时器
-    var onWatchFinishRequest: ((String) -> Void)?
+    public var onWatchFinishRequest: ((String) -> Void)?
 
     private var session: WCSession?
 
@@ -21,7 +21,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     }
 
     /// 必须在 App 启动时调用（AppDelegate / BridgeViewController）
-    func activate() {
+    public func activate() {
         guard WCSession.isSupported() else {
             print("⚡️ [WatchSession] 当前设备不支持 WatchConnectivity")
             return
@@ -36,7 +36,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     // MARK: - 发送到 Watch
 
     /// 推送单个计时器状态
-    func sendTimerState(exerciseId: String, exerciseName: String, remaining: Int, duration: Double) {
+    public func sendTimerState(exerciseId: String, exerciseName: String, remaining: Int, duration: Double) {
         guard let session = session, session.isReachable else { return }
         let message: [String: Any] = [
             "type": "timerState",
@@ -50,7 +50,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     }
 
     /// 推送计时结束
-    func sendTimerFinished(exerciseId: String, exerciseName: String) {
+    public func sendTimerFinished(exerciseId: String, exerciseName: String) {
         guard let session = session, session.isReachable else { return }
         let message: [String: Any] = [
             "type": "timerFinished",
@@ -62,7 +62,7 @@ final class WatchSessionManager: NSObject, WCSessionDelegate {
     }
 
     /// 推送清空状态（所有计时结束）
-    func sendAllFinished() {
+    public func sendAllFinished() {
         guard let session = session, session.isReachable else { return }
         sendMessage(["type": "allFinished", "timestamp": Date().timeIntervalSince1970])
     }
