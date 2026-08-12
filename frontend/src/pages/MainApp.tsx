@@ -56,6 +56,7 @@ import type { WeeklyReport } from "@/shared/types";
 import WeeklySummaryService from "@/features/report/services/WeeklySummaryService";
 import { usePreventBackGesture } from "@/hooks/usePreventBackGesture";
 import { useActiveWorkoutPersistence } from "@/hooks/useActiveWorkoutPersistence";
+import { useDailyHealthSync } from "@/hooks/useDailyHealthSync";
 import { iOSStorage, safeParseJSON, safeSaveJSON } from "@/services/iOSStorageService";
 import { WorkoutTimerService } from '@/services/WorkoutTimerService';
 
@@ -83,6 +84,22 @@ export const MainApp: React.FC = () => {
   const navigate = useNavigate(); // 初始化导航
   const { user, isAuthenticated } = useAuth(); // 获取认证状态
   const { showPrompt: showHealthPrompt, onConfirm: onHealthConfirm, onCancel: onHealthCancel } = useHealthSyncPrompt();
+
+  // 延迟 2 秒执行每日 Health 同步，避免阻塞首屏渲染
+  const { lastSampleDates, staleMetrics } = useDailyHealthSync({ delayMs: 2000 });
+
+  // 48 小时无 Health 数据更新提醒（只提示一次）
+  const staleNotifiedRef = React.useRef(false);
+  useEffect(() => {
+    if (staleMetrics.length > 0 && !staleNotifiedRef.current) {
+      staleNotifiedRef.current = true;
+      setNotification({
+        message: `Health data reminder: no ${staleMetrics.join('/')} update in the past 48 hours`,
+        visible: true,
+      });
+      setTimeout(() => setNotification(null), 5000);
+    }
+  }, [staleMetrics]);
 
   // Use iOS-compatible storage
   const safeParse = <T,>(key: string, fallback: T): T => {
@@ -3241,6 +3258,8 @@ export const MainApp: React.FC = () => {
             setShowProfileView(false);
             navigate('/health-settings');
           }}
+          healthTimestamps={lastSampleDates}
+          staleMetrics={staleMetrics}
         />
       )}
 

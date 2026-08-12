@@ -34,7 +34,12 @@ function isWithinHours(isoString?: string, hours: number = STALE_HOURS): boolean
   return Date.now() - d.getTime() <= hours * 60 * 60 * 1000;
 }
 
-export function useDailyHealthSync(): DailyHealthSyncState {
+export interface DailyHealthSyncOptions {
+  delayMs?: number;
+}
+
+export function useDailyHealthSync(options: DailyHealthSyncOptions = {}): DailyHealthSyncState {
+  const { delayMs = 0 } = options;
   const [syncing, setSyncing] = useState(false);
   const [syncedToday, setSyncedToday] = useState(false);
   const [lastSampleDates, setLastSampleDates] = useState<Record<string, string | undefined>>({});
@@ -46,10 +51,10 @@ export function useDailyHealthSync(): DailyHealthSyncState {
   const checkStale = useCallback((dates: Record<string, string | undefined>) => {
     const stale: string[] = [];
     if (!isWithinHours(dates.weight, STALE_HOURS)) {
-      stale.push('体重');
+      stale.push('weight');
     }
     if (!isWithinHours(dates.fat_percentage, STALE_HOURS)) {
-      stale.push('体脂');
+      stale.push('body fat');
     }
     setStaleMetrics(stale);
   }, []);
@@ -78,7 +83,7 @@ export function useDailyHealthSync(): DailyHealthSyncState {
       }
     } catch (err) {
       console.error('[DailyHealthSync] sync failed:', err);
-      setError(err instanceof Error ? err.message : '同步失败');
+      setError(err instanceof Error ? err.message : 'Sync failed');
     } finally {
       setSyncing(false);
     }
@@ -91,7 +96,6 @@ export function useDailyHealthSync(): DailyHealthSyncState {
       const lastSyncDate = iOSStorage.getItem(DAILY_SYNC_DATE_KEY);
       if (lastSyncDate === todayString) {
         setSyncedToday(true);
-        // 即使今天同步过，也读取缓存时间戳用于显示和过期检查
         const cached = await healthKitService.getCachedHealthData();
         if (cached) {
           setLastSampleDates(cached.lastSampleDates);
@@ -100,12 +104,15 @@ export function useDailyHealthSync(): DailyHealthSyncState {
         return;
       }
 
-      // 启动后台同步，不阻塞 UI 初始化
-      void sync();
+      if (delayMs > 0) {
+        setTimeout(() => void sync(), delayMs);
+      } else {
+        void sync();
+      }
     };
 
     init();
-  }, [sync, todayString, checkStale]);
+  }, [sync, todayString, checkStale, delayMs]);
 
   return {
     syncing,
