@@ -5,7 +5,7 @@ import WatchConnectivity
 ///
 /// 职责：
 /// - 与 watchOS App 建立会话（WCSession）
-/// - 把倒计时状态（剩余秒数、动作名、总时长）实时推送到手表
+/// - 通过 updateApplicationContext 把计时器状态推送到手表（不需要手表当前可达）
 /// - 接收手表发来的"结束休息"指令，转交 TimerEngine
 public final class WatchSessionManager: NSObject, WCSessionDelegate {
 
@@ -15,6 +15,8 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
     public var onWatchFinishRequest: ((String) -> Void)?
 
     private var session: WCSession?
+    /// 激活完成前如果已有计时状态，先暂存，激活后立即推送
+    private var pendingContext: [String: Any]?
 
     private override init() {
         super.init()
@@ -30,46 +32,48 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
         s.delegate = self
         s.activate()
         session = s
-        print("⚡️ [WatchSession] WCSession activated, isPaired=\(s.isPaired), isWatchAppInstalled=\(s.isWatchAppInstalled)")
+        print("⚡️ [WatchSession] WCSession activate() called, isPaired=\(s.isPaired), isWatchAppInstalled=\(s.isWatchAppInstalled)")
     }
 
-    // MARK: - 发送到 Watch
+    // MARK: - 推送到 Watch
 
-    /// 推送单个计时器状态
-    public func sendTimerState(exerciseId: String, exerciseName: String, remaining: Int, duration: Double) {
-        guard let session = session, session.isReachable else { return }
-        let message: [String: Any] = [
-            "type": "timerState",
-            "exerciseId": exerciseId,
-            "exerciseName": exerciseName,
-            "remaining": remaining,
-            "duration": duration,
+    /// 把当前所有计时器状态通过 Application Context 推送给手表。
+    /// 如果会话尚未激活，会先缓存，激活成功后自动补发。
+    public func pushTimerState() {
+        let context: [String: Any] = [
+            "timers": TimerEngine.shared.snapshot(),
             "timestamp": Date().timeIntervalSince1970
         ]
-        sendMessage(message)
+
+        guard let session = session else {
+            print("⚡️ [WatchSession] session 尚未创建，缓存 context")
+            pendingContext = context
+            return
+        }
+
+        guard session.activationState == .activated else {
+            print("⚡️ [WatchSession] 会话未激活 (state=\(session.activationState.rawValue))，缓存 context")
+            pendingContext = context
+            return
+        }
+
+        do {
+            try session.updateApplicationContext(context)
+            print("⚡️ [WatchSession] 已推送 context，timers=\(TimerEngine.shared.snapshot().count)")
+            pendingContext = nil
+        } catch {
+            print("⚡️ [WatchSession] updateApplicationContext 失败: \(error.localizedDescription)")
+        }
     }
 
-    /// 推送计时结束
-    public func sendTimerFinished(exerciseId: String, exerciseName: String) {
-        guard let session = session, session.isReachable else { return }
-        let message: [String: Any] = [
-            "type": "timerFinished",
-            "exerciseId": exerciseId,
-            "exerciseName": exerciseName,
-            "timestamp": Date().timeIntervalSince1970
-        ]
-        sendMessage(message)
-    }
-
-    /// 推送清空状态（所有计时结束）
-    public func sendAllFinished() {
-        guard let session = session, session.isReachable else { return }
-        sendMessage(["type": "allFinished", "timestamp": Date().timeIntervalSince1970])
-    }
-
-    private func sendMessage(_ message: [String: Any]) {
-        session?.sendMessage(message, replyHandler: nil) { error in
-            print("⚡️ [WatchSession] sendMessage 失败: \(error.localizedDescription)")
+    private func flushPendingContext() {
+        guard let pending = pendingContext else { return }
+        print("⚡️ [WatchSession] 激活完成，补发缓存的 context")
+        do {
+            try session?.updateApplicationContext(pending)
+            pendingContext = nil
+        } catch {
+            print("⚡️ [WatchSession] 补发 context 失败: \(error.localizedDescription)")
         }
     }
 
@@ -85,12 +89,17 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
                     self.onWatchFinishRequest?(exerciseId)
                 }
             case "getState":
-                for timer in TimerEngine.shared.snapshot() {
-                    let id = timer["exerciseId"] as? String ?? ""
-                    let name = timer["exerciseName"] as? String ?? ""
-                    let remaining = timer["remaining"] as? Int ?? 0
-                    let duration = timer["duration"] as? Double ?? 0
-                    self.sendTimerState(exerciseId: id, exerciseName: name, remaining: remaining, duration: duration)
+                print("⚡️ [WatchSession] 收到手表 getState 请求，立即推送 context")
+                // 1. 通过 Application Context 推送（即使 sendMessage 失败也能送达）
+                self.pushTimerState()
+                // 2. 同时尝试用 sendMessage 立即回复
+                let reply: [String: Any] = [
+                    "type": "stateSync",
+                    "timers": TimerEngine.shared.snapshot(),
+                    "timestamp": Date().timeIntervalSince1970
+                ]
+                session.sendMessage(reply, replyHandler: nil) { error in
+                    print("⚡️ [WatchSession] 回复 getState 失败: \(error.localizedDescription)")
                 }
             default:
                 break
@@ -104,7 +113,10 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
         if let error = error {
             print("⚡️ [WatchSession] 激活失败: \(error.localizedDescription)")
         } else {
-            print("⚡️ [WatchSession] 激活完成: \(activationState.rawValue)")
+            print("⚡️ [WatchSession] 激活完成: state=\(activationState.rawValue), reachable=\(session.isReachable), watchAppInstalled=\(session.isWatchAppInstalled)")
+            if activationState == .activated {
+                flushPendingContext()
+            }
         }
     }
 
@@ -119,15 +131,5 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
 
     public func sessionReachabilityDidChange(_ session: WCSession) {
         print("⚡️ [WatchSession] 可达性变化: \(session.isReachable)")
-        if session.isReachable {
-            // 恢复可达后，把当前状态推送给手表
-            for timer in TimerEngine.shared.snapshot() {
-                let id = timer["exerciseId"] as? String ?? ""
-                let name = timer["exerciseName"] as? String ?? ""
-                let remaining = timer["remaining"] as? Int ?? 0
-                let duration = timer["duration"] as? Double ?? 0
-                self.sendTimerState(exerciseId: id, exerciseName: name, remaining: remaining, duration: duration)
-            }
-        }
     }
 }

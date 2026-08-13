@@ -138,6 +138,7 @@ public final class TimerEngine: NSObject {
         guard let entry = timers[exerciseId] else { return }
         timers.removeValue(forKey: exerciseId)
         onFinish?(exerciseId, entry.exerciseName)
+        notifyStateChanged()
         if timers.isEmpty {
             stopDisplayTimer()
         }
@@ -178,6 +179,7 @@ public final class TimerEngine: NSObject {
     // MARK: - Watch 同步广播
 
     private func notifyStateChanged() {
-        // 通知 WatchConnectivityManager 推送状态（由外部通过 onTick/onFinish 回调）
+        // 计时器状态发生变化时，直接推送到 Apple Watch
+        WatchSessionManager.shared.pushTimerState()
     }
 }

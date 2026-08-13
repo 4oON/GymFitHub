@@ -20,25 +20,27 @@ public class WorkoutTimerPlugin: CAPPlugin {
 
     override public func load() {
         super.load()
-        // 订阅引擎事件，转发到 JS 与 Watch
+        print("⚡️ [WorkoutTimerPlugin] load() 已注册")
+
+        // 激活 WatchConnectivity（必须在主线程，异步完成）
+        WatchSessionManager.shared.activate()
+        WatchSessionManager.shared.onWatchFinishRequest = { exerciseId in
+            // 结束计时器；finishRest 会触发 engine.onFinish，Plugin 已通过 onFinish 回调通知 JS
+            TimerEngine.shared.finishRest(exerciseId: exerciseId)
+        }
+
+        // 订阅引擎事件，转发到 JS（Watch 同步由 TimerEngine 直接负责）
         engine.onTick = { [weak self] exerciseId, remaining in
             self?.notifyListeners("timerTick", data: [
                 "exerciseId": exerciseId,
                 "remaining": remaining
             ])
-            WatchSessionManager.shared.sendTimerState(
-                exerciseId: exerciseId,
-                exerciseName: self?.engine.snapshot().first { $0["exerciseId"] as? String == exerciseId }?["exerciseName"] as? String ?? "",
-                remaining: remaining,
-                duration: self?.engine.snapshot().first { $0["exerciseId"] as? String == exerciseId }?["duration"] as? Double ?? 0
-            )
         }
         engine.onFinish = { [weak self] exerciseId, exerciseName in
             self?.notifyListeners("timerFinish", data: [
                 "exerciseId": exerciseId,
                 "exerciseName": exerciseName
             ])
-            WatchSessionManager.shared.sendTimerFinished(exerciseId: exerciseId, exerciseName: exerciseName)
         }
     }
 

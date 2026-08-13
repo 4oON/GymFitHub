@@ -16,7 +16,12 @@ const config: CapacitorConfig = {
       'NSHealthShareUsageDescription': 'ZenFit需要访问您的健康数据来提供个性化的训练建议和体重追踪',
       'NSHealthUpdateUsageDescription': 'ZenFit需要写入训练数据到健康应用'
     }
-  }
+  },
+  packageClassList: [
+    'HapticsPlugin',
+    'CDVPlugin',
+    'WorkoutTimerPlugin'
+  ]
 };
 
 export default config;

@@ -1,0 +1,151 @@
+import SwiftUI
+import WatchConnectivity
+
+/// watchOS 端 WatchConnectivity 管理器（ObservableObject 供 SwiftUI 使用）
+///
+/// 职责：
+/// - 通过 WCSession.applicationContext 接收 iPhone 推送的计时器状态
+/// - 手表"结束休息"按钮 → 发送 finishRest 指令回 iPhone（sendMessage，需要可达）
+final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
+
+    static let shared = WatchSessionManager()
+
+    // 手表 UI 状态
+    @Published var activeTimer: WatchTimerState?
+    @Published var isConnected = false
+
+    struct WatchTimerState {
+        let exerciseId: String
+        let exerciseName: String
+        let remaining: Int
+        let duration: Double
+    }
+
+    private override init() {
+        super.init()
+        activate()
+    }
+
+    func activate() {
+        guard WCSession.isSupported() else {
+            print("⚡️ [Watch] WCSession 不支持")
+            return
+        }
+        let session = WCSession.default
+        session.delegate = self
+        session.activate()
+        print("⚡️ [Watch] WCSession activate() 已调用")
+    }
+
+    // MARK: - 发送到 iPhone
+
+    /// 手表点击"结束休息"
+    func requestFinishRest() {
+        guard let timer = activeTimer else { return }
+        send(["type": "finishRest", "exerciseId": timer.exerciseId])
+    }
+
+    /// 手表请求同步当前状态（仅在 iPhone 可达时使用；Application Context 会自己到达）
+    func requestStateSync() {
+        // 优先读取已缓存的 Application Context
+        let context = WCSession.default.receivedApplicationContext
+        if !(context["timers"] as? [[String: Any]] ?? []).isEmpty {
+            print("⚡️ [Watch] requestStateSync 使用已缓存 context")
+            DispatchQueue.main.async {
+                self.applyContext(context)
+            }
+            return
+        }
+        // 没有缓存且 iPhone 可达时才尝试主动请求
+        guard WCSession.default.isReachable else {
+            print("⚡️ [Watch] requestStateSync: context 为空且 iPhone 不可达，等待 Application Context")
+            return
+        }
+        send(["type": "getState"])
+    }
+
+    private func send(_ message: [String: Any]) {
+        guard WCSession.default.isReachable else {
+            print("⚡️ [Watch] iPhone 当前不可达，跳过 sendMessage")
+            return
+        }
+        WCSession.default.sendMessage(message, replyHandler: nil) { error in
+            print("⚡️ [Watch] 发送失败: \(error.localizedDescription)")
+        }
+    }
+
+    // MARK: - 接收来自 iPhone
+
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String: Any]) {
+        DispatchQueue.main.async {
+            print("⚡️ [Watch] 收到 applicationContext，timers=\((applicationContext["timers"] as? [[String: Any]])?.count ?? 0)")
+            self.applyContext(applicationContext)
+        }
+    }
+
+    func session(_ session: WCSession, didReceiveMessage message: [String: Any]) {
+        DispatchQueue.main.async {
+            guard let type = message["type"] as? String else { return }
+            switch type {
+            case "stateSync":
+                print("⚡️ [Watch] 收到 stateSync 消息")
+                self.applyContext(message)
+            default:
+                break
+            }
+        }
+    }
+
+    private func applyContext(_ context: [String: Any]) {
+        guard let timers = context["timers"] as? [[String: Any]], !timers.isEmpty else {
+            print("⚡️ [Watch] applyContext: timers 为空，清空 activeTimer")
+            self.activeTimer = nil
+            return
+        }
+        // 取第一个活跃计时器显示（目前业务场景下通常只有一个休息计时器）
+        let timer = timers.first ?? [:]
+        let state = WatchTimerState(
+            exerciseId: timer["exerciseId"] as? String ?? "",
+            exerciseName: timer["exerciseName"] as? String ?? "休息",
+            remaining: timer["remaining"] as? Int ?? 0,
+            duration: timer["duration"] as? Double ?? 90
+        )
+        print("⚡️ [Watch] applyContext: 设置 activeTimer=\(state.exerciseName), remaining=\(state.remaining)")
+        self.activeTimer = state
+    }
+
+    // MARK: - WCSessionDelegate
+
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        DispatchQueue.main.async {
+            self.isConnected = activationState == .activated
+            if activationState == .activated {
+                print("⚡️ [Watch] WCSession 激活完成，reachable=\(session.isReachable)")
+                // 激活后立即读取缓存的 Application Context
+                let context = session.receivedApplicationContext
+                print("⚡️ [Watch] 激活后缓存 context timers=\((context["timers"] as? [[String: Any]])?.count ?? 0)")
+                self.applyContext(context)
+            } else if let error = error {
+                print("⚡️ [Watch] WCSession 激活失败: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    #if os(iOS)
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+    func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
+    #endif
+
+    func sessionReachabilityDidChange(_ session: WCSession) {
+        DispatchQueue.main.async {
+            self.isConnected = session.isReachable
+            print("⚡️ [Watch] reachable 变化: \(session.isReachable)")
+            // iPhone 重新变为可达且当前没有计时数据时，主动请求一次
+            if session.isReachable && self.activeTimer == nil {
+                self.requestStateSync()
+            }
+        }
+    }
+}
