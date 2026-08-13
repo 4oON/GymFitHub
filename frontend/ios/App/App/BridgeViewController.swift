@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import WebKit
+import CapApp_SPM
 
 class BridgeViewController: CAPBridgeViewController {
 
