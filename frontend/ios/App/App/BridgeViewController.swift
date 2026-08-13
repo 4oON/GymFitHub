@@ -7,6 +7,9 @@ class BridgeViewController: CAPBridgeViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 强制链接 SPM 中的 WorkoutTimerPlugin；仅 import 不足以阻止静态链接器剥离该 Swift 类，
+        // 显式引用 metatype 可确保类被编入主二进制，Capacitor 才能通过 packageClassList 发现它。
+        _ = WorkoutTimerPlugin.self
         applyDarkBackground()
     }
 
