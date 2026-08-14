@@ -18,6 +18,11 @@ public class WorkoutTimerPlugin: CAPPlugin {
 
     private var engine: TimerEngine { TimerEngine.shared }
 
+    /// 供 App target 显式调用，强制链接器把本类保留在主二进制中。
+    @objc public static func forceLink() {
+        print("⚡️ [WorkoutTimerPlugin] forceLink() called – class is linked")
+    }
+
     override public func load() {
         super.load()
         print("⚡️ [WorkoutTimerPlugin] load() 已注册")
