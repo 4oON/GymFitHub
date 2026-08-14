@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF7A1A"/>
+      <stop offset="0.55" stop-color="#FF6A00"/>
+      <stop offset="1" stop-color="#F45800"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.42" r="0.85">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#7A2600" stop-opacity="0.38"/>
+    </radialGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#FFEDDA"/>
+    </linearGradient>
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB470"/>
+      <stop offset="1" stop-color="#F08A3C"/>
+    </linearGradient>
+    <filter id="longShadow" x="-60%" y="-30%" width="220%" height="200%">
+      <feOffset in="SourceAlpha" dx="38" dy="48"/>
+      <feGaussianBlur stdDeviation="30"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.22"/>
+      </feComponentTransfer>
+    </filter>
+    <!-- 圆形裁切，防止投影溢出 -->
+    <clipPath id="circleClip">
+      <circle cx="512" cy="512" r="512"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="512" cy="512" r="512" fill="url(#bg)"/>
+  <circle cx="512" cy="512" r="512" fill="url(#vignette)"/>
+
+  <!-- 8 根 3D 条形，圆形版式内略微收窄，中心 y=505 -->
+  <g clip-path="url(#circleClip)">
+    <g fill="#8F3200" filter="url(#longShadow)">
+      <rect x="212" y="310" width="58" height="390" rx="27"/>
+      <rect x="294" y="220" width="58" height="570" rx="27"/>
+      <rect x="376" y="360" width="58" height="290" rx="27"/>
+      <rect x="458" y="310" width="58" height="390" rx="27"/>
+      <rect x="540" y="265" width="58" height="480" rx="27"/>
+      <rect x="622" y="375" width="58" height="260" rx="27"/>
+      <rect x="704" y="200" width="58" height="610" rx="27"/>
+      <rect x="786" y="345" width="58" height="320" rx="27"/>
+    </g>
+
+    <g fill="url(#side)">
+      <rect x="221" y="319" width="58" height="390" rx="27"/>
+      <rect x="303" y="229" width="58" height="570" rx="27"/>
+      <rect x="385" y="369" width="58" height="290" rx="27"/>
+      <rect x="467" y="319" width="58" height="390" rx="27"/>
+      <rect x="549" y="274" width="58" height="480" rx="27"/>
+      <rect x="631" y="384" width="58" height="260" rx="27"/>
+      <rect x="713" y="209" width="58" height="610" rx="27"/>
+      <rect x="795" y="354" width="58" height="320" rx="27"/>
+    </g>
+
+    <g fill="url(#face)">
+      <rect x="212" y="310" width="58" height="390" rx="27"/>
+      <rect x="294" y="220" width="58" height="570" rx="27"/>
+      <rect x="376" y="360" width="58" height="290" rx="27"/>
+      <rect x="458" y="310" width="58" height="390" rx="27"/>
+      <rect x="540" y="265" width="58" height="480" rx="27"/>
+      <rect x="622" y="375" width="58" height="260" rx="27"/>
+      <rect x="704" y="200" width="58" height="610" rx="27"/>
+      <rect x="786" y="345" width="58" height="320" rx="27"/>
+    </g>
+  </g>
+</svg>

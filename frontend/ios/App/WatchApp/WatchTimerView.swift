@@ -45,7 +45,9 @@ struct WatchTimerView: View {
     // MARK: - 活跃计时状态
 
     private func activeTimerView(_ timer: WatchSessionManager.WatchTimerState) -> some View {
-        let progress = timer.duration > 0 ? Double(timer.remaining) / timer.duration : 0
+        // 每次 SwiftUI 刷新时基于当前时间实时计算，确保倒计时持续走秒
+        let remaining = timer.remaining
+        let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
         return VStack(spacing: 4) {
             Text(timer.exerciseName)
@@ -66,7 +68,7 @@ struct WatchTimerView: View {
                     .rotationEffect(.degrees(-90))
                     .animation(.linear(duration: 0.5), value: progress)
 
-                Text("\(timer.remaining)")
+                Text("\(remaining)")
                     .font(.system(size: 44, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .foregroundColor(.white)

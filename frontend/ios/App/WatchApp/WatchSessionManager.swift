@@ -17,8 +17,13 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     struct WatchTimerState {
         let exerciseId: String
         let exerciseName: String
-        let remaining: Int
         let duration: Double
+        let endDate: Date
+
+        /// 基于当前时间实时计算剩余秒数，确保 UI 持续倒计时
+        var remaining: Int {
+            max(0, Int(ceil(endDate.timeIntervalSinceNow)))
+        }
     }
 
     private override init() {
@@ -104,13 +109,14 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         }
         // 取第一个活跃计时器显示（目前业务场景下通常只有一个休息计时器）
         let timer = timers.first ?? [:]
+        let endDateTimestamp = timer["endDate"] as? TimeInterval ?? Date().addingTimeInterval(90).timeIntervalSince1970
         let state = WatchTimerState(
             exerciseId: timer["exerciseId"] as? String ?? "",
             exerciseName: timer["exerciseName"] as? String ?? "休息",
-            remaining: timer["remaining"] as? Int ?? 0,
-            duration: timer["duration"] as? Double ?? 90
+            duration: timer["duration"] as? Double ?? 90,
+            endDate: Date(timeIntervalSince1970: endDateTimestamp)
         )
-        print("⚡️ [Watch] applyContext: 设置 activeTimer=\(state.exerciseName), remaining=\(state.remaining)")
+        print("⚡️ [Watch] applyContext: 设置 activeTimer=\(state.exerciseName), endDate=\(state.endDate), remaining=\(state.remaining)")
         self.activeTimer = state
     }
 
