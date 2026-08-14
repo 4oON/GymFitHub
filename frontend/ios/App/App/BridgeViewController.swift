@@ -6,14 +6,17 @@ import CapApp_SPM
 class BridgeViewController: CAPBridgeViewController {
 
     override func viewDidLoad() {
-        // 必须在 super.viewDidLoad() 之前强制链接；Capacitor 在 super.viewDidLoad() 里读取
-        // packageClassList 并注册插件，如果那时 WorkoutTimerPlugin 还没被链接进主二进制，
-        // NSClassFromString 会返回 nil，导致插件完全没有被注册。
+        // 强制链接 SPM 中的 WorkoutTimerPlugin，防止静态链接器剥离该 Swift 类。
         WorkoutTimerPlugin.forceLink()
-        let cls = NSClassFromString("WorkoutTimerPlugin")
-        print("⚡️ [BridgeViewController] WorkoutTimerPlugin runtime class: \(String(describing: cls))")
 
         super.viewDidLoad()
+
+        // packageClassList 自动发现对 SPM 内的自定义类不可靠，手动注册实例。
+        // 必须在 super.viewDidLoad() 之后调用，此时 Capacitor bridge 已初始化完成。
+        let timerPlugin = WorkoutTimerPlugin()
+        bridge.registerPluginInstance(timerPlugin)
+        print("⚡️ [BridgeViewController] manually registered WorkoutTimerPlugin")
+
         applyDarkBackground()
     }
 
