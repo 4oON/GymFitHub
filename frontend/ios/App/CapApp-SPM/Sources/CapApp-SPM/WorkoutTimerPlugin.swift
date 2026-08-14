@@ -14,7 +14,19 @@ import Capacitor
 /// - "timerTick"：每秒剩余秒数 { exerciseId, remaining }
 /// - "timerFinish"：计时结束 { exerciseId, exerciseName }
 @objc(WorkoutTimerPlugin)
-public class WorkoutTimerPlugin: CAPPlugin {
+public class WorkoutTimerPlugin: CAPPlugin, CAPBridgedPlugin {
+
+    /// Capacitor 8 要求插件显式声明 JS 端注册的插件 ID。
+    /// 必须与 frontend/src/services/WorkoutTimerService.ts 中 registerPlugin('WorkoutTimer') 一致。
+    public let identifier = "WorkoutTimer"
+    public let jsName = "WorkoutTimer"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "startRest", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "finishRest", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "finishAll", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getState", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "requestPermission", returnType: CAPPluginReturnPromise)
+    ]
 
     private var engine: TimerEngine { TimerEngine.shared }
 
