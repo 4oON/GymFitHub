@@ -1,6 +1,7 @@
 import SwiftUI
 import WatchConnectivity
 import WatchKit
+import UserNotifications
 
 /// watchOS WatchConnectivity manager (ObservableObject for SwiftUI)
 ///
@@ -9,7 +10,7 @@ import WatchKit
 /// - Send "finish rest" command back to iPhone (sendMessage, requires reachable)
 /// - Built-in native timer refreshes remaining time every second, independent of SwiftUI Timer.publish
 /// - Haptic feedback when timer finishes
-final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
+final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, WKExtendedRuntimeSessionDelegate {
 
     static let shared = WatchSessionManager()
 
@@ -22,6 +23,9 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
     /// Track which timers have already played haptic to avoid duplicates
     private var hapticPlayedFor: Set<String> = []
+
+    /// Extended runtime session to keep app alive in background
+    private var extendedRuntimeSession: WKExtendedRuntimeSession?
 
     struct WatchTimerState: Equatable, Identifiable {
         let exerciseId: String
@@ -47,6 +51,18 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     private override init() {
         super.init()
         activate()
+        requestNotificationPermission()
+    }
+
+    /// Request local notification permission for timer completion alerts
+    private func requestNotificationPermission() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if let error = error {
+                print("⚡️ [Watch] Notification permission error: \(error.localizedDescription)")
+            } else {
+                print("⚡️ [Watch] Notification permission granted: \(granted)")
+            }
+        }
     }
 
     func activate() {
@@ -122,6 +138,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         guard let timers = context["timers"] as? [[String: Any]], !timers.isEmpty else {
             print("⚡️ [Watch] applyContext: timers empty, clearing activeTimers")
             stopCountdown()
+            stopExtendedRuntimeSession()
             self.activeTimers = []
             self.hapticPlayedFor.removeAll()
             return
@@ -143,6 +160,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
         if states.isEmpty {
             stopCountdown()
+            stopExtendedRuntimeSession()
             self.activeTimers = []
             self.hapticPlayedFor.removeAll()
             return
@@ -150,6 +168,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
         self.activeTimers = states
         startCountdown()
+        startExtendedRuntimeSession()
     }
 
     // MARK: - Native countdown driver
@@ -178,6 +197,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
                 if updatedTimers.isEmpty {
                     self.stopCountdown()
+                    self.stopExtendedRuntimeSession()
                     self.activeTimers = []
                     self.hapticPlayedFor.removeAll()
                 } else if updatedTimers.count != self.activeTimers.count {
@@ -199,6 +219,30 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     /// Play haptic feedback when timer finishes
     private func playHaptic() {
         WKInterfaceDevice.current().play(.notification)
+    }
+
+    // MARK: - Extended Runtime Session
+
+    /// Start extended runtime session to keep app running in background
+    private func startExtendedRuntimeSession() {
+        guard extendedRuntimeSession == nil || extendedRuntimeSession?.state == .invalid else {
+            return
+        }
+        let session = WKExtendedRuntimeSession()
+        session.delegate = self
+        session.start()
+        extendedRuntimeSession = session
+        print("⚡️ [Watch] Extended runtime session started")
+    }
+
+    /// Stop extended runtime session when no active timers
+    private func stopExtendedRuntimeSession() {
+        guard let session = extendedRuntimeSession, session.state != .invalid else {
+            return
+        }
+        session.invalidate()
+        extendedRuntimeSession = nil
+        print("⚡️ [Watch] Extended runtime session stopped")
     }
 
     // MARK: - WCSessionDelegate
@@ -234,5 +278,19 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
                 self.requestStateSync()
             }
         }
+    }
+
+    // MARK: - WKExtendedRuntimeSessionDelegate
+
+    func extendedRuntimeSessionDidStart(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+        print("⚡️ [Watch] Extended runtime session did start")
+    }
+
+    func extendedRuntimeSessionWillExpire(_ extendedRuntimeSession: WKExtendedRuntimeSession) {
+        print("⚡️ [Watch] Extended runtime session will expire")
+    }
+
+    func extendedRuntimeSession(_ extendedRuntimeSession: WKExtendedRuntimeSession, didInvalidateWith reason: WKExtendedRuntimeSessionInvalidationReason, error: Error?) {
+        print("⚡️ [Watch] Extended runtime session invalidated: \(reason.rawValue), error: \(String(describing: error))")
     }
 }
