@@ -40,8 +40,11 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
     /// 把当前所有计时器状态通过 Application Context 推送给手表。
     /// 如果会话尚未激活，会先缓存，激活成功后自动补发。
     public func pushTimerState() {
+        let snapshot = TimerEngine.shared.snapshot()
+        print("⚡️ [WatchSession] pushTimerState: snapshot count=\(snapshot.count)")
+
         let context: [String: Any] = [
-            "timers": TimerEngine.shared.snapshot(),
+            "timers": snapshot,
             "timestamp": Date().timeIntervalSince1970
         ]
 
