@@ -1,17 +1,19 @@
 import SwiftUI
 
-/// 手表主界面：倒计时大屏
+/// 手表主界面：休息倒计时
 ///
-/// 显示：
-/// - 当前动作名
-/// - 剩余秒数（大数字）
-/// - 圆形进度环
-/// - "结束休息"按钮（回传 iPhone）
+/// 设计目标：
+/// - 深色背景，绿色 accent，贴近 iPhone App 主题
+/// - 大号动作名称 + 大号倒计时数字
+/// - 圆形进度环直观展示剩余时间
+/// - 底部红色"结束休息"按钮，易于点击
 struct WatchTimerView: View {
     @EnvironmentObject var session: WatchSessionManager
-    @State private var now = Date()
 
-    private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    // App 主题绿色（与 iPhone 端 accent 接近）
+    private let accentGreen = Color(red: 0.20, green: 0.78, blue: 0.35)
+    private let backgroundDark = Color(red: 0.02, green: 0.06, blue: 0.09)
+    private let surfaceDark = Color(red: 0.10, green: 0.14, blue: 0.18)
 
     var body: some View {
         Group {
@@ -21,72 +23,100 @@ struct WatchTimerView: View {
                 idleView
             }
         }
-        .onReceive(timer) { _ in now = Date() }
         .onAppear { session.requestStateSync() }
     }
 
     // MARK: - 空闲状态
 
     private var idleView: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "timer")
-                .font(.system(size: 32))
-                .foregroundColor(.gray)
-            Text("休息倒计时")
-                .font(.headline)
-            Text(session.isConnected ? "等待 iPhone 开始计时" : "未连接 iPhone")
-                .font(.caption2)
-                .foregroundColor(.gray)
-                .multilineTextAlignment(.center)
+        ZStack {
+            backgroundDark.ignoresSafeArea()
+
+            VStack(spacing: 12) {
+                Image(systemName: "timer")
+                    .font(.system(size: 36, weight: .light))
+                    .foregroundColor(accentGreen.opacity(0.8))
+
+                Text("休息倒计时")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(.white)
+
+                Text(session.isConnected ? "等待 iPhone 开始计时" : "未连接 iPhone")
+                    .font(.system(size: 13))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
         }
-        .padding()
     }
 
     // MARK: - 活跃计时状态
 
     private func activeTimerView(_ timer: WatchSessionManager.WatchTimerState) -> some View {
-        // 每次 SwiftUI 刷新时基于当前时间实时计算，确保倒计时持续走秒
         let remaining = timer.remaining
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return VStack(spacing: 4) {
-            Text(timer.exerciseName)
-                .font(.caption2)
-                .foregroundColor(.white.opacity(0.8))
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
+        return ZStack {
+            backgroundDark.ignoresSafeArea()
 
-            ZStack {
-                Circle()
-                    .stroke(Color.white.opacity(0.15), lineWidth: 6)
-                Circle()
-                    .trim(from: 0, to: progress)
-                    .stroke(
-                        Color.green,
-                        style: StrokeStyle(lineWidth: 6, lineCap: .round)
-                    )
-                    .rotationEffect(.degrees(-90))
-                    .animation(.linear(duration: 0.5), value: progress)
-
-                Text("\(remaining)")
-                    .font(.system(size: 44, weight: .bold, design: .rounded))
-                    .monospacedDigit()
+            VStack(spacing: 0) {
+                // 动作名称：大号、清晰
+                Text(timer.exerciseName)
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundColor(.white)
-            }
-            .frame(width: 120, height: 120)
-            .padding(.vertical, 2)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.8)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 8)
+                    .padding(.horizontal, 8)
 
-            Button {
-                session.requestFinishRest()
-            } label: {
-                Text("结束休息")
-                    .font(.system(size: 13, weight: .medium))
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 4)
+                Spacer()
+
+                // 倒计时圆环 + 数字
+                ZStack {
+                    Circle()
+                        .stroke(surfaceDark, lineWidth: 10)
+
+                    Circle()
+                        .trim(from: 0, to: progress)
+                        .stroke(
+                            accentGreen,
+                            style: StrokeStyle(lineWidth: 10, lineCap: .round)
+                        )
+                        .rotationEffect(.degrees(-90))
+                        .animation(.linear(duration: 0.5), value: progress)
+
+                    VStack(spacing: 2) {
+                        Text("\(remaining)")
+                            .font(.system(size: 52, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                            .foregroundColor(.white)
+
+                        Text("秒")
+                            .font(.system(size: 13))
+                            .foregroundColor(.gray)
+                    }
+                }
+                .frame(width: 140, height: 140)
+
+                Spacer()
+
+                // 结束休息按钮
+                Button {
+                    session.requestFinishRest()
+                } label: {
+                    Text("结束休息")
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                        .background(Color.red.opacity(0.85))
+                        .cornerRadius(10)
+                }
+                .buttonStyle(.plain)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 12)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.red)
         }
-        .padding(.horizontal, 8)
     }
 }

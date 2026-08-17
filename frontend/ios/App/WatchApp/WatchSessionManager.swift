@@ -6,6 +6,7 @@ import WatchConnectivity
 /// 职责：
 /// - 通过 WCSession.applicationContext 接收 iPhone 推送的计时器状态
 /// - 手表"结束休息"按钮 → 发送 finishRest 指令回 iPhone（sendMessage，需要可达）
+/// - 内置原生计时器，每秒刷新剩余时间，不依赖 SwiftUI Timer.publish（避免后台挂起）
 final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
     static let shared = WatchSessionManager()
@@ -14,15 +15,25 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     @Published var activeTimer: WatchTimerState?
     @Published var isConnected = false
 
-    struct WatchTimerState {
+    /// 每秒刷新一次剩余时间，驱动 SwiftUI 更新
+    private var countdownTimer: Timer?
+
+    struct WatchTimerState: Equatable {
         let exerciseId: String
         let exerciseName: String
         let duration: Double
         let endDate: Date
 
-        /// 基于当前时间实时计算剩余秒数，确保 UI 持续倒计时
+        /// 基于当前时间实时计算剩余秒数
         var remaining: Int {
             max(0, Int(ceil(endDate.timeIntervalSinceNow)))
+        }
+
+        static func == (lhs: WatchTimerState, rhs: WatchTimerState) -> Bool {
+            lhs.exerciseId == rhs.exerciseId &&
+            lhs.exerciseName == rhs.exerciseName &&
+            lhs.duration == rhs.duration &&
+            lhs.endDate == rhs.endDate
         }
     }
 
@@ -104,6 +115,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     private func applyContext(_ context: [String: Any]) {
         guard let timers = context["timers"] as? [[String: Any]], !timers.isEmpty else {
             print("⚡️ [Watch] applyContext: timers 为空，清空 activeTimer")
+            stopCountdown()
             self.activeTimer = nil
             return
         }
@@ -117,7 +129,46 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
             endDate: Date(timeIntervalSince1970: endDateTimestamp)
         )
         print("⚡️ [Watch] applyContext: 设置 activeTimer=\(state.exerciseName), endDate=\(state.endDate), remaining=\(state.remaining)")
+
+        // 如果计时器已结束，直接清空
+        if state.remaining <= 0 {
+            stopCountdown()
+            self.activeTimer = nil
+            return
+        }
+
         self.activeTimer = state
+        startCountdown()
+    }
+
+    // MARK: - 原生倒计时驱动
+
+    private func startCountdown() {
+        stopCountdown()
+        // 使用 Foundation Timer，在主 RunLoop 的 commonModes 下运行，SwiftUI 会随 @Published 更新
+        countdownTimer = Timer(timeInterval: 0.5, repeats: true) { [weak self] _ in
+            guard let self = self, let current = self.activeTimer else { return }
+            let remaining = current.remaining
+            if remaining <= 0 {
+                // 计时结束，清空状态并停止计时器
+                DispatchQueue.main.async {
+                    self.stopCountdown()
+                    self.activeTimer = nil
+                }
+            } else {
+                // 触发 @Published 刷新（endDate 不变，但 remaining 计算属性会随时间变化）
+                // 通过重新赋值同一个值来强制 objectWillChange 发送
+                DispatchQueue.main.async {
+                    self.activeTimer = current
+                }
+            }
+        }
+        RunLoop.main.add(countdownTimer!, forMode: .common)
+    }
+
+    private func stopCountdown() {
+        countdownTimer?.invalidate()
+        countdownTimer = nil
     }
 
     // MARK: - WCSessionDelegate
