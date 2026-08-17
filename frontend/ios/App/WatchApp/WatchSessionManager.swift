@@ -1,5 +1,6 @@
 import SwiftUI
 import WatchConnectivity
+import WatchKit
 
 /// watchOS WatchConnectivity manager (ObservableObject for SwiftUI)
 ///
@@ -7,6 +8,7 @@ import WatchConnectivity
 /// - Receive timer state pushed from iPhone via WCSession.applicationContext
 /// - Send "finish rest" command back to iPhone (sendMessage, requires reachable)
 /// - Built-in native timer refreshes remaining time every second, independent of SwiftUI Timer.publish
+/// - Haptic feedback when timer finishes
 final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
     static let shared = WatchSessionManager()
@@ -57,7 +59,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
 
     // MARK: - Send to iPhone
 
-    /// User taps "End Rest" on watch
+    /// User taps "Done" on watch
     func requestFinishRest(exerciseId: String) {
         send(["type": "finishRest", "exerciseId": exerciseId])
     }
@@ -159,6 +161,8 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
                     self.stopCountdown()
                     self.activeTimers = []
                 } else if validTimers.count != self.activeTimers.count {
+                    // Timer just expired - play haptic
+                    self.playHaptic()
                     self.activeTimers = validTimers
                 } else {
                     // Force @Published refresh by reassigning
@@ -172,6 +176,11 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     private func stopCountdown() {
         countdownTimer?.invalidate()
         countdownTimer = nil
+    }
+
+    /// Play haptic feedback when timer finishes
+    private func playHaptic() {
+        WKInterfaceDevice.current().play(.notification)
     }
 
     // MARK: - WCSessionDelegate
