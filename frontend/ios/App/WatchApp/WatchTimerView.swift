@@ -83,29 +83,29 @@ struct WatchTimerView: View {
                 // Countdown ring + digits
                 ZStack {
                     Circle()
-                        .stroke(surfaceDark, lineWidth: 8)
+                        .stroke(surfaceDark, lineWidth: 6)
 
                     Circle()
                         .trim(from: 0, to: progress)
                         .stroke(
                             accentGreen,
-                            style: StrokeStyle(lineWidth: 8, lineCap: .round)
+                            style: StrokeStyle(lineWidth: 6, lineCap: .round)
                         )
                         .rotationEffect(.degrees(-90))
                         .animation(.linear(duration: 0.5), value: progress)
 
                     VStack(spacing: 2) {
                         Text("\(remaining)")
-                            .font(.system(size: 48, weight: .bold, design: .rounded))
+                            .font(.system(size: 40, weight: .bold, design: .rounded))
                             .monospacedDigit()
                             .foregroundColor(.white)
 
                         Text("sec")
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.gray)
                     }
                 }
-                .frame(width: 130, height: 130)
+                .frame(width: 110, height: 110)
 
                 Spacer()
 
@@ -139,16 +139,16 @@ struct WatchTimerView: View {
             backgroundDark.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Minimal header with safe area
+                // Compact header
                 Text("Rest Timers")
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .foregroundColor(.white)
-                    .padding(.top, 32)
-                    .padding(.bottom, 12)
+                    .padding(.top, 20)
+                    .padding(.bottom, 8)
 
                 // Timer list - maximize visible area
                 ScrollView {
-                    VStack(spacing: 12) {
+                    VStack(spacing: 10) {
                         ForEach(session.activeTimers) { timer in
                             timerCard(timer)
                         }
@@ -164,7 +164,7 @@ struct WatchTimerView: View {
         let remaining = timer.remaining
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return HStack(spacing: 14) {
+        return HStack(spacing: 12) {
             // Progress ring (small)
             ZStack {
                 Circle()
@@ -179,21 +179,21 @@ struct WatchTimerView: View {
                     .rotationEffect(.degrees(-90))
 
                 Text("\(remaining)")
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .font(.system(size: 15, weight: .bold, design: .rounded))
                     .monospacedDigit()
                     .foregroundColor(.white)
             }
-            .frame(width: 44, height: 44)
+            .frame(width: 40, height: 40)
 
             // Exercise info
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(timer.exerciseName)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundColor(.white)
                     .lineLimit(1)
 
                 Text("\(remaining)s left")
-                    .font(.system(size: 12))
+                    .font(.system(size: 11))
                     .foregroundColor(.gray)
             }
 
@@ -204,14 +204,14 @@ struct WatchTimerView: View {
                 session.requestFinishRest(exerciseId: timer.exerciseId)
             } label: {
                 Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 26))
+                    .font(.system(size: 24))
                     .foregroundColor(accentGreen)
             }
             .buttonStyle(.plain)
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
         .background(cardDark)
-        .cornerRadius(14)
+        .cornerRadius(12)
     }
 }

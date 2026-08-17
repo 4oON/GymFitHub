@@ -20,6 +20,9 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
     /// Refresh remaining time every second to drive SwiftUI updates
     private var countdownTimer: Timer?
 
+    /// Track which timers have already played haptic to avoid duplicates
+    private var hapticPlayedFor: Set<String> = []
+
     struct WatchTimerState: Equatable, Identifiable {
         let exerciseId: String
         let exerciseName: String
@@ -120,6 +123,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
             print("⚡️ [Watch] applyContext: timers empty, clearing activeTimers")
             stopCountdown()
             self.activeTimers = []
+            self.hapticPlayedFor.removeAll()
             return
         }
 
@@ -140,6 +144,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         if states.isEmpty {
             stopCountdown()
             self.activeTimers = []
+            self.hapticPlayedFor.removeAll()
             return
         }
 
@@ -155,15 +160,28 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate {
         countdownTimer = Timer(timeInterval: 0.5, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                // Remove expired timers
-                let validTimers = self.activeTimers.filter { $0.remaining > 0 }
-                if validTimers.isEmpty {
+                // Check each timer individually for haptic
+                var updatedTimers: [WatchTimerState] = []
+                for timer in self.activeTimers {
+                    let remaining = timer.remaining
+                    if remaining <= 0 {
+                        // Play haptic for this specific timer if not already played
+                        if !self.hapticPlayedFor.contains(timer.exerciseId) {
+                            self.hapticPlayedFor.insert(timer.exerciseId)
+                            self.playHaptic()
+                            print("⚡️ [Watch] Timer expired: \(timer.exerciseName), haptic played")
+                        }
+                    } else {
+                        updatedTimers.append(timer)
+                    }
+                }
+
+                if updatedTimers.isEmpty {
                     self.stopCountdown()
                     self.activeTimers = []
-                } else if validTimers.count != self.activeTimers.count {
-                    // Timer just expired - play haptic
-                    self.playHaptic()
-                    self.activeTimers = validTimers
+                    self.hapticPlayedFor.removeAll()
+                } else if updatedTimers.count != self.activeTimers.count {
+                    self.activeTimers = updatedTimers
                 } else {
                     // Force @Published refresh by reassigning
                     self.activeTimers = self.activeTimers
