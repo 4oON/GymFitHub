@@ -5,10 +5,15 @@ import SwiftUI
 /// Design goals:
 /// - Dark background, green accent, consistent with iPhone App theme
 /// - Support multiple concurrent timers (list layout)
-/// - Generous spacing and breathing room, not cramped
+/// - Always-On display: countdown keeps ticking on the dimmed lock screen
+///   via TimelineView (Apple-recommended for per-second updates in always-on state)
 /// - iOS-native feel with proper safe areas
 struct WatchTimerView: View {
     @EnvironmentObject var session: WatchSessionManager
+
+    /// True when the watch display is in always-on dimmed state (wrist down).
+    /// In this state we disable animations and let TimelineView drive per-second updates.
+    @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
     // App theme colors - matching ZenFit iPhone app
     private let accentGreen = Color(red: 0.20, green: 0.78, blue: 0.35) // #34C759
@@ -61,73 +66,80 @@ struct WatchTimerView: View {
     // MARK: - Single Timer (Full Screen)
 
     private func singleTimerView(_ timer: WatchSessionManager.WatchTimerState) -> some View {
-        let remaining = timer.remaining
-        let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
+        // TimelineView drives per-second UI refresh and continues updating
+        // in always-on (wrist-down) state, unlike Timer.publish / Foundation Timer.
+        TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+            let remaining = max(0, Int(ceil(timer.endDate.timeIntervalSince(context.date))))
+            let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return ZStack {
-            backgroundDark.ignoresSafeArea()
+            ZStack {
+                backgroundDark.ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                // Exercise name with generous top padding
-                Text(timer.exerciseName)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundColor(.white)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.8)
-                    .multilineTextAlignment(.center)
-                    .padding(.top, 36)
-                    .padding(.horizontal, 16)
+                VStack(spacing: 0) {
+                    // Exercise name with generous top padding
+                    Text(timer.exerciseName)
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundColor(.white)
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.8)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 36)
+                        .padding(.horizontal, 16)
 
-                Spacer()
+                    Spacer()
 
-                // Countdown ring + digits
-                ZStack {
-                    Circle()
-                        .stroke(surfaceDark, lineWidth: 6)
+                    // Countdown ring + digits
+                    ZStack {
+                        Circle()
+                            .stroke(surfaceDark, lineWidth: 6)
 
-                    Circle()
-                        .trim(from: 0, to: progress)
-                        .stroke(
-                            accentGreen,
-                            style: StrokeStyle(lineWidth: 6, lineCap: .round)
-                        )
-                        .rotationEffect(.degrees(-90))
-                        .animation(.linear(duration: 0.5), value: progress)
+                        Circle()
+                            .trim(from: 0, to: progress)
+                            .stroke(
+                                accentGreen,
+                                style: StrokeStyle(lineWidth: 6, lineCap: .round)
+                            )
+                            .rotationEffect(.degrees(-90))
+                            // Animations must be disabled in always-on dimmed state
+                            .animation(isLuminanceReduced ? nil : .linear(duration: 0.5), value: progress)
 
-                    VStack(spacing: 2) {
-                        Text("\(remaining)")
-                            .font(.system(size: 40, weight: .bold, design: .rounded))
-                            .monospacedDigit()
+                        VStack(spacing: 2) {
+                            Text("\(remaining)")
+                                .font(.system(size: 40, weight: .bold, design: .rounded))
+                                .monospacedDigit()
+                                .foregroundColor(.white)
+
+                            Text("sec")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .frame(width: 110, height: 110)
+
+                    Spacer()
+
+                    // Done button - hidden in always-on state (not tappable anyway)
+                    if !isLuminanceReduced {
+                        Button {
+                            session.requestFinishRest(exerciseId: timer.exerciseId)
+                        } label: {
+                            HStack(spacing: 6) {
+                                Image(systemName: "checkmark")
+                                    .font(.system(size: 15, weight: .semibold))
+                                Text("Done")
+                                    .font(.system(size: 16, weight: .semibold))
+                            }
                             .foregroundColor(.white)
-
-                        Text("sec")
-                            .font(.system(size: 12, weight: .medium))
-                            .foregroundColor(.gray)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(accentGreen.opacity(0.9))
+                            .cornerRadius(12)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 20)
                     }
                 }
-                .frame(width: 110, height: 110)
-
-                Spacer()
-
-                // Done button - checkmark style
-                Button {
-                    session.requestFinishRest(exerciseId: timer.exerciseId)
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: "checkmark")
-                            .font(.system(size: 15, weight: .semibold))
-                        Text("Done")
-                            .font(.system(size: 16, weight: .semibold))
-                    }
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(accentGreen.opacity(0.9))
-                    .cornerRadius(12)
-                }
-                .buttonStyle(.plain)
-                .padding(.horizontal, 24)
-                .padding(.bottom, 20)
             }
         }
     }
@@ -146,22 +158,24 @@ struct WatchTimerView: View {
                     .padding(.top, 20)
                     .padding(.bottom, 8)
 
-                // Timer list - maximize visible area
-                ScrollView {
-                    VStack(spacing: 10) {
-                        ForEach(session.activeTimers) { timer in
-                            timerCard(timer)
+                // Timer list - TimelineView keeps every card ticking in always-on state
+                TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+                    ScrollView {
+                        VStack(spacing: 10) {
+                            ForEach(session.activeTimers) { timer in
+                                timerCard(timer, now: context.date)
+                            }
                         }
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 16)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 16)
                 }
             }
         }
     }
 
-    private func timerCard(_ timer: WatchSessionManager.WatchTimerState) -> some View {
-        let remaining = timer.remaining
+    private func timerCard(_ timer: WatchSessionManager.WatchTimerState, now: Date) -> some View {
+        let remaining = max(0, Int(ceil(timer.endDate.timeIntervalSince(now))))
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
         return HStack(spacing: 12) {
@@ -199,15 +213,17 @@ struct WatchTimerView: View {
 
             Spacer()
 
-            // Done button - checkmark
-            Button {
-                session.requestFinishRest(exerciseId: timer.exerciseId)
-            } label: {
-                Image(systemName: "checkmark.circle.fill")
-                    .font(.system(size: 24))
-                    .foregroundColor(accentGreen)
+            // Done button - checkmark (hidden in always-on state)
+            if !isLuminanceReduced {
+                Button {
+                    session.requestFinishRest(exerciseId: timer.exerciseId)
+                } label: {
+                    Image(systemName: "checkmark.circle.fill")
+                        .font(.system(size: 24))
+                        .foregroundColor(accentGreen)
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
