@@ -1,23 +1,20 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { MuscleGroup } from '@/shared/types';
 import type { Exercise, ActiveExercise } from '@/shared/types';
-import { INITIAL_EXERCISES } from '@/shared/constants/initial_exercises';
-import { Search, ChevronLeft, List, RefreshCw, User, X, CheckCircle2, Dumbbell } from 'lucide-react';
+import { Search, ChevronLeft, List, RefreshCw, User, CheckCircle2, Dumbbell } from 'lucide-react';
 import MuscleAnatomyViewer from '@/features/anatomy/components/MuscleAnatomyViewer';
 import HeroExerciseCard from './HeroExerciseCard';
 import { ToastContainer } from '@/components/Toast';
 import { useToast } from '@/hooks/useToast';
+import { ExerciseFrequencyService, type ExerciseFrequencyMap } from '@/features/exercise/services/ExerciseFrequencyService';
+import { sortEquipment } from '@/features/exercise/utils/equipmentUtils';
 
 interface ExerciseSelectorProps {
   onSelectExercise: (exercise: Exercise) => void;
-  onAskAI: (exerciseName: string) => void;
   activeWorkoutStats: { compound: number; isolation: number; total: number };
   activeWorkout: ActiveExercise[];
-  commonExercises: Exercise[];
-  comprehensiveExercises: Exercise[];
-  onMoveToCommon: (id: string) => void;
-  onMoveToComprehensive: (id: string) => void;
-  onToggleFavorite: (id: string) => void;
+  exercises: Exercise[];
+  exerciseFrequency: ExerciseFrequencyMap;
   onOpenProfile: () => void;
   userProfile: { weight: number, unit: 'kg' | 'lbs' };
   isSelectionMode?: boolean;
@@ -34,14 +31,10 @@ interface ExerciseSelectorProps {
 
 const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   onSelectExercise,
-  onAskAI,
   activeWorkoutStats,
   activeWorkout,
-  commonExercises,
-  comprehensiveExercises,
-  onMoveToCommon,
-  onMoveToComprehensive,
-  onToggleFavorite,
+  exercises,
+  exerciseFrequency,
   onOpenProfile,
   userProfile,
   onClose,
@@ -58,29 +51,37 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   const [viewState, setViewState] = useState<'model' | 'list'>(
     forceListView ? 'list' : (selectedMuscleGroup ? 'list' : 'model')
   );
-  const [activeTab, setActiveTab] = useState<'common' | 'comprehensive'>('common');
+  const [activeTab, setActiveTab] = useState<'frequent' | 'more'>('more');
   const [bodyFacing, setBodyFacing] = useState<'front' | 'back'>('front');
   const [selectedCategory, setSelectedCategory] = useState<MuscleGroup | 'All'>(selectedMuscleGroup || 'All');
   const [selectedEquipment, setSelectedEquipment] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [hoveredMuscleId, setHoveredMuscleId] = useState<string | null>(null);
-  const [isFilterExpanded, setIsFilterExpanded] = useState(true);
-  const [displayLimit, setDisplayLimit] = useState(50); // Increased initial limit
+  const [displayLimit, setDisplayLimit] = useState(50);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  // Filter Logic
-  const availableEquipment = useMemo(() => {
-    const sourceList = (activeTab === 'common' ? commonExercises : comprehensiveExercises) || [];
-    const exercisesInGroup = sourceList.filter(
-      ex => selectedCategory === 'All' || ex.muscleGroup === selectedCategory
-    );
-    const equipmentSet = new Set(exercisesInGroup.map(ex => ex.equipment || 'Other'));
-    return ['All', ...Array.from(equipmentSet).sort()];
-  }, [selectedCategory, activeTab, commonExercises, comprehensiveExercises]);
+  // Split exercises into Frequent / More based on frequency.
+  const sourceExercises = useMemo(() => {
+    const withFreq = exercises.map(ex => ({
+      exercise: ex,
+      freq: exerciseFrequency[ex.id] || { count: 0, lastUsedAt: null }
+    }));
 
+    if (activeTab === 'frequent') {
+      return withFreq
+        .filter(({ freq }) => ExerciseFrequencyService.isFrequent(freq))
+        .sort(ExerciseFrequencyService.compareByFrequencyThenName)
+        .map(({ exercise }) => exercise);
+    }
+
+    return withFreq
+      .filter(({ freq }) => !ExerciseFrequencyService.isFrequent(freq))
+      .sort(ExerciseFrequencyService.compareByFrequencyThenName)
+      .map(({ exercise }) => exercise);
+  }, [exercises, exerciseFrequency, activeTab]);
+
+  // Filter Logic
   const filteredExercises = useMemo(() => {
-    const sourceList = (activeTab === 'common' ? commonExercises : comprehensiveExercises) || [];
-    const filtered = sourceList.filter((ex) => {
+    const filtered = sourceExercises.filter((ex) => {
       const searchLower = searchTerm.toLowerCase();
 
       // Search in exercise name (English and Chinese)
@@ -96,11 +97,10 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
         muscle => muscle.toLowerCase().includes(searchLower)
       ) || false;
 
-      // Search in equipment (English and Chinese)
-      const matchesEquipment = (ex.equipment || 'Other').toLowerCase().includes(searchLower) ||
-        ((ex as any).equipment_type_zh && (ex as any).equipment_type_zh.includes(searchTerm));
+      // Search in equipment
+      const matchesEquipment = (ex.equipment || 'Other').toLowerCase().includes(searchLower);
 
-      // Search in detailed muscle IDs (biceps, triceps, glutes, etc.)
+      // Search in detailed muscle IDs
       const matchesMuscleIds = ex.muscle_ids?.some(
         muscleId => muscleId.toLowerCase().includes(searchLower)
       ) || false;
@@ -115,22 +115,16 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
       const matchesSearch = matchesName || matchesMuscleGroup || matchesSecondaryMusclesSearch ||
         matchesEquipment || matchesMuscleIds || matchesDifficulty || matchesMechanic;
 
-      // Category Filter Logic (Updated for Detailed Muscles)
-      let categoryToMatch = selectedCategory;
-
       // Special handling for rear shoulders on back view
-      // When on back view and Shoulders is selected, we want to match "rear-shoulders"
       const shouldMatchRearShoulders = bodyFacing === 'back' && selectedCategory === MuscleGroup.SHOULDERS;
 
       // Check if exercise matches the selected category
       const isPrimaryMatch = ex.muscleGroup === selectedCategory;
 
       const isSecondaryMatch = selectedCategory !== 'All' && (
-        // Check if the selected category is in the exercise's muscle_ids
-        // Use .includes() to match variations like "traps", "traps-middle", etc.
         ex.muscle_ids?.some(id => {
           const idLower = id.toLowerCase();
-          const categoryLower = categoryToMatch.toLowerCase();
+          const categoryLower = selectedCategory.toLowerCase();
 
           // Special case: on back view with shoulders selected, match rear-shoulders
           if (shouldMatchRearShoulders) {
@@ -140,7 +134,6 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
           // Normal matching
           return idLower.includes(categoryLower);
         }) ||
-        // Check if the selected category is in the secondary muscles
         ex.secondaryMuscles?.includes(selectedCategory as MuscleGroup)
       );
 
@@ -148,18 +141,13 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
 
       const matchesEquipmentFilter = selectedEquipment === 'All' || (ex.equipment || 'Other') === selectedEquipment;
 
-      // Add isPrimaryMuscle flag to help with sorting
-      if (matchesSearch && matchesCategory && matchesEquipmentFilter) {
-        (ex as any).isPrimaryMuscle = isPrimaryMatch;
-        return true;
-      }
-      return false;
+      return matchesSearch && matchesCategory && matchesEquipmentFilter;
     });
 
     // Sort exercises: primary muscle matches first, then secondary matches
     return filtered.sort((a, b) => {
-      const aIsPrimary = (a as any).isPrimaryMuscle || false;
-      const bIsPrimary = (b as any).isPrimaryMuscle || false;
+      const aIsPrimary = a.muscleGroup === selectedCategory;
+      const bIsPrimary = b.muscleGroup === selectedCategory;
 
       // Primary exercises come first
       if (aIsPrimary && !bIsPrimary) return -1;
@@ -168,7 +156,13 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
       // Within same category, sort by name
       return (a.nameZh || a.name).localeCompare(b.nameZh || b.name, 'zh-CN');
     });
-  }, [searchTerm, selectedCategory, selectedEquipment, activeTab, commonExercises, comprehensiveExercises, bodyFacing]);
+  }, [searchTerm, selectedCategory, selectedEquipment, sourceExercises, bodyFacing]);
+
+  // Equipment pills are derived from the *visible* filtered list so every card has a matching pill.
+  const availableEquipment = useMemo(() => {
+    const equipmentSet = new Set(filteredExercises.map(ex => ex.equipment || 'Other'));
+    return sortEquipment(['All', ...Array.from(equipmentSet)]);
+  }, [filteredExercises]);
 
   // Simple Lazy Loading
   useEffect(() => {
@@ -183,24 +177,26 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
     return () => observer.disconnect();
   }, [filteredExercises, viewState]);
 
-  useEffect(() => {
-    setDisplayLimit(50);
-    setIsFilterExpanded(true);
-  }, [selectedCategory, searchTerm]);
-
   const handleCategorySelect = (category: MuscleGroup | 'All') => {
     setSelectedCategory(category);
     setSelectedEquipment('All');
+    setDisplayLimit(50);
     setViewState('list');
   };
 
-  // Auto-navigate to list view if muscle group is pre-selected
-  React.useEffect(() => {
-    if (selectedMuscleGroup) {
-      setSelectedCategory(selectedMuscleGroup);
-      setViewState('list');
-    }
-  }, [selectedMuscleGroup]);
+  const handleTabSelect = (tab: 'frequent' | 'more') => {
+    setActiveTab(tab);
+    setSelectedEquipment('All');
+    setDisplayLimit(50);
+  };
+
+  const handleSearchChange = (value: string) => {
+    setSearchTerm(value);
+    setDisplayLimit(50);
+  };
+
+  // Auto-navigate to list view when muscle group is pre-selected via key remount.
+  // selectedMuscleGroup is consumed via initial state only.
 
   const handleBack = () => {
     setViewState('model');
@@ -224,11 +220,17 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   // Calculate active muscles for viewer
   const activeMusclesForViewer = useMemo(() => {
     const muscles = Array.from(new Set(activeWorkout.map(ex => {
-      const exercise = [...commonExercises, ...comprehensiveExercises].find(e => e.id === ex.exerciseId);
+      const exercise = exercises.find(e => e.id === ex.exerciseId);
       return exercise?.muscleGroup;
     }).filter(Boolean) as MuscleGroup[]));
     return muscles;
-  }, [activeWorkout, commonExercises, comprehensiveExercises]);
+  }, [activeWorkout, exercises]);
+
+  const frequentCount = useMemo(
+    () => exercises.filter(ex => ExerciseFrequencyService.isFrequent(exerciseFrequency[ex.id])).length,
+    [exercises, exerciseFrequency]
+  );
+  const moreCount = exercises.length - frequentCount;
 
   if (viewState === 'model') {
 
@@ -311,25 +313,27 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
 
           <div className="flex bg-slate-900 p-1 rounded-xl mb-4 border border-slate-800">
             <button
-              onClick={() => setActiveTab('common')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === 'common' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+              onClick={() => handleTabSelect('frequent')}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${activeTab === 'frequent' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
             >
-              Common Library
+              常用 Frequent
+              <span className={`px-1.5 py-0.5 rounded text-[10px] ${activeTab === 'frequent' ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-400'}`}>{frequentCount}</span>
             </button>
             <button
-              onClick={() => setActiveTab('comprehensive')}
-              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${activeTab === 'comprehensive' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+              onClick={() => handleTabSelect('more')}
+              className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all flex items-center justify-center gap-1.5 ${activeTab === 'more' ? 'bg-slate-800 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
             >
-              Comprehensive
+              更多 More
+              <span className={`px-1.5 py-0.5 rounded text-[10px] ${activeTab === 'more' ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-400'}`}>{moreCount}</span>
             </button>
           </div>
           <div className="relative group mb-3">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-500" />
-            <input type="text" placeholder="Search..." className="w-full bg-slate-900 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-slate-200 text-sm focus:border-emerald-500 outline-none" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+            <input type="text" placeholder="Search..." className="w-full bg-slate-900 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-slate-200 text-sm focus:border-emerald-500 outline-none" value={searchTerm} onChange={(e) => handleSearchChange(e.target.value)} />
           </div>
-          <div className={`flex gap-2 -mx-4 px-4 transition-all duration-300 ${isFilterExpanded ? 'flex-wrap pb-2' : 'overflow-x-auto pb-2 no-scrollbar'}`}>
+          <div className="flex gap-2 -mx-4 px-4 overflow-x-auto pb-2 no-scrollbar">
             {availableEquipment.map(eq => (
-              <button key={eq} onClick={() => { setSelectedEquipment(eq); setIsFilterExpanded(false); }} className={`flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold border ${selectedEquipment === eq ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400'}`}>{eq}</button>
+              <button key={eq} onClick={() => setSelectedEquipment(eq)} className={`flex-shrink-0 px-4 py-2 rounded-xl text-xs font-bold border ${selectedEquipment === eq ? 'bg-emerald-500 border-emerald-500 text-white' : 'bg-slate-900 border-slate-800 text-slate-400'}`}>{eq}</button>
             ))}
           </div>
         </div>
@@ -340,6 +344,11 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
           <div className="flex flex-col items-center justify-center py-12 text-slate-500">
             <Search size={32} className="mb-2 opacity-50" />
             <p className="text-sm">No exercises found</p>
+            {activeTab === 'frequent' && (
+              <p className="text-xs text-slate-600 mt-2 text-center px-8">
+                Finish workouts with 3+ sets per exercise to see them here.
+              </p>
+            )}
           </div>
         ) : (
           <>
@@ -352,6 +361,8 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
                 <HeroExerciseCard
                   key={exercise.id}
                   exercise={exercise}
+                  frequency={exerciseFrequency[exercise.id]?.count}
+                  showEquipment={true}
                   isSelected={isSelected}
                   onToggle={() => {
                     if (isSelectionMode && onToggleSelection) {

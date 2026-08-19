@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useRef, useState, useCallback, useMemo } from 'react';
 import type { Exercise } from '@/shared/types';
 import { CheckCircle2, Star, Activity, Plus, Minus } from 'lucide-react';
 import VideoPlayer from './VideoPlayer';
@@ -36,6 +36,10 @@ interface HeroExerciseCardProps {
     selectionIndicator?: React.ReactNode;
     /** Disable card click to toggle (useful when put inside other clickable containers) */
     disableCardClick?: boolean;
+    /** Optional frequency count to display (e.g. "Used 8 times") */
+    frequency?: number;
+    /** Whether to show the equipment badge */
+    showEquipment?: boolean;
 }
 
 /**
@@ -60,6 +64,8 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
     layout = 'horizontal',
     selectionIndicator,
     disableCardClick = false,
+    frequency,
+    showEquipment = true,
 }) => {
     const touchStartX = useRef<number>(0);
     const touchEndX = useRef<number>(0);
@@ -124,6 +130,12 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
         return 'bg-slate-700/30 text-slate-400 border-slate-700';
     }, [exercise.mechanic]);
 
+    // Memoized equipment styling
+    const equipmentStyle = useMemo(() => 'bg-slate-700/30 text-slate-300 border-slate-600', []);
+
+    // Memoized frequency styling
+    const frequencyStyle = useMemo(() => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', []);
+
     // Memoized click handler with animation
     const handleClick = useCallback(() => {
         if (disableCardClick) return;
@@ -139,7 +151,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                 setTimeout(() => setIsAdding(false), 300);
             }, 200);
         }
-    }, [isSelected, onRemoveFromWorkout, onToggle, onAddToWorkout]);
+    }, [isSelected, onRemoveFromWorkout, onToggle, onAddToWorkout, disableCardClick]);
 
     // Memoized swipe handlers
     const handleTouchStart = useCallback((e: React.TouchEvent) => {
@@ -171,11 +183,6 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
         e.stopPropagation();
         onRemoveFromWorkout?.();
     }, [onRemoveFromWorkout]);
-
-    const handleAddToRoutine = useCallback((e: React.MouseEvent) => {
-        e.stopPropagation();
-        onAddToRoutine?.();
-    }, [onAddToRoutine]);
 
     // Render horizontal layout (default)
     if (layout === 'horizontal') {
@@ -210,6 +217,20 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                                         className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${difficultyStyle}`}
                                     >
                                         {exercise.difficulty}
+                                    </span>
+                                )}
+                                {showEquipment && exercise.equipment && (
+                                    <span
+                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                                    >
+                                        {exercise.equipment}
+                                    </span>
+                                )}
+                                {typeof frequency === 'number' && frequency > 0 && (
+                                    <span
+                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
+                                    >
+                                        {frequency}×
                                     </span>
                                 )}
                                 {exercise.isFavorite && (
@@ -359,6 +380,20 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                             className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${difficultyStyle}`}
                         >
                             {exercise.difficulty}
+                        </span>
+                    )}
+                    {showEquipment && exercise.equipment && (
+                        <span
+                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                        >
+                            {exercise.equipment}
+                        </span>
+                    )}
+                    {typeof frequency === 'number' && frequency > 0 && (
+                        <span
+                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
+                        >
+                            {frequency}×
                         </span>
                     )}
                     {exercise.isFavorite && (

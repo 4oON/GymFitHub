@@ -23,7 +23,7 @@ export const INITIAL_EXERCISES: Exercise[] = [
     nameZh: '史密斯机臀桥',
     muscleGroup: MuscleGroup.GLUTES,
     secondaryMuscles: [MuscleGroup.QUADS, MuscleGroup.HAMSTRINGS],
-    equipment: 'Smith Machine',
+    equipment: 'Smith',
     mechanic: 'Compound',
     videoUrl: 'https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-hip-thrust-side.mp4'
   },
@@ -116,7 +116,7 @@ export const INITIAL_EXERCISES: Exercise[] = [
     nameZh: '史密斯机驴式后踢',
     muscleGroup: MuscleGroup.GLUTES,
     secondaryMuscles: [],
-    equipment: 'Smith Machine',
+    equipment: 'Smith',
     mechanic: 'Isolation',
     videoUrl: 'https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-glute-kickback-side.mp4'
   },
@@ -181,7 +181,7 @@ export const INITIAL_EXERCISES: Exercise[] = [
     nameZh: '史密斯机卧推',
     muscleGroup: MuscleGroup.CHEST,
     secondaryMuscles: [MuscleGroup.TRICEPS, MuscleGroup.SHOULDERS],
-    equipment: 'Smith Machine',
+    equipment: 'Smith',
     mechanic: 'Compound',
     videoUrl: 'https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-bench-press-front.mp4'
   },
@@ -545,7 +545,7 @@ export const INITIAL_EXERCISES: Exercise[] = [
     nameZh: '史密斯机直立划船',
     muscleGroup: MuscleGroup.SHOULDERS,
     secondaryMuscles: [MuscleGroup.TRAPS, MuscleGroup.BICEPS],
-    equipment: 'Smith Machine',
+    equipment: 'Smith',
     mechanic: 'Compound',
     videoUrl: 'https://media.musclewiki.com/media/uploads/videos/branded/male-Smithmachine-upright-row-front.mp4'
   },

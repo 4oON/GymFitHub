@@ -1,5 +1,6 @@
 import type { Exercise } from '@/shared/types';
 import { MuscleGroup } from '@/shared/types';
+import { normalizeEquipment } from '@/features/exercise/utils/equipmentUtils';
 
 // Mapping from muscle_module to MuscleGroup enum
 const MUSCLE_GROUP_MAP: Record<string, MuscleGroup> = {
@@ -185,7 +186,7 @@ function convertJSONToExercise(jsonEx: JSONExercise, index: number, equipmentTyp
     nameZh: jsonEx.exercise_name_zh,
     muscleGroup: muscleGroup,
     muscle_ids: normalizeMuscleIds(jsonEx.muscle_ids), // Normalize muscle IDs to standardized format
-    equipment: equipmentType,
+    equipment: normalizeEquipment(jsonEx.equipment_type || equipmentType),
     mechanic: mechanic,
     difficulty: difficulty,
     videoUrl: jsonEx['video-front'],
@@ -208,7 +209,7 @@ function convertCablesJSONToExercise(jsonEx: CablesJSONExercise, index: number):
     nameZh: jsonEx.exercise_name_zh,
     muscleGroup: muscleGroup,
     muscle_ids: normalizeMuscleIds(jsonEx.muscle_ids), // Normalize muscle IDs to standardized format
-    equipment: 'Cable',
+    equipment: normalizeEquipment('Cable'),
     mechanic: mechanic,
     difficulty: difficulty,
     videoUrl: jsonEx['url-video-front'],

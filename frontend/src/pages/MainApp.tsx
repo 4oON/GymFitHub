@@ -37,6 +37,8 @@ import { Haptics } from '@capacitor/haptics';
 import GlobalTimer from '@/features/workout/components/GlobalTimer';
 import { INITIAL_EXERCISES } from '@/shared/constants/initial_exercises';
 import { COMPREHENSIVE_EXERCISES_PROMISE } from '@/features/exercise/data/comprehensive_exercises';
+import { ExerciseFrequencyService } from '@/features/exercise/services/ExerciseFrequencyService';
+import { normalizeEquipment } from '@/features/exercise/utils/equipmentUtils';
 import ExerciseSelector from '@/features/exercise/components/ExerciseSelector';
 import WorkoutLogger from '@/features/workout/components/WorkoutLogger';
 import ProgressView from '@/features/report/components/ProgressView';
@@ -274,6 +276,41 @@ export const MainApp: React.FC = () => {
     return INITIAL_EXERCISES;
   });
 
+  // Unified exercise library: merges curated seed, cached common list, and comprehensive data.
+  // Normalizes equipment vocabulary and deduplicates by id, preferring richer metadata.
+  const unifiedExerciseLibrary = useMemo<Exercise[]>(() => {
+    const all = [...INITIAL_EXERCISES, ...commonExercises, ...comprehensiveExercises];
+    const byId = new Map<string, Exercise>();
+
+    all.forEach(ex => {
+      const normalized: Exercise = {
+        ...ex,
+        equipment: normalizeEquipment(ex.equipment)
+      };
+
+      const existing = byId.get(normalized.id);
+      if (!existing) {
+        byId.set(normalized.id, normalized);
+        return;
+      }
+
+      // Merge richer metadata without mutating original objects.
+      byId.set(normalized.id, {
+        ...existing,
+        ...normalized,
+        equipment: normalized.equipment || existing.equipment,
+        muscle_ids: normalized.muscle_ids?.length
+          ? normalized.muscle_ids
+          : existing.muscle_ids,
+        difficulty: normalized.difficulty || existing.difficulty,
+        mechanic: normalized.mechanic || existing.mechanic,
+        videoUrl: normalized.videoUrl || existing.videoUrl,
+      });
+    });
+
+    return Array.from(byId.values());
+  }, [commonExercises, comprehensiveExercises]);
+
   // --- USER PROFILE STATE ---
   const [userProfile, setUserProfile] = useState<UserProfile>(() => {
     const saved = safeParseJSON<UserProfile>('zenfit_user_profile', { weight: 70, unit: 'kg' as const });
@@ -367,7 +404,7 @@ export const MainApp: React.FC = () => {
       }
 
       // ✅ 第三步：确保 exercise 库已加载
-      if (commonExercises.length === 0 && comprehensiveExercises.length === 0) {
+      if (unifiedExerciseLibrary.length === 0) {
         console.log('⏸️ Exercise library not loaded yet, skipping routine load');
         return;
       }
@@ -377,10 +414,7 @@ export const MainApp: React.FC = () => {
 
         // 并行加载本地和远程 Routines
         const localRoutines = safeParse<Routine[]>('zenfit_routines', []);
-        const remoteRoutines = await RoutineSyncService.loadRoutinesFromBackend([
-          ...commonExercises,
-          ...comprehensiveExercises
-        ]);
+        const remoteRoutines = await RoutineSyncService.loadRoutinesFromBackend(unifiedExerciseLibrary);
 
         // 合并数据
         let mergedRoutines = RoutineSyncService.mergeRoutineData(localRoutines, remoteRoutines);
@@ -449,7 +483,7 @@ export const MainApp: React.FC = () => {
     };
 
     loadRoutinesFromBackend();
-  }, [isAuthenticated, user?.id, commonExercises.length, comprehensiveExercises.length]);
+  }, [isAuthenticated, user?.id, unifiedExerciseLibrary.length]);
 
   // 保存 Routines 到 localStorage（作为备份）
   useEffect(() => {
@@ -607,6 +641,14 @@ export const MainApp: React.FC = () => {
   const [history, setHistory] = useState<WorkoutSession[]>(() => safeParse('zenfit_history', []));
   const [isLoadingHistory, setIsLoadingHistory] = useState(false);
 
+  // Per-exercise frequency: sessions where the exercise had >= 3 completed sets.
+  // Derived from merged local + backend history; recomputes immediately when a
+  // workout is finished, with no extra network traffic.
+  const exerciseFrequency = useMemo(
+    () => ExerciseFrequencyService.computeFrequency(history, unifiedExerciseLibrary),
+    [history, unifiedExerciseLibrary]
+  );
+
   // Check for new weekly reports on app startup
   useEffect(() => {
     const checkWeeklyReports = async () => {
@@ -697,7 +739,7 @@ export const MainApp: React.FC = () => {
 
 
 
-  // Persist Libraries
+  // Persist Libraries (legacy keys kept for backward compatibility)
   useEffect(() => {
     safeSaveJSON('commonExercises', commonExercises);
   }, [commonExercises]);
@@ -706,75 +748,7 @@ export const MainApp: React.FC = () => {
     safeSaveJSON('comprehensiveExercises', comprehensiveExercises);
   }, [comprehensiveExercises]);
 
-  // Enrich Common Exercises with data from Comprehensive (Difficulty, Muscle IDs)
-  useEffect(() => {
-    if (comprehensiveExercises.length > 0 && commonExercises.length > 0) {
-      console.log('🔄 Checking if enrichment is needed...');
-
-      // Force enrichment to ensure all data is up to date
-      const enriched = commonExercises.map(common => {
-        // Find match in comprehensive
-        const match = comprehensiveExercises.find(comp =>
-          comp.name.toLowerCase().trim() === common.name.toLowerCase().trim() ||
-          comp.nameZh === common.nameZh ||
-          (comp.videoUrl && common.videoUrl && comp.videoUrl === common.videoUrl)
-        );
-
-        if (match) {
-          // Always update difficulty and muscle_ids from comprehensive data
-          return {
-            ...common,
-            difficulty: match.difficulty || common.difficulty,
-            mechanic: match.mechanic || common.mechanic,
-            muscle_ids: match.muscle_ids && match.muscle_ids.length > 0 ? match.muscle_ids : common.muscle_ids
-          };
-        }
-        return common;
-      });
-
-      // Check if any changes were actually made to avoid infinite loops
-      const hasChanges = JSON.stringify(enriched) !== JSON.stringify(commonExercises);
-
-      if (hasChanges) {
-        setCommonExercises(enriched);
-        console.log('✅ Common exercises enriched with detailed data!');
-      } else {
-        console.log('✨ Common exercises already up to date.');
-      }
-    }
-  }, [comprehensiveExercises.length, commonExercises.length]); // Run when either changes
-
-  // Library Management Handlers
-  const handleMoveToCommon = (exerciseId: string) => {
-    const exercise = comprehensiveExercises.find(e => e.id === exerciseId);
-    if (exercise) {
-      setCommonExercises(prev => [...prev, exercise]);
-      setComprehensiveExercises(prev => prev.filter(e => e.id !== exerciseId));
-      setNotification({ message: 'Added to Common Library', visible: true });
-      setTimeout(() => setNotification(null), 2000);
-    }
-  };
-
-  const handleMoveToComprehensive = (exerciseId: string) => {
-    const exercise = commonExercises.find(e => e.id === exerciseId);
-    if (exercise) {
-      if (exercise.isFavorite) {
-        setNotification({ message: 'Cannot archive favorite exercise', visible: true });
-        setTimeout(() => setNotification(null), 2000);
-        return;
-      }
-      setComprehensiveExercises(prev => [...prev, exercise]);
-      setCommonExercises(prev => prev.filter(e => e.id !== exerciseId));
-      setNotification({ message: 'Archived to Comprehensive Library', visible: true });
-      setTimeout(() => setNotification(null), 2000);
-    }
-  };
-
-  const handleToggleFavorite = (exerciseId: string) => {
-    setCommonExercises(prev => prev.map(ex =>
-      ex.id === exerciseId ? { ...ex, isFavorite: !ex.isFavorite } : ex
-    ));
-  };
+  // Library Management Handlers (deprecated: Common/Comprehensive split replaced by Frequent/More)
 
   const [modalContent, setModalContent] = useState<{ title: string, content: React.ReactNode } | null>(null);
 
@@ -1719,7 +1693,7 @@ export const MainApp: React.FC = () => {
     // 将 ActiveExercise 转换为 Exercise 格式
     const exercisesForRoutine: Exercise[] = activeWorkout.map(activeEx => {
       // 从 exercise library 中查找完整的 exercise 信息
-      const fullExercise = [...commonExercises, ...comprehensiveExercises].find(
+      const fullExercise = unifiedExerciseLibrary.find(
         ex => ex.id === activeEx.exerciseId
       );
 
@@ -2044,7 +2018,7 @@ export const MainApp: React.FC = () => {
       recoveryState,
       recentWorkouts,
       workoutHistory: history, // 传入完整的训练历史
-      exerciseLibrary: [...commonExercises, ...comprehensiveExercises],
+      exerciseLibrary: unifiedExerciseLibrary,
       currentDate: new Date(),
     };
 
@@ -2060,7 +2034,7 @@ export const MainApp: React.FC = () => {
       currentWorkout: activeWorkout,
       recoveryState,
       recentWorkouts,
-      exerciseLibrary: [...commonExercises, ...comprehensiveExercises],
+      exerciseLibrary: unifiedExerciseLibrary,
       currentDate: new Date(),
     };
 
@@ -2210,7 +2184,7 @@ export const MainApp: React.FC = () => {
   // 基于历史数据的AI推荐处理函数
   const handleAcceptHistoryBasedRecommendation = (recommendation: HistoryBasedRecommendation) => {
     // 查找对应的动作
-    const exercise = [...commonExercises, ...comprehensiveExercises].find(
+    const exercise = unifiedExerciseLibrary.find(
       ex => ex.name === recommendation.exerciseName || ex.id === recommendation.exerciseName
     );
 
@@ -2284,14 +2258,14 @@ export const MainApp: React.FC = () => {
   // 生成基于历史数据的AI推荐
   const generateHistoryBasedRecommendations = () => {
     console.log('🔍 Starting history-based recommendation generation...');
-    console.log('📚 Exercise library size:', [...commonExercises, ...comprehensiveExercises].length);
+    console.log('📚 Exercise library size:', unifiedExerciseLibrary.length);
     const context = {
       userProfile,
       currentWorkout: activeWorkout,
       recoveryState,
       recentWorkouts: history.slice(-5).map(session => session.exercises),
       workoutHistory: history,
-      exerciseLibrary: [...commonExercises, ...comprehensiveExercises],
+      exerciseLibrary: unifiedExerciseLibrary,
     };
 
     const recommendations = EnhancedAIRecommendationServiceV2.generateHistoryBasedRecommendations(
@@ -2394,7 +2368,7 @@ export const MainApp: React.FC = () => {
                 recoveryState,
                 recentWorkouts: history.slice(-5).map(session => session.exercises),
                 workoutHistory: history,
-                exerciseLibrary: [...commonExercises, ...comprehensiveExercises],
+                exerciseLibrary: unifiedExerciseLibrary,
               }}
               onAcceptRecommendation={handleAcceptHistoryBasedRecommendation}
               isExpanded={showHistoryBasedAI}
@@ -2475,7 +2449,7 @@ export const MainApp: React.FC = () => {
               routines={routines}
               onStartRoutine={handleStartRoutine}
               exercises={(() => {
-                const allExercises = [...INITIAL_EXERCISES, ...commonExercises, ...comprehensiveExercises];
+                const allExercises = unifiedExerciseLibrary;
                 const uniqueExercises = Array.from(
                   new Map(allExercises.map(ex => [ex.id, ex])).values()
                 );
@@ -2699,7 +2673,7 @@ export const MainApp: React.FC = () => {
               onToggleTimer={toggleTimer}
               exerciseLibrary={(() => {
                 // Create a complete exercise library with deduplication
-                const allExercises = [...INITIAL_EXERCISES, ...commonExercises, ...comprehensiveExercises];
+                const allExercises = unifiedExerciseLibrary;
                 const uniqueExercises = Array.from(
                   new Map(allExercises.map(ex => [ex.id, ex])).values()
                 );
@@ -2720,7 +2694,7 @@ export const MainApp: React.FC = () => {
               onFinishWorkout={handleFinishWorkout}
               onRemoveExercise={handleRemoveExercise}
               exerciseLibrary={(() => {
-                const allExercises = [...INITIAL_EXERCISES, ...commonExercises, ...comprehensiveExercises];
+                const allExercises = unifiedExerciseLibrary;
                 const uniqueExercises = Array.from(
                   new Map(allExercises.map(ex => [ex.id, ex])).values()
                 );
@@ -3052,7 +3026,7 @@ export const MainApp: React.FC = () => {
             setShowExerciseLibraryView(true);
           }}
           recoveryState={recoveryState}
-          exerciseLibrary={comprehensiveExercises}
+          exerciseLibrary={unifiedExerciseLibrary}
           onViewHistory={() => setCurrentScreen(AppScreen.HISTORY)}
           userProfile={userProfile}
           editingRoutine={editingRoutine}
@@ -3063,18 +3037,15 @@ export const MainApp: React.FC = () => {
           showExerciseSelector && (
             <div className="fixed inset-0 bg-slate-950 z-40 pt-safe">
               <ExerciseSelector
+                key={`selector-${selectedMuscleForWorkout || 'none'}`}
                 onSelectExercise={(exercise) => {
                   handleAddExercise(exercise);
                   // Don't close the selector, allow continuous selection
                 }}
-                onAskAI={handleAskAI}
                 activeWorkoutStats={activeWorkoutStats}
                 activeWorkout={activeWorkout}
-                commonExercises={commonExercises}
-                comprehensiveExercises={comprehensiveExercises}
-                onMoveToCommon={handleMoveToCommon}
-                onMoveToComprehensive={handleMoveToComprehensive}
-                onToggleFavorite={handleToggleFavorite}
+                exercises={unifiedExerciseLibrary}
+                exerciseFrequency={exerciseFrequency}
                 onOpenProfile={handleOpenProfile}
                 userProfile={userProfile}
                 isSelectionMode={isSelectionMode}
@@ -3106,6 +3077,7 @@ export const MainApp: React.FC = () => {
         {showExerciseLibraryView && (
           <div className="fixed inset-0 bg-slate-950 z-[100] pt-safe">
             <ExerciseSelector
+              key="selector-library"
               onSelectExercise={(exercise) => {
                 // 在非选择模式下，添加到训练并关闭视图
                 // 在选择模式下，这个回调不应该被调用（由 onToggleSelection 处理）
@@ -3114,14 +3086,10 @@ export const MainApp: React.FC = () => {
                   setShowExerciseLibraryView(false);
                 }
               }}
-              onAskAI={handleAskAI}
               activeWorkoutStats={activeWorkoutStats}
               activeWorkout={activeWorkout}
-              commonExercises={commonExercises}
-              comprehensiveExercises={comprehensiveExercises}
-              onMoveToCommon={handleMoveToCommon}
-              onMoveToComprehensive={handleMoveToComprehensive}
-              onToggleFavorite={handleToggleFavorite}
+              exercises={unifiedExerciseLibrary}
+              exerciseFrequency={exerciseFrequency}
               onOpenProfile={handleOpenProfile}
               userProfile={userProfile}
               isSelectionMode={isSelectionMode}
