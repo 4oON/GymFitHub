@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,9 +19,9 @@
 		7FA81E06302EEF0500493036 /* WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = WATCH000000000001 /* WatchApp.app */; };
 		7FE1905130353AB100BC42B3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19034303539A100BC42B3 /* WidgetKit.framework */; };
 		7FE1905230353AB100BC42B3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19036303539A100BC42B3 /* SwiftUI.framework */; };
-		7FE1905D30353AB200BC42B3 /* ZenFitTimerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7FE1905030353AB100BC42B3 /* ZenFitTimerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		7FE1905D30353AB200BC42B3 /* GymFitHubTimerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
-		WATCH000000000025 /* ZenFitWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000007 /* ZenFitWatchApp.swift */; };
+		WATCH000000000025 /* GymFitHubWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000007 /* GymFitHubWatchApp.swift */; };
 		WATCH000000000026 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000008 /* WatchSessionManager.swift */; };
 		WATCH000000000027 /* WatchTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000009 /* WatchTimerView.swift */; };
 		WATCH000000000028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = WATCH000000000010 /* Assets.xcassets */; };
@@ -33,7 +33,7 @@
 			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7FE1904F30353AB100BC42B3;
-			remoteInfo = ZenFitTimerWidgetExtension;
+			remoteInfo = GymFitHubTimerWidgetExtension;
 		};
 		WATCH000000000031 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -62,7 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				7FE1905D30353AB200BC42B3 /* ZenFitTimerWidgetExtension.appex in Embed Foundation Extensions */,
+				7FE1905D30353AB200BC42B3 /* GymFitHubTimerWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +73,7 @@
 		2FAD9762203C412B000D30F8 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = config.xml; sourceTree = "<group>"; };
 		366514F1C05840679E29ED73 /* BridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeViewController.swift; sourceTree = "<group>"; };
 		50379B222058CBB4000EE86E /* capacitor.config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = capacitor.config.json; sourceTree = "<group>"; };
-		504EC3041FED79650016851F /* ZenFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		504EC3041FED79650016851F /* GymFitHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymFitHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		504EC3071FED79650016851F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		504EC30C1FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		504EC30E1FED79650016851F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,12 +82,12 @@
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
 		7FE19034303539A100BC42B3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		7FE19036303539A100BC42B3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		7FE1905030353AB100BC42B3 /* ZenFitTimerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ZenFitTimerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = GymFitHubTimerWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
 		WATCH000000000001 /* WatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		WATCH000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		WATCH000000000007 /* ZenFitWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZenFitWatchApp.swift; sourceTree = "<group>"; };
+		WATCH000000000007 /* GymFitHubWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymFitHubWatchApp.swift; sourceTree = "<group>"; };
 		WATCH000000000008 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		WATCH000000000009 /* WatchTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTimerView.swift; sourceTree = "<group>"; };
 		WATCH000000000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,12 +99,12 @@
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 7FE1904F30353AB100BC42B3 /* ZenFitTimerWidgetExtension */;
+			target = 7FE1904F30353AB100BC42B3 /* GymFitHubTimerWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		7FE1905330353AB100BC42B3 /* ZenFitTimerWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (7FE1905E30353AB200BC42B3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = ZenFitTimerWidget; sourceTree = "<group>"; };
+		7FE1905330353AB100BC42B3 /* GymFitHubTimerWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (7FE1905E30353AB200BC42B3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = GymFitHubTimerWidget; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
 				WATCH000000000003 /* WatchApp */,
-				7FE1905330353AB100BC42B3 /* ZenFitTimerWidget */,
+				7FE1905330353AB100BC42B3 /* GymFitHubTimerWidget */,
 				7FE19033303539A100BC42B3 /* Frameworks */,
 				504EC3051FED79650016851F /* Products */,
 			);
@@ -150,9 +150,9 @@
 		504EC3051FED79650016851F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				504EC3041FED79650016851F /* ZenFit.app */,
+				504EC3041FED79650016851F /* GymFitHub.app */,
 				WATCH000000000001 /* WatchApp.app */,
-				7FE1905030353AB100BC42B3 /* ZenFitTimerWidgetExtension.appex */,
+				7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,7 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				WATCH000000000005 /* Info.plist */,
-				WATCH000000000007 /* ZenFitWatchApp.swift */,
+				WATCH000000000007 /* GymFitHubWatchApp.swift */,
 				WATCH000000000008 /* WatchSessionManager.swift */,
 				WATCH000000000009 /* WatchTimerView.swift */,
 				WATCH000000000010 /* Assets.xcassets */,
@@ -217,12 +217,12 @@
 				4D22ABE82AF431CB00220026 /* CapApp-SPM */,
 			);
 			productName = App;
-			productReference = 504EC3041FED79650016851F /* ZenFit.app */;
+			productReference = 504EC3041FED79650016851F /* GymFitHub.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7FE1904F30353AB100BC42B3 /* ZenFitTimerWidgetExtension */ = {
+		7FE1904F30353AB100BC42B3 /* GymFitHubTimerWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7FE1905F30353AB200BC42B3 /* Build configuration list for PBXNativeTarget "ZenFitTimerWidgetExtension" */;
+			buildConfigurationList = 7FE1905F30353AB200BC42B3 /* Build configuration list for PBXNativeTarget "GymFitHubTimerWidgetExtension" */;
 			buildPhases = (
 				7FE1904C30353AB100BC42B3 /* Sources */,
 				7FE1904D30353AB100BC42B3 /* Frameworks */,
@@ -233,13 +233,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				7FE1905330353AB100BC42B3 /* ZenFitTimerWidget */,
+				7FE1905330353AB100BC42B3 /* GymFitHubTimerWidget */,
 			);
-			name = ZenFitTimerWidgetExtension;
+			name = GymFitHubTimerWidgetExtension;
 			packageProductDependencies = (
 			);
-			productName = ZenFitTimerWidgetExtension;
-			productReference = 7FE1905030353AB100BC42B3 /* ZenFitTimerWidgetExtension.appex */;
+			productName = GymFitHubTimerWidgetExtension;
+			productReference = 7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		WATCH000000000011 /* WatchApp */ = {
@@ -303,7 +303,7 @@
 			targets = (
 				504EC3031FED79650016851F /* App */,
 				WATCH000000000011 /* WatchApp */,
-				7FE1904F30353AB100BC42B3 /* ZenFitTimerWidgetExtension */,
+				7FE1904F30353AB100BC42B3 /* GymFitHubTimerWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -361,7 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				WATCH000000000025 /* ZenFitWatchApp.swift in Sources */,
+				WATCH000000000025 /* GymFitHubWatchApp.swift in Sources */,
 				WATCH000000000026 /* WatchSessionManager.swift in Sources */,
 				WATCH000000000027 /* WatchTimerView.swift in Sources */,
 			);
@@ -372,7 +372,7 @@
 /* Begin PBXTargetDependency section */
 		7FE1905C30353AB200BC42B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7FE1904F30353AB100BC42B3 /* ZenFitTimerWidgetExtension */;
+			target = 7FE1904F30353AB100BC42B3 /* GymFitHubTimerWidgetExtension */;
 			targetProxy = 7FE1905B30353AB200BC42B3 /* PBXContainerItemProxy */;
 		};
 		WATCH000000000032 /* PBXTargetDependency */ = {
@@ -540,7 +540,7 @@
 				MARKETING_VERSION = 1.0;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app;
-				PRODUCT_NAME = ZenFit;
+				PRODUCT_NAME = GymFitHub;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -562,7 +562,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app;
-				PRODUCT_NAME = ZenFit;
+				PRODUCT_NAME = GymFitHub;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -582,8 +582,8 @@
 				DEVELOPMENT_TEAM = GSAYWM6VH6;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ZenFitTimerWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ZenFitTimerWidget;
+				INFOPLIST_FILE = GymFitHubTimerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GymFitHubTimerWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -595,7 +595,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp.ZenFitTimerWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp.GymFitHubTimerWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -623,8 +623,8 @@
 				DEVELOPMENT_TEAM = GSAYWM6VH6;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ZenFitTimerWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ZenFitTimerWidget;
+				INFOPLIST_FILE = GymFitHubTimerWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GymFitHubTimerWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -635,7 +635,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp.ZenFitTimerWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp.GymFitHubTimerWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -711,7 +711,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7FE1905F30353AB200BC42B3 /* Build configuration list for PBXNativeTarget "ZenFitTimerWidgetExtension" */ = {
+		7FE1905F30353AB200BC42B3 /* Build configuration list for PBXNativeTarget "GymFitHubTimerWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7FE1906030353AB200BC42B3 /* Debug */,

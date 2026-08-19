@@ -1,6 +1,6 @@
 //
-//  ZenFitTimerWidget.swift
-//  ZenFitTimerWidget
+//  GymFitHubTimerWidget.swift
+//  GymFitHubTimerWidget
 //
 //  Created by SKL on 19/8/2026.
 //
@@ -43,7 +43,7 @@ struct SimpleEntry: TimelineEntry {
     let emoji: String
 }
 
-struct ZenFitTimerWidgetEntryView : View {
+struct GymFitHubTimerWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -59,16 +59,16 @@ struct ZenFitTimerWidgetEntryView : View {
     }
 }
 
-struct ZenFitTimerWidget: Widget {
-    let kind: String = "ZenFitTimerWidget"
+struct GymFitHubTimerWidget: Widget {
+    let kind: String = "GymFitHubTimerWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(watchOS 10.0, *) {
-                ZenFitTimerWidgetEntryView(entry: entry)
+                GymFitHubTimerWidgetEntryView(entry: entry)
                     .containerBackground(.fill.tertiary, for: .widget)
             } else {
-                ZenFitTimerWidgetEntryView(entry: entry)
+                GymFitHubTimerWidgetEntryView(entry: entry)
                     .padding()
                     .background()
             }
@@ -79,7 +79,7 @@ struct ZenFitTimerWidget: Widget {
 }
 
 #Preview(as: .accessoryRectangular) {
-    ZenFitTimerWidget()
+    GymFitHubTimerWidget()
 } timeline: {
     SimpleEntry(date: .now, emoji: "😀")
     SimpleEntry(date: .now, emoji: "🤩")

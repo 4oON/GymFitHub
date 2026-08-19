@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import UserNotifications
 
-/// ZenFit 原生计时引擎
+/// GymFitHub 原生计时引擎
 ///
 /// 解决 WebView (setInterval/requestAnimationFrame) 在 iOS 后台被冻结的问题：
 /// - 计时基于 `Date` 时间戳计算，不依赖 JS 定时器，App 切后台后依然准确
@@ -153,7 +153,7 @@ public final class TimerEngine: NSObject {
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: entry.duration, repeats: false)
-        let request = UNNotificationRequest(identifier: "zenfit-rest-\(entry.exerciseId)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "gymfithub-rest-\(entry.exerciseId)", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
@@ -164,7 +164,7 @@ public final class TimerEngine: NSObject {
 
     private func cancelCompletionNotification(for entry: TimerEntry) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: ["zenfit-rest-\(entry.exerciseId)"]
+            withIdentifiers: ["gymfithub-rest-\(entry.exerciseId)"]
         )
     }
 

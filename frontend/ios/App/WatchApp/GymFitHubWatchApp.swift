@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct ZenFitWatchApp: App {
+struct GymFitHubWatchApp: App {
     var body: some Scene {
         WindowGroup {
             WatchTimerView()

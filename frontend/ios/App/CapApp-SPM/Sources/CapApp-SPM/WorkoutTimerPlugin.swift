@@ -1,7 +1,7 @@
 import Foundation
 import Capacitor
 
-/// ZenFit 计时器 Capacitor 插件
+/// GymFitHub 计时器 Capacitor 插件
 ///
 /// 供 Web 前端 (React) 调用原生计时引擎：
 /// - startRest(exerciseId, exerciseName, duration)：启动休息计时

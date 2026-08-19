@@ -15,7 +15,7 @@ struct WatchTimerView: View {
     /// In this state we disable animations and let TimelineView drive per-second updates.
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
-    // App theme colors - matching ZenFit iPhone app
+    // App theme colors - matching GymFitHub iPhone app
     private let accentGreen = Color(red: 0.20, green: 0.78, blue: 0.35) // #34C759
     private let backgroundDark = Color(red: 0.02, green: 0.06, blue: 0.09) // #050F17
     private let surfaceDark = Color(red: 0.12, green: 0.16, blue: 0.20) // #1F2933
