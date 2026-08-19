@@ -224,13 +224,15 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
     // MARK: - Extended Runtime Session
 
     /// Start extended runtime session to keep app running in background
+    /// Use .smartAlarm session type (no special approval needed, designed for timers/alarms)
     private func startExtendedRuntimeSession() {
         guard extendedRuntimeSession == nil || extendedRuntimeSession?.state == .invalid else {
             return
         }
         let session = WKExtendedRuntimeSession()
         session.delegate = self
-        session.start()
+        // smartAlarm is designed for timer/alarm apps and doesn't require workout approval
+        session.start(at: Date())
         extendedRuntimeSession = session
         print("⚡️ [Watch] Extended runtime session started")
     }

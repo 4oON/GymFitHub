@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "GymFitHub_App_Icon_1024x1024.png",
       "idiom" : "universal",
       "platform" : "watchos",
       "size" : "1024x1024"

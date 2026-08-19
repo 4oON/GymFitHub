@@ -32,6 +32,7 @@
 	<key>WKBackgroundModes</key>
 	<array>
 		<string>workout-processing</string>
+		<string>alarm</string>
 	</array>
 </dict>
 </plist>
