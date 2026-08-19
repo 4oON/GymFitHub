@@ -203,7 +203,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     {/* Left: Content (65%) */}
                     <div className={`w-[65%] h-full relative z-10 bg-slate-950 flex flex-col justify-center ${sizeConfig.padding}`}>
                         <div className="relative z-10">
-                            {/* Badges */}
+                            {/* Badges: mechanic / difficulty / favorite */}
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                                 {exercise.mechanic && (
                                     <span
@@ -219,36 +219,38 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                                         {exercise.difficulty}
                                     </span>
                                 )}
+                                {exercise.isFavorite && (
+                                    <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
+                                )}
+                            </div>
+
+                            {/* Exercise Name + Equipment + Frequency on one line */}
+                            <div className="flex items-center gap-2 mb-1 min-w-0">
+                                <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
+                                    {exercise.nameZh || exercise.name}
+                                </h3>
                                 {showEquipment && exercise.equipment && (
                                     <span
-                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                                        className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
                                     >
                                         {exercise.equipment}
                                     </span>
                                 )}
                                 {typeof frequency === 'number' && frequency > 0 && (
                                     <span
-                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
+                                        className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
                                     >
                                         {frequency}×
                                     </span>
                                 )}
-                                {exercise.isFavorite && (
-                                    <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
-                                )}
                             </div>
 
-                            {/* Exercise Name */}
-                            <h3 className={`font-bold text-white leading-tight mb-1 ${sizeConfig.titleSize}`}>
-                                {exercise.nameZh || exercise.name}
-                            </h3>
-
-                            {/* Muscle Information */}
-                            <div className={`flex flex-wrap gap-x-2 gap-y-1 ${sizeConfig.textSize}`}>
+                            {/* Muscle Information — compact */}
+                            <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] leading-tight">
                                 <span className="flex items-center gap-1 text-emerald-400 font-semibold">
                                     <Activity size={sizeConfig.iconSize} /> {exercise.muscleGroup}
                                     {exercise.isPrimaryMuscle === false && (
-                                        <span className="ml-1 px-1 py-0.5 text-[7px] font-bold uppercase tracking-wider bg-slate-700/50 text-slate-400 rounded border border-slate-600">
+                                        <span className="ml-1 px-1 py-0.5 text-[6px] font-bold uppercase tracking-wider bg-slate-700/50 text-slate-400 rounded border border-slate-600">
                                             辅助
                                         </span>
                                     )}
@@ -366,7 +368,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
 
             {/* Content Section */}
             <div className={`w-full p-4 ${sizeConfig.padding}`}>
-                {/* Badges */}
+                {/* Badges: mechanic / difficulty / favorite */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {exercise.mechanic && (
                         <span
@@ -382,36 +384,38 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                             {exercise.difficulty}
                         </span>
                     )}
+                    {exercise.isFavorite && (
+                        <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
+                    )}
+                </div>
+
+                {/* Exercise Name + Equipment + Frequency on one line */}
+                <div className="flex items-center gap-2 mb-2 min-w-0">
+                    <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
+                        {exercise.nameZh || exercise.name}
+                    </h3>
                     {showEquipment && exercise.equipment && (
                         <span
-                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                            className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
                         >
                             {exercise.equipment}
                         </span>
                     )}
                     {typeof frequency === 'number' && frequency > 0 && (
                         <span
-                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
+                            className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
                         >
                             {frequency}×
                         </span>
                     )}
-                    {exercise.isFavorite && (
-                        <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
-                    )}
                 </div>
 
-                {/* Exercise Name */}
-                <h3 className={`font-bold text-white leading-tight mb-2 ${sizeConfig.titleSize}`}>
-                    {exercise.nameZh || exercise.name}
-                </h3>
-
-                {/* Muscle Information */}
-                <div className={`flex flex-wrap gap-x-2 gap-y-1 ${sizeConfig.textSize}`}>
+                {/* Muscle Information — compact */}
+                <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] leading-tight">
                     <span className="flex items-center gap-1 text-emerald-400 font-semibold">
                         <Activity size={sizeConfig.iconSize} /> {exercise.muscleGroup}
                         {exercise.isPrimaryMuscle === false && (
-                            <span className="ml-1 px-1 py-0.5 text-[7px] font-bold uppercase tracking-wider bg-slate-700/50 text-slate-400 rounded border border-slate-600">
+                            <span className="ml-1 px-1 py-0.5 text-[6px] font-bold uppercase tracking-wider bg-slate-700/50 text-slate-400 rounded border border-slate-600">
                                 辅助
                             </span>
                         )}

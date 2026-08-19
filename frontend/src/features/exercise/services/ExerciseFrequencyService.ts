@@ -24,7 +24,7 @@ interface FrequencyAccumulator {
  */
 export class ExerciseFrequencyService {
   static readonly MIN_SETS_TO_COUNT = 3;
-  static readonly FREQUENT_THRESHOLD = 5;
+  static readonly FREQUENT_THRESHOLD = 2;
 
   /**
    * Count completed sets for an active exercise in a session.

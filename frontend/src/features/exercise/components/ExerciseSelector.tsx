@@ -59,9 +59,39 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   const [displayLimit, setDisplayLimit] = useState(50);
   const observerTarget = useRef<HTMLDivElement>(null);
 
-  // Split exercises into Frequent / More based on frequency.
+  // 1) Exercises matching the selected muscle category (primary / secondary / muscle_ids).
+  const categoryMatchedExercises = useMemo(() => {
+    if (selectedCategory === 'All') return exercises;
+
+    const shouldMatchRearShoulders = bodyFacing === 'back' && selectedCategory === MuscleGroup.SHOULDERS;
+
+    return exercises.filter(ex => {
+      if (ex.muscleGroup === selectedCategory) return true;
+
+      return (
+        ex.muscle_ids?.some(id => {
+          const idLower = id.toLowerCase();
+          const categoryLower = selectedCategory.toLowerCase();
+          if (shouldMatchRearShoulders) {
+            return idLower.includes('rear') && idLower.includes('shoulder');
+          }
+          return idLower.includes(categoryLower);
+        }) ||
+        ex.secondaryMuscles?.includes(selectedCategory)
+      );
+    });
+  }, [exercises, selectedCategory, bodyFacing]);
+
+  // 2) Tab counts are dynamic: count only exercises matching the current category.
+  const frequentCount = useMemo(
+    () => categoryMatchedExercises.filter(ex => ExerciseFrequencyService.isFrequent(exerciseFrequency[ex.id])).length,
+    [categoryMatchedExercises, exerciseFrequency]
+  );
+  const moreCount = categoryMatchedExercises.length - frequentCount;
+
+  // 3) Split category-matched exercises into Frequent / More and sort by frequency desc, then name.
   const sourceExercises = useMemo(() => {
-    const withFreq = exercises.map(ex => ({
+    const withFreq = categoryMatchedExercises.map(ex => ({
       exercise: ex,
       freq: exerciseFrequency[ex.id] || { count: 0, lastUsedAt: null }
     }));
@@ -77,86 +107,32 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
       .filter(({ freq }) => !ExerciseFrequencyService.isFrequent(freq))
       .sort(ExerciseFrequencyService.compareByFrequencyThenName)
       .map(({ exercise }) => exercise);
-  }, [exercises, exerciseFrequency, activeTab]);
+  }, [categoryMatchedExercises, exerciseFrequency, activeTab]);
 
-  // Filter Logic
+  // 4) Apply search + equipment filter on top of the tab-sorted list.
   const filteredExercises = useMemo(() => {
-    const filtered = sourceExercises.filter((ex) => {
-      const searchLower = searchTerm.toLowerCase();
+    const searchLower = searchTerm.toLowerCase();
 
-      // Search in exercise name (English and Chinese)
+    return sourceExercises.filter(ex => {
       const matchesName =
         ex.name.toLowerCase().includes(searchLower) ||
         (ex.nameZh && ex.nameZh.includes(searchTerm));
-
-      // Search in muscle group
       const matchesMuscleGroup = ex.muscleGroup.toLowerCase().includes(searchLower);
-
-      // Search in secondary muscles
-      const matchesSecondaryMusclesSearch = ex.secondaryMuscles?.some(
-        muscle => muscle.toLowerCase().includes(searchLower)
-      ) || false;
-
-      // Search in equipment
+      const matchesSecondaryMuscles = ex.secondaryMuscles?.some(m => m.toLowerCase().includes(searchLower)) || false;
       const matchesEquipment = (ex.equipment || 'Other').toLowerCase().includes(searchLower);
-
-      // Search in detailed muscle IDs
-      const matchesMuscleIds = ex.muscle_ids?.some(
-        muscleId => muscleId.toLowerCase().includes(searchLower)
-      ) || false;
-
-      // Search in difficulty
+      const matchesMuscleIds = ex.muscle_ids?.some(id => id.toLowerCase().includes(searchLower)) || false;
       const matchesDifficulty = ex.difficulty?.toLowerCase().includes(searchLower) || false;
-
-      // Search in mechanic
       const matchesMechanic = ex.mechanic?.toLowerCase().includes(searchLower) || false;
 
-      // Combine all search matches
-      const matchesSearch = matchesName || matchesMuscleGroup || matchesSecondaryMusclesSearch ||
+      const matchesSearch =
+        matchesName || matchesMuscleGroup || matchesSecondaryMuscles ||
         matchesEquipment || matchesMuscleIds || matchesDifficulty || matchesMechanic;
-
-      // Special handling for rear shoulders on back view
-      const shouldMatchRearShoulders = bodyFacing === 'back' && selectedCategory === MuscleGroup.SHOULDERS;
-
-      // Check if exercise matches the selected category
-      const isPrimaryMatch = ex.muscleGroup === selectedCategory;
-
-      const isSecondaryMatch = selectedCategory !== 'All' && (
-        ex.muscle_ids?.some(id => {
-          const idLower = id.toLowerCase();
-          const categoryLower = selectedCategory.toLowerCase();
-
-          // Special case: on back view with shoulders selected, match rear-shoulders
-          if (shouldMatchRearShoulders) {
-            return idLower.includes('rear') && idLower.includes('shoulder');
-          }
-
-          // Normal matching
-          return idLower.includes(categoryLower);
-        }) ||
-        ex.secondaryMuscles?.includes(selectedCategory as MuscleGroup)
-      );
-
-      const matchesCategory = selectedCategory === 'All' || isPrimaryMatch || isSecondaryMatch;
 
       const matchesEquipmentFilter = selectedEquipment === 'All' || (ex.equipment || 'Other') === selectedEquipment;
 
-      return matchesSearch && matchesCategory && matchesEquipmentFilter;
+      return matchesSearch && matchesEquipmentFilter;
     });
-
-    // Sort exercises: primary muscle matches first, then secondary matches
-    return filtered.sort((a, b) => {
-      const aIsPrimary = a.muscleGroup === selectedCategory;
-      const bIsPrimary = b.muscleGroup === selectedCategory;
-
-      // Primary exercises come first
-      if (aIsPrimary && !bIsPrimary) return -1;
-      if (!aIsPrimary && bIsPrimary) return 1;
-
-      // Within same category, sort by name
-      return (a.nameZh || a.name).localeCompare(b.nameZh || b.name, 'zh-CN');
-    });
-  }, [searchTerm, selectedCategory, selectedEquipment, sourceExercises, bodyFacing]);
+  }, [searchTerm, selectedEquipment, sourceExercises]);
 
   // Equipment pills are derived from the *visible* filtered list so every card has a matching pill.
   const availableEquipment = useMemo(() => {
@@ -225,12 +201,6 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
     }).filter(Boolean) as MuscleGroup[]));
     return muscles;
   }, [activeWorkout, exercises]);
-
-  const frequentCount = useMemo(
-    () => exercises.filter(ex => ExerciseFrequencyService.isFrequent(exerciseFrequency[ex.id])).length,
-    [exercises, exerciseFrequency]
-  );
-  const moreCount = exercises.length - frequentCount;
 
   if (viewState === 'model') {
 
