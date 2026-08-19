@@ -82,7 +82,7 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let timers: [TimerData]
-    let isPlaceholder: bool
+    let isPlaceholder: Bool
 }
 
 struct GymFitHubTimerWidgetEntryView : View {
@@ -192,8 +192,8 @@ struct GymFitHubTimerWidget: Widget {
 #Preview(as: .accessoryRectangular) {
     GymFitHubTimerWidget()
 } timeline: {
-    SimpleEntry(date: .now, timers: [], isPlaceholder: true)
-    SimpleEntry(date: .now, timers: [
+    SimpleEntry(date: Date(), timers: [], isPlaceholder: true)
+    SimpleEntry(date: Date(), timers: [
         TimerData(exerciseId: "1", exerciseName: "Bench Press", duration: 90, endDate: Date().addingTimeInterval(45).timeIntervalSince1970)
     ], isPlaceholder: false)
 }
