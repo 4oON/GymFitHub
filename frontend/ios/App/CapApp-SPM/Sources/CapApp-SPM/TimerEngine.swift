@@ -2,31 +2,38 @@ import Foundation
 import UIKit
 import UserNotifications
 
-/// ZenFit 原生计时引擎
+/// GymFitHub 原生计时引擎
 ///
 /// 解决 WebView (setInterval/requestAnimationFrame) 在 iOS 后台被冻结的问题：
 /// - 计时基于 `Date` 时间戳计算，不依赖 JS 定时器，App 切后台后依然准确
 /// - 计时结束时触发本地通知（声音 + 横幅），并回调给 Web 层与 Watch 层
 /// - 支持多个并行休息计时器（以 exerciseId 为 key）
-final class TimerEngine: NSObject {
+public final class TimerEngine: NSObject {
 
-    static let shared = TimerEngine()
+    public static let shared = TimerEngine()
 
     /// 计时器状态字典：exerciseId -> TimerEntry
-    private(set) var timers: [String: TimerEntry] = [:]
+    private(set) public var timers: [String: TimerEntry] = [:]
 
     /// 事件回调（供 Web 桥接 / Watch 同步使用）
-    var onTick: ((String, Int) -> Void)?          // exerciseId, remainingSeconds
-    var onFinish: ((String, String) -> Void)?     // exerciseId, exerciseName
+    public var onTick: ((String, Int) -> Void)?          // exerciseId, remainingSeconds
+    public var onFinish: ((String, String) -> Void)?     // exerciseId, exerciseName
 
     private var displayTimer: Timer?
     private var completionTimer: Timer?
 
-    struct TimerEntry {
-        let exerciseId: String
-        let exerciseName: String
-        let duration: TimeInterval   // 总时长（秒）
-        let endDate: Date            // 结束时间戳（绝对时间，后台依然有效）
+    public struct TimerEntry {
+        public let exerciseId: String
+        public let exerciseName: String
+        public let duration: TimeInterval   // 总时长（秒）
+        public let endDate: Date            // 结束时间戳（绝对时间，后台依然有效）
+
+        public init(exerciseId: String, exerciseName: String, duration: TimeInterval, endDate: Date) {
+            self.exerciseId = exerciseId
+            self.exerciseName = exerciseName
+            self.duration = duration
+            self.endDate = endDate
+        }
     }
 
     private override init() {
@@ -38,7 +45,7 @@ final class TimerEngine: NSObject {
     ///   - exerciseId: 动作唯一 ID
     ///   - exerciseName: 动作显示名
     ///   - duration: 休息时长（秒）
-    func startRest(exerciseId: String, exerciseName: String, duration: Double) {
+    public func startRest(exerciseId: String, exerciseName: String, duration: Double) {
         let entry = TimerEntry(
             exerciseId: exerciseId,
             exerciseName: exerciseName,
@@ -58,7 +65,7 @@ final class TimerEngine: NSObject {
     }
 
     /// 手动结束某个计时器（用户点"结束休息"或手表回传）
-    func finishRest(exerciseId: String) {
+    public func finishRest(exerciseId: String) {
         guard let entry = timers[exerciseId] else { return }
         timers.removeValue(forKey: exerciseId)
         cancelCompletionNotification(for: entry)
@@ -71,7 +78,7 @@ final class TimerEngine: NSObject {
     }
 
     /// 主动结束全部计时器
-    func finishAll() {
+    public func finishAll() {
         let keys = Array(timers.keys)
         for key in keys {
             finishRest(exerciseId: key)
@@ -79,14 +86,14 @@ final class TimerEngine: NSObject {
     }
 
     /// 查询单个计时器剩余秒数（0 表示不存在或已结束）
-    func remainingSeconds(for exerciseId: String) -> Int {
+    public func remainingSeconds(for exerciseId: String) -> Int {
         guard let entry = timers[exerciseId] else { return 0 }
         let remaining = Int(ceil(entry.endDate.timeIntervalSinceNow))
         return max(0, remaining)
     }
 
     /// 当前所有计时器状态（供 Web 查询 / Watch 同步）
-    func snapshot() -> [[String: Any]] {
+    public func snapshot() -> [[String: Any]] {
         return timers.values.map { entry in
             return [
                 "exerciseId": entry.exerciseId,
@@ -131,6 +138,7 @@ final class TimerEngine: NSObject {
         guard let entry = timers[exerciseId] else { return }
         timers.removeValue(forKey: exerciseId)
         onFinish?(exerciseId, entry.exerciseName)
+        notifyStateChanged()
         if timers.isEmpty {
             stopDisplayTimer()
         }
@@ -145,7 +153,7 @@ final class TimerEngine: NSObject {
         content.sound = .default
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: entry.duration, repeats: false)
-        let request = UNNotificationRequest(identifier: "zenfit-rest-\(entry.exerciseId)", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "gymfithub-rest-\(entry.exerciseId)", content: content, trigger: trigger)
 
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
@@ -156,11 +164,11 @@ final class TimerEngine: NSObject {
 
     private func cancelCompletionNotification(for entry: TimerEntry) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: ["zenfit-rest-\(entry.exerciseId)"]
+            withIdentifiers: ["gymfithub-rest-\(entry.exerciseId)"]
         )
     }
 
-    func requestNotificationPermissionIfNeeded() {
+    public func requestNotificationPermissionIfNeeded() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
                 print("⚡️ [TimerEngine] 通知权限申请失败: \(error)")
@@ -171,6 +179,7 @@ final class TimerEngine: NSObject {
     // MARK: - Watch 同步广播
 
     private func notifyStateChanged() {
-        // 通知 WatchConnectivityManager 推送状态（由外部通过 onTick/onFinish 回调）
+        // 计时器状态发生变化时，直接推送到 Apple Watch
+        WatchSessionManager.shared.pushTimerState()
     }
 }

@@ -188,7 +188,9 @@ export const MainApp: React.FC = () => {
       setTimers(prev => {
         const next = { ...prev };
         if (next[exerciseId]) {
-          next[exerciseId] = { ...next[exerciseId], targetTime: Date.now() - 1 };
+          delete next[exerciseId];
+          // 触发 finishedTimerQueue 让 UI 知道休息结束，可以进入下一组
+          setFinishedTimerQueue(prevQueue => [...prevQueue, exerciseId]);
         }
         return next;
       });

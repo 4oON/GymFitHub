@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- 背景：品牌橙渐变 + 四角暗角，营造舞台光感 -->
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF7A1A"/>
+      <stop offset="0.55" stop-color="#FF6A00"/>
+      <stop offset="1" stop-color="#F45800"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.42" r="0.85">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#7A2600" stop-opacity="0.38"/>
+    </radialGradient>
+
+    <!-- 条形正面：奶油白微渐变 -->
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#FFEDDA"/>
+    </linearGradient>
+    <!-- 条形侧面：桃橙厚度面 -->
+    <linearGradient id="side" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB470"/>
+      <stop offset="1" stop-color="#F08A3C"/>
+    </linearGradient>
+
+    <!-- 长投影：向右下 45°，单层大模糊，柔和 -->
+    <filter id="longShadow" x="-60%" y="-30%" width="220%" height="200%">
+      <feOffset in="SourceAlpha" dx="42" dy="54"/>
+      <feGaussianBlur stdDeviation="34"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.22"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <!-- 满版背景（iOS 自动裁圆角） -->
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <rect width="1024" height="1024" fill="url(#vignette)"/>
+
+  <!-- ===== 数据哑铃：8 根 3D 条形，高度不规则（参考附件） ===== -->
+  <!-- 高度序列: 470 660 350 450 550 320 700 400，中心 y=500 -->
+  <!-- 每根：侧面(厚度，先画) + 正面(奶油白) -->
+
+  <g>
+    <!-- 长投影层：用所有条形正面的轮廓生成 -->
+    <g fill="#8F3200" filter="url(#longShadow)">
+      <rect x="146" y="265" width="64" height="470" rx="30"/>
+      <rect x="236" y="170" width="64" height="660" rx="30"/>
+      <rect x="326" y="325" width="64" height="350" rx="30"/>
+      <rect x="416" y="275" width="64" height="450" rx="30"/>
+      <rect x="506" y="225" width="64" height="550" rx="30"/>
+      <rect x="596" y="340" width="64" height="320" rx="30"/>
+      <rect x="686" y="150" width="64" height="700" rx="30"/>
+      <rect x="776" y="300" width="64" height="400" rx="30"/>
+    </g>
+
+    <!-- 侧面厚度：紧贴正面下缘，较小偏移，颜色更亮 -->
+    <g fill="url(#side)">
+      <rect x="156" y="276" width="64" height="470" rx="30"/>
+      <rect x="246" y="181" width="64" height="660" rx="30"/>
+      <rect x="336" y="336" width="64" height="350" rx="30"/>
+      <rect x="426" y="286" width="64" height="450" rx="30"/>
+      <rect x="516" y="236" width="64" height="550" rx="30"/>
+      <rect x="606" y="351" width="64" height="320" rx="30"/>
+      <rect x="696" y="161" width="64" height="700" rx="30"/>
+      <rect x="786" y="311" width="64" height="400" rx="30"/>
+    </g>
+
+    <!-- 正面（奶油白） -->
+    <g fill="url(#face)">
+      <rect x="146" y="265" width="64" height="470" rx="30"/>
+      <rect x="236" y="170" width="64" height="660" rx="30"/>
+      <rect x="326" y="325" width="64" height="350" rx="30"/>
+      <rect x="416" y="275" width="64" height="450" rx="30"/>
+      <rect x="506" y="225" width="64" height="550" rx="30"/>
+      <rect x="596" y="340" width="64" height="320" rx="30"/>
+      <rect x="686" y="150" width="64" height="700" rx="30"/>
+      <rect x="776" y="300" width="64" height="400" rx="30"/>
+    </g>
+  </g>
+</svg>

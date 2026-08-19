@@ -1,7 +1,7 @@
 import Foundation
 import Capacitor
 
-/// ZenFit 计时器 Capacitor 插件
+/// GymFitHub 计时器 Capacitor 插件
 ///
 /// 供 Web 前端 (React) 调用原生计时引擎：
 /// - startRest(exerciseId, exerciseName, duration)：启动休息计时
@@ -14,31 +14,50 @@ import Capacitor
 /// - "timerTick"：每秒剩余秒数 { exerciseId, remaining }
 /// - "timerFinish"：计时结束 { exerciseId, exerciseName }
 @objc(WorkoutTimerPlugin)
-public class WorkoutTimerPlugin: CAPPlugin {
+public class WorkoutTimerPlugin: CAPPlugin, CAPBridgedPlugin {
+
+    /// Capacitor 8 要求插件显式声明 JS 端注册的插件 ID。
+    /// 必须与 frontend/src/services/WorkoutTimerService.ts 中 registerPlugin('WorkoutTimer') 一致。
+    public let identifier = "WorkoutTimer"
+    public let jsName = "WorkoutTimer"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "startRest", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "finishRest", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "finishAll", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "getState", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "requestPermission", returnType: CAPPluginReturnPromise)
+    ]
 
     private var engine: TimerEngine { TimerEngine.shared }
 
+    /// 供 App target 显式调用，强制链接器把本类保留在主二进制中。
+    @objc public static func forceLink() {
+        print("⚡️ [WorkoutTimerPlugin] forceLink() called – class is linked")
+    }
+
     override public func load() {
         super.load()
-        // 订阅引擎事件，转发到 JS 与 Watch
+        print("⚡️ [WorkoutTimerPlugin] load() 已注册")
+
+        // 激活 WatchConnectivity（必须在主线程，异步完成）
+        WatchSessionManager.shared.activate()
+        WatchSessionManager.shared.onWatchFinishRequest = { exerciseId in
+            // 结束计时器；finishRest 会触发 engine.onFinish，Plugin 已通过 onFinish 回调通知 JS
+            TimerEngine.shared.finishRest(exerciseId: exerciseId)
+        }
+
+        // 订阅引擎事件，转发到 JS（Watch 同步由 TimerEngine 直接负责）
         engine.onTick = { [weak self] exerciseId, remaining in
             self?.notifyListeners("timerTick", data: [
                 "exerciseId": exerciseId,
                 "remaining": remaining
             ])
-            WatchSessionManager.shared.sendTimerState(
-                exerciseId: exerciseId,
-                exerciseName: self?.engine.snapshot().first { $0["exerciseId"] as? String == exerciseId }?["exerciseName"] as? String ?? "",
-                remaining: remaining,
-                duration: self?.engine.snapshot().first { $0["exerciseId"] as? String == exerciseId }?["duration"] as? Double ?? 0
-            )
         }
         engine.onFinish = { [weak self] exerciseId, exerciseName in
             self?.notifyListeners("timerFinish", data: [
                 "exerciseId": exerciseId,
                 "exerciseName": exerciseName
             ])
-            WatchSessionManager.shared.sendTimerFinished(exerciseId: exerciseId, exerciseName: exerciseName)
         }
     }
 

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>ZenFit</string>
+	<string>GymFitHub</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -25,9 +25,14 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>WKApplication</key>
+	<true/>
 	<key>WKCompanionAppBundleIdentifier</key>
 	<string>com.gymfithub.app</string>
-	<key>WKWatchKitApp</key>
-	<true/>
+	<key>WKBackgroundModes</key>
+	<array>
+		<string>workout-processing</string>
+		<string>alarm</string>
+	</array>
 </dict>
 </plist>
