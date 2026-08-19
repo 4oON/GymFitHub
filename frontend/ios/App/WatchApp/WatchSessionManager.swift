@@ -3,6 +3,9 @@ import WatchConnectivity
 import WatchKit
 import UserNotifications
 
+/// Shared App Group ID for Watch App ↔ Widget data sharing
+private let appGroupID = "group.com.gymfithub.app.timer"
+
 /// watchOS WatchConnectivity manager (ObservableObject for SwiftUI)
 ///
 /// Responsibilities:
@@ -10,6 +13,7 @@ import UserNotifications
 /// - Send "finish rest" command back to iPhone (sendMessage, requires reachable)
 /// - Built-in native timer refreshes remaining time every second, independent of SwiftUI Timer.publish
 /// - Haptic feedback when timer finishes
+/// - Write timer state to App Group UserDefaults for Widget to read
 final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, WKExtendedRuntimeSessionDelegate {
 
     static let shared = WatchSessionManager()
@@ -141,6 +145,8 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
             stopExtendedRuntimeSession()
             self.activeTimers = []
             self.hapticPlayedFor.removeAll()
+            // Clear shared data for Widget
+            self.saveTimersToAppGroup([])
             return
         }
 
@@ -163,12 +169,35 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
             stopExtendedRuntimeSession()
             self.activeTimers = []
             self.hapticPlayedFor.removeAll()
+            // Clear shared data for Widget
+            self.saveTimersToAppGroup([])
             return
         }
 
         self.activeTimers = states
+        // Save to App Group for Widget
+        self.saveTimersToAppGroup(states)
         startCountdown()
         startExtendedRuntimeSession()
+    }
+
+    /// Write current timer states to App Group UserDefaults for Widget to read
+    private func saveTimersToAppGroup(_ timers: [WatchTimerState]) {
+        guard let defaults = UserDefaults(suiteName: appGroupID) else {
+            print("⚡️ [Watch] Failed to access App Group UserDefaults")
+            return
+        }
+        let data: [[String: Any]] = timers.map { timer in
+            return [
+                "exerciseId": timer.exerciseId,
+                "exerciseName": timer.exerciseName,
+                "duration": timer.duration,
+                "endDate": timer.endDate.timeIntervalSince1970
+            ]
+        }
+        defaults.set(data, forKey: "activeTimers")
+        defaults.synchronize()
+        print("⚡️ [Watch] Saved \(timers.count) timers to App Group")
     }
 
     // MARK: - Native countdown driver
