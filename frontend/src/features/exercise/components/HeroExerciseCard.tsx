@@ -5,15 +5,15 @@ import VideoPlayer from './VideoPlayer';
 
 /**
  * 难度等级竖排艺术字配置
- * Hollow/outline effect via WebkitTextStroke + transparent fill (iOS-safe, no bg-clip-text)
+ * 黑色粗体实心；Intermediate 去元音缩写为 INTRMEDT
  */
-const DIFFICULTY_ART: Record<string, { label: string; stroke: string; glow: string }> = {
-    Beginner: { label: 'BEGINNER', stroke: '#34d399', glow: 'rgba(52, 211, 153, 0.35)' },
-    Intermediate: { label: 'INTERMEDIATE', stroke: '#fbbf24', glow: 'rgba(251, 191, 36, 0.35)' },
-    Advanced: { label: 'ADVANCED', stroke: '#fb7185', glow: 'rgba(251, 113, 133, 0.35)' },
+const DIFFICULTY_ART: Record<string, { label: string; glow: string }> = {
+    Beginner: { label: 'BEGINNER', glow: 'rgba(52, 211, 153, 0.45)' },
+    Intermediate: { label: 'INTRMEDT', glow: 'rgba(251, 191, 36, 0.45)' },
+    Advanced: { label: 'ADVANCED', glow: 'rgba(251, 113, 133, 0.45)' },
 };
 
-/** Vertical hollow difficulty label — bottom-to-top, right edge of card */
+/** Vertical difficulty label — black bold solid, bottom-to-top, right edge of card */
 const DifficultyArtLabel: React.FC<{ difficulty: string }> = ({ difficulty }) => {
     const art = DIFFICULTY_ART[difficulty];
     if (!art) return null;
@@ -28,10 +28,9 @@ const DifficultyArtLabel: React.FC<{ difficulty: string }> = ({ difficulty }) =>
                     writingMode: 'vertical-rl',
                     transform: 'rotate(180deg)',
                     fontSize: '12px',
-                    letterSpacing: '0.3em',
-                    WebkitTextStroke: `1px ${art.stroke}`,
-                    color: 'transparent',
-                    textShadow: `0 0 10px ${art.glow}`,
+                    letterSpacing: '0.25em',
+                    color: '#000000',
+                    textShadow: `0 0 6px ${art.glow}`,
                 }}
             >
                 {art.label}
@@ -236,7 +235,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     {/* Left: Content (65%) */}
                     <div className={`w-[65%] h-full relative z-10 bg-slate-950 flex flex-col justify-center ${sizeConfig.padding}`}>
                         <div className="relative z-10">
-                            {/* Badges: mechanic / favorite (difficulty moved to vertical art label) */}
+                            {/* Badges row: mechanic + equipment (same level) + favorite */}
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                                 {exercise.mechanic && (
                                     <span
@@ -245,23 +244,23 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                                         {exercise.mechanic}
                                     </span>
                                 )}
+                                {showEquipment && exercise.equipment && (
+                                    <span
+                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                                    >
+                                        {exercise.equipment}
+                                    </span>
+                                )}
                                 {exercise.isFavorite && (
                                     <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
                                 )}
                             </div>
 
-                            {/* Exercise Name + Equipment + Frequency on one line */}
+                            {/* Exercise Name + Frequency on one line */}
                             <div className="flex items-center gap-2 mb-1 min-w-0">
                                 <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
                                     {exercise.nameZh || exercise.name}
                                 </h3>
-                                {showEquipment && exercise.equipment && (
-                                    <span
-                                        className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
-                                    >
-                                        {exercise.equipment}
-                                    </span>
-                                )}
                                 {typeof frequency === 'number' && frequency > 0 && (
                                     <span
                                         className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
@@ -421,7 +420,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
 
             {/* Content Section */}
             <div className={`w-full p-4 ${sizeConfig.padding} pr-8`}>
-                {/* Badges: mechanic / favorite (difficulty moved to vertical art label) */}
+                {/* Badges row: mechanic + equipment (same level) + favorite */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {exercise.mechanic && (
                         <span
@@ -430,23 +429,23 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                             {exercise.mechanic}
                         </span>
                     )}
+                    {showEquipment && exercise.equipment && (
+                        <span
+                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
+                        >
+                            {exercise.equipment}
+                        </span>
+                    )}
                     {exercise.isFavorite && (
                         <Star size={sizeConfig.iconSize} className="text-amber-400 fill-amber-400" />
                     )}
                 </div>
 
-                {/* Exercise Name + Equipment + Frequency on one line */}
+                {/* Exercise Name + Frequency on one line */}
                 <div className="flex items-center gap-2 mb-2 min-w-0">
                     <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
                         {exercise.nameZh || exercise.name}
                     </h3>
-                    {showEquipment && exercise.equipment && (
-                        <span
-                            className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
-                        >
-                            {exercise.equipment}
-                        </span>
-                    )}
                     {typeof frequency === 'number' && frequency > 0 && (
                         <span
                             className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}

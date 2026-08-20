@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { X, Play, BookmarkPlus, Activity, Wrench, Layers, BarChart3, Star } from 'lucide-react';
 import type { Exercise, Routine } from '@/shared/types';
 import VideoPlayer from '@/shared/video/VideoPlayer';
+import ExerciseMuscleMap from '@/features/anatomy/components/ExerciseMuscleMap';
 
 interface ExerciseDetailModalProps {
     /** The exercise to display. null = closed */
@@ -170,6 +171,20 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 )}
 
                 <div className="px-4 py-4 max-w-md mx-auto w-full pb-8">
+                    {/* 肌肉解剖图：正面 + 背面，按 MUSCLE_THEME 高亮 */}
+                    <div className="mb-4">
+                        <h3 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2">
+                            <Activity size={16} className="text-emerald-400" />
+                            肌肉刺激图解 / Muscle Activation
+                        </h3>
+                        <ExerciseMuscleMap
+                            primaryMuscle={exercise.muscleGroup}
+                            secondaryMuscles={exercise.secondaryMuscles}
+                            muscleIds={exercise.muscle_ids}
+                            height={220}
+                        />
+                    </div>
+
                     {/* Badges */}
                     <div className="flex items-center gap-2 flex-wrap mb-4">
                         {exercise.difficulty && difficultyMeta && (
