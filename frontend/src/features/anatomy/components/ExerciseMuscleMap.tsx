@@ -112,8 +112,9 @@ const AnatomyView: React.FC<{
                 />
             )}
 
-            {/* Muscle paths with highlight */}
+            {/* Muscle paths with highlight (cardio heart excluded — it's a symbol on the chest, not a target muscle) */}
             {muscleKeys.map((key) => {
+                if (key === 'cardio') return null;
                 const d = MUSCLE_PATHS[key as keyof typeof MUSCLE_PATHS];
                 if (!d) return null;
                 return <path key={key} d={d} style={getStyle(key)} />;

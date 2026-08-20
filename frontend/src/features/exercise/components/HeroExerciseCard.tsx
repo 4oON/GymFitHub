@@ -4,22 +4,23 @@ import { CheckCircle2, Star, Activity, Plus, Minus, Maximize2 } from 'lucide-rea
 import VideoPlayer from './VideoPlayer';
 
 /**
- * 难度等级竖排艺术字配置
- * 黑色粗体实心；Intermediate 去元音缩写为 INTRMEDT
+ * 难度等级竖排标签配置
+ * 简单硬朗风：深色半透明胶囊底 + 难度色粗体文字（与卡片其它 badge 同一视觉体系）
+ * Intermediate 去元音缩写为 INTRMEDT
  */
-const DIFFICULTY_ART: Record<string, { label: string; glow: string }> = {
-    Beginner: { label: 'BEGINNER', glow: 'rgba(52, 211, 153, 0.45)' },
-    Intermediate: { label: 'INTRMEDT', glow: 'rgba(251, 191, 36, 0.45)' },
-    Advanced: { label: 'ADVANCED', glow: 'rgba(251, 113, 133, 0.45)' },
+const DIFFICULTY_ART: Record<string, { label: string; color: string; border: string }> = {
+    Beginner: { label: 'BEGINNER', color: '#34d399', border: 'rgba(52, 211, 153, 0.35)' },
+    Intermediate: { label: 'INTRMEDT', color: '#fbbf24', border: 'rgba(251, 191, 36, 0.35)' },
+    Advanced: { label: 'ADVANCED', color: '#fb7185', border: 'rgba(251, 113, 133, 0.35)' },
 };
 
-/** Vertical difficulty label — black bold solid, bottom-to-top, right edge of card */
+/** Vertical difficulty tag — compact pill, bottom-to-top, right edge of card */
 const DifficultyArtLabel: React.FC<{ difficulty: string }> = ({ difficulty }) => {
     const art = DIFFICULTY_ART[difficulty];
     if (!art) return null;
     return (
         <div
-            className="absolute right-1 inset-y-0 z-20 flex items-center justify-center pointer-events-none select-none"
+            className="absolute right-1 inset-y-0 z-20 flex items-center pointer-events-none select-none"
             aria-hidden="true"
         >
             <span
@@ -27,10 +28,14 @@ const DifficultyArtLabel: React.FC<{ difficulty: string }> = ({ difficulty }) =>
                 style={{
                     writingMode: 'vertical-rl',
                     transform: 'rotate(180deg)',
-                    fontSize: '12px',
-                    letterSpacing: '0.25em',
-                    color: '#000000',
-                    textShadow: `0 0 6px ${art.glow}`,
+                    fontSize: '9px',
+                    letterSpacing: '0.18em',
+                    color: art.color,
+                    background: 'rgba(2, 6, 23, 0.55)',
+                    border: `1px solid ${art.border}`,
+                    borderRadius: '6px',
+                    padding: '6px 2px',
+                    lineHeight: 1,
                 }}
             >
                 {art.label}
@@ -157,7 +162,8 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
     }, [exercise.mechanic]);
 
     // Memoized equipment styling
-    const equipmentStyle = useMemo(() => 'bg-slate-700/30 text-slate-300 border-slate-600', []);
+    // Memoized equipment styling — emerald to echo the equipment filter pills' selected state
+    const equipmentStyle = useMemo(() => 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40', []);
 
     // Memoized frequency styling
     const frequencyStyle = useMemo(() => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', []);
