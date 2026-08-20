@@ -3068,6 +3068,7 @@ export const MainApp: React.FC = () => {
                 onAddToRoutine={handleAddToRoutine}
                 selectedMuscleGroup={selectedMuscleForWorkout}
                 forceListView={false}
+                routines={routines}
               />
             </div>
           )
@@ -3103,6 +3104,7 @@ export const MainApp: React.FC = () => {
               onRemoveExercise={handleRemoveExerciseById}
               onAddToRoutine={handleAddToRoutine}
               forceListView={true}
+              routines={routines}
             />
           </div>
         )}

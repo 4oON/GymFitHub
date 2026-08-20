@@ -4,6 +4,7 @@ import type { Exercise, ActiveExercise } from '@/shared/types';
 import { Search, ChevronLeft, List, RefreshCw, User, CheckCircle2, Dumbbell } from 'lucide-react';
 import MuscleAnatomyViewer from '@/features/anatomy/components/MuscleAnatomyViewer';
 import HeroExerciseCard from './HeroExerciseCard';
+import ExerciseDetailModal from './ExerciseDetailModal';
 import { ToastContainer } from '@/components/Toast';
 import { useToast } from '@/hooks/useToast';
 import { ExerciseFrequencyService, type ExerciseFrequencyMap } from '@/features/exercise/services/ExerciseFrequencyService';
@@ -26,6 +27,8 @@ interface ExerciseSelectorProps {
   onAddToRoutine?: (exercise: Exercise) => void;
   selectedMuscleGroup?: MuscleGroup | null;
   forceListView?: boolean;
+  /** Existing routines — enables "quick add to routine" in the detail modal */
+  routines?: import('@/shared/types').Routine[];
 }
 
 
@@ -45,7 +48,8 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   onRemoveExercise,
   onAddToRoutine,
   selectedMuscleGroup,
-  forceListView
+  forceListView,
+  routines
 }) => {
   const { toasts, showSuccess, removeToast } = useToast();
   const [viewState, setViewState] = useState<'model' | 'list'>(
@@ -57,6 +61,7 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   const [selectedEquipment, setSelectedEquipment] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [displayLimit, setDisplayLimit] = useState(50);
+  const [expandedExercise, setExpandedExercise] = useState<Exercise | null>(null);
   const observerTarget = useRef<HTMLDivElement>(null);
 
   // 1) Exercises matching the selected muscle category (primary / secondary / muscle_ids).
@@ -350,6 +355,7 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
                   }}
                   onRemoveFromWorkout={() => onRemoveExercise && onRemoveExercise(exercise.id)}
                   onAddToRoutine={() => onAddToRoutine && onAddToRoutine(exercise)}
+                  onExpandVideo={(ex) => setExpandedExercise(ex)}
                   showVideo={true}
                   showDetailedMuscles={true}
                   size="md"
@@ -362,6 +368,26 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
           </>
         )}
       </div >
+
+      {/* Exercise Detail Modal (video expand + quick add) */}
+      <ExerciseDetailModal
+        exercise={expandedExercise}
+        isInActiveWorkout={
+          expandedExercise
+            ? activeWorkout.some(e => e.exerciseId === expandedExercise.id)
+            : false
+        }
+        routines={routines}
+        onClose={() => setExpandedExercise(null)}
+        onAddToWorkout={(ex) => {
+          if (isSelectionMode && onToggleSelection) {
+            onToggleSelection(ex);
+          } else {
+            handleSelectExercise(ex);
+          }
+        }}
+        onAddToRoutine={(ex) => onAddToRoutine && onAddToRoutine(ex)}
+      />
 
       {/* Fixed Bottom Bar for Selection Mode */}
       {
