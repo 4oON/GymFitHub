@@ -72,22 +72,15 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 }) => {
     const isOpen = !!exercise;
 
-    // Lock body scroll while open (iOS-safe: store & restore scroll position)
+    // Lock body scroll while open.
+    // NOTE: only overflow hidden — do NOT use position:fixed body lock, it causes
+    // a frozen black screen in iOS WKWebView (real device) combined with portal rendering.
     useEffect(() => {
         if (!isOpen) return;
-        const scrollY = window.scrollY;
-        const { style } = document.body;
-        const prev = { overflow: style.overflow, position: style.position, top: style.top, width: style.width };
-        style.overflow = 'hidden';
-        style.position = 'fixed';
-        style.top = `-${scrollY}px`;
-        style.width = '100%';
+        const prevOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
         return () => {
-            style.overflow = prev.overflow;
-            style.position = prev.position;
-            style.top = prev.top;
-            style.width = prev.width;
-            window.scrollTo(0, scrollY);
+            document.body.style.overflow = prevOverflow;
         };
     }, [isOpen]);
 
@@ -103,14 +96,10 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
     const cues = useMemo(() => (exercise ? generateCues(exercise) : []), [exercise]);
 
-    if (!exercise) return null;
-
-    const difficultyMeta = exercise.difficulty ? DIFFICULTY_META[exercise.difficulty] : undefined;
-    const mechanicMeta = exercise.mechanic ? MECHANIC_META[exercise.mechanic] : undefined;
-
     // 智能匹配最合适的 routine：按主目标肌群出现频次排序，平手时取动作数更少（更聚焦）者
+    // NOTE: all hooks must be called unconditionally, before the early return below
     const bestRoutine = useMemo(() => {
-        if (routines.length === 0) return null;
+        if (!exercise || routines.length === 0) return null;
         const scored = routines.map((r) => ({
             routine: r,
             score: r.exercises.filter((e) => e.muscleGroup === exercise.muscleGroup).length,
@@ -119,7 +108,12 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
             b.score - a.score || a.routine.exercises.length - b.routine.exercises.length
         );
         return scored[0].routine;
-    }, [routines, exercise.muscleGroup]);
+    }, [routines, exercise]);
+
+    if (!exercise) return null;
+
+    const difficultyMeta = exercise.difficulty ? DIFFICULTY_META[exercise.difficulty] : undefined;
+    const mechanicMeta = exercise.mechanic ? MECHANIC_META[exercise.mechanic] : undefined;
 
     const handleAddToWorkout = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -174,14 +168,16 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 className="flex-1 overflow-y-auto overscroll-contain"
                 style={{ WebkitOverflowScrolling: 'touch' }}
             >
-                {/* Video — 纯循环播放，隐藏控制条 */}
+                {/* Video — 纯循环播放，隐藏控制条；poster 兜底避免解码失败时黑屏 */}
                 {exercise.videoUrl && (
                     <div className="w-full aspect-video bg-slate-900">
                         <VideoPlayer
                             videoUrl={exercise.videoUrl}
+                            className="w-full aspect-video"
                             lazy={false}
                             autoPlay={true}
                             loop={true}
+                            muted={true}
                             controls={false}
                         />
                     </div>
