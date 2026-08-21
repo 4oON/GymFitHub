@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Play, BookmarkPlus, Activity, Wrench, Layers, BarChart3, Star } from 'lucide-react';
+import { X, Play, BookmarkPlus, Activity, Layers, Star } from 'lucide-react';
 import type { Exercise, Routine } from '@/shared/types';
 import VideoPlayer from '@/shared/video/VideoPlayer';
 import ExerciseMuscleMap from '@/features/anatomy/components/ExerciseMuscleMap';
+import ExerciseHistorySummary from './ExerciseHistorySummary';
 
 interface ExerciseDetailModalProps {
     /** The exercise to display. null = closed */
@@ -255,27 +256,12 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                         </ul>
                     </div>
 
-                    {/* 器械信息 / Equipment */}
-                    {exercise.equipment && (
-                        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-4">
-                            <h3 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2">
-                                <Wrench size={16} className="text-emerald-400" />
-                                器械 / Equipment
-                            </h3>
-                            <p className="text-sm text-slate-300 capitalize">{exercise.equipment}</p>
-                        </div>
-                    )}
-
-                    {/* 追踪模式 / Tracking */}
-                    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-2">
-                        <h3 className="text-sm font-bold text-slate-200 mb-2 flex items-center gap-2">
-                            <BarChart3 size={16} className="text-emerald-400" />
-                            记录方式 / Tracking
-                        </h3>
-                        <p className="text-sm text-slate-300">
-                            {exercise.trackingMode === 'duration' ? '计时 (Duration)' : '计次 (Reps)'}
-                        </p>
-                    </div>
+                    {/* 个人训练历史 / My History（替代原 Equipment 与 Tracking 区块） */}
+                    <ExerciseHistorySummary
+                        exerciseId={exercise.id}
+                        exerciseName={exercise.name}
+                        exerciseNameZh={exercise.nameZh}
+                    />
                 </div>
             </div>
 

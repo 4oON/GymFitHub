@@ -506,7 +506,7 @@ const MuscleAnatomyViewer: React.FC<MuscleAnatomyViewerProps> = ({
                     onClick={() => onMuscleSelect(MuscleGroup.CARDIO)}
                     className={`absolute right-6 flex items-center gap-2 bg-slate-900/90 border border-slate-800 text-rose-500 ${sizeConfig.buttonClass} rounded-xl shadow-lg backdrop-blur-sm hover:bg-slate-800/90 active:scale-95 transition-all`}
                     style={{
-                        bottom: 'calc(env(safe-area-inset-bottom, 0px) + 96px)',
+                        bottom: 'calc(env(safe-area-inset-bottom, 0px) + 180px)',
                         touchAction: 'manipulation',
                     }}
                 >
