@@ -1,7 +1,48 @@
 import React, { useRef, useState, useCallback, useMemo } from 'react';
 import type { Exercise } from '@/shared/types';
-import { CheckCircle2, Star, Activity, Plus, Minus } from 'lucide-react';
+import { CheckCircle2, Star, Activity, Plus, Minus, Maximize2 } from 'lucide-react';
 import VideoPlayer from './VideoPlayer';
+
+/**
+ * 难度等级竖排标签配置
+ * 简单硬朗风：深色半透明胶囊底 + 难度色粗体文字（与卡片其它 badge 同一视觉体系）
+ * Intermediate 去元音缩写为 INTRMEDT
+ */
+const DIFFICULTY_ART: Record<string, { label: string; color: string; border: string }> = {
+    Beginner: { label: 'BEGINNER', color: '#34d399', border: 'rgba(52, 211, 153, 0.35)' },
+    Intermediate: { label: 'INTRMEDT', color: '#fbbf24', border: 'rgba(251, 191, 36, 0.35)' },
+    Advanced: { label: 'ADVANCED', color: '#fb7185', border: 'rgba(251, 113, 133, 0.35)' },
+};
+
+/** Vertical difficulty tag — compact pill, bottom-to-top, right edge of card */
+const DifficultyArtLabel: React.FC<{ difficulty: string }> = ({ difficulty }) => {
+    const art = DIFFICULTY_ART[difficulty];
+    if (!art) return null;
+    return (
+        <div
+            className="absolute right-1 inset-y-0 z-20 flex items-center pointer-events-none select-none"
+            aria-hidden="true"
+        >
+            <span
+                className="font-black uppercase whitespace-nowrap"
+                style={{
+                    writingMode: 'vertical-rl',
+                    transform: 'rotate(180deg)',
+                    fontSize: '9px',
+                    letterSpacing: '0.18em',
+                    color: art.color,
+                    background: 'rgba(2, 6, 23, 0.55)',
+                    border: `1px solid ${art.border}`,
+                    borderRadius: '6px',
+                    padding: '6px 2px',
+                    lineHeight: 1,
+                }}
+            >
+                {art.label}
+            </span>
+        </div>
+    );
+};
 
 interface HeroExerciseCardProps {
     /** Exercise data to display */
@@ -40,6 +81,8 @@ interface HeroExerciseCardProps {
     frequency?: number;
     /** Whether to show the equipment badge */
     showEquipment?: boolean;
+    /** Callback when the user taps the expand icon on the video */
+    onExpandVideo?: (exercise: Exercise) => void;
 }
 
 /**
@@ -66,6 +109,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
     disableCardClick = false,
     frequency,
     showEquipment = true,
+    onExpandVideo,
 }) => {
     const touchStartX = useRef<number>(0);
     const touchEndX = useRef<number>(0);
@@ -107,19 +151,6 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
         }
     }, [size]);
 
-    // Memoized difficulty styling
-    const difficultyStyle = useMemo(() => {
-        const difficulty = exercise.difficulty as string | undefined;
-        if (difficulty === 'Beginner' || difficulty === '初学者' || difficulty === '新手') {
-            return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
-        } else if (difficulty === 'Intermediate' || difficulty === '中级') {
-            return 'bg-amber-500/10 text-amber-400 border-amber-500/20';
-        } else if (difficulty === 'Advanced' || difficulty === '高级') {
-            return 'bg-rose-500/10 text-rose-400 border-rose-500/20';
-        }
-        return 'bg-slate-700/30 text-slate-400 border-slate-700';
-    }, [exercise.difficulty]);
-
     // Memoized mechanic styling
     const mechanicStyle = useMemo(() => {
         if (exercise.mechanic === 'Compound') {
@@ -131,7 +162,8 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
     }, [exercise.mechanic]);
 
     // Memoized equipment styling
-    const equipmentStyle = useMemo(() => 'bg-slate-700/30 text-slate-300 border-slate-600', []);
+    // Memoized equipment styling — emerald to echo the equipment filter pills' selected state
+    const equipmentStyle = useMemo(() => 'bg-emerald-500/15 text-emerald-300 border-emerald-500/40', []);
 
     // Memoized frequency styling
     const frequencyStyle = useMemo(() => 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', []);
@@ -184,6 +216,12 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
         onRemoveFromWorkout?.();
     }, [onRemoveFromWorkout]);
 
+    // Memoized expand-video handler (opens fullscreen detail modal)
+    const handleExpandVideo = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+        onExpandVideo?.(exercise);
+    }, [onExpandVideo, exercise]);
+
     // Render horizontal layout (default)
     if (layout === 'horizontal') {
         return (
@@ -203,7 +241,7 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     {/* Left: Content (65%) */}
                     <div className={`w-[65%] h-full relative z-10 bg-slate-950 flex flex-col justify-center ${sizeConfig.padding}`}>
                         <div className="relative z-10">
-                            {/* Badges: mechanic / difficulty / favorite */}
+                            {/* Badges row: mechanic + equipment (same level) + favorite */}
                             <div className="flex items-center gap-2 mb-1 flex-wrap">
                                 {exercise.mechanic && (
                                     <span
@@ -212,11 +250,11 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                                         {exercise.mechanic}
                                     </span>
                                 )}
-                                {exercise.difficulty && (
+                                {showEquipment && exercise.equipment && (
                                     <span
-                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${difficultyStyle}`}
+                                        className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
                                     >
-                                        {exercise.difficulty}
+                                        {exercise.equipment}
                                     </span>
                                 )}
                                 {exercise.isFavorite && (
@@ -224,18 +262,11 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                                 )}
                             </div>
 
-                            {/* Exercise Name + Equipment + Frequency on one line */}
+                            {/* Exercise Name + Frequency on one line */}
                             <div className="flex items-center gap-2 mb-1 min-w-0">
                                 <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
                                     {exercise.nameZh || exercise.name}
                                 </h3>
-                                {showEquipment && exercise.equipment && (
-                                    <span
-                                        className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
-                                    >
-                                        {exercise.equipment}
-                                    </span>
-                                )}
                                 {typeof frequency === 'number' && frequency > 0 && (
                                     <span
                                         className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
@@ -285,18 +316,33 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                         </div>
                     </div>
 
-                    {/* Right: Video */}
+                    {/* Right: Video (narrowed to make room for the vertical difficulty label) */}
                     {showVideo && (
-                        <div className="w-[50%] h-full relative bg-slate-900">
+                        <div className="w-[42%] h-full relative bg-slate-900">
                             <div className="absolute inset-y-0 left-0 w-[60%] bg-gradient-to-r from-slate-950 via-slate-950/70 to-transparent z-10 pointer-events-none" />
                             {exercise.videoUrl && (
                                 <VideoPlayer
                                     videoUrl={exercise.videoUrl}
                                 />
                             )}
+                            {/* Expand video button (iOS: >=44px touch target) */}
+                            {onExpandVideo && exercise.videoUrl && (
+                                <button
+                                    onClick={handleExpandVideo}
+                                    className="absolute top-1 right-1 z-20 flex items-center justify-center min-w-[44px] min-h-[44px] text-white/80 hover:text-white active:scale-95 transition-all"
+                                    style={{ touchAction: 'manipulation' }}
+                                    title="放大视频 / Expand"
+                                    aria-label="Expand video"
+                                >
+                                    <Maximize2 size={14} strokeWidth={2.5} />
+                                </button>
+                            )}
                         </div>
                     )}
                 </div>
+
+                {/* Vertical hollow difficulty art label — bottom-to-top, right edge */}
+                {exercise.difficulty && <DifficultyArtLabel difficulty={exercise.difficulty} />}
 
                 {/* Action Buttons - Positioned at bottom-right to avoid overlapping with badges */}
                 {showActionButtons && (
@@ -363,12 +409,24 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     <VideoPlayer
                         videoUrl={exercise.videoUrl}
                     />
+                    {/* Expand video button (iOS: >=44px touch target) */}
+                    {onExpandVideo && (
+                        <button
+                            onClick={handleExpandVideo}
+                            className="absolute top-1 right-1 z-20 flex items-center justify-center min-w-[44px] min-h-[44px] text-white/80 hover:text-white active:scale-95 transition-all"
+                            style={{ touchAction: 'manipulation' }}
+                            title="放大视频 / Expand"
+                            aria-label="Expand video"
+                        >
+                            <Maximize2 size={14} strokeWidth={2.5} />
+                        </button>
+                    )}
                 </div>
             )}
 
             {/* Content Section */}
-            <div className={`w-full p-4 ${sizeConfig.padding}`}>
-                {/* Badges: mechanic / difficulty / favorite */}
+            <div className={`w-full p-4 ${sizeConfig.padding} pr-8`}>
+                {/* Badges row: mechanic + equipment (same level) + favorite */}
                 <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {exercise.mechanic && (
                         <span
@@ -377,11 +435,11 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                             {exercise.mechanic}
                         </span>
                     )}
-                    {exercise.difficulty && (
+                    {showEquipment && exercise.equipment && (
                         <span
-                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${difficultyStyle}`}
+                            className={`px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
                         >
-                            {exercise.difficulty}
+                            {exercise.equipment}
                         </span>
                     )}
                     {exercise.isFavorite && (
@@ -389,18 +447,11 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     )}
                 </div>
 
-                {/* Exercise Name + Equipment + Frequency on one line */}
+                {/* Exercise Name + Frequency on one line */}
                 <div className="flex items-center gap-2 mb-2 min-w-0">
                     <h3 className={`font-bold text-white leading-tight truncate ${sizeConfig.titleSize}`}>
                         {exercise.nameZh || exercise.name}
                     </h3>
-                    {showEquipment && exercise.equipment && (
-                        <span
-                            className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${equipmentStyle}`}
-                        >
-                            {exercise.equipment}
-                        </span>
-                    )}
                     {typeof frequency === 'number' && frequency > 0 && (
                         <span
                             className={`flex-shrink-0 px-1.5 py-0.5 rounded ${sizeConfig.badgeSize} font-bold uppercase tracking-wider border ${frequencyStyle}`}
@@ -437,6 +488,9 @@ const HeroExerciseCard: React.FC<HeroExerciseCardProps> = ({
                     )}
                 </div>
             </div>
+
+            {/* Vertical hollow difficulty art label — bottom-to-top, right edge */}
+            {exercise.difficulty && <DifficultyArtLabel difficulty={exercise.difficulty} />}
 
             {/* Action Buttons - Positioned at bottom-right */}
             {showActionButtons && (

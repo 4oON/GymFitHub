@@ -84,6 +84,8 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     /// User taps "Done" on watch
     func requestFinishRest(exerciseId: String) {
+        // Immediate local haptic confirmation so the user feels the tap
+        WKInterfaceDevice.current().play(.click)
         send(["type": "finishRest", "exerciseId": exerciseId])
     }
 
