@@ -171,9 +171,9 @@ const ExerciseMuscleMap: React.FC<ExerciseMuscleMapProps> = ({
 
     return (
         <div className="flex gap-2">
-            {/* Front view */}
+            {/* Front view — py-2 给人体图上下留出呼吸位，SVG 在框内居中 */}
             <div className="flex-1 flex flex-col items-center">
-                <div className="w-full bg-slate-900/60 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center" style={{ height }}>
+                <div className="w-full bg-slate-900/60 rounded-xl border border-slate-800 overflow-hidden flex items-center justify-center py-2" style={{ height }}>
                     <AnatomyView view="front" primaryMuscle={primaryMuscle} secondarySet={secondarySet} />
                 </div>
                 <span className="mt-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">正面 Anterior</span>
@@ -181,7 +181,7 @@ const ExerciseMuscleMap: React.FC<ExerciseMuscleMapProps> = ({
 
             {/* Back view */}
             <div className="flex-1 flex flex-col items-center">
-                <div className={`w-full bg-slate-900/60 rounded-xl border overflow-hidden flex items-center justify-center ${hasBackMuscles ? 'border-slate-800' : 'border-slate-800/50 opacity-60'}`} style={{ height }}>
+                <div className={`w-full bg-slate-900/60 rounded-xl border overflow-hidden flex items-center justify-center py-2 ${hasBackMuscles ? 'border-slate-800' : 'border-slate-800/50 opacity-60'}`} style={{ height }}>
                     <AnatomyView view="back" primaryMuscle={primaryMuscle} secondarySet={secondarySet} />
                 </div>
                 <span className="mt-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">背面 Posterior</span>

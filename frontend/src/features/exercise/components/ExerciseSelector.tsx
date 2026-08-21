@@ -29,6 +29,8 @@ interface ExerciseSelectorProps {
   forceListView?: boolean;
   /** Existing routines — enables "quick add to routine" in the detail modal */
   routines?: import('@/shared/types').Routine[];
+  /** Directly add exercise to a specific routine (used by detail modal's smart quick-add) */
+  onQuickAddToRoutine?: (exercise: Exercise, routineId: string) => void;
 }
 
 
@@ -49,7 +51,8 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
   onAddToRoutine,
   selectedMuscleGroup,
   forceListView,
-  routines
+  routines,
+  onQuickAddToRoutine
 }) => {
   const { toasts, showSuccess, removeToast } = useToast();
   const [viewState, setViewState] = useState<'model' | 'list'>(
@@ -387,6 +390,7 @@ const ExerciseSelector: React.FC<ExerciseSelectorProps> = ({
           }
         }}
         onAddToRoutine={(ex) => onAddToRoutine && onAddToRoutine(ex)}
+        onQuickAddToRoutine={(ex, routineId) => onQuickAddToRoutine && onQuickAddToRoutine(ex, routineId)}
       />
 
       {/* Fixed Bottom Bar for Selection Mode */}

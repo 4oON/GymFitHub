@@ -16,6 +16,8 @@ interface ExerciseDetailModalProps {
     onClose: () => void;
     onAddToWorkout: (exercise: Exercise) => void;
     onAddToRoutine: (exercise: Exercise) => void;
+    /** Directly add exercise to a specific routine (dedupe + backend sync handled by caller) */
+    onQuickAddToRoutine?: (exercise: Exercise, routineId: string) => void;
 }
 
 const DIFFICULTY_META: Record<string, { zh: string; text: string; border: string }> = {
@@ -66,6 +68,7 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
     onClose,
     onAddToWorkout,
     onAddToRoutine,
+    onQuickAddToRoutine,
 }) => {
     const isOpen = !!exercise;
 
@@ -104,7 +107,19 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
     const difficultyMeta = exercise.difficulty ? DIFFICULTY_META[exercise.difficulty] : undefined;
     const mechanicMeta = exercise.mechanic ? MECHANIC_META[exercise.mechanic] : undefined;
-    const primaryRoutine = routines.length > 0 ? routines[0] : null;
+
+    // 智能匹配最合适的 routine：按主目标肌群出现频次排序，平手时取动作数更少（更聚焦）者
+    const bestRoutine = useMemo(() => {
+        if (routines.length === 0) return null;
+        const scored = routines.map((r) => ({
+            routine: r,
+            score: r.exercises.filter((e) => e.muscleGroup === exercise.muscleGroup).length,
+        }));
+        scored.sort((a, b) =>
+            b.score - a.score || a.routine.exercises.length - b.routine.exercises.length
+        );
+        return scored[0].routine;
+    }, [routines, exercise.muscleGroup]);
 
     const handleAddToWorkout = (e: React.MouseEvent) => {
         e.stopPropagation();
@@ -114,9 +129,9 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
 
     const handleQuickAddToRoutine = (e: React.MouseEvent) => {
         e.stopPropagation();
-        if (!primaryRoutine) return;
-        // 快捷路径：直接加入第一个 routine，避免再次弹出选择窗口
-        onAddToRoutine(exercise);
+        if (!bestRoutine) return;
+        // 直接加入智能匹配的 routine（去重 + 后端同步由 MainApp 处理）
+        onQuickAddToRoutine?.(exercise, bestRoutine.id);
         onClose();
     };
 
@@ -159,14 +174,15 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                 className="flex-1 overflow-y-auto overscroll-contain"
                 style={{ WebkitOverflowScrolling: 'touch' }}
             >
-                {/* Video */}
+                {/* Video — 纯循环播放，隐藏控制条 */}
                 {exercise.videoUrl && (
                     <div className="w-full aspect-video bg-slate-900">
                         <VideoPlayer
                             videoUrl={exercise.videoUrl}
                             lazy={false}
                             autoPlay={true}
-                            controls={true}
+                            loop={true}
+                            controls={false}
                         />
                     </div>
                 )}
@@ -282,24 +298,24 @@ const ExerciseDetailModal: React.FC<ExerciseDetailModalProps> = ({
                         {isInActiveWorkout ? '已在当前训练中 / In Workout' : '加入当前训练 / Add to Workout'}
                     </button>
                     <div className="flex gap-2">
-                        {primaryRoutine && (
+                        {bestRoutine && (
                             <button
                                 onClick={handleQuickAddToRoutine}
                                 className="flex-1 min-h-[48px] py-3 rounded-xl font-bold flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all active:scale-95"
                                 style={{ touchAction: 'manipulation' }}
-                                title={primaryRoutine.name}
+                                title={bestRoutine.name}
                             >
                                 <BookmarkPlus size={18} />
-                                <span className="truncate">加入「{primaryRoutine.name}」</span>
+                                <span className="truncate">加入「{bestRoutine.name}」</span>
                             </button>
                         )}
                         <button
                             onClick={handleChooseRoutine}
-                            className={`${primaryRoutine ? 'flex-1' : 'w-full'} min-h-[48px] py-3 rounded-xl font-bold flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all active:scale-95`}
+                            className={`${bestRoutine ? 'flex-1' : 'w-full'} min-h-[48px] py-3 rounded-xl font-bold flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all active:scale-95`}
                             style={{ touchAction: 'manipulation' }}
                         >
                             <BookmarkPlus size={18} />
-                            {primaryRoutine ? '选择 Routine' : '加入 Routine / Add to Routine'}
+                            {bestRoutine ? '选择 Routine' : '加入 Routine / Add to Routine'}
                         </button>
                     </div>
                 </div>
