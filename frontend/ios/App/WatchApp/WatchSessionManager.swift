@@ -2,6 +2,7 @@ import SwiftUI
 import WatchConnectivity
 import WatchKit
 import UserNotifications
+import WidgetKit
 
 /// Shared App Group ID for Watch App ↔ Widget data sharing
 private let appGroupID = "group.com.gymfithub.app.timer"
@@ -198,6 +199,10 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         defaults.set(data, forKey: "activeTimers")
         defaults.synchronize()
         print("⚡️ [Watch] Saved \(timers.count) timers to App Group")
+
+        // Force Widget to reload its timeline so it reads the fresh data immediately
+        WidgetCenter.shared.reloadAllTimelines()
+        print("⚡️ [Watch] Requested Widget timeline reload")
     }
 
     // MARK: - Native countdown driver
