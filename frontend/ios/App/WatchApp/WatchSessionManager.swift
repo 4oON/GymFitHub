@@ -229,11 +229,17 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
                     self.stopExtendedRuntimeSession()
                     self.activeTimers = []
                     self.hapticPlayedFor.removeAll()
+                    // Clear shared data for Widget
+                    self.saveTimersToAppGroup([])
                 } else if updatedTimers.count != self.activeTimers.count {
                     self.activeTimers = updatedTimers
+                    // Update shared data for Widget when timers change
+                    self.saveTimersToAppGroup(updatedTimers)
                 } else {
                     // Force @Published refresh by reassigning
                     self.activeTimers = self.activeTimers
+                    // Continuously update App Group so Widget reads fresh remaining time
+                    self.saveTimersToAppGroup(self.activeTimers)
                 }
             }
         }
