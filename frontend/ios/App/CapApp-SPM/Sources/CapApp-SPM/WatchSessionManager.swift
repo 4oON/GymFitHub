@@ -104,6 +104,14 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
                 session.sendMessage(reply, replyHandler: nil) { error in
                     print("⚡️ [WatchSession] 回复 getState 失败: \(error.localizedDescription)")
                 }
+            case "handshake":
+                // 手表打开 App 后主动握手，确认 iPhone App 正在运行
+                print("⚡️ [WatchSession] 收到手表 handshake，回复 ack")
+                session.sendMessage(["type": "handshakeAck"], replyHandler: nil) { error in
+                    print("⚡️ [WatchSession] 回复 handshakeAck 失败: \(error.localizedDescription)")
+                }
+                // 顺带把当前计时状态推给刚打开的手表
+                self.pushTimerState()
             default:
                 break
             }

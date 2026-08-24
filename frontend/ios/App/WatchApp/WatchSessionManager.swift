@@ -133,9 +133,28 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
             case "stateSync":
                 print("⚡️ [Watch] Received stateSync message")
                 self.applyContext(message)
+            case "handshakeAck":
+                // iPhone App 已确认运行，握手成功
+                print("⚡️ [Watch] Handshake ACK received - iPhone app is running")
+                self.isConnected = true
             default:
                 break
             }
+        }
+    }
+
+    /// 主动与 iPhone 握手：确认手机 App 是否打开
+    func sendHandshake() {
+        guard WCSession.default.isReachable else {
+            print("⚡️ [Watch] sendHandshake: iPhone unreachable, will retry on reachability change")
+            self.isConnected = false
+            return
+        }
+        WCSession.default.sendMessage(["type": "handshake"], replyHandler: nil) { error in
+            DispatchQueue.main.async {
+                self.isConnected = false
+            }
+            print("⚡️ [Watch] Handshake send failed: \(error.localizedDescription)")
         }
     }
 
@@ -291,13 +310,15 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         DispatchQueue.main.async {
-            self.isConnected = activationState == .activated
+            self.isConnected = activationState == .activated && session.isReachable
             if activationState == .activated {
                 print("⚡️ [Watch] WCSession activated, reachable=\(session.isReachable)")
                 // Read cached Application Context immediately after activation
                 let context = session.receivedApplicationContext
                 print("⚡️ [Watch] Post-activation cached context timers=\((context["timers"] as? [[String: Any]])?.count ?? 0)")
                 self.applyContext(context)
+                // Actively handshake with iPhone to confirm app is running
+                self.sendHandshake()
             } else if let error = error {
                 print("⚡️ [Watch] WCSession activation failed: \(error.localizedDescription)")
             }
@@ -315,9 +336,14 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         DispatchQueue.main.async {
             self.isConnected = session.isReachable
             print("⚡️ [Watch] Reachability changed: \(session.isReachable)")
-            // When iPhone becomes reachable and no timer data, actively request once
-            if session.isReachable && self.activeTimers.isEmpty {
-                self.requestStateSync()
+            // When iPhone becomes reachable, handshake + sync state
+            if session.isReachable {
+                self.sendHandshake()
+                if self.activeTimers.isEmpty {
+                    self.requestStateSync()
+                }
+            } else {
+                self.isConnected = false
             }
         }
     }

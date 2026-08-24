@@ -31,7 +31,10 @@ struct WatchTimerView: View {
                 multiTimerView
             }
         }
-        .onAppear { session.requestStateSync() }
+        .onAppear {
+            session.requestStateSync()
+            session.sendHandshake()
+        }
     }
 
     // MARK: - Idle State
@@ -52,9 +55,15 @@ struct WatchTimerView: View {
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
 
-                    Text(session.isConnected ? "Waiting for iPhone" : "Not connected")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                    // Connection status: green dot when iPhone app is running
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(session.isConnected ? accentGreen : Color.gray)
+                            .frame(width: 8, height: 8)
+                        Text(session.isConnected ? "Connected to iPhone" : "iPhone not running")
+                            .font(.system(size: 14))
+                            .foregroundColor(session.isConnected ? .white : .gray)
+                    }
                 }
 
                 Spacer()

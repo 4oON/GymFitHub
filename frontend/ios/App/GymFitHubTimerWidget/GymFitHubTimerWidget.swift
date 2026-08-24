@@ -166,8 +166,8 @@ struct GymFitHubTimerWidgetEntryView : View {
                 .background(Capsule().fill(Color.black.opacity(0.55)))
             }
         }
-        .padding(.horizontal, 4)
-        .padding(.vertical, 5)
+        .padding(.horizontal, 2)
+        .padding(.vertical, 3)
     }
 
     // MARK: - Multiple Timers
