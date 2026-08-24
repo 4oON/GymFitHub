@@ -41,18 +41,20 @@ struct Provider: TimelineProvider {
         var entries: [SimpleEntry] = []
 
         // Read current timers from App Group
-        let entry = loadEntry()
-        entries.append(entry)
+        let timers = loadTimersFromAppGroup()
 
-        // Create timeline entries for the next 60 seconds (Widget max refresh rate)
-        // The system will decide when to actually refresh, but we prepare per-second data
-        for secondOffset in 1..<60 {
+        // Create timeline entries for the next 60 seconds.
+        // CRITICAL: Each entry must carry the SAME timers array, and the VIEW
+        // must compute remaining based on entry.date (not a pre-computed value).
+        // This ensures the countdown ticks even though the system may not
+        // call getTimeline again for several minutes.
+        for secondOffset in 0..<60 {
             let entryDate = Calendar.current.date(byAdding: .second, value: secondOffset, to: currentDate)!
-            let futureEntry = SimpleEntry(date: entryDate, timers: entry.timers, isPlaceholder: false)
-            entries.append(futureEntry)
+            let entry = SimpleEntry(date: entryDate, timers: timers, isPlaceholder: false)
+            entries.append(entry)
         }
 
-        // Reload policy: try to refresh as soon as possible
+        // Reload policy: ask the system to refresh as soon as possible
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
