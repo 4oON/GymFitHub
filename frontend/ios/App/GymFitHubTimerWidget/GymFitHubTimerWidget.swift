@@ -130,39 +130,44 @@ struct GymFitHubTimerWidgetEntryView : View {
         }
     }
 
-    // MARK: - Single Timer (progress bar)
+    // MARK: - Single Timer (thick progress bar as background)
 
     private func singleTimerBar(_ timer: TimerData) -> some View {
         let remaining = timer.remaining(at: entry.date)
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(timer.exerciseName)
-                    .font(.system(size: 11, weight: .semibold))
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                Spacer(minLength: 4)
-                Text("\(remaining)s")
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundColor(accentGreen)
-            }
+        return GeometryReader { geo in
+            ZStack(alignment: .leading) {
+                // Track (dim background)
+                Capsule()
+                    .fill(surfaceDark)
 
-            // Horizontal bar that shrinks as the timer counts down
-            GeometryReader { geo in
-                ZStack(alignment: .leading) {
-                    Capsule()
-                        .fill(surfaceDark)
-                    Capsule()
-                        .fill(accentGreen)
-                        .frame(width: geo.size.width * progress)
+                // Thick green bar as the background, shrinking as time runs out
+                Capsule()
+                    .fill(accentGreen)
+                    .frame(width: geo.size.width * max(progress, 0.03))
+
+                // Text overlay: white bold on semi-transparent black capsule (stencil-like)
+                HStack(spacing: 6) {
+                    Text(timer.exerciseName)
+                        .font(.system(size: 13, weight: .bold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+
+                    Spacer(minLength: 4)
+
+                    Text("\(remaining)s")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .monospacedDigit()
                 }
+                .foregroundColor(.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .background(Capsule().fill(Color.black.opacity(0.55)))
             }
-            .frame(height: 6)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
+        .padding(.horizontal, 4)
+        .padding(.vertical, 5)
     }
 
     // MARK: - Multiple Timers
