@@ -91,9 +91,18 @@ struct GymFitHubTimerWidgetEntryView : View {
     var entry: Provider.Entry
 
     // App theme colors
-    private let accentGreen = Color(red: 0.20, green: 0.78, blue: 0.35)
+    private let accentGreen = Color(red: 0.20, green: 0.78, blue: 0.35)   // #34C759
+    private let accentOrange = Color(red: 1.00, green: 0.58, blue: 0.00)  // #FF9500
+    private let accentBlue = Color(red: 0.04, green: 0.52, blue: 1.00)    // #0A84FF
+    private let accentPurple = Color(red: 0.69, green: 0.32, blue: 0.87)  // #AF52DE
     private let backgroundDark = Color(red: 0.02, green: 0.06, blue: 0.09)
     private let surfaceDark = Color(red: 0.12, green: 0.16, blue: 0.20)
+
+    /// Assign a distinct color per timer index (green first, then theme-compatible alternates)
+    private func color(for index: Int) -> Color {
+        let palette = [accentGreen, accentOrange, accentBlue, accentPurple]
+        return palette[index % palette.count]
+    }
 
     var body: some View {
         if entry.timers.isEmpty {
@@ -109,64 +118,97 @@ struct GymFitHubTimerWidgetEntryView : View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(backgroundDark)
         } else if entry.timers.count == 1, let timer = entry.timers.first {
-            // Single timer view
-            let remaining = timer.remaining(at: entry.date)
-            let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
+            // Single timer - horizontal progress bar, counts down to zero
+            singleTimerBar(timer)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(backgroundDark)
+        } else {
+            // Multiple timers - one row each with distinct color
+            multiTimerRows
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(backgroundDark)
+        }
+    }
 
-            VStack(spacing: 4) {
+    // MARK: - Single Timer (progress bar)
+
+    private func singleTimerBar(_ timer: TimerData) -> some View {
+        let remaining = timer.remaining(at: entry.date)
+        let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
+
+        return VStack(alignment: .leading, spacing: 4) {
+            HStack {
                 Text(timer.exerciseName)
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundColor(.white)
                     .lineLimit(1)
-
-                ZStack {
-                    Circle()
-                        .stroke(surfaceDark, lineWidth: 3)
-                    Circle()
-                        .trim(from: 0, to: progress)
-                        .stroke(accentGreen, style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                        .rotationEffect(.degrees(-90))
-
-                    Text("\(remaining)")
-                        .font(.system(size: 20, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundColor(.white)
-                }
-                .frame(width: 50, height: 50)
-
-                Text("sec")
-                    .font(.system(size: 9))
-                    .foregroundColor(.gray)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(backgroundDark)
-        } else {
-            // Multiple timers - show count and first timer
-            let firstTimer = entry.timers[0]
-            let remaining = firstTimer.remaining(at: entry.date)
-
-            VStack(spacing: 2) {
-                HStack(spacing: 4) {
-                    Image(systemName: "timer")
-                        .font(.system(size: 12))
-                        .foregroundColor(accentGreen)
-                    Text("\(entry.timers.count) Timers")
-                        .font(.system(size: 11, weight: .semibold))
-                        .foregroundColor(.white)
-                }
-
+                Spacer(minLength: 4)
                 Text("\(remaining)s")
-                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
                     .monospacedDigit()
-                    .foregroundColor(.white)
-
-                Text(firstTimer.exerciseName)
-                    .font(.system(size: 10))
-                    .foregroundColor(.gray)
-                    .lineLimit(1)
+                    .foregroundColor(accentGreen)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(backgroundDark)
+
+            // Horizontal bar that shrinks as the timer counts down
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Capsule()
+                        .fill(surfaceDark)
+                    Capsule()
+                        .fill(accentGreen)
+                        .frame(width: geo.size.width * progress)
+                }
+            }
+            .frame(height: 6)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+    }
+
+    // MARK: - Multiple Timers
+
+    private var multiTimerRows: some View {
+        VStack(spacing: 3) {
+            ForEach(Array(entry.timers.prefix(3).enumerated()), id: \.element.exerciseId) { index, timer in
+                timerRow(timer, index: index)
+            }
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+    }
+
+    private func timerRow(_ timer: TimerData, index: Int) -> some View {
+        let remaining = timer.remaining(at: entry.date)
+        let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
+        let color = color(for: index)
+
+        return HStack(spacing: 5) {
+            // Color indicator + mini bar
+            VStack(alignment: .leading, spacing: 2) {
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(color)
+                    .frame(width: 3, height: 10)
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(surfaceDark)
+                        Capsule().fill(color).frame(width: geo.size.width * progress)
+                    }
+                }
+                .frame(height: 3)
+            }
+            .frame(width: 22)
+
+            Text(timer.exerciseName)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(.white)
+                .lineLimit(1)
+
+            Spacer(minLength: 2)
+
+            Text("\(remaining)")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .monospacedDigit()
+                .foregroundColor(color)
         }
     }
 }
