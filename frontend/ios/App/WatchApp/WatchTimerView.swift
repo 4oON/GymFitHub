@@ -34,6 +34,7 @@ struct WatchTimerView: View {
         .onAppear {
             session.requestStateSync()
             session.sendHandshake()
+            session.checkExpiredTimers()
         }
     }
 
@@ -78,6 +79,9 @@ struct WatchTimerView: View {
         // TimelineView drives per-second UI refresh and continues updating
         // in always-on (wrist-down) state, unlike Timer.publish / Foundation Timer.
         TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+            // Sync: clean up expired timers every render (handles lock-screen desync)
+            session.checkExpiredTimers()
+
             let remaining = max(0, Int(ceil(timer.endDate.timeIntervalSince(context.date))))
             let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
@@ -174,6 +178,9 @@ struct WatchTimerView: View {
 
                 // Timer list - compact cards, 3+ visible
                 TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+                    // Sync: clean up expired timers every render
+                    session.checkExpiredTimers()
+
                     ScrollView {
                         VStack(spacing: 6) {
                             ForEach(session.activeTimers) { timer in

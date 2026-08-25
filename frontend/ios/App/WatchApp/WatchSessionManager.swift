@@ -32,6 +32,9 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
     /// Extended runtime session to keep app alive in background
     private var extendedRuntimeSession: WKExtendedRuntimeSession?
 
+    /// Periodic handshake timer to keep connection status honest
+    private var handshakeTimer: Timer?
+
     struct WatchTimerState: Equatable, Identifiable {
         let exerciseId: String
         let exerciseName: String
@@ -57,6 +60,25 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         super.init()
         activate()
         requestNotificationPermission()
+        startPeriodicHandshake()
+    }
+
+    /// Periodically verify iPhone app is still running (every 10s)
+    /// This fixes the case where the iPhone app is killed but isConnected
+    /// stays true because WCSession reachability doesn't change.
+    private func startPeriodicHandshake() {
+        stopPeriodicHandshake()
+        handshakeTimer = Timer(timeInterval: 10.0, repeats: true) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.sendHandshake()
+            }
+        }
+        RunLoop.main.add(handshakeTimer!, forMode: .common)
+    }
+
+    private func stopPeriodicHandshake() {
+        handshakeTimer?.invalidate()
+        handshakeTimer = nil
     }
 
     /// Request local notification permission for timer completion alerts
@@ -143,19 +165,30 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         }
     }
 
-    /// 主动与 iPhone 握手：确认手机 App 是否打开
+    /// 主动与 iPhone 握手：用 replyHandler 确认手机 App 真正在运行
+    /// iPhone 收到 handshake 后会回复 handshakeAck，replyHandler 被调用 = 已连接
+    /// replyHandler 超时/失败 = 未连接
     func sendHandshake() {
         guard WCSession.default.isReachable else {
-            print("⚡️ [Watch] sendHandshake: iPhone unreachable, will retry on reachability change")
+            print("⚡️ [Watch] sendHandshake: iPhone unreachable")
             self.isConnected = false
             return
         }
-        WCSession.default.sendMessage(["type": "handshake"], replyHandler: nil) { error in
-            DispatchQueue.main.async {
-                self.isConnected = false
+        WCSession.default.sendMessage(
+            ["type": "handshake"],
+            replyHandler: { _ in
+                DispatchQueue.main.async {
+                    print("⚡️ [Watch] Handshake reply received - iPhone app is running")
+                    self.isConnected = true
+                }
+            },
+            errorHandler: { error in
+                DispatchQueue.main.async {
+                    print("⚡️ [Watch] Handshake failed: \(error.localizedDescription)")
+                    self.isConnected = false
+                }
             }
-            print("⚡️ [Watch] Handshake send failed: \(error.localizedDescription)")
-        }
+        )
     }
 
     private func applyContext(_ context: [String: Any]) {
@@ -225,6 +258,35 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
     }
 
     // MARK: - Native countdown driver
+
+    /// 供 UI 层在渲染时调用：清理已到期的计时器（幂等，解决锁屏/后台不同步）
+    /// 即使 Foundation Timer 被系统挂起，UI 每次刷新也会主动检查并清理
+    func checkExpiredTimers() {
+        DispatchQueue.main.async {
+            guard !self.activeTimers.isEmpty else { return }
+            let expired = self.activeTimers.filter { $0.remaining <= 0 }
+            if expired.isEmpty { return }
+
+            // Play haptic for each newly expired timer
+            for timer in expired where !self.hapticPlayedFor.contains(timer.exerciseId) {
+                self.hapticPlayedFor.insert(timer.exerciseId)
+                self.playHaptic()
+                print("⚡️ [Watch] checkExpiredTimers: \(timer.exerciseName) expired, haptic played")
+            }
+
+            let remaining = self.activeTimers.filter { $0.remaining > 0 }
+            if remaining.isEmpty {
+                self.stopCountdown()
+                self.stopExtendedRuntimeSession()
+                self.activeTimers = []
+                self.hapticPlayedFor.removeAll()
+                self.saveTimersToAppGroup([])
+            } else {
+                self.activeTimers = remaining
+                self.saveTimersToAppGroup(remaining)
+            }
+        }
+    }
 
     private func startCountdown() {
         stopCountdown()

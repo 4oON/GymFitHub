@@ -64,6 +64,14 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
             try session.updateApplicationContext(context)
             print("⚡️ [WatchSession] 已推送 context，timers=\(TimerEngine.shared.snapshot().count)")
             pendingContext = nil
+
+            // 即时通道：sendMessage 直接送达（需要手表可达），作为 context 的补充
+            // 解决蓝牙/后台下 updateApplicationContext 延迟导致的同步不同步问题
+            if session.isReachable {
+                session.sendMessage(["type": "stateSync", "timers": snapshot, "timestamp": Date().timeIntervalSince1970], replyHandler: nil) { error in
+                    print("⚡️ [WatchSession] 即时推送失败(可忽略): \(error.localizedDescription)")
+                }
+            }
         } catch {
             print("⚡️ [WatchSession] updateApplicationContext 失败: \(error.localizedDescription)")
         }

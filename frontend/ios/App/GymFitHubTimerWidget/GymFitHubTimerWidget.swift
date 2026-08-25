@@ -130,55 +130,60 @@ struct GymFitHubTimerWidgetEntryView : View {
         }
     }
 
-    // MARK: - Single Timer (thick progress bar as background)
+    // MARK: - Single Timer (simple progress bar)
 
     private func singleTimerBar(_ timer: TimerData) -> some View {
         let remaining = timer.remaining(at: entry.date)
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return GeometryReader { geo in
-            ZStack(alignment: .leading) {
-                // Track (dim background)
-                Capsule()
-                    .fill(surfaceDark)
-
-                // Thick green bar as the background, shrinking as time runs out
-                Capsule()
-                    .fill(accentGreen)
-                    .frame(width: geo.size.width * max(progress, 0.03))
-
-                // Text overlay: white bold on semi-transparent black capsule (stencil-like)
-                HStack(spacing: 6) {
-                    Text(timer.exerciseName)
-                        .font(.system(size: 13, weight: .bold))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-
-                    Spacer(minLength: 4)
-
-                    Text("\(remaining)s")
-                        .font(.system(size: 13, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                }
-                .foregroundColor(.white)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 6)
-                .background(Capsule().fill(Color.black.opacity(0.55)))
+        return VStack(spacing: 4) {
+            HStack {
+                Text(timer.exerciseName)
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Spacer(minLength: 4)
+                Text("\(remaining)s")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundColor(accentGreen)
             }
+
+            // Simple clean progress bar (no capsule background)
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(surfaceDark)
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(accentGreen)
+                        .frame(width: geo.size.width * max(progress, 0.02))
+                }
+            }
+            .frame(height: 8)
         }
-        .padding(.horizontal, 2)
-        .padding(.vertical, 3)
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
     }
 
-    // MARK: - Multiple Timers
+    // MARK: - Multiple Timers (up to 3 rows + overflow indicator)
 
     private var multiTimerRows: some View {
         VStack(spacing: 3) {
             ForEach(Array(entry.timers.prefix(3).enumerated()), id: \.element.exerciseId) { index, timer in
                 timerRow(timer, index: index)
             }
+            // Overflow indicator when more than 3 timers are running
+            if entry.timers.count > 3 {
+                HStack(spacing: 3) {
+                    Text("+\(entry.timers.count - 3) more")
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+            }
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 6)
         .padding(.vertical, 4)
     }
 
@@ -188,32 +193,33 @@ struct GymFitHubTimerWidgetEntryView : View {
         let color = color(for: index)
 
         return HStack(spacing: 5) {
-            // Color indicator + mini bar
-            VStack(alignment: .leading, spacing: 2) {
-                RoundedRectangle(cornerRadius: 1.5)
-                    .fill(color)
-                    .frame(width: 3, height: 10)
-                GeometryReader { geo in
-                    ZStack(alignment: .leading) {
-                        Capsule().fill(surfaceDark)
-                        Capsule().fill(color).frame(width: geo.size.width * progress)
-                    }
-                }
-                .frame(height: 3)
-            }
-            .frame(width: 22)
+            // Color dot
+            Circle()
+                .fill(color)
+                .frame(width: 5, height: 5)
 
             Text(timer.exerciseName)
                 .font(.system(size: 10, weight: .medium))
                 .foregroundColor(.white)
                 .lineLimit(1)
 
-            Spacer(minLength: 2)
+            // Mini progress bar (flexible width)
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 1.5)
+                        .fill(surfaceDark)
+                    RoundedRectangle(cornerRadius: 1.5)
+                        .fill(color)
+                        .frame(width: geo.size.width * progress)
+                }
+            }
+            .frame(height: 3)
 
             Text("\(remaining)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .font(.system(size: 11, weight: .bold, design: .rounded))
                 .monospacedDigit()
                 .foregroundColor(color)
+                .frame(width: 18, alignment: .trailing)
         }
     }
 }
