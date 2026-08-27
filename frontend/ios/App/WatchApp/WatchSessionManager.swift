@@ -2,6 +2,7 @@ import SwiftUI
 import WatchConnectivity
 import WatchKit
 import UserNotifications
+import WidgetKit
 
 /// Shared App Group ID for Watch App ↔ Widget data sharing
 private let appGroupID = "group.com.gymfithub.app.timer"
@@ -31,6 +32,9 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
     /// Extended runtime session to keep app alive in background
     private var extendedRuntimeSession: WKExtendedRuntimeSession?
 
+    /// Periodic handshake timer to keep connection status honest
+    private var handshakeTimer: Timer?
+
     struct WatchTimerState: Equatable, Identifiable {
         let exerciseId: String
         let exerciseName: String
@@ -56,6 +60,25 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         super.init()
         activate()
         requestNotificationPermission()
+        startPeriodicHandshake()
+    }
+
+    /// Periodically verify iPhone app is still running (every 10s)
+    /// This fixes the case where the iPhone app is killed but isConnected
+    /// stays true because WCSession reachability doesn't change.
+    private func startPeriodicHandshake() {
+        stopPeriodicHandshake()
+        handshakeTimer = Timer(timeInterval: 10.0, repeats: true) { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.sendHandshake()
+            }
+        }
+        RunLoop.main.add(handshakeTimer!, forMode: .common)
+    }
+
+    private func stopPeriodicHandshake() {
+        handshakeTimer?.invalidate()
+        handshakeTimer = nil
     }
 
     /// Request local notification permission for timer completion alerts
@@ -132,10 +155,40 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
             case "stateSync":
                 print("⚡️ [Watch] Received stateSync message")
                 self.applyContext(message)
+            // handshakeAck 不再通过单独消息处理 — 改用 replyHandler 确认
             default:
                 break
             }
         }
+    }
+
+    /// 主动与 iPhone 握手：用 replyHandler 确认手机 App 真正在运行
+    /// iPhone 收到 handshake 后必须调用 replyHandler()，回调被执行 = App 活着
+    /// replyHandler 超时/失败 = iPhone App 没运行（即使蓝牙物理连接还在）
+    /// 
+    /// 注意：WCSession.isReachable 只表示"物理通道可用"（蓝牙/Wi-Fi 连着手机），
+    /// 不代表 iPhone App 在前台运行。isConnected 只由 replyHandler 回调设置。
+    func sendHandshake() {
+        guard WCSession.default.isReachable else {
+            print("⚡️ [Watch] sendHandshake: iPhone physically unreachable")
+            self.isConnected = false
+            return
+        }
+        WCSession.default.sendMessage(
+            ["type": "handshake"],
+            replyHandler: { reply in
+                DispatchQueue.main.async {
+                    print("⚡️ [Watch] Handshake reply received: \(reply)")
+                    self.isConnected = true
+                }
+            },
+            errorHandler: { error in
+                DispatchQueue.main.async {
+                    print("⚡️ [Watch] Handshake failed (iPhone app not running): \(error.localizedDescription)")
+                    self.isConnected = false
+                }
+            }
+        )
     }
 
     private func applyContext(_ context: [String: Any]) {
@@ -198,9 +251,42 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
         defaults.set(data, forKey: "activeTimers")
         defaults.synchronize()
         print("⚡️ [Watch] Saved \(timers.count) timers to App Group")
+
+        // Force Widget to reload its timeline so it reads the fresh data immediately
+        WidgetCenter.shared.reloadAllTimelines()
+        print("⚡️ [Watch] Requested Widget timeline reload")
     }
 
     // MARK: - Native countdown driver
+
+    /// 供 UI 层在渲染时调用：清理已到期的计时器（幂等，解决锁屏/后台不同步）
+    /// 即使 Foundation Timer 被系统挂起，UI 每次刷新也会主动检查并清理
+    func checkExpiredTimers() {
+        DispatchQueue.main.async {
+            guard !self.activeTimers.isEmpty else { return }
+            let expired = self.activeTimers.filter { $0.remaining <= 0 }
+            if expired.isEmpty { return }
+
+            // Play haptic for each newly expired timer
+            for timer in expired where !self.hapticPlayedFor.contains(timer.exerciseId) {
+                self.hapticPlayedFor.insert(timer.exerciseId)
+                self.playHaptic()
+                print("⚡️ [Watch] checkExpiredTimers: \(timer.exerciseName) expired, haptic played")
+            }
+
+            let remaining = self.activeTimers.filter { $0.remaining > 0 }
+            if remaining.isEmpty {
+                self.stopCountdown()
+                self.stopExtendedRuntimeSession()
+                self.activeTimers = []
+                self.hapticPlayedFor.removeAll()
+                self.saveTimersToAppGroup([])
+            } else {
+                self.activeTimers = remaining
+                self.saveTimersToAppGroup(remaining)
+            }
+        }
+    }
 
     private func startCountdown() {
         stopCountdown()
@@ -229,11 +315,17 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
                     self.stopExtendedRuntimeSession()
                     self.activeTimers = []
                     self.hapticPlayedFor.removeAll()
+                    // Clear shared data for Widget
+                    self.saveTimersToAppGroup([])
                 } else if updatedTimers.count != self.activeTimers.count {
                     self.activeTimers = updatedTimers
+                    // Update shared data for Widget when timers change
+                    self.saveTimersToAppGroup(updatedTimers)
                 } else {
                     // Force @Published refresh by reassigning
                     self.activeTimers = self.activeTimers
+                    // Continuously update App Group so Widget reads fresh remaining time
+                    self.saveTimersToAppGroup(self.activeTimers)
                 }
             }
         }
@@ -280,15 +372,18 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         DispatchQueue.main.async {
-            self.isConnected = activationState == .activated
             if activationState == .activated {
                 print("⚡️ [Watch] WCSession activated, reachable=\(session.isReachable)")
                 // Read cached Application Context immediately after activation
                 let context = session.receivedApplicationContext
                 print("⚡️ [Watch] Post-activation cached context timers=\((context["timers"] as? [[String: Any]])?.count ?? 0)")
                 self.applyContext(context)
+                // Actively handshake to confirm iPhone app is running
+                // isConnected is ONLY set by replyHandler success, NOT by activation
+                self.sendHandshake()
             } else if let error = error {
                 print("⚡️ [Watch] WCSession activation failed: \(error.localizedDescription)")
+                self.isConnected = false
             }
         }
     }
@@ -302,11 +397,17 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     func sessionReachabilityDidChange(_ session: WCSession) {
         DispatchQueue.main.async {
-            self.isConnected = session.isReachable
             print("⚡️ [Watch] Reachability changed: \(session.isReachable)")
-            // When iPhone becomes reachable and no timer data, actively request once
-            if session.isReachable && self.activeTimers.isEmpty {
-                self.requestStateSync()
+            if session.isReachable {
+                // iPhone 物理可达 → 立即握手确认 App 是否活着
+                // isConnected 由 replyHandler 回调设置，不在此处直接修改
+                self.sendHandshake()
+                if self.activeTimers.isEmpty {
+                    self.requestStateSync()
+                }
+            } else {
+                // iPhone 物理不可达 → 必然未连接
+                self.isConnected = false
             }
         }
     }

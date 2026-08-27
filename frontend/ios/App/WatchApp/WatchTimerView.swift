@@ -31,7 +31,11 @@ struct WatchTimerView: View {
                 multiTimerView
             }
         }
-        .onAppear { session.requestStateSync() }
+        .onAppear {
+            session.requestStateSync()
+            session.sendHandshake()
+            session.checkExpiredTimers()
+        }
     }
 
     // MARK: - Idle State
@@ -52,9 +56,15 @@ struct WatchTimerView: View {
                         .font(.system(size: 20, weight: .semibold))
                         .foregroundColor(.white)
 
-                    Text(session.isConnected ? "Waiting for iPhone" : "Not connected")
-                        .font(.system(size: 14))
-                        .foregroundColor(.gray)
+                    // Connection status: green dot when iPhone app is running
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(session.isConnected ? accentGreen : Color.gray)
+                            .frame(width: 8, height: 8)
+                        Text(session.isConnected ? "Connected to iPhone" : "iPhone not running")
+                            .font(.system(size: 14))
+                            .foregroundColor(session.isConnected ? .white : .gray)
+                    }
                 }
 
                 Spacer()
@@ -69,6 +79,9 @@ struct WatchTimerView: View {
         // TimelineView drives per-second UI refresh and continues updating
         // in always-on (wrist-down) state, unlike Timer.publish / Foundation Timer.
         TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+            // Sync: clean up expired timers every render (handles lock-screen desync)
+            let _ = session.checkExpiredTimers()
+
             let remaining = max(0, Int(ceil(timer.endDate.timeIntervalSince(context.date))))
             let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
@@ -151,23 +164,31 @@ struct WatchTimerView: View {
             backgroundDark.ignoresSafeArea()
 
             VStack(spacing: 0) {
-                // Compact header
-                Text("Rest Timers")
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundColor(.white)
-                    .padding(.top, 20)
-                    .padding(.bottom, 8)
+                // Minimal header - tiny, doesn't eat screen space
+                HStack(spacing: 4) {
+                    Image(systemName: "timer")
+                        .font(.system(size: 10))
+                        .foregroundColor(accentGreen)
+                    Text("\(session.activeTimers.count)")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                }
+                .padding(.top, 12)
+                .padding(.bottom, 4)
 
-                // Timer list - TimelineView keeps every card ticking in always-on state
+                // Timer list - compact cards, 3+ visible
                 TimelineView(.periodic(from: Date(), by: 1.0)) { context in
+                    // Sync: clean up expired timers every render
+                    let _ = session.checkExpiredTimers()
+
                     ScrollView {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 6) {
                             ForEach(session.activeTimers) { timer in
                                 timerCard(timer, now: context.date)
                             }
                         }
-                        .padding(.horizontal, 12)
-                        .padding(.bottom, 16)
+                        .padding(.horizontal, 8)
+                        .padding(.bottom, 8)
                     }
                 }
             }
@@ -178,40 +199,35 @@ struct WatchTimerView: View {
         let remaining = max(0, Int(ceil(timer.endDate.timeIntervalSince(now))))
         let progress = timer.duration > 0 ? Double(remaining) / timer.duration : 0
 
-        return HStack(spacing: 12) {
-            // Progress ring (small)
-            ZStack {
-                Circle()
-                    .stroke(surfaceDark, lineWidth: 4)
-
-                Circle()
-                    .trim(from: 0, to: progress)
-                    .stroke(
-                        accentGreen,
-                        style: StrokeStyle(lineWidth: 4, lineCap: .round)
-                    )
-                    .rotationEffect(.degrees(-90))
-
-                Text("\(remaining)")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .monospacedDigit()
-                    .foregroundColor(.white)
+        return HStack(spacing: 8) {
+            // Compact progress bar (vertical color strip + remaining)
+            VStack(alignment: .leading, spacing: 3) {
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(accentGreen)
+                    .frame(width: 3, height: 14)
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(surfaceDark)
+                        Capsule().fill(accentGreen).frame(width: geo.size.width * progress)
+                    }
+                }
+                .frame(height: 3)
             }
-            .frame(width: 40, height: 40)
+            .frame(width: 24)
 
             // Exercise info
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 1) {
                 Text(timer.exerciseName)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: 13, weight: .semibold))
                     .foregroundColor(.white)
                     .lineLimit(1)
 
                 Text("\(remaining)s left")
-                    .font(.system(size: 11))
+                    .font(.system(size: 10))
                     .foregroundColor(.gray)
             }
 
-            Spacer()
+            Spacer(minLength: 2)
 
             // Done button - checkmark (hidden in always-on state)
             if !isLuminanceReduced {
@@ -219,15 +235,15 @@ struct WatchTimerView: View {
                     session.requestFinishRest(exerciseId: timer.exerciseId)
                 } label: {
                     Image(systemName: "checkmark.circle.fill")
-                        .font(.system(size: 24))
+                        .font(.system(size: 22))
                         .foregroundColor(accentGreen)
                 }
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
         .background(cardDark)
-        .cornerRadius(12)
+        .cornerRadius(10)
     }
 }
