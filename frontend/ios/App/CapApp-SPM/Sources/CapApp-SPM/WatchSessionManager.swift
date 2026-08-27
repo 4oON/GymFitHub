@@ -101,9 +101,7 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
                 }
             case "getState":
                 print("⚡️ [WatchSession] 收到手表 getState 请求，立即推送 context")
-                // 1. 通过 Application Context 推送（即使 sendMessage 失败也能送达）
                 self.pushTimerState()
-                // 2. 同时尝试用 sendMessage 立即回复
                 let reply: [String: Any] = [
                     "type": "stateSync",
                     "timers": TimerEngine.shared.snapshot(),
@@ -112,16 +110,44 @@ public final class WatchSessionManager: NSObject, WCSessionDelegate {
                 session.sendMessage(reply, replyHandler: nil) { error in
                     print("⚡️ [WatchSession] 回复 getState 失败: \(error.localizedDescription)")
                 }
-            case "handshake":
-                // 手表打开 App 后主动握手，确认 iPhone App 正在运行
-                print("⚡️ [WatchSession] 收到手表 handshake，回复 ack")
-                session.sendMessage(["type": "handshakeAck"], replyHandler: nil) { error in
-                    print("⚡️ [WatchSession] 回复 handshakeAck 失败: \(error.localizedDescription)")
-                }
-                // 顺带把当前计时状态推给刚打开的手表
-                self.pushTimerState()
             default:
                 break
+            }
+        }
+    }
+
+    /// 带 replyHandler 的消息接收：只有这个方法被调用时，发送方的 replyHandler 才会执行
+    /// 这是握手确认的关键 — iPhone 必须调用 replyHandler() 才能让 Watch 知道 App 真的活着
+    public func session(_ session: WCSession, didReceiveMessage message: [String: Any], replyHandler: @escaping ([String: Any]) -> Void) {
+        DispatchQueue.main.async {
+            guard let type = message["type"] as? String else {
+                replyHandler(["error": "missing type"])
+                return
+            }
+
+            switch type {
+            case "handshake":
+                // 收到手表握手请求，立即回复确认 — replyHandler 被调用 = iPhone App 活着
+                print("⚡️ [WatchSession] 收到手表 handshake (with replyHandler)，立即回复")
+                replyHandler(["type": "handshakeAck"])
+                // 顺带把当前计时状态推给刚打开的手表
+                self.pushTimerState()
+            case "getState":
+                print("⚡️ [WatchSession] 收到手表 getState (with replyHandler)，回复 + 推送")
+                let reply: [String: Any] = [
+                    "type": "stateSync",
+                    "timers": TimerEngine.shared.snapshot(),
+                    "timestamp": Date().timeIntervalSince1970
+                ]
+                replyHandler(reply)
+                self.pushTimerState()
+            case "finishRest":
+                if let exerciseId = message["exerciseId"] as? String {
+                    self.onWatchFinishRequest?(exerciseId)
+                }
+                replyHandler(["type": "finishRestAck"])
+            default:
+                replyHandler(["error": "unknown type"])
             }
         }
     }

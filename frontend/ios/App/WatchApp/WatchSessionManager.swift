@@ -155,10 +155,7 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
             case "stateSync":
                 print("⚡️ [Watch] Received stateSync message")
                 self.applyContext(message)
-            case "handshakeAck":
-                // iPhone App 已确认运行，握手成功
-                print("⚡️ [Watch] Handshake ACK received - iPhone app is running")
-                self.isConnected = true
+            // handshakeAck 不再通过单独消息处理 — 改用 replyHandler 确认
             default:
                 break
             }
@@ -166,25 +163,28 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
     }
 
     /// 主动与 iPhone 握手：用 replyHandler 确认手机 App 真正在运行
-    /// iPhone 收到 handshake 后会回复 handshakeAck，replyHandler 被调用 = 已连接
-    /// replyHandler 超时/失败 = 未连接
+    /// iPhone 收到 handshake 后必须调用 replyHandler()，回调被执行 = App 活着
+    /// replyHandler 超时/失败 = iPhone App 没运行（即使蓝牙物理连接还在）
+    /// 
+    /// 注意：WCSession.isReachable 只表示"物理通道可用"（蓝牙/Wi-Fi 连着手机），
+    /// 不代表 iPhone App 在前台运行。isConnected 只由 replyHandler 回调设置。
     func sendHandshake() {
         guard WCSession.default.isReachable else {
-            print("⚡️ [Watch] sendHandshake: iPhone unreachable")
+            print("⚡️ [Watch] sendHandshake: iPhone physically unreachable")
             self.isConnected = false
             return
         }
         WCSession.default.sendMessage(
             ["type": "handshake"],
-            replyHandler: { _ in
+            replyHandler: { reply in
                 DispatchQueue.main.async {
-                    print("⚡️ [Watch] Handshake reply received - iPhone app is running")
+                    print("⚡️ [Watch] Handshake reply received: \(reply)")
                     self.isConnected = true
                 }
             },
             errorHandler: { error in
                 DispatchQueue.main.async {
-                    print("⚡️ [Watch] Handshake failed: \(error.localizedDescription)")
+                    print("⚡️ [Watch] Handshake failed (iPhone app not running): \(error.localizedDescription)")
                     self.isConnected = false
                 }
             }
@@ -372,17 +372,18 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
         DispatchQueue.main.async {
-            self.isConnected = activationState == .activated && session.isReachable
             if activationState == .activated {
                 print("⚡️ [Watch] WCSession activated, reachable=\(session.isReachable)")
                 // Read cached Application Context immediately after activation
                 let context = session.receivedApplicationContext
                 print("⚡️ [Watch] Post-activation cached context timers=\((context["timers"] as? [[String: Any]])?.count ?? 0)")
                 self.applyContext(context)
-                // Actively handshake with iPhone to confirm app is running
+                // Actively handshake to confirm iPhone app is running
+                // isConnected is ONLY set by replyHandler success, NOT by activation
                 self.sendHandshake()
             } else if let error = error {
                 print("⚡️ [Watch] WCSession activation failed: \(error.localizedDescription)")
+                self.isConnected = false
             }
         }
     }
@@ -396,15 +397,16 @@ final class WatchSessionManager: NSObject, ObservableObject, WCSessionDelegate, 
 
     func sessionReachabilityDidChange(_ session: WCSession) {
         DispatchQueue.main.async {
-            self.isConnected = session.isReachable
             print("⚡️ [Watch] Reachability changed: \(session.isReachable)")
-            // When iPhone becomes reachable, handshake + sync state
             if session.isReachable {
+                // iPhone 物理可达 → 立即握手确认 App 是否活着
+                // isConnected 由 replyHandler 回调设置，不在此处直接修改
                 self.sendHandshake()
                 if self.activeTimers.isEmpty {
                     self.requestStateSync()
                 }
             } else {
+                // iPhone 物理不可达 → 必然未连接
                 self.isConnected = false
             }
         }
