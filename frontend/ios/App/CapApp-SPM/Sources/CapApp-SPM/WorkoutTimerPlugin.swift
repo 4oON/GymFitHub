@@ -101,7 +101,8 @@ public class WorkoutTimerPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func requestPermission(_ call: CAPPluginCall) {
-        engine.requestNotificationPermissionIfNeeded()
-        call.resolve(["granted": true])
+        engine.requestNotificationPermissionIfNeeded { granted in
+            call.resolve(["granted": granted])
+        }
     }
 }

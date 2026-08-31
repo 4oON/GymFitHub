@@ -168,11 +168,12 @@ public final class TimerEngine: NSObject {
         )
     }
 
-    public func requestNotificationPermissionIfNeeded() {
+    public func requestNotificationPermissionIfNeeded(completion: ((Bool) -> Void)? = nil) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
             if let error = error {
                 print("⚡️ [TimerEngine] 通知权限申请失败: \(error)")
             }
+            completion?(granted)
         }
     }
 

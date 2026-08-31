@@ -79,12 +79,14 @@ export const WorkoutTimerService = {
     }
   },
 
-  async requestPermission(): Promise<void> {
-    if (!Capacitor.isNativePlatform()) return;
+  async requestPermission(): Promise<{ granted: boolean }> {
+    if (!Capacitor.isNativePlatform()) return { granted: false };
     try {
-      await WorkoutTimer.requestPermission();
+      const result = await WorkoutTimer.requestPermission();
+      return { granted: result.granted };
     } catch (e) {
       console.warn('[WorkoutTimer] requestPermission failed:', e);
+      return { granted: false };
     }
   },
 

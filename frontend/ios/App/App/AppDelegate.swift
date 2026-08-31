@@ -1,9 +1,10 @@
 import UIKit
 import Capacitor
 import WebKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -25,6 +26,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
+        // 设置本地通知代理，确保 App 在前台时也能展示横幅并播放声音
+        UNUserNotificationCenter.current().delegate = self
+
         return true
+    }
+
+    // MARK: - UNUserNotificationCenterDelegate
+
+    /// App 在前台收到本地通知时，仍展示横幅并播放声音
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        if #available(iOS 14.0, *) {
+            completionHandler([.banner, .sound, .badge])
+        } else {
+            completionHandler([.alert, .sound, .badge])
+        }
+    }
+
+    /// 用户点击通知时进入此处，可用于后续跳转
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        completionHandler()
     }
 }

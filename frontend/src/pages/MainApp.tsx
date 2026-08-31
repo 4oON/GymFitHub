@@ -183,8 +183,10 @@ export const MainApp: React.FC = () => {
   useEffect(() => {
     if (!WorkoutTimerService.isNative) return;
 
-    // 请求通知权限（后台提醒）
-    WorkoutTimerService.requestPermission();
+    // 请求通知权限（后台提醒），并记录授权结果
+    WorkoutTimerService.requestPermission().then(({ granted }) => {
+      setNativeNotificationGranted(granted);
+    });
 
     const unsubFinish = WorkoutTimerService.onFinish(({ exerciseId }) => {
       setTimers(prev => {
@@ -765,6 +767,9 @@ export const MainApp: React.FC = () => {
   // Queue to handle state updates safely outside the interval loop
   const [finishedTimerQueue, setFinishedTimerQueue] = useState<string[]>([]);
 
+  // iOS 原生通知权限状态：有权限时让 OS 通知负责声音，避免 JS WebAudio 延迟/重复
+  const [nativeNotificationGranted, setNativeNotificationGranted] = useState(false);
+
   // Audio Ref
   const audioCtxRef = useRef<AudioContext | null>(null);
   const isPlayingSoundRef = useRef<boolean>(false);
@@ -788,15 +793,20 @@ export const MainApp: React.FC = () => {
   }, []);
 
   const playAlarmSound = async () => {
+    // iOS 原生平台且通知权限已授权：由 OS 本地通知负责声音与横幅，避免 WebAudio 延迟/重复
+    if (WorkoutTimerService.isNative && nativeNotificationGranted) {
+      return;
+    }
+
     // 🆕 防止重复播放 - 如果1秒内已经播放过，就不播放
     const now = Date.now();
     if (isPlayingSoundRef.current || now - lastSoundTimeRef.current < 1000) {
       return;
     }
-    
+
     isPlayingSoundRef.current = true;
     lastSoundTimeRef.current = now;
-    
+
     try {
       if (!audioCtxRef.current) {
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
