@@ -794,6 +794,14 @@ export const MainApp: React.FC = () => {
     };
   }, []);
 
+  // 振动提醒：原生平台且通知已授权时，振动由原生 TimerEngine 负责（锁屏挂起时 JS 无法执行）
+  const vibrate = () => {
+    if (WorkoutTimerService.isNative && nativeNotificationGranted) {
+      return;
+    }
+    Haptics.vibrate({ duration: 200 }).catch(() => {});
+  };
+
   const playAlarmSound = async () => {
     // iOS 原生平台且通知权限已授权：由 OS 本地通知负责声音与横幅，避免 WebAudio 延迟/重复
     if (WorkoutTimerService.isNative && nativeNotificationGranted) {
@@ -908,7 +916,7 @@ export const MainApp: React.FC = () => {
           });
 
           setTimeout(() => {
-            Haptics.vibrate({ duration: 200 }).catch(() => {});
+            vibrate();
             playAlarmSound();
           }, 100);
         }
@@ -963,7 +971,7 @@ export const MainApp: React.FC = () => {
 
           // 只播放一次声音（即使有多个计时器同时完成）
           if (shouldPlaySound) {
-            Haptics.vibrate({ duration: 200 }).catch(() => {});
+            vibrate();
             playAlarmSound();
           }
 

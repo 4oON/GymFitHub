@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import UserNotifications
+import AudioToolbox
 
 /// GymFitHub 原生计时引擎
 ///
@@ -143,10 +144,18 @@ public final class TimerEngine: NSObject {
         guard let entry = timers[exerciseId] else { return }
         timers.removeValue(forKey: exerciseId)
         onFinish?(exerciseId, entry.exerciseName)
+        // 原生振动：前台 / 后台未挂起时立即触发，不依赖 JS（JS 在锁屏挂起时被冻结）
+        vibrate()
         notifyStateChanged()
         if timers.isEmpty {
             stopDisplayTimer()
         }
+    }
+
+    /// 原生振动提醒。注意：锁屏且 App 已被系统挂起时，本方法不会被调用，
+    /// 此时振动依赖本地通知的 sound（受 iOS 静音键 / 专注模式控制）。
+    private func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 
     // MARK: - 本地通知（后台提醒）
