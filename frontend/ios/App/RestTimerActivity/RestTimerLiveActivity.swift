@@ -91,11 +91,14 @@ struct RestTimerRow: View {
                 .minimumScaleFactor(0.8)
                 .truncationMode(.tail)
 
+            // 倒计时文字（系统 timerInterval 自动刷新，锁屏挂起也更新）
+            // 关键坑：不能加 .fixedSize()！Text(timerInterval:) 内部用 GeometryReader 测量
+            // 文字宽度，.fixedSize() 强制 intrinsic size，动画每帧刷新时 place 断言失败 → SIGTRAP。
+            // 灵动岛的 Text(timerInterval:) 没有 .fixedSize() 所以不崩。
             Text(timerInterval: item.startDate...item.endDate, countsDown: true)
                 .font(.system(size: 15, weight: .bold, design: .monospaced))
                 .monospacedDigit()
                 .foregroundColor(zenOrange)
-                .fixedSize()
 
             Spacer(minLength: 8)
 
