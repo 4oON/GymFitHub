@@ -133,12 +133,13 @@ struct RestTimerRow: View {
                 Rectangle()
                     .fill(Color.white.opacity(0.08))
                 // 从右向左消退的倒计时条：系统 ProgressView + RTL 方向翻转
-                // 注意：不能用 scaleEffect(x: -1) 负缩放，会让 Live Activity 渲染成黑框
+                // 关键：Live Activity 里 ProgressView(timerInterval:) + scaleEffect 会让
+                // WidgetRenderer 的 GeometryReader 布局断言崩溃（SIGTRAP），必须移除 scaleEffect。
+                // 负缩放(x:-1)黑框、正放大(y:8)崩溃，两种都不能用。
                 ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
                     .progressViewStyle(.linear)
-                    .tint(zenOrange.opacity(0.6))
+                    .tint(zenOrange)
                     .environment(\.layoutDirection, .rightToLeft)
-                    .scaleEffect(y: 8)
             }
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
