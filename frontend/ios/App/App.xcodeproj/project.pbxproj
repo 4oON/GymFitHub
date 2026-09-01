@@ -21,13 +21,13 @@
 		7FE1905230353AB100BC42B3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19036303539A100BC42B3 /* SwiftUI.framework */; };
 		7FE1905D30353AB200BC42B3 /* GymFitHubTimerWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9582B6832FE993A70072D4E8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582B6822FE993A50072D4E8 /* SceneDelegate.swift */; };
+		AAA00000000000000000000A /* RestTimerActivity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AAA000000000000000000001 /* RestTimerActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AAA00000000000000000000E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19034303539A100BC42B3 /* WidgetKit.framework */; };
+		AAA00000000000000000000F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19036303539A100BC42B3 /* SwiftUI.framework */; };
 		WATCH000000000025 /* GymFitHubWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000007 /* GymFitHubWatchApp.swift */; };
 		WATCH000000000026 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000008 /* WatchSessionManager.swift */; };
 		WATCH000000000027 /* WatchTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = WATCH000000000009 /* WatchTimerView.swift */; };
 		WATCH000000000028 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = WATCH000000000010 /* Assets.xcassets */; };
-		AAA00000000000000000000A /* RestTimerActivity.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AAA000000000000000000001 /* RestTimerActivity.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AAA00000000000000000000E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19034303539A100BC42B3 /* WidgetKit.framework */; };
-		AAA00000000000000000000F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE19036303539A100BC42B3 /* SwiftUI.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,19 +38,19 @@
 			remoteGlobalIDString = 7FE1904F30353AB100BC42B3;
 			remoteInfo = GymFitHubTimerWidgetExtension;
 		};
-		WATCH000000000031 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = WATCH000000000011;
-			remoteInfo = WatchApp;
-		};
 		AAA00000000000000000000C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AAA000000000000000000002;
 			remoteInfo = RestTimerActivity;
+		};
+		WATCH000000000031 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 504EC2FC1FED79650016851F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = WATCH000000000011;
+			remoteInfo = WatchApp;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -108,13 +108,13 @@
 		7FE1906B30354AC300BC42B3 /* GymFitHubTimerWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymFitHubTimerWidgetExtension.entitlements; sourceTree = "<group>"; };
 		9582B6822FE993A50072D4E8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		958DCC722DB07C7200EA8C5F /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = debug.xcconfig; path = ../debug.xcconfig; sourceTree = SOURCE_ROOT; };
+		AAA000000000000000000001 /* RestTimerActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RestTimerActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		WATCH000000000001 /* WatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		WATCH000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		WATCH000000000007 /* GymFitHubWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymFitHubWatchApp.swift; sourceTree = "<group>"; };
 		WATCH000000000008 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		WATCH000000000009 /* WatchTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchTimerView.swift; sourceTree = "<group>"; };
 		WATCH000000000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AAA000000000000000000001 /* RestTimerActivity.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RestTimerActivity.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -157,19 +157,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		WATCH000000000015 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AAA000000000000000000007 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				AAA00000000000000000000F /* SwiftUI.framework in Frameworks */,
 				AAA00000000000000000000E /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		WATCH000000000015 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +183,7 @@
 				958DCC722DB07C7200EA8C5F /* debug.xcconfig */,
 				504EC3061FED79650016851F /* App */,
 				WATCH000000000003 /* WatchApp */,
-					7FE1905330353AB100BC42B3 /* GymFitHubTimerWidget */,
+				7FE1905330353AB100BC42B3 /* GymFitHubTimerWidget */,
 				AAA000000000000000000009 /* RestTimerActivity */,
 				7FE19033303539A100BC42B3 /* Frameworks */,
 				504EC3051FED79650016851F /* Products */,
@@ -289,25 +289,6 @@
 			productReference = 7FE1905030353AB100BC42B3 /* GymFitHubTimerWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		WATCH000000000011 /* WatchApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = WATCH000000000019 /* Build configuration list for PBXNativeTarget "WatchApp" */;
-			buildPhases = (
-				WATCH000000000013 /* Sources */,
-				WATCH000000000015 /* Frameworks */,
-				WATCH000000000014 /* Resources */,
-				7FE19047303539A300BC42B3 /* Embed Foundation Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7FE1905C30353AB200BC42B3 /* PBXTargetDependency */,
-			);
-			name = WatchApp;
-			productName = WatchApp;
-			productReference = WATCH000000000001 /* WatchApp.app */;
-			productType = "com.apple.product-type.application";
-		};
 		AAA000000000000000000002 /* RestTimerActivity */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AAA000000000000000000003 /* Build configuration list for PBXNativeTarget "RestTimerActivity" */;
@@ -329,6 +310,25 @@
 			productName = RestTimerActivity;
 			productReference = AAA000000000000000000001 /* RestTimerActivity.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		WATCH000000000011 /* WatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = WATCH000000000019 /* Build configuration list for PBXNativeTarget "WatchApp" */;
+			buildPhases = (
+				WATCH000000000013 /* Sources */,
+				WATCH000000000015 /* Frameworks */,
+				WATCH000000000014 /* Resources */,
+				7FE19047303539A300BC42B3 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FE1905C30353AB200BC42B3 /* PBXTargetDependency */,
+			);
+			name = WatchApp;
+			productName = WatchApp;
+			productReference = WATCH000000000001 /* WatchApp.app */;
+			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
@@ -402,18 +402,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAA000000000000000000008 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		WATCH000000000014 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				WATCH000000000028 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAA000000000000000000008 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +437,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AAA000000000000000000006 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		WATCH000000000013 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,13 +451,6 @@
 				WATCH000000000025 /* GymFitHubWatchApp.swift in Sources */,
 				WATCH000000000026 /* WatchSessionManager.swift in Sources */,
 				WATCH000000000027 /* WatchTimerView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AAA000000000000000000006 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,15 +462,15 @@
 			target = 7FE1904F30353AB100BC42B3 /* GymFitHubTimerWidgetExtension */;
 			targetProxy = 7FE1905B30353AB200BC42B3 /* PBXContainerItemProxy */;
 		};
-		WATCH000000000032 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = WATCH000000000011 /* WatchApp */;
-			targetProxy = WATCH000000000031 /* PBXContainerItemProxy */;
-		};
 		AAA00000000000000000000D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AAA000000000000000000002 /* RestTimerActivity */;
 			targetProxy = AAA00000000000000000000C /* PBXContainerItemProxy */;
+		};
+		WATCH000000000032 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = WATCH000000000011 /* WatchApp */;
+			targetProxy = WATCH000000000031 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -743,54 +743,6 @@
 			};
 			name = Release;
 		};
-		WATCH000000000021 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=watchos*]" = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				ASSETCATALOG_COMPILER_WATCH_APP_ICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GSAYWM6VH6;
-				INFOPLIST_FILE = WatchApp/Info.plist;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Debug;
-		};
-		WATCH000000000022 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				ASSETCATALOG_COMPILER_WATCH_APP_ICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GSAYWM6VH6;
-				INFOPLIST_FILE = WatchApp/Info.plist;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 10.0;
-			};
-			name = Release;
-		};
 		AAA000000000000000000004 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -839,6 +791,54 @@
 			};
 			name = Release;
 		};
+		WATCH000000000021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"ASSETCATALOG_COMPILER_APPICON_NAME[sdk=watchos*]" = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_WATCH_APP_ICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GSAYWM6VH6;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		WATCH000000000022 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_WATCH_APP_ICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WatchApp/WatchApp.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GSAYWM6VH6;
+				INFOPLIST_FILE = WatchApp/Info.plist;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gymfithub.app.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -869,20 +869,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		WATCH000000000019 /* Build configuration list for PBXNativeTarget "WatchApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				WATCH000000000021 /* Debug */,
-				WATCH000000000022 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AAA000000000000000000003 /* Build configuration list for PBXNativeTarget "RestTimerActivity" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAA000000000000000000004 /* Debug */,
 				AAA000000000000000000005 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		WATCH000000000019 /* Build configuration list for PBXNativeTarget "WatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				WATCH000000000021 /* Debug */,
+				WATCH000000000022 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
