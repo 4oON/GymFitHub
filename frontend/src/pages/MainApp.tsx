@@ -194,7 +194,9 @@ export const MainApp: React.FC = () => {
         if (next[exerciseId]) {
           delete next[exerciseId];
           // 触发 finishedTimerQueue 让 UI 知道休息结束，可以进入下一组
-          setFinishedTimerQueue(prevQueue => [...prevQueue, exerciseId]);
+          setFinishedTimerQueue(prevQueue =>
+            prevQueue.includes(exerciseId) ? prevQueue : [...prevQueue, exerciseId]
+          );
         }
         return next;
       });
@@ -852,6 +854,7 @@ export const MainApp: React.FC = () => {
   const lastVisibleTimeRef = useRef<number>(Date.now());
   const missedAlarmsRef = useRef<string[]>([]);
   const alarmsPlayedInBackgroundRef = useRef<Set<string>>(new Set());
+  const alarmsProcessedRef = useRef<Set<string>>(new Set()); // 防止 visibilitychange 重复处理同一批闹钟
   
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -884,7 +887,11 @@ export const MainApp: React.FC = () => {
             const newFinishedIds = finishedIds.filter(id => !alarmsPlayedInBackgroundRef.current.has(id));
             if (newFinishedIds.length > 0) {
               missedAlarmsRef.current = newFinishedIds;
-              setFinishedTimerQueue(prevQueue => [...prevQueue, ...finishedIds]);
+              setFinishedTimerQueue(prevQueue => {
+                const existing = new Set(prevQueue);
+                const uniqueNew = newFinishedIds.filter(id => !existing.has(id));
+                return uniqueNew.length > 0 ? [...prevQueue, ...uniqueNew] : prevQueue;
+              });
             }
           }
           
@@ -892,21 +899,28 @@ export const MainApp: React.FC = () => {
         });
         
         // 如果有错过的闹钟，立即播放声音和震动（只播放一次）
-        if (missedAlarmsRef.current.length > 0) {
-          console.log('[Timer] Playing missed alarms for:', missedAlarmsRef.current);
-          missedAlarmsRef.current.forEach(id => alarmsPlayedInBackgroundRef.current.add(id));
-          
+        const toPlay = missedAlarmsRef.current.filter(id => !alarmsProcessedRef.current.has(id));
+        if (toPlay.length > 0) {
+          console.log('[Timer] Playing missed alarms for:', toPlay);
+          toPlay.forEach(id => {
+            alarmsPlayedInBackgroundRef.current.add(id);
+            alarmsProcessedRef.current.add(id);
+          });
+
           setTimeout(() => {
             Haptics.vibrate({ duration: 200 }).catch(() => {});
             playAlarmSound();
-            missedAlarmsRef.current = [];
           }, 100);
         }
+        missedAlarmsRef.current = [];
         
-        // 清理已完成的闹钟记录（防止内存无限增长）
-        setTimeout(() => {
-          alarmsPlayedInBackgroundRef.current.clear();
-        }, 5000);
+        // 清理已完成的闹钟记录：只在所有计时器都结束后才清空，防止未到期计时器被误放
+        setTimers(prev => {
+          if (Object.keys(prev).length === 0) {
+            alarmsPlayedInBackgroundRef.current.clear();
+          }
+          return prev;
+        });
       }
     };
     
@@ -954,7 +968,11 @@ export const MainApp: React.FC = () => {
           }
 
           if (finishedIds.length > 0) {
-            setFinishedTimerQueue(prevQueue => [...prevQueue, ...finishedIds]);
+            setFinishedTimerQueue(prevQueue => {
+              const existing = new Set(prevQueue);
+              const newIds = finishedIds.filter(id => !existing.has(id));
+              return newIds.length > 0 ? [...prevQueue, ...newIds] : prevQueue;
+            });
           }
 
           return changed ? next : prev;
@@ -1047,16 +1065,18 @@ export const MainApp: React.FC = () => {
   };
 
   const handleFinishTimer = (exerciseId: string) => {
+    // 立即同步清理 JS 计时器状态，不再依赖 rAF 轮询发现
     setTimers(prev => {
       const next = { ...prev };
-      // Set target to NOW to trigger natural completion logic in next tick
-      if (next[exerciseId]) {
-        next[exerciseId] = { ...next[exerciseId], targetTime: Date.now() - 1 };
-      }
+      delete next[exerciseId];
       return next;
     });
     // 同步结束原生计时器
     WorkoutTimerService.finishRest(exerciseId);
+    // 直接触发完成队列，让 UI 立即进入下一组
+    setFinishedTimerQueue(prevQueue =>
+      prevQueue.includes(exerciseId) ? prevQueue : [...prevQueue, exerciseId]
+    );
   };
 
   const [recoveryState, setRecoveryState] = useState<RecoveryStatus[]>(() => safeParse('zenfit_recovery', [

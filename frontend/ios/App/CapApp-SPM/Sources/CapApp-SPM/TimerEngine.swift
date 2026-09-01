@@ -46,6 +46,11 @@ public final class TimerEngine: NSObject {
     ///   - exerciseName: 动作显示名
     ///   - duration: 休息时长（秒）
     public func startRest(exerciseId: String, exerciseName: String, duration: Double) {
+        // 如果该 exerciseId 已有旧计时器，先取消旧通知，防止重复弹窗
+        if let oldEntry = timers[exerciseId] {
+            cancelCompletionNotification(for: oldEntry)
+        }
+
         let entry = TimerEntry(
             exerciseId: exerciseId,
             exerciseName: exerciseName,

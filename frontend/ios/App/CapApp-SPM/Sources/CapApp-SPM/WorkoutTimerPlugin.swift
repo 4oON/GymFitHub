@@ -47,17 +47,22 @@ public class WorkoutTimerPlugin: CAPPlugin, CAPBridgedPlugin {
         }
 
         // 订阅引擎事件，转发到 JS（Watch 同步由 TimerEngine 直接负责）
-        engine.onTick = { [weak self] exerciseId, remaining in
-            self?.notifyListeners("timerTick", data: [
-                "exerciseId": exerciseId,
-                "remaining": remaining
-            ])
+        // 只在首次 load 时注册，防止 WebView 重建时覆盖旧 listener
+        if engine.onTick == nil {
+            engine.onTick = { [weak self] exerciseId, remaining in
+                self?.notifyListeners("timerTick", data: [
+                    "exerciseId": exerciseId,
+                    "remaining": remaining
+                ])
+            }
         }
-        engine.onFinish = { [weak self] exerciseId, exerciseName in
-            self?.notifyListeners("timerFinish", data: [
-                "exerciseId": exerciseId,
-                "exerciseName": exerciseName
-            ])
+        if engine.onFinish == nil {
+            engine.onFinish = { [weak self] exerciseId, exerciseName in
+                self?.notifyListeners("timerFinish", data: [
+                    "exerciseId": exerciseId,
+                    "exerciseName": exerciseName
+                ])
+            }
         }
     }
 
