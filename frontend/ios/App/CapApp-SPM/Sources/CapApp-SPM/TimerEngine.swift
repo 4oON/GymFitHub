@@ -26,7 +26,7 @@ public final class TimerEngine: NSObject {
     /// Live Activity 实例（擦除为 Any 以兼容 iOS 15；仅 iOS 16.1+ 使用）
     private var liveActivity: Any?
 
-    public struct TimerEntry {
+    public struct TimerEntry: Codable {
         public let exerciseId: String
         public let exerciseName: String
         public let duration: TimeInterval   // 总时长（秒）
@@ -44,6 +44,33 @@ public final class TimerEngine: NSObject {
 
     private override init() {
         super.init()
+        loadState()
+        // 重新 attach 现有的 Live Activity（App 被杀重启后，避免创建重复 Activity）
+        if #available(iOS 16.1, *) {
+            if let existing = Activity<RestTimerAttributes>.activities.first {
+                liveActivity = existing
+            }
+        }
+    }
+
+    // MARK: - 状态持久化（App 被杀后恢复计时器，保证 Live Activity 交互仍可用）
+
+    private let stateKey = "gymfithub.restTimers.state"
+
+    private func saveState() {
+        let entries = Array(timers.values)
+        if let data = try? JSONEncoder().encode(entries) {
+            UserDefaults.standard.set(data, forKey: stateKey)
+        }
+    }
+
+    private func loadState() {
+        guard let data = UserDefaults.standard.data(forKey: stateKey) else { return }
+        guard let entries = try? JSONDecoder().decode([TimerEntry].self, from: data) else { return }
+        // 只恢复还没过期的计时器
+        for entry in entries where entry.endDate > Date() {
+            timers[entry.exerciseId] = entry
+        }
     }
 
     /// 启动/重置一个休息计时器
@@ -76,6 +103,7 @@ public final class TimerEngine: NSObject {
         // 立即回调一次当前状态
         onTick?(exerciseId, Int(duration))
         notifyStateChanged()
+        saveState()
     }
 
     /// 手动结束某个计时器（用户点"结束休息"或手表回传）
@@ -90,6 +118,7 @@ public final class TimerEngine: NSObject {
         if timers.isEmpty {
             stopDisplayTimer()
         }
+        saveState()
     }
 
     /// 延长某个计时器（锁屏 Live Activity 的 +30s 按钮触发）
@@ -113,6 +142,7 @@ public final class TimerEngine: NSObject {
         scheduleCompletionNotification(for: newEntry)
         syncLiveActivity()
         notifyStateChanged()
+        saveState()
     }
 
     /// 主动结束全部计时器
@@ -183,6 +213,7 @@ public final class TimerEngine: NSObject {
         if timers.isEmpty {
             stopDisplayTimer()
         }
+        saveState()
     }
 
     /// 原生振动提醒。注意：锁屏且 App 已被系统挂起时，本方法不会被调用，
@@ -218,14 +249,20 @@ public final class TimerEngine: NSObject {
                 Task { await existing.update(using: contentState) }
             }
         } else if !items.isEmpty {
-            do {
-                let activity = try Activity<RestTimerAttributes>.request(
-                    attributes: RestTimerAttributes(),
-                    contentState: contentState
-                )
-                liveActivity = activity
-            } catch {
-                print("⚡️ [TimerEngine] Live Activity 启动失败: \(error)")
+            // 先尝试重新 attach 现有的 Activity（App 被杀重启后，避免创建重复 Activity）
+            if let existing = Activity<RestTimerAttributes>.activities.first {
+                liveActivity = existing
+                Task { await existing.update(using: contentState) }
+            } else {
+                do {
+                    let activity = try Activity<RestTimerAttributes>.request(
+                        attributes: RestTimerAttributes(),
+                        contentState: contentState
+                    )
+                    liveActivity = activity
+                } catch {
+                    print("⚡️ [TimerEngine] Live Activity 启动失败: \(error)")
+                }
             }
         }
     }
