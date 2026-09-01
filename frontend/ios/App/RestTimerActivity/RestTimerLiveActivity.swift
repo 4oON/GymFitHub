@@ -22,7 +22,7 @@ struct RestTimerLiveActivity: Widget {
                 }
                 DynamicIslandExpandedRegion(.center) {
                     if let first = context.state.items.first {
-                        Text(first.endDate, style: .timer)
+                        Text(timerInterval: first.startDate...first.endDate, countsDown: true)
                             .font(.title3.bold())
                             .monospacedDigit()
                             .foregroundColor(.white)
@@ -45,7 +45,7 @@ struct RestTimerLiveActivity: Widget {
                     .foregroundColor(zenOrange)
             } compactTrailing: {
                 if let first = context.state.items.first {
-                    Text(first.endDate, style: .timer)
+                    Text(timerInterval: first.startDate...first.endDate, countsDown: true, showsHours: false)
                         .monospacedDigit()
                         .frame(maxWidth: 34)
                 }
@@ -90,7 +90,7 @@ struct RestTimerRow: View {
                     .lineLimit(1)
                     .layoutPriority(1)
 
-                Text(item.endDate, style: .timer)
+                Text(timerInterval: item.startDate...item.endDate, countsDown: true)
                     .font(.system(size: 15, weight: .bold, design: .monospaced))
                     .monospacedDigit()
                     .foregroundColor(zenOrange)
