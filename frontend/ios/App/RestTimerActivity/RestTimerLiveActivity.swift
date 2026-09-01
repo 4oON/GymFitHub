@@ -128,10 +128,18 @@ struct RestTimerRow: View {
         .padding(.vertical, 7)
         .padding(.horizontal, 10)
         .background(
-            ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
-                .progressViewStyle(.linear)
-                .tint(zenOrange.opacity(0.35))
-                .scaleEffect(x: -1, y: 3)
+            ZStack {
+                // 轨道底色（白色微透，作背景条轨道）
+                Rectangle()
+                    .fill(Color.white.opacity(0.04))
+                // 从右向左消退的倒计时条：系统 ProgressView + RTL 方向翻转
+                // 注意：不能用 scaleEffect(x: -1) 负缩放，会让 Live Activity 渲染成黑框
+                ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
+                    .progressViewStyle(.linear)
+                    .tint(zenOrange.opacity(0.35))
+                    .environment(\.layoutDirection, .rightToLeft)
+                    .scaleEffect(y: 3)
+            }
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .widgetURL(URL(string: "gymfithub://rest/open?exerciseId=\(item.exerciseId)"))
