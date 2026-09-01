@@ -183,8 +183,10 @@ export const MainApp: React.FC = () => {
   useEffect(() => {
     if (!WorkoutTimerService.isNative) return;
 
-    // 请求通知权限（后台提醒）
-    WorkoutTimerService.requestPermission();
+    // 请求通知权限（后台提醒），并记录授权结果
+    WorkoutTimerService.requestPermission().then(({ granted }) => {
+      setNativeNotificationGranted(granted);
+    });
 
     const unsubFinish = WorkoutTimerService.onFinish(({ exerciseId }) => {
       setTimers(prev => {
@@ -192,7 +194,9 @@ export const MainApp: React.FC = () => {
         if (next[exerciseId]) {
           delete next[exerciseId];
           // 触发 finishedTimerQueue 让 UI 知道休息结束，可以进入下一组
-          setFinishedTimerQueue(prevQueue => [...prevQueue, exerciseId]);
+          setFinishedTimerQueue(prevQueue =>
+            prevQueue.includes(exerciseId) ? prevQueue : [...prevQueue, exerciseId]
+          );
         }
         return next;
       });
@@ -765,6 +769,9 @@ export const MainApp: React.FC = () => {
   // Queue to handle state updates safely outside the interval loop
   const [finishedTimerQueue, setFinishedTimerQueue] = useState<string[]>([]);
 
+  // iOS 原生通知权限状态：有权限时让 OS 通知负责声音，避免 JS WebAudio 延迟/重复
+  const [nativeNotificationGranted, setNativeNotificationGranted] = useState(false);
+
   // Audio Ref
   const audioCtxRef = useRef<AudioContext | null>(null);
   const isPlayingSoundRef = useRef<boolean>(false);
@@ -787,16 +794,29 @@ export const MainApp: React.FC = () => {
     };
   }, []);
 
+  // 振动提醒：原生平台且通知已授权时，振动由原生 TimerEngine 负责（锁屏挂起时 JS 无法执行）
+  const vibrate = () => {
+    if (WorkoutTimerService.isNative && nativeNotificationGranted) {
+      return;
+    }
+    Haptics.vibrate({ duration: 200 }).catch(() => {});
+  };
+
   const playAlarmSound = async () => {
+    // iOS 原生平台且通知权限已授权：由 OS 本地通知负责声音与横幅，避免 WebAudio 延迟/重复
+    if (WorkoutTimerService.isNative && nativeNotificationGranted) {
+      return;
+    }
+
     // 🆕 防止重复播放 - 如果1秒内已经播放过，就不播放
     const now = Date.now();
     if (isPlayingSoundRef.current || now - lastSoundTimeRef.current < 1000) {
       return;
     }
-    
+
     isPlayingSoundRef.current = true;
     lastSoundTimeRef.current = now;
-    
+
     try {
       if (!audioCtxRef.current) {
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -842,6 +862,7 @@ export const MainApp: React.FC = () => {
   const lastVisibleTimeRef = useRef<number>(Date.now());
   const missedAlarmsRef = useRef<string[]>([]);
   const alarmsPlayedInBackgroundRef = useRef<Set<string>>(new Set());
+  const alarmsProcessedRef = useRef<Set<string>>(new Set()); // 防止 visibilitychange 重复处理同一批闹钟
   
   useEffect(() => {
     const handleVisibilityChange = () => {
@@ -874,7 +895,11 @@ export const MainApp: React.FC = () => {
             const newFinishedIds = finishedIds.filter(id => !alarmsPlayedInBackgroundRef.current.has(id));
             if (newFinishedIds.length > 0) {
               missedAlarmsRef.current = newFinishedIds;
-              setFinishedTimerQueue(prevQueue => [...prevQueue, ...finishedIds]);
+              setFinishedTimerQueue(prevQueue => {
+                const existing = new Set(prevQueue);
+                const uniqueNew = newFinishedIds.filter(id => !existing.has(id));
+                return uniqueNew.length > 0 ? [...prevQueue, ...uniqueNew] : prevQueue;
+              });
             }
           }
           
@@ -882,21 +907,28 @@ export const MainApp: React.FC = () => {
         });
         
         // 如果有错过的闹钟，立即播放声音和震动（只播放一次）
-        if (missedAlarmsRef.current.length > 0) {
-          console.log('[Timer] Playing missed alarms for:', missedAlarmsRef.current);
-          missedAlarmsRef.current.forEach(id => alarmsPlayedInBackgroundRef.current.add(id));
-          
+        const toPlay = missedAlarmsRef.current.filter(id => !alarmsProcessedRef.current.has(id));
+        if (toPlay.length > 0) {
+          console.log('[Timer] Playing missed alarms for:', toPlay);
+          toPlay.forEach(id => {
+            alarmsPlayedInBackgroundRef.current.add(id);
+            alarmsProcessedRef.current.add(id);
+          });
+
           setTimeout(() => {
-            Haptics.vibrate({ duration: 200 }).catch(() => {});
+            vibrate();
             playAlarmSound();
-            missedAlarmsRef.current = [];
           }, 100);
         }
+        missedAlarmsRef.current = [];
         
-        // 清理已完成的闹钟记录（防止内存无限增长）
-        setTimeout(() => {
-          alarmsPlayedInBackgroundRef.current.clear();
-        }, 5000);
+        // 清理已完成的闹钟记录：只在所有计时器都结束后才清空，防止未到期计时器被误放
+        setTimers(prev => {
+          if (Object.keys(prev).length === 0) {
+            alarmsPlayedInBackgroundRef.current.clear();
+          }
+          return prev;
+        });
       }
     };
     
@@ -939,12 +971,16 @@ export const MainApp: React.FC = () => {
 
           // 只播放一次声音（即使有多个计时器同时完成）
           if (shouldPlaySound) {
-            Haptics.vibrate({ duration: 200 }).catch(() => {});
+            vibrate();
             playAlarmSound();
           }
 
           if (finishedIds.length > 0) {
-            setFinishedTimerQueue(prevQueue => [...prevQueue, ...finishedIds]);
+            setFinishedTimerQueue(prevQueue => {
+              const existing = new Set(prevQueue);
+              const newIds = finishedIds.filter(id => !existing.has(id));
+              return newIds.length > 0 ? [...prevQueue, ...newIds] : prevQueue;
+            });
           }
 
           return changed ? next : prev;
@@ -999,7 +1035,7 @@ export const MainApp: React.FC = () => {
   }, [finishedTimerQueue]);
 
 
-  const toggleTimer = (exerciseId: string, duration: number, forceStart: boolean = false, exerciseName: string = 'Rest') => {
+  const toggleTimer = (exerciseId: string, duration: number, forceStart: boolean = false, exerciseName: string = 'Rest', setNumber: number = 1) => {
     setTimers(prev => {
       if (prev[exerciseId] && !forceStart) {
         // Cancel
@@ -1012,7 +1048,7 @@ export const MainApp: React.FC = () => {
         // Start or Restart (Force Start)
         const now = Date.now();
         // 同步启动原生计时器：后台不挂起 + 本地通知 + Apple Watch 同步
-        WorkoutTimerService.startRest(exerciseId, exerciseName, duration);
+        WorkoutTimerService.startRest(exerciseId, exerciseName, duration, setNumber);
         return {
           ...prev,
           [exerciseId]: {
@@ -1037,16 +1073,18 @@ export const MainApp: React.FC = () => {
   };
 
   const handleFinishTimer = (exerciseId: string) => {
+    // 立即同步清理 JS 计时器状态，不再依赖 rAF 轮询发现
     setTimers(prev => {
       const next = { ...prev };
-      // Set target to NOW to trigger natural completion logic in next tick
-      if (next[exerciseId]) {
-        next[exerciseId] = { ...next[exerciseId], targetTime: Date.now() - 1 };
-      }
+      delete next[exerciseId];
       return next;
     });
     // 同步结束原生计时器
     WorkoutTimerService.finishRest(exerciseId);
+    // 直接触发完成队列，让 UI 立即进入下一组
+    setFinishedTimerQueue(prevQueue =>
+      prevQueue.includes(exerciseId) ? prevQueue : [...prevQueue, exerciseId]
+    );
   };
 
   const [recoveryState, setRecoveryState] = useState<RecoveryStatus[]>(() => safeParse('zenfit_recovery', [
@@ -1381,7 +1419,7 @@ export const MainApp: React.FC = () => {
 
       // Auto-start timer for the NEW set (Force Start)
       const restTime = exercise.recommendedRestSeconds || 90;
-      toggleTimer(exercise.id, restTime, true, exercise.exerciseName);
+      toggleTimer(exercise.id, restTime, true, exercise.exerciseName, setIndex + 2);
 
       // Mark set completion timestamp
       (set as any).completedAt = getCurrentTimestamp();

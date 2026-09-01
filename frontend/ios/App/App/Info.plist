@@ -45,5 +45,18 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSSupportsLiveActivities</key>
+	<true/>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.gymfithub.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>gymfithub</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>
