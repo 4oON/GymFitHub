@@ -79,6 +79,21 @@ struct RestTimerLockScreenView: View {
     }
 }
 
+/// 填充满整个动作条高度的倒计时背景条：橙色填充从右向左消退
+struct RestTimerBarStyle: ProgressViewStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        GeometryReader { geo in
+            ZStack(alignment: .trailing) {
+                Rectangle()
+                    .fill(Color.white.opacity(0.04))
+                Rectangle()
+                    .fill(zenOrange.opacity(0.28))
+                    .frame(width: geo.size.width * CGFloat(configuration.fractionCompleted ?? 0))
+            }
+        }
+    }
+}
+
 struct RestTimerRow: View {
     let item: RestTimerAttributes.RestTimerItem
 
@@ -121,6 +136,13 @@ struct RestTimerRow: View {
                 .buttonStyle(.plain)
             }
         }
+        .padding(.vertical, 7)
+        .padding(.horizontal, 10)
+        .background(
+            ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
+                .progressViewStyle(RestTimerBarStyle())
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 10))
         .widgetURL(URL(string: "gymfithub://rest/open?exerciseId=\(item.exerciseId)"))
     }
 }
