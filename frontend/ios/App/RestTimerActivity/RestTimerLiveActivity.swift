@@ -128,20 +128,14 @@ struct RestTimerRow: View {
         .padding(.vertical, 7)
         .padding(.horizontal, 10)
         .background(
-            ZStack {
-                // 轨道底色（白色微透，作背景条轨道）
-                Rectangle()
-                    .fill(Color.white.opacity(0.08))
-                // 从右向左消退的倒计时条。
-                // 关键：默认 LTR + countsDown 本身就是「右侧先空、向左推进」= 从右向左消退，
-                // 不需要 .layoutDirection(.rightToLeft)。
-                // 之前加 RTL 反而会翻转 ProgressView 内部 GeometryReader 的坐标系，
-                // 叠加 timerInterval 持续动画 → WidgetRenderer 布局断言崩溃（SIGTRAP）。
-                // scaleEffect（负值黑框/正值崩溃）与 RTL 都不能用。
-                ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
-                    .progressViewStyle(.linear)
-                    .tint(zenOrange)
-            }
+            // 锁屏 Live Activity 的坑（已反复验证）：
+            // ProgressView(timerInterval:) 的系统 .linear 样式，放在锁屏「铺满」上下文里
+            // 会因内部 GeometryReader + 持续动画 AnimatableFrameAttribute 触发 SIGTRAP。
+            // scaleEffect / RTL 只是加速了这个崩溃，真正的病根是「锁屏 + timerInterval 动画」。
+            // 灵动岛正常是因为它有系统给的固定尺寸约束；锁屏的 .background 铺满会崩。
+            // 故锁屏只保留静态深色底 + 倒计时文字（Text timerInterval 正常），不放进度条。
+            Rectangle()
+                .fill(Color.white.opacity(0.08))
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .widgetURL(URL(string: "gymfithub://rest/open?exerciseId=\(item.exerciseId)"))
