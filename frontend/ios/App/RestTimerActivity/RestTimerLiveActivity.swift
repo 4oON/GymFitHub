@@ -131,14 +131,14 @@ struct RestTimerRow: View {
             ZStack {
                 // 轨道底色（白色微透，作背景条轨道）
                 Rectangle()
-                    .fill(Color.white.opacity(0.04))
+                    .fill(Color.white.opacity(0.08))
                 // 从右向左消退的倒计时条：系统 ProgressView + RTL 方向翻转
                 // 注意：不能用 scaleEffect(x: -1) 负缩放，会让 Live Activity 渲染成黑框
                 ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
                     .progressViewStyle(.linear)
-                    .tint(zenOrange.opacity(0.35))
+                    .tint(zenOrange.opacity(0.6))
                     .environment(\.layoutDirection, .rightToLeft)
-                    .scaleEffect(y: 3)
+                    .scaleEffect(y: 8)
             }
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
