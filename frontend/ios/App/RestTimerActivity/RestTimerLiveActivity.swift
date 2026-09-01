@@ -79,21 +79,6 @@ struct RestTimerLockScreenView: View {
     }
 }
 
-/// 填充满整个动作条高度的倒计时背景条：橙色填充从右向左消退
-struct RestTimerBarStyle: ProgressViewStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        GeometryReader { geo in
-            ZStack(alignment: .trailing) {
-                Rectangle()
-                    .fill(Color.white.opacity(0.04))
-                Rectangle()
-                    .fill(zenOrange.opacity(0.28))
-                    .frame(width: geo.size.width * CGFloat(configuration.fractionCompleted ?? 0))
-            }
-        }
-    }
-}
-
 struct RestTimerRow: View {
     let item: RestTimerAttributes.RestTimerItem
 
@@ -102,13 +87,15 @@ struct RestTimerRow: View {
             Text(item.exerciseName)
                 .font(.subheadline.weight(.semibold))
                 .foregroundColor(.white)
-                .lineLimit(1)
-                .layoutPriority(1)
+                .lineLimit(2)
+                .minimumScaleFactor(0.8)
+                .truncationMode(.tail)
 
             Text(timerInterval: item.startDate...item.endDate, countsDown: true)
                 .font(.system(size: 15, weight: .bold, design: .monospaced))
                 .monospacedDigit()
                 .foregroundColor(zenOrange)
+                .fixedSize()
 
             Spacer(minLength: 8)
 
@@ -123,6 +110,7 @@ struct RestTimerRow: View {
                         .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
+                .fixedSize()
 
                 Button(intent: FinishRestIntent(exerciseId: item.exerciseId)) {
                     Text("Done")
@@ -134,13 +122,16 @@ struct RestTimerRow: View {
                         .clipShape(Capsule())
                 }
                 .buttonStyle(.plain)
+                .fixedSize()
             }
         }
         .padding(.vertical, 7)
         .padding(.horizontal, 10)
         .background(
             ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
-                .progressViewStyle(RestTimerBarStyle())
+                .progressViewStyle(.linear)
+                .tint(zenOrange.opacity(0.35))
+                .scaleEffect(x: -1, y: 3)
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
         .widgetURL(URL(string: "gymfithub://rest/open?exerciseId=\(item.exerciseId)"))
