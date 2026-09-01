@@ -132,14 +132,15 @@ struct RestTimerRow: View {
                 // 轨道底色（白色微透，作背景条轨道）
                 Rectangle()
                     .fill(Color.white.opacity(0.08))
-                // 从右向左消退的倒计时条：系统 ProgressView + RTL 方向翻转
-                // 关键：Live Activity 里 ProgressView(timerInterval:) + scaleEffect 会让
-                // WidgetRenderer 的 GeometryReader 布局断言崩溃（SIGTRAP），必须移除 scaleEffect。
-                // 负缩放(x:-1)黑框、正放大(y:8)崩溃，两种都不能用。
+                // 从右向左消退的倒计时条。
+                // 关键：默认 LTR + countsDown 本身就是「右侧先空、向左推进」= 从右向左消退，
+                // 不需要 .layoutDirection(.rightToLeft)。
+                // 之前加 RTL 反而会翻转 ProgressView 内部 GeometryReader 的坐标系，
+                // 叠加 timerInterval 持续动画 → WidgetRenderer 布局断言崩溃（SIGTRAP）。
+                // scaleEffect（负值黑框/正值崩溃）与 RTL 都不能用。
                 ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
                     .progressViewStyle(.linear)
                     .tint(zenOrange)
-                    .environment(\.layoutDirection, .rightToLeft)
             }
         )
         .clipShape(RoundedRectangle(cornerRadius: 10))
