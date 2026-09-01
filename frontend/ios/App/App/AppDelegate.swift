@@ -2,6 +2,7 @@ import UIKit
 import Capacitor
 import WebKit
 import UserNotifications
+import CapApp_SPM
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -30,6 +31,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
 
         return true
+    }
+
+    // MARK: - URL Scheme 处理（锁屏 Live Activity 的 +30s / Done 按钮）
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        handleRestURL(url)
+        return true
+    }
+
+    private func handleRestURL(_ url: URL) {
+        guard url.scheme == "gymfithub", url.host == "rest" else { return }
+        guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return }
+        guard let exerciseId = components.queryItems?.first(where: { $0.name == "exerciseId" })?.value,
+              !exerciseId.isEmpty else { return }
+
+        let action = url.path
+        if action == "/extend" {
+            let secondsStr = components.queryItems?.first(where: { $0.name == "seconds" })?.value ?? "30"
+            let seconds = Double(secondsStr) ?? 30
+            TimerEngine.shared.extendRest(exerciseId: exerciseId, bySeconds: seconds)
+        } else if action == "/done" {
+            TimerEngine.shared.finishRest(exerciseId: exerciseId)
+        }
     }
 
     // MARK: - UNUserNotificationCenterDelegate

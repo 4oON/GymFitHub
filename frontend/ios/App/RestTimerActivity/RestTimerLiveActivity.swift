@@ -57,7 +57,8 @@ struct RestTimerLiveActivity: Widget {
     }
 }
 
-/// 锁屏视图：多组并列的横条倒计时
+/// 锁屏视图：多组并列的紧凑横条倒计时。
+/// 每个条目两行：动作名 + 内联倒计时 + 操作按钮 / 横条进度条。
 struct RestTimerLockScreenView: View {
     let context: ActivityViewContext<RestTimerAttributes>
 
@@ -67,12 +68,13 @@ struct RestTimerLockScreenView: View {
                 if index > 0 {
                     Divider()
                         .overlay(Color(white: 0.18))
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                 }
                 RestTimerRow(item: item)
             }
         }
-        .padding(14)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
     }
 }
 
@@ -80,40 +82,53 @@ struct RestTimerRow: View {
     let item: RestTimerAttributes.RestTimerItem
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
-                RoundedRectangle(cornerRadius: 3)
-                    .fill(zenOrange)
-                    .frame(width: 5, height: 18)
                 Text(item.exerciseName)
                     .font(.subheadline.weight(.semibold))
                     .foregroundColor(.white)
                     .lineLimit(1)
-                Spacer()
-                Text("Set \(item.setNumber)")
-                    .font(.caption)
-                    .foregroundColor(Color(white: 0.55))
+                    .layoutPriority(1)
+
+                Text(item.endDate, style: .timer)
+                    .font(.system(size: 15, weight: .bold, design: .monospaced))
+                    .monospacedDigit()
+                    .foregroundColor(zenOrange)
+
+                Spacer(minLength: 8)
+
+                Link(destination: extendURL) {
+                    Text("+30s")
+                        .font(.caption.bold())
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.white.opacity(0.14))
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
+                }
+
+                Link(destination: doneURL) {
+                    Text("Done")
+                        .font(.caption.bold())
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(zenOrange)
+                        .foregroundColor(Color(red: 0.1, green: 0.05, blue: 0.0))
+                        .clipShape(Capsule())
+                }
             }
 
             ProgressView(timerInterval: item.startDate...item.endDate, countsDown: true)
                 .progressViewStyle(.linear)
                 .tint(zenOrange)
-
-            HStack(alignment: .bottom) {
-                Text(item.endDate, style: .timer)
-                    .font(.system(size: 24, weight: .bold, design: .monospaced))
-                    .monospacedDigit()
-                    .foregroundColor(.white)
-                Spacer()
-                Text("Total \(Self.duration(item.totalDuration))")
-                    .font(.caption)
-                    .foregroundColor(Color(white: 0.55))
-            }
         }
     }
 
-    static func duration(_ t: TimeInterval) -> String {
-        let s = Int(t)
-        return "\(s / 60):\(String(format: "%02d", s % 60))"
+    private var extendURL: URL {
+        URL(string: "gymfithub://rest/extend?exerciseId=\(item.exerciseId)&seconds=30")!
+    }
+
+    private var doneURL: URL {
+        URL(string: "gymfithub://rest/done?exerciseId=\(item.exerciseId)")!
     }
 }

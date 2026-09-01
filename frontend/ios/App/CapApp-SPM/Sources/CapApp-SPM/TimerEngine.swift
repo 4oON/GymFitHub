@@ -92,6 +92,29 @@ public final class TimerEngine: NSObject {
         }
     }
 
+    /// 延长某个计时器（锁屏 Live Activity 的 +30s 按钮触发）
+    /// - Parameters:
+    ///   - exerciseId: 动作唯一 ID
+    ///   - seconds: 延长的秒数（如 30）
+    public func extendRest(exerciseId: String, bySeconds seconds: Double) {
+        guard let old = timers[exerciseId] else { return }
+        // 取消旧通知，用新的 endDate 重新调度
+        cancelCompletionNotification(for: old)
+
+        let newEntry = TimerEntry(
+            exerciseId: old.exerciseId,
+            exerciseName: old.exerciseName,
+            duration: old.duration + seconds,
+            endDate: old.endDate.addingTimeInterval(seconds),
+            setNumber: old.setNumber
+        )
+        timers[exerciseId] = newEntry
+
+        scheduleCompletionNotification(for: newEntry)
+        syncLiveActivity()
+        notifyStateChanged()
+    }
+
     /// 主动结束全部计时器
     public func finishAll() {
         let keys = Array(timers.keys)
