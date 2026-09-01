@@ -1035,7 +1035,7 @@ export const MainApp: React.FC = () => {
   }, [finishedTimerQueue]);
 
 
-  const toggleTimer = (exerciseId: string, duration: number, forceStart: boolean = false, exerciseName: string = 'Rest') => {
+  const toggleTimer = (exerciseId: string, duration: number, forceStart: boolean = false, exerciseName: string = 'Rest', setNumber: number = 1) => {
     setTimers(prev => {
       if (prev[exerciseId] && !forceStart) {
         // Cancel
@@ -1048,7 +1048,7 @@ export const MainApp: React.FC = () => {
         // Start or Restart (Force Start)
         const now = Date.now();
         // 同步启动原生计时器：后台不挂起 + 本地通知 + Apple Watch 同步
-        WorkoutTimerService.startRest(exerciseId, exerciseName, duration);
+        WorkoutTimerService.startRest(exerciseId, exerciseName, duration, setNumber);
         return {
           ...prev,
           [exerciseId]: {
@@ -1419,7 +1419,7 @@ export const MainApp: React.FC = () => {
 
       // Auto-start timer for the NEW set (Force Start)
       const restTime = exercise.recommendedRestSeconds || 90;
-      toggleTimer(exercise.id, restTime, true, exercise.exerciseName);
+      toggleTimer(exercise.id, restTime, true, exercise.exerciseName, setIndex + 2);
 
       // Mark set completion timestamp
       (set as any).completedAt = getCurrentTimestamp();

@@ -73,11 +73,12 @@ public class WorkoutTimerPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("exerciseId is required")
             return
         }
-        let exerciseName = call.getString("exerciseName") ?? "休息"
+        let exerciseName = call.getString("exerciseName") ?? "Rest"
         let duration = call.getDouble("duration") ?? 90.0
+        let setNumber = call.getInt("setNumber") ?? 1
 
         engine.requestNotificationPermissionIfNeeded()
-        engine.startRest(exerciseId: exerciseId, exerciseName: exerciseName, duration: duration)
+        engine.startRest(exerciseId: exerciseId, exerciseName: exerciseName, duration: duration, setNumber: setNumber)
 
         call.resolve([
             "exerciseId": exerciseId,

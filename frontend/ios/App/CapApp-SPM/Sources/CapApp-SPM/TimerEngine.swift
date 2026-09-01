@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import UserNotifications
 import AudioToolbox
+import ActivityKit
 
 /// GymFitHub 原生计时引擎
 ///
@@ -22,18 +23,22 @@ public final class TimerEngine: NSObject {
 
     private var displayTimer: Timer?
     private var completionTimer: Timer?
+    /// Live Activity 实例（擦除为 Any 以兼容 iOS 15；仅 iOS 16.1+ 使用）
+    private var liveActivity: Any?
 
     public struct TimerEntry {
         public let exerciseId: String
         public let exerciseName: String
         public let duration: TimeInterval   // 总时长（秒）
         public let endDate: Date            // 结束时间戳（绝对时间，后台依然有效）
+        public let setNumber: Int           // 组号（1-based，休息后要做的组）
 
-        public init(exerciseId: String, exerciseName: String, duration: TimeInterval, endDate: Date) {
+        public init(exerciseId: String, exerciseName: String, duration: TimeInterval, endDate: Date, setNumber: Int) {
             self.exerciseId = exerciseId
             self.exerciseName = exerciseName
             self.duration = duration
             self.endDate = endDate
+            self.setNumber = setNumber
         }
     }
 
@@ -46,7 +51,7 @@ public final class TimerEngine: NSObject {
     ///   - exerciseId: 动作唯一 ID
     ///   - exerciseName: 动作显示名
     ///   - duration: 休息时长（秒）
-    public func startRest(exerciseId: String, exerciseName: String, duration: Double) {
+    public func startRest(exerciseId: String, exerciseName: String, duration: Double, setNumber: Int = 1) {
         // 如果该 exerciseId 已有旧计时器，先取消旧通知，防止重复弹窗
         if let oldEntry = timers[exerciseId] {
             cancelCompletionNotification(for: oldEntry)
@@ -56,7 +61,8 @@ public final class TimerEngine: NSObject {
             exerciseId: exerciseId,
             exerciseName: exerciseName,
             duration: duration,
-            endDate: Date().addingTimeInterval(duration)
+            endDate: Date().addingTimeInterval(duration),
+            setNumber: setNumber
         )
         timers[exerciseId] = entry
 
@@ -64,6 +70,8 @@ public final class TimerEngine: NSObject {
         restartDisplayTimer()
         // 安排结束通知
         scheduleCompletionNotification(for: entry)
+        // 同步锁屏 Live Activity
+        syncLiveActivity()
 
         // 立即回调一次当前状态
         onTick?(exerciseId, Int(duration))
@@ -76,6 +84,7 @@ public final class TimerEngine: NSObject {
         timers.removeValue(forKey: exerciseId)
         cancelCompletionNotification(for: entry)
         onFinish?(exerciseId, entry.exerciseName)
+        syncLiveActivity()
         notifyStateChanged()
 
         if timers.isEmpty {
@@ -146,6 +155,7 @@ public final class TimerEngine: NSObject {
         onFinish?(exerciseId, entry.exerciseName)
         // 原生振动：前台 / 后台未挂起时立即触发，不依赖 JS（JS 在锁屏挂起时被冻结）
         vibrate()
+        syncLiveActivity()
         notifyStateChanged()
         if timers.isEmpty {
             stopDisplayTimer()
@@ -156,6 +166,45 @@ public final class TimerEngine: NSObject {
     /// 此时振动依赖本地通知的 sound（受 iOS 静音键 / 专注模式控制）。
     private func vibrate() {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+
+    // MARK: - Live Activity（锁屏实时倒计时）
+
+    /// 同步当前所有计时器到锁屏 Live Activity（多组并列）。
+    /// 倒计时本身由系统组件（ProgressView timerInterval / Text timer）自动刷新，无需频繁 update。
+    private func syncLiveActivity() {
+        guard #available(iOS 16.1, *) else { return }
+
+        let items = timers.values.map { entry in
+            RestTimerAttributes.RestTimerItem(
+                exerciseId: entry.exerciseId,
+                exerciseName: entry.exerciseName,
+                startDate: entry.endDate.addingTimeInterval(-entry.duration),
+                endDate: entry.endDate,
+                totalDuration: entry.duration,
+                setNumber: entry.setNumber
+            )
+        }
+        let contentState = RestTimerAttributes.ContentState(items: items)
+
+        if let existing = liveActivity as? Activity<RestTimerAttributes> {
+            if items.isEmpty {
+                Task { await existing.end(using: contentState, dismissalPolicy: .immediate) }
+                liveActivity = nil
+            } else {
+                Task { await existing.update(using: contentState) }
+            }
+        } else if !items.isEmpty {
+            do {
+                let activity = try Activity<RestTimerAttributes>.request(
+                    attributes: RestTimerAttributes(),
+                    contentState: contentState
+                )
+                liveActivity = activity
+            } catch {
+                print("⚡️ [TimerEngine] Live Activity 启动失败: \(error)")
+            }
+        }
     }
 
     // MARK: - 本地通知（后台提醒）
