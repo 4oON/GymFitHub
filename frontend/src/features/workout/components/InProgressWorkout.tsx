@@ -10,14 +10,14 @@ import { ExerciseIdentificationService } from '../services/ExerciseIdentificatio
 import { iOSStorage } from '@/services/iOSStorageService';
 import type { WeightUnit } from '../utils/weightUnitUtils';
 import {
-    LB_PRESETS,
     lbToKg,
     kgToLb,
     snapLbToPreset,
-    displayWeight,
     formatKgHint,
     round1,
+    round2,
 } from '../utils/weightUnitUtils';
+import WeightWheel from './WeightWheel';
 
 /** Storage key for per-exercise weight unit preferences (kg default, lb opt-in) */
 const WEIGHT_UNIT_PREFS_KEY = 'zenfit_weight_unit_prefs';
@@ -283,22 +283,6 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         onExerciseUpdate(exerciseId, { ...exercise, sets: updatedSets });
     };
 
-    /**
-     * Apply an imperial preset (lb) to the most relevant set:
-     * the last empty set if any, otherwise the last set.
-     * Stored value is converted to kg.
-     */
-    const applyLbPreset = (exercise: ActiveExercise, lb: number) => {
-        if (exercise.sets.length === 0) return;
-        const target = [...exercise.sets].reverse().find(s => !s.weight || s.weight === 0)
-            || exercise.sets[exercise.sets.length - 1];
-        const weightKg = lbToKg(lb);
-        const updatedSets = exercise.sets.map(set =>
-            set.id === target.id ? { ...set, weight: weightKg } : set
-        );
-        onExerciseUpdate(exercise.id, { ...exercise, sets: updatedSets });
-    };
-
     if (exercises.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-full p-8 text-center">
@@ -315,110 +299,54 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
 
     return (
         <div className={`flex flex-col h-full bg-slate-950 ${className}`}>
-            {/* Header with workout controls and stats */}
-            <div className="flex-shrink-0 p-4 border-b border-slate-800">
-                <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                        <h2 className="text-xl font-bold text-white">Active Workout</h2>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                        {/* Workout duration */}
-                        <div className="flex items-center gap-1 text-slate-400 text-sm">
-                            <Clock size={14} />
+            {/* Slim sticky header: title + duration + inline stats + progress.
+                Critical actions moved to the docked bottom bar so system
+                notifications and in-app toasts can never block them. */}
+            <div className="flex-shrink-0 px-4 pt-3 pb-2.5 border-b border-slate-800 bg-slate-950/95 z-30">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2 min-w-0">
+                        <h2 className="text-base font-bold text-white whitespace-nowrap">Active Workout</h2>
+                        <span className="flex items-center gap-1 text-slate-400 text-[11px] whitespace-nowrap">
+                            <Clock size={11} />
                             {formatDuration(workoutDuration)}
-                        </div>
-
-                        {/* Save as Routine button */}
-                        {exercises.length > 0 && onSaveAsRoutine && (
-                            <button
-                                onClick={onSaveAsRoutine}
-                                className="p-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition-colors"
-                                title="Save as Routine"
-                            >
-                                <Save size={16} />
-                            </button>
-                        )}
-
-                        {/* Clear all exercises button */}
-                        {exercises.length > 0 && onClearAllExercises && (
-                            <button
-                                onClick={onClearAllExercises}
-                                className="p-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors"
-                                title="Clear All Exercises"
-                            >
-                                <Trash2 size={16} />
-                            </button>
-                        )}
-
-                        {/* Finish workout button */}
-                        <button
-                            onClick={onFinishWorkout}
-                            className="p-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg transition-colors"
-                            title="Finish Workout"
-                        >
-                            <Check size={16} />
-                        </button>
+                        </span>
+                    </div>
+                    <div className="flex items-center gap-2.5 text-[11px] text-slate-400 whitespace-nowrap">
+                        <span className="flex items-center gap-1" title="Sets">
+                            <Target size={11} className="text-emerald-400" />
+                            <span className="text-white font-bold">{workoutStats.completedSets}/{workoutStats.totalSets}</span>
+                        </span>
+                        <span className="flex items-center gap-1" title="Volume">
+                            <Zap size={11} className="text-blue-400" />
+                            <span className="text-white font-bold">{Math.round(workoutStats.totalVolume)}kg</span>
+                        </span>
+                        <span className="flex items-center gap-1" title="Reps">
+                            <TrendingUp size={11} className="text-purple-400" />
+                            <span className="text-white font-bold">{workoutStats.totalReps}</span>
+                        </span>
+                        <span className="flex items-center gap-1" title="Muscle groups">
+                            <Activity size={11} className="text-rose-400" />
+                            <span className="text-white font-bold">{workoutStats.muscleGroups.length}</span>
+                        </span>
                     </div>
                 </div>
 
-                {/* Workout stats */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                            <Target size={14} className="text-emerald-400" />
-                            <span className="text-xs text-slate-400">Sets</span>
-                        </div>
-                        <div className="text-lg font-bold text-white">
-                            {workoutStats.completedSets}/{workoutStats.totalSets}
-                        </div>
+                {/* Progress bar with inline percentage */}
+                <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                        <div
+                            className="bg-emerald-500 h-1.5 rounded-full transition-all duration-300"
+                            style={{ width: `${workoutStats.completionPercentage}%` }}
+                        />
                     </div>
-
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                            <Zap size={14} className="text-blue-400" />
-                            <span className="text-xs text-slate-400">Volume</span>
-                        </div>
-                        <div className="text-lg font-bold text-white">
-                            {Math.round(workoutStats.totalVolume)}kg
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                            <TrendingUp size={14} className="text-purple-400" />
-                            <span className="text-xs text-slate-400">Reps</span>
-                        </div>
-                        <div className="text-lg font-bold text-white">
-                            {workoutStats.totalReps}
-                        </div>
-                    </div>
-
-                    <div className="bg-slate-900/50 rounded-lg p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                            <Activity size={14} className="text-rose-400" />
-                            <span className="text-xs text-slate-400">Muscles</span>
-                        </div>
-                        <div className="text-lg font-bold text-white">
-                            {workoutStats.muscleGroups.length}
-                        </div>
-                    </div>
-                </div>
-
-                {/* Progress bar */}
-                <div className="w-full bg-slate-800 rounded-full h-2">
-                    <div
-                        className="bg-emerald-500 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${workoutStats.completionPercentage}%` }}
-                    />
-                </div>
-                <div className="text-xs text-slate-400 mt-1 text-center">
-                    {Math.round(workoutStats.completionPercentage)}% Complete
+                    <span className="text-[10px] font-bold text-slate-500 w-8 text-right">
+                        {Math.round(workoutStats.completionPercentage)}%
+                    </span>
                 </div>
             </div>
 
             {/* Exercise Cards */}
-            <div className="flex-1 min-h-0 overflow-auto space-y-4 px-4 pb-24">
+            <div className="flex-1 min-h-0 overflow-auto space-y-4 px-4 pb-44">
                 {exercises.map((exercise, exIndex) => {
                     const timer = timers[exercise.id];
                     const isTimerRunning = timer?.targetTime ? timer.targetTime > now : false;
@@ -681,8 +609,8 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                 <Scale size={14} />
                                                 <span>
                                                     {weightUnit === 'lb'
-                                                        ? 'Enter ONE dumbbell in lb, auto-saved as kg (total = x2)'
-                                                        : 'Enter weight of ONE dumbbell (total = x2)'}
+                                                        ? 'Wheel = ONE dumbbell in lb, auto-saved as kg (total = x2)'
+                                                        : 'Wheel = weight of ONE dumbbell (total = x2)'}
                                                 </span>
                                             </div>
                                         )}
@@ -701,30 +629,22 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                     </div>
                                 )}
 
-                                {/* Imperial dumbbell quick-select chips (only in lb mode) */}
-                                {isDumbbellExercise && weightUnit === 'lb' && (
-                                    <div className="mb-3 px-2">
-                                        <div
-                                            className="flex gap-1.5 overflow-x-auto no-scrollbar py-1"
-                                            data-swipe-ignore
-                                            style={{ touchAction: 'pan-x' }}
-                                        >
-                                            {LB_PRESETS.map(lb => (
-                                                <button
-                                                    key={lb}
-                                                    onClick={() => applyLbPreset(exercise, lb)}
-                                                    className="flex-shrink-0 px-2.5 py-1.5 rounded-full text-[11px] font-bold border border-slate-700 bg-slate-800/70 text-slate-300 active:scale-95 transition-all"
-                                                    style={{ touchAction: 'manipulation' }}
-                                                >
-                                                    {lb}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
+                                {/* Imperial dumbbell quick-select chips: replaced by the WeightWheel picker */}
                                 <div className="grid grid-cols-10 gap-2 mb-2 px-2 text-xs font-medium text-slate-500 uppercase text-center">
                                     <div className="col-span-2">Set</div>
-                                    <div className="col-span-3">{isDumbbellExercise ? weightUnit : 'kg'}</div>
+                                    <div className="col-span-3">
+                                        {isDumbbellExercise ? (
+                                            <button
+                                                onClick={() => toggleUnit(exercise)}
+                                                className={`uppercase transition-colors ${weightUnit === 'lb' ? 'text-amber-500 font-bold' : 'hover:text-slate-300'
+                                                    }`}
+                                                style={{ touchAction: 'manipulation' }}
+                                                title="Tap to switch kg/lb"
+                                            >
+                                                {weightUnit}
+                                            </button>
+                                        ) : 'kg'}
+                                    </div>
                                     <div className="col-span-3">
                                         {typeInfo.trackingMode === 'duration' ? 'Sec' : 'Reps'}
                                     </div>
@@ -746,43 +666,33 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                 </button>
                                             </div>
                                             <div className="col-span-3">
-                                                <div className="relative">
+                                                {isDumbbellExercise ? (
+                                                    <>
+                                                        <WeightWheel
+                                                            kgValue={set.weight}
+                                                            unit={weightUnit}
+                                                            onChange={kg => handleSetUpdate(exercise.id, set.id, 'weight', kg)}
+                                                        />
+                                                        {/* Fixed-height hint line keeps every set row aligned.
+                                                            lb: actual kg weight · kg: both-dumbbell total. */}
+                                                        <div className="h-4 mt-0.5 text-[10px] text-slate-500 text-center leading-none">
+                                                            {set.weight > 0 && (weightUnit === 'lb'
+                                                                ? `≈ ${formatKgHint(set.weight)}`
+                                                                : `total ${formatKgHint(round2(set.weight * 2))}`)}
+                                                        </div>
+                                                    </>
+                                                ) : (
                                                     <input
                                                         type="number"
                                                         data-swipe-ignore
-                                                        value={isDumbbellExercise ? (displayWeight(set.weight, weightUnit) || '') : (set.weight || '')}
-                                                        placeholder={isDumbbellExercise && weightUnit === 'lb' && rec
-                                                            ? `${round1(kgToLb(rec.weight))}`
-                                                            : rec ? `${rec.weight}` : "0"}
-                                                        className={`w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500 ${isDumbbellExercise ? 'pr-7' : ''}`}
+                                                        value={set.weight || ''}
+                                                        placeholder={rec ? `${rec.weight}` : "0"}
+                                                        className="w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500"
                                                         onChange={e => {
                                                             const v = parseFloat(e.target.value);
-                                                            if (isNaN(v)) {
-                                                                handleSetUpdate(exercise.id, set.id, 'weight', 0);
-                                                            } else if (isDumbbellExercise && weightUnit === 'lb') {
-                                                                // User types lb; store kg internally
-                                                                handleSetUpdate(exercise.id, set.id, 'weight', lbToKg(v));
-                                                            } else {
-                                                                handleSetUpdate(exercise.id, set.id, 'weight', v);
-                                                            }
+                                                            handleSetUpdate(exercise.id, set.id, 'weight', isNaN(v) ? 0 : v);
                                                         }}
                                                     />
-                                                    {isDumbbellExercise && (
-                                                        <button
-                                                            onClick={() => toggleUnit(exercise)}
-                                                            className={`absolute right-1 top-1/2 -translate-y-1/2 px-1.5 py-1 rounded text-[10px] font-bold uppercase transition-colors ${weightUnit === 'lb' ? 'text-amber-400' : 'text-slate-500 hover:text-slate-300'
-                                                                }`}
-                                                            style={{ touchAction: 'manipulation' }}
-                                                            title="Tap to switch kg/lb"
-                                                        >
-                                                            {weightUnit}
-                                                        </button>
-                                                    )}
-                                                </div>
-                                                {isDumbbellExercise && weightUnit === 'lb' && set.weight > 0 && (
-                                                    <div className="text-[10px] text-slate-500 text-center mt-0.5 leading-none">
-                                                        ≈ {formatKgHint(set.weight)}
-                                                    </div>
                                                 )}
                                             </div>
                                             <div className="col-span-3">
@@ -826,6 +736,44 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                         </SwipeableCard>
                     );
                 })}
+            </div>
+
+            {/* Docked bottom action bar: sits just above the tab nav, far away
+                from system notifications and top popups that used to block
+                the Finish / Clear buttons. */}
+            <div
+                className="fixed left-0 right-0 z-40 px-4 pointer-events-none"
+                style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
+            >
+                <div className="max-w-md mx-auto flex items-center gap-2 bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl p-2 shadow-2xl pointer-events-auto">
+                    {onSaveAsRoutine && (
+                        <button
+                            onClick={onSaveAsRoutine}
+                            className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 hover:bg-blue-500/25 transition-colors"
+                            title="Save as Routine"
+                            style={{ touchAction: 'manipulation' }}
+                        >
+                            <Save size={18} />
+                        </button>
+                    )}
+                    {onClearAllExercises && (
+                        <button
+                            onClick={onClearAllExercises}
+                            className="p-2.5 rounded-xl bg-red-500/15 text-red-400 hover:bg-red-500/25 transition-colors"
+                            title="Clear All Exercises"
+                            style={{ touchAction: 'manipulation' }}
+                        >
+                            <Trash2 size={18} />
+                        </button>
+                    )}
+                    <button
+                        onClick={onFinishWorkout}
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+                        style={{ touchAction: 'manipulation' }}
+                    >
+                        <Check size={18} /> Finish Workout
+                    </button>
+                </div>
             </div>
 
             <div ref={bottomRef} />
