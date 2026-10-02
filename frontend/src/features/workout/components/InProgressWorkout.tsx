@@ -96,8 +96,9 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         title: string;
     } | null>(null);
     const [keypadBuffer, setKeypadBuffer] = useState('');
-    /** Press-and-hold magnifier for the Volume stat in the header */
-    const [showVolumePeek, setShowVolumePeek] = useState(false);
+    /** Tap-to-expand glass stats sheet below the header strip */
+    const [showStatsSheet, setShowStatsSheet] = useState(false);
+    const [statsPage, setStatsPage] = useState(0);
     const [now, setNow] = useState(Date.now());
     const [expandedExerciseId, setExpandedExerciseId] = useState<string | null>(null);
     const [dragDistance, setDragDistance] = useState<Record<string, number>>({});
@@ -190,6 +191,31 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         };
     }, [exercises, exerciseLibrary, userProfile?.weight]);
 
+    /** Pages of the expandable glass stats sheet (swipeable, snap per page). */
+    const statPages = [
+        {
+            key: 'sets', icon: Target, label: 'Sets',
+            value: `${workoutStats.completedSets}/${workoutStats.totalSets}`,
+            desc: 'Sets completed out of the sets planned for this session.'
+        },
+        {
+            key: 'volume', icon: Zap, label: 'Volume',
+            value: `${Math.round(workoutStats.totalVolume)} kg`,
+            desc: 'Total weight lifted. Every completed set adds weight x reps.',
+            highlight: true
+        },
+        {
+            key: 'reps', icon: TrendingUp, label: 'Reps',
+            value: `${workoutStats.totalReps}`,
+            desc: 'Total repetitions performed across all completed sets.'
+        },
+        {
+            key: 'muscles', icon: Activity, label: 'Muscles',
+            value: `${workoutStats.muscleGroups.length}`,
+            desc: 'Distinct muscle groups trained in this workout.'
+        },
+    ];
+
     const formatTimeAgo = (timestamp?: number) => {
         if (!timestamp) return null;
         const diffSec = Math.floor((now - timestamp) / 1000);
@@ -199,11 +225,12 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
     };
 
     const formatDuration = (seconds: number) => {
-        const hours = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        if (hours > 0) {
-            return `${hours}h ${mins}m`;
+        if (seconds >= 3600) {
+            // Compact decimal-hours format (1.4h) so the clock never collides
+            // with the stats cluster on narrow screens.
+            return `${(seconds / 3600).toFixed(1)}h`;
         }
+        const mins = Math.floor(seconds / 60);
         return `${mins}m`;
     };
 
@@ -384,28 +411,25 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                             {formatDuration(workoutDuration)}
                         </span>
                     </div>
-                    {/* Inline stats: Volume is the metric the user tracks most,
-                        so it is bigger and highlighted; the rest stay muted. */}
-                    <div className="flex items-center gap-2.5 text-[11px] whitespace-nowrap">
+                    {/* Inline stats: tap the strip to expand the glass sheet
+                        below; Volume stays highlighted as the primary metric. */}
+                    <div
+                        className="flex items-center gap-2.5 text-[11px] whitespace-nowrap cursor-pointer select-none"
+                        onClick={() => setShowStatsSheet(v => !v)}
+                        style={{ touchAction: 'manipulation' }}
+                        title="Tap to expand stats"
+                    >
                         <span className="flex items-center gap-1 text-slate-500" title="Sets">
                             <Target size={11} />
                             <span className="font-semibold text-slate-400">{workoutStats.completedSets}/{workoutStats.totalSets}</span>
                         </span>
-                        {/* Press-and-hold to magnify Volume and learn what it means;
-                            release to dismiss. */}
-                        <button
-                            type="button"
-                            onPointerDown={() => setShowVolumePeek(true)}
-                            onPointerUp={() => setShowVolumePeek(false)}
-                            onPointerCancel={() => setShowVolumePeek(false)}
-                            onPointerLeave={() => setShowVolumePeek(false)}
-                            className="flex items-center gap-1 rounded-md bg-emerald-500/10 border border-emerald-500/25 px-1.5 py-0.5 active:bg-emerald-500/25 transition-colors"
-                            title="Press and hold: what is Volume?"
-                            style={{ touchAction: 'manipulation' }}
+                        <span
+                            className="flex items-center gap-1 rounded-md bg-emerald-500/10 border border-emerald-500/25 px-1.5 py-0.5"
+                            title="Volume (total weight lifted)"
                         >
                             <Zap size={12} className="text-emerald-400" />
                             <span className="text-[13px] font-black text-emerald-300">{Math.round(workoutStats.totalVolume)}kg</span>
-                        </button>
+                        </span>
                         <span className="flex items-center gap-1 text-slate-500" title="Reps">
                             <TrendingUp size={11} />
                             <span className="font-semibold text-slate-400">{workoutStats.totalReps}</span>
@@ -428,6 +452,61 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                     <span className="text-[10px] font-bold text-slate-500 w-8 text-right">
                         {Math.round(workoutStats.completionPercentage)}%
                     </span>
+                </div>
+
+                {/* Expandable glass stats sheet (~1/4 of the screen). The grid
+                    rows transition gives the smooth grow/collapse; inside, a
+                    snap-scrolling pager shows one stat per page with an Apple
+                    frosted-glass look. */}
+                <div
+                    className={`grid transition-all duration-300 ease-in-out ${showStatsSheet ? 'grid-rows-[1fr] opacity-100 mt-2.5' : 'grid-rows-[0fr] opacity-0'
+                        }`}
+                >
+                    <div className="overflow-hidden">
+                        <div
+                            className="relative h-52 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-2xl shadow-2xl overflow-hidden"
+                            data-swipe-ignore
+                            style={{ touchAction: 'pan-x' }}
+                        >
+                            <div
+                                className="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"
+                                onScroll={e => {
+                                    const el = e.currentTarget;
+                                    const i = Math.round(el.scrollLeft / el.clientWidth);
+                                    if (i !== statsPage) setStatsPage(Math.max(0, Math.min(statPages.length - 1, i)));
+                                }}
+                            >
+                                {statPages.map(p => (
+                                    <div key={p.key} className="min-w-full h-full snap-center flex flex-col items-center justify-center px-8">
+                                        <p.icon size={18} className={p.highlight ? 'text-emerald-400 mb-2' : 'text-slate-500 mb-2'} />
+                                        <span className={`text-4xl font-black tabular-nums ${p.highlight ? 'text-emerald-300' : 'text-white'}`}>
+                                            {p.value}
+                                        </span>
+                                        <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mt-1">{p.label}</span>
+                                        <p className="text-[11px] text-slate-500 text-center mt-2 leading-relaxed">{p.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                            {/* Page dots + close */}
+                            <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+                                {statPages.map((p, i) => (
+                                    <span
+                                        key={p.key}
+                                        className={`h-1.5 rounded-full transition-all duration-300 ${i === statsPage ? 'w-4 bg-emerald-400' : 'w-1.5 bg-slate-600'
+                                            }`}
+                                    />
+                                ))}
+                            </div>
+                            <button
+                                onClick={() => setShowStatsSheet(false)}
+                                className="absolute top-2 right-2 p-1.5 rounded-full text-slate-500 hover:text-white hover:bg-white/10 transition-colors"
+                                style={{ touchAction: 'manipulation' }}
+                                title="Close"
+                            >
+                                <X size={14} />
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -823,21 +902,6 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                 })}
             </div>
 
-            {/* Volume magnifier: shown while the header Volume badge is held,
-                dismissed on release. Explains the metric in plain words. */}
-            {showVolumePeek && (
-                <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/85 backdrop-blur-sm pointer-events-none px-8">
-                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">Volume</span>
-                    <span className="text-white text-7xl font-black tabular-nums">
-                        {Math.round(workoutStats.totalVolume)}<span className="text-3xl text-slate-400">kg</span>
-                    </span>
-                    <p className="text-slate-400 text-sm mt-4 text-center max-w-xs leading-relaxed">
-                        Total weight lifted this session. Every completed set adds weight x reps, so heavier sets and more reps both push it up.
-                    </p>
-                    <p className="text-slate-600 text-[11px] mt-6 uppercase tracking-wide">Release to close</p>
-                </div>
-            )}
-
             {/* In-app numeric keypad: replaces the dock slot while a field is
                 being edited. It is not a real input, so iOS never brings up
                 the system keyboard nor scrolls the page to reveal it. */}
@@ -926,7 +990,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                     </div>
                     <button
                         onClick={() => { setShowMoreMenu(false); onFinishWorkout?.(); }}
-                        className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+                        className="flex-1 bg-gradient-to-br from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all shadow-lg shadow-emerald-500/20"
                         style={{ touchAction: 'manipulation' }}
                     >
                         <Check size={18} /> Finish Workout

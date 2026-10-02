@@ -80,7 +80,7 @@ const NumericKeypad: React.FC<NumericKeypadProps> = ({ title, value, allowDecima
                 {digit('7')}{digit('8')}{digit('9')}
                 <button
                     type="button" data-swipe-ignore onClick={() => onKey('done')}
-                    className="w-full h-12 rounded-lg bg-emerald-600 text-white flex items-center justify-center active:bg-emerald-500 active:scale-95 transition-all"
+                    className="w-full h-12 rounded-lg bg-gradient-to-br from-emerald-500 to-teal-500 text-white flex items-center justify-center active:from-emerald-400 active:to-teal-400 active:scale-95 transition-all"
                     style={{ touchAction: 'manipulation' }} title="Done"
                 >
                     <Check size={18} />
