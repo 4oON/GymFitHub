@@ -20,6 +20,19 @@ export const LB_PRESETS: number[] = [
     5, 7.5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 52.5,
 ];
 
+/**
+ * Generic imperial steps for non-dumbbell equipment (barbell, machines,
+ * cables): 5 lb increments up to 100 lb, then 10 lb increments up to 300 lb.
+ * Covers the user's dumbbell set plus standard imperial barbell work for
+ * future production users.
+ */
+export const LB_GENERIC: number[] = (() => {
+    const vals: number[] = [];
+    for (let v = 5; v <= 100; v += 5) vals.push(v);
+    for (let v = 110; v <= 300; v += 10) vals.push(v);
+    return vals;
+})();
+
 export const round2 = (n: number): number => Math.round(n * 100) / 100;
 export const round1 = (n: number): number => Math.round(n * 10) / 10;
 

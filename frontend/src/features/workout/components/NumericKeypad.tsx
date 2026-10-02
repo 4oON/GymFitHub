@@ -27,7 +27,7 @@ const NumericKeypad: React.FC<NumericKeypadProps> = ({ title, value, allowDecima
             type="button"
             data-swipe-ignore
             onClick={() => onKey(d)}
-            className="h-12 rounded-lg bg-slate-800 text-white text-lg font-bold active:bg-slate-600 active:scale-95 transition-all"
+            className="w-full h-12 rounded-lg bg-slate-800 text-white text-lg font-bold active:bg-slate-600 active:scale-95 transition-all"
             style={{ touchAction: 'manipulation' }}
         >
             {d}
@@ -64,7 +64,7 @@ const NumericKeypad: React.FC<NumericKeypadProps> = ({ title, value, allowDecima
                 {digit('1')}{digit('2')}{digit('3')}
                 <button
                     type="button" data-swipe-ignore onClick={() => onKey('back')}
-                    className="h-12 rounded-lg bg-slate-700 text-slate-200 flex items-center justify-center active:bg-slate-500 active:scale-95 transition-all"
+                    className="w-full h-12 rounded-lg bg-slate-700 text-slate-200 flex items-center justify-center active:bg-slate-500 active:scale-95 transition-all"
                     style={{ touchAction: 'manipulation' }} title="Backspace"
                 >
                     <Delete size={18} />
@@ -72,7 +72,7 @@ const NumericKeypad: React.FC<NumericKeypadProps> = ({ title, value, allowDecima
                 {digit('4')}{digit('5')}{digit('6')}
                 <button
                     type="button" data-swipe-ignore onClick={() => onKey('clear')}
-                    className="h-12 rounded-lg bg-slate-700 text-slate-300 text-sm font-bold active:bg-slate-500 active:scale-95 transition-all"
+                    className="w-full h-12 rounded-lg bg-slate-700 text-slate-300 text-sm font-bold active:bg-slate-500 active:scale-95 transition-all"
                     style={{ touchAction: 'manipulation' }} title="Clear"
                 >
                     C
@@ -80,7 +80,7 @@ const NumericKeypad: React.FC<NumericKeypadProps> = ({ title, value, allowDecima
                 {digit('7')}{digit('8')}{digit('9')}
                 <button
                     type="button" data-swipe-ignore onClick={() => onKey('done')}
-                    className="h-12 rounded-lg bg-emerald-600 text-white flex items-center justify-center active:bg-emerald-500 active:scale-95 transition-all"
+                    className="w-full h-12 rounded-lg bg-emerald-600 text-white flex items-center justify-center active:bg-emerald-500 active:scale-95 transition-all"
                     style={{ touchAction: 'manipulation' }} title="Done"
                 >
                     <Check size={18} />

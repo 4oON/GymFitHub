@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState, useCallback } from 'react';
 import type { WeightUnit } from '../utils/weightUnitUtils';
-import { LB_PRESETS, lbToKg, kgToLb, round1, round2 } from '../utils/weightUnitUtils';
+import { LB_PRESETS, LB_GENERIC, lbToKg, kgToLb, round1, round2 } from '../utils/weightUnitUtils';
 
 const ITEM_WIDTH = 38;
 const WHEEL_HEIGHT = 44;
@@ -21,6 +21,8 @@ interface WeightWheelProps {
     /** Stored weight in kg (0 = not set yet) */
     kgValue: number;
     unit: WeightUnit;
+    /** 'dumbbell': the user's imperial dumbbell set. 'generic': 5/10 lb steps for barbell & machines */
+    variant?: 'dumbbell' | 'generic';
     onChange: (kg: number) => void;
 }
 
@@ -62,13 +64,13 @@ const WheelItem = memo(({ display, index, onSelect }: WheelItemProps) => (
  * and keeps the stored value canonical to the wheel's steps.
  * The container carries data-swipe-ignore so card swipe never hijacks it.
  */
-const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) => {
+const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, variant = 'dumbbell', onChange }) => {
     const scrollRef = useRef<HTMLDivElement>(null);
     const [centerIndex, setCenterIndex] = useState(0);
     const suppressScrollEmit = useRef(false);
     const rafRef = useRef<number | null>(null);
 
-    const values = unit === 'lb' ? LB_PRESETS : KG_STEPS;
+    const values = unit === 'lb' ? (variant === 'generic' ? LB_GENERIC : LB_PRESETS) : KG_STEPS;
     const toKg = (display: number) => (unit === 'lb' ? lbToKg(display) : round2(display));
 
     const indexForKg = useCallback((kg: number): number => {
@@ -122,7 +124,7 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
         const canonical = toKg(values[target]);
         if (canonical !== kgValue) onChange(canonical);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [kgValue, unit]);
+    }, [kgValue, unit, variant]);
 
     // Paint grayscale/scale after mount, unit switch and smooth-scroll frames.
     useEffect(() => {
@@ -135,7 +137,7 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
         const start = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); window.setTimeout(() => cancelAnimationFrame(raf), 500); };
         el.addEventListener('scroll', start, { passive: true });
         return () => { el.removeEventListener('scroll', start); cancelAnimationFrame(raf); };
-    }, [unit, paintItems]);
+    }, [unit, variant, paintItems]);
 
     const handleScroll = () => {
         if (rafRef.current !== null) return;

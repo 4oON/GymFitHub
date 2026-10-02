@@ -96,6 +96,8 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         title: string;
     } | null>(null);
     const [keypadBuffer, setKeypadBuffer] = useState('');
+    /** Press-and-hold magnifier for the Volume stat in the header */
+    const [showVolumePeek, setShowVolumePeek] = useState(false);
     const [now, setNow] = useState(Date.now());
     const [expandedExerciseId, setExpandedExerciseId] = useState<string | null>(null);
     const [dragDistance, setDragDistance] = useState<Record<string, number>>({});
@@ -389,13 +391,21 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                             <Target size={11} />
                             <span className="font-semibold text-slate-400">{workoutStats.completedSets}/{workoutStats.totalSets}</span>
                         </span>
-                        <span
-                            className="flex items-center gap-1 rounded-md bg-emerald-500/10 border border-emerald-500/25 px-1.5 py-0.5"
-                            title="Volume (total weight lifted)"
+                        {/* Press-and-hold to magnify Volume and learn what it means;
+                            release to dismiss. */}
+                        <button
+                            type="button"
+                            onPointerDown={() => setShowVolumePeek(true)}
+                            onPointerUp={() => setShowVolumePeek(false)}
+                            onPointerCancel={() => setShowVolumePeek(false)}
+                            onPointerLeave={() => setShowVolumePeek(false)}
+                            className="flex items-center gap-1 rounded-md bg-emerald-500/10 border border-emerald-500/25 px-1.5 py-0.5 active:bg-emerald-500/25 transition-colors"
+                            title="Press and hold: what is Volume?"
+                            style={{ touchAction: 'manipulation' }}
                         >
                             <Zap size={12} className="text-emerald-400" />
                             <span className="text-[13px] font-black text-emerald-300">{Math.round(workoutStats.totalVolume)}kg</span>
-                        </span>
+                        </button>
                         <span className="flex items-center gap-1 text-slate-500" title="Reps">
                             <TrendingUp size={11} />
                             <span className="font-semibold text-slate-400">{workoutStats.totalReps}</span>
@@ -714,17 +724,17 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                 <div className="grid grid-cols-10 gap-2 mb-2 px-2 text-xs font-medium text-slate-500 uppercase text-center">
                                     <div className="col-span-2">Set</div>
                                     <div className="col-span-3">
-                                        {isDumbbellExercise ? (
-                                            <button
-                                                onClick={() => toggleUnit(exercise)}
-                                                className={`uppercase transition-colors ${weightUnit === 'lb' ? 'text-amber-500 font-bold' : 'hover:text-slate-300'
-                                                    }`}
-                                                style={{ touchAction: 'manipulation' }}
-                                                title="Tap to switch kg/lb"
-                                            >
-                                                {weightUnit}
-                                            </button>
-                                        ) : 'kg'}
+                                        {/* Unit toggle is available on every exercise (kg default),
+                                            so future imperial users are covered on any equipment. */}
+                                        <button
+                                            onClick={() => toggleUnit(exercise)}
+                                            className={`uppercase transition-colors ${weightUnit === 'lb' ? 'text-amber-500 font-bold' : 'hover:text-slate-300'
+                                                }`}
+                                            style={{ touchAction: 'manipulation' }}
+                                            title="Tap to switch kg/lb"
+                                        >
+                                            {weightUnit}
+                                        </button>
                                     </div>
                                     <div className="col-span-3">
                                         {typeInfo.trackingMode === 'duration' ? 'Sec' : 'Reps'}
@@ -747,32 +757,19 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                 </button>
                                             </div>
                                             <div className="col-span-3">
-                                                {isDumbbellExercise ? (
-                                                    <>
-                                                        <WeightWheel
-                                                            kgValue={set.weight}
-                                                            unit={weightUnit}
-                                                            onChange={kg => handleSetUpdate(exercise.id, set.id, 'weight', kg)}
-                                                        />
-                                                        {/* Fixed-height hint line keeps every set row aligned.
-                                                            lb: actual kg weight · kg: both-dumbbell total. */}
-                                                        <div className="h-4 mt-0.5 text-[10px] text-slate-500 text-center leading-none">
-                                                            {set.weight > 0 && (weightUnit === 'lb'
-                                                                ? `≈ ${formatKgHint(set.weight)}`
-                                                                : `total ${formatKgHint(round2(set.weight * 2))}`)}
-                                                        </div>
-                                                    </>
-                                                ) : (
-                                                    <button
-                                                        type="button"
-                                                        data-swipe-ignore
-                                                        onClick={() => openKeypad(exercise.id, set.id, 'weight', set.weight, true, `Weight (kg) - Set ${setIndex + 1}`)}
-                                                        className="w-full bg-slate-900 border border-slate-700 rounded-md py-1.5 text-center text-sm font-bold text-white placeholder-slate-500 active:border-emerald-500 transition-colors"
-                                                        style={{ touchAction: 'manipulation' }}
-                                                    >
-                                                        {set.weight > 0 ? set.weight : <span className="text-slate-500">{rec ? rec.weight : '0'}</span>}
-                                                    </button>
-                                                )}
+                                                <WeightWheel
+                                                    kgValue={set.weight}
+                                                    unit={weightUnit}
+                                                    variant={isDumbbellExercise ? 'dumbbell' : 'generic'}
+                                                    onChange={kg => handleSetUpdate(exercise.id, set.id, 'weight', kg)}
+                                                />
+                                                {/* Fixed-height, single-line hint keeps every set row
+                                                    aligned. lb: actual kg weight; kg dumbbell: both-dumbbell total. */}
+                                                <div className="h-4 mt-0.5 text-[10px] text-slate-500 text-center leading-none whitespace-nowrap">
+                                                    {set.weight > 0 && (weightUnit === 'lb'
+                                                        ? `= ${formatKgHint(set.weight)}`
+                                                        : (isDumbbellExercise ? `total ${formatKgHint(round2(set.weight * 2))}` : ''))}
+                                                </div>
                                             </div>
                                             <div className="col-span-3">
                                                 <button
@@ -783,7 +780,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                         set.id,
                                                         'reps',
                                                         set.reps,
-                                                        false,
+                                                        true,
                                                         `${typeInfo.trackingMode === 'duration' ? 'Duration (sec)' : 'Reps'} - Set ${setIndex + 1}`
                                                     )}
                                                     className="w-full bg-slate-900 border border-slate-700 rounded-md py-1.5 text-center text-sm font-bold text-white active:border-emerald-500 transition-colors"
@@ -825,6 +822,21 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                     );
                 })}
             </div>
+
+            {/* Volume magnifier: shown while the header Volume badge is held,
+                dismissed on release. Explains the metric in plain words. */}
+            {showVolumePeek && (
+                <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/85 backdrop-blur-sm pointer-events-none px-8">
+                    <span className="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">Volume</span>
+                    <span className="text-white text-7xl font-black tabular-nums">
+                        {Math.round(workoutStats.totalVolume)}<span className="text-3xl text-slate-400">kg</span>
+                    </span>
+                    <p className="text-slate-400 text-sm mt-4 text-center max-w-xs leading-relaxed">
+                        Total weight lifted this session. Every completed set adds weight x reps, so heavier sets and more reps both push it up.
+                    </p>
+                    <p className="text-slate-600 text-[11px] mt-6 uppercase tracking-wide">Release to close</p>
+                </div>
+            )}
 
             {/* In-app numeric keypad: replaces the dock slot while a field is
                 being edited. It is not a real input, so iOS never brings up
