@@ -704,7 +704,11 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                 {/* Imperial dumbbell quick-select chips (only in lb mode) */}
                                 {isDumbbellExercise && weightUnit === 'lb' && (
                                     <div className="mb-3 px-2">
-                                        <div className="flex gap-1.5 overflow-x-auto no-scrollbar py-1">
+                                        <div
+                                            className="flex gap-1.5 overflow-x-auto no-scrollbar py-1"
+                                            data-swipe-ignore
+                                            style={{ touchAction: 'pan-x' }}
+                                        >
                                             {LB_PRESETS.map(lb => (
                                                 <button
                                                     key={lb}
@@ -745,6 +749,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                 <div className="relative">
                                                     <input
                                                         type="number"
+                                                        data-swipe-ignore
                                                         value={isDumbbellExercise ? (displayWeight(set.weight, weightUnit) || '') : (set.weight || '')}
                                                         placeholder={isDumbbellExercise && weightUnit === 'lb' && rec
                                                             ? `${round1(kgToLb(rec.weight))}`
@@ -783,6 +788,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                             <div className="col-span-3">
                                                 <input
                                                     type="number"
+                                                    data-swipe-ignore
                                                     value={set.reps || ''}
                                                     placeholder={rec ? rec.reps.split('-')[0] : (() => {
                                                     const typeInfo = ExerciseIdentificationService.getExerciseTypeInfo(exerciseDetails);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, type ReactNode } from 'react';
+import React, { useState, useEffect, useRef, type ReactNode } from 'react';
 
 interface SwipeableCardProps {
     children: ReactNode;
@@ -8,6 +8,14 @@ interface SwipeableCardProps {
     className?: string;
     swipeThreshold?: number;
 }
+
+/**
+ * Gesture exclusion zones: any descendant with `data-swipe-ignore`
+ * (horizontal scrollers, number inputs, etc.) opts out of card swipe,
+ * so inner controls never fight the card's open/close gesture.
+ */
+const isIgnoredTarget = (target: EventTarget | null): boolean =>
+    target instanceof HTMLElement && target.closest('[data-swipe-ignore]') !== null;
 
 const SwipeableCard: React.FC<SwipeableCardProps> = ({
     children,
@@ -19,6 +27,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
 }) => {
     const [startPos, setStartPos] = useState<{ x: number; y: number } | null>(null);
     const [isDragging, setIsDragging] = useState(false);
+    const ignoreGesture = useRef(false);
 
     // Global mouseup listener
     useEffect(() => {
@@ -43,19 +52,28 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
 
     // Touch Events
     const handleTouchStart = (e: React.TouchEvent) => {
+        if (isIgnoredTarget(e.target)) {
+            ignoreGesture.current = true;
+            return;
+        }
+        ignoreGesture.current = false;
         const touch = e.touches[0];
         setStartPos({ x: touch.clientX, y: touch.clientY });
         console.log('🔵 Touch Start:', touch.clientX, touch.clientY);
     };
 
     const handleTouchMove = (e: React.TouchEvent) => {
-        if (!startPos) return;
+        if (ignoreGesture.current || !startPos) return;
         const touch = e.touches[0];
         const dx = touch.clientX - startPos.x;
         if (onDragUpdate) onDragUpdate(dx, true);
     };
 
     const handleTouchEnd = (e: React.TouchEvent) => {
+        if (ignoreGesture.current) {
+            ignoreGesture.current = false;
+            return;
+        }
         if (!startPos) return;
 
         const touch = e.changedTouches[0];
@@ -67,15 +85,28 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
         setStartPos(null);
     };
 
+    // iOS takes over the gesture for inner scrolling and fires touchcancel;
+    // without this the card could stay stuck mid-drag or mis-fire on the next tap.
+    const handleTouchCancel = () => {
+        ignoreGesture.current = false;
+        setStartPos(null);
+        if (onDragUpdate) onDragUpdate(0, false);
+    };
+
     // Mouse Events
     const handleMouseDown = (e: React.MouseEvent) => {
+        if (isIgnoredTarget(e.target)) {
+            ignoreGesture.current = true;
+            return;
+        }
+        ignoreGesture.current = false;
         setStartPos({ x: e.clientX, y: e.clientY });
         setIsDragging(true);
         console.log('🖱️ Mouse Down:', e.clientX, e.clientY);
     };
 
     const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDragging || !startPos) return;
+        if (ignoreGesture.current || !isDragging || !startPos) return;
         const dx = e.clientX - startPos.x;
 
         if (onDragUpdate) onDragUpdate(dx, true);
@@ -112,6 +143,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchCancel}
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             style={{ cursor: isDragging ? 'grabbing' : 'grab', userSelect: 'none' }}
