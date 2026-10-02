@@ -2810,7 +2810,7 @@ export const MainApp: React.FC = () => {
         {notification && notification.visible && (
           <div
             className="fixed left-0 right-0 z-[90] flex justify-center pointer-events-none"
-            style={{ top: weeklyReportNotification?.show || hasRestoredData ? '100px' : '80px' }}
+            style={{ top: currentScreen === AppScreen.WORKOUT ? '136px' : (weeklyReportNotification?.show || hasRestoredData ? '100px' : '80px') }}
           >
             <div
               onClick={() => { setCurrentScreen(AppScreen.WORKOUT); setNotification(null); }}

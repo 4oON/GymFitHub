@@ -2,8 +2,9 @@ import React, { memo, useEffect, useRef, useState, useCallback } from 'react';
 import type { WeightUnit } from '../utils/weightUnitUtils';
 import { LB_PRESETS, lbToKg, kgToLb, round1, round2 } from '../utils/weightUnitUtils';
 
-const ITEM_WIDTH = 48;
+const ITEM_WIDTH = 38;
 const WHEEL_HEIGHT = 44;
+const PAD_WIDTH = `calc(50% - ${ITEM_WIDTH / 2}px)`;
 
 /**
  * kg-mode wheel steps: 0.5 kg increments up to 10 kg,
@@ -25,19 +26,31 @@ interface WeightWheelProps {
 
 interface WheelItemProps {
     display: string;
-    active: boolean;
     index: number;
     onSelect: (index: number) => void;
 }
 
-const WheelItem = memo(({ display, active, index, onSelect }: WheelItemProps) => (
+/**
+ * Apple-style wheel number: no binary active/inactive color. Grayscale,
+ * opacity and scale are painted continuously from the item's live distance
+ * to the wheel center (see paintItems), so digits fade dark toward the
+ * edges and glow white under the center marker while the wheel spins.
+ */
+const WheelItem = memo(({ display, index, onSelect }: WheelItemProps) => (
     <button
         type="button"
+        data-wheel-item
         data-swipe-ignore
         onClick={() => onSelect(index)}
-        className={`flex-shrink-0 snap-center text-sm font-bold transition-colors duration-150 ${active ? 'text-white' : 'text-slate-500'
-            }`}
-        style={{ width: ITEM_WIDTH, height: WHEEL_HEIGHT, touchAction: 'manipulation' }}
+        className="flex-shrink-0 snap-center text-[15px] font-bold will-change-transform"
+        style={{
+            width: ITEM_WIDTH,
+            height: WHEEL_HEIGHT,
+            touchAction: 'manipulation',
+            color: 'rgb(80 80 92)',
+            opacity: 0.4,
+            transform: 'scale(0.8)',
+        }}
     >
         {display}
     </button>
@@ -71,6 +84,27 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [unit]);
 
+    /**
+     * Paint every digit from its live distance to the wheel center:
+     * edges are dark slate-gray and shrink, the digit under the marker
+     * is bright white and full size, giving the "real wheel" feel.
+     */
+    const paintItems = useCallback(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        const centerX = el.getBoundingClientRect().left + el.clientWidth / 2;
+        const range = Math.max(el.clientWidth * 0.4, 1);
+        el.querySelectorAll<HTMLElement>('[data-wheel-item]').forEach(item => {
+            const r = item.getBoundingClientRect();
+            const d = Math.min(Math.abs(r.left + r.width / 2 - centerX) / range, 1);
+            const t = 1 - d; // 1 = dead center
+            const gray = Math.round(80 + t * 175); // 80 (dim) -> 255 (white)
+            item.style.color = `rgb(${gray} ${gray} ${gray})`;
+            item.style.opacity = (0.4 + t * 0.6).toFixed(2);
+            item.style.transform = `scale(${(0.8 + t * 0.28).toFixed(3)})`;
+        });
+    }, []);
+
     const scrollToIndex = useCallback((index: number, smooth: boolean) => {
         const el = scrollRef.current;
         if (!el) return;
@@ -90,12 +124,27 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [kgValue, unit]);
 
+    // Paint grayscale/scale after mount, unit switch and smooth-scroll frames.
+    useEffect(() => {
+        paintItems();
+        const el = scrollRef.current;
+        if (!el) return;
+        let raf = 0;
+        const loop = () => { paintItems(); raf = requestAnimationFrame(loop); };
+        // Only repaint while a scroll animation may be in flight.
+        const start = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); window.setTimeout(() => cancelAnimationFrame(raf), 500); };
+        el.addEventListener('scroll', start, { passive: true });
+        return () => { el.removeEventListener('scroll', start); cancelAnimationFrame(raf); };
+    }, [unit, paintItems]);
+
     const handleScroll = () => {
         if (rafRef.current !== null) return;
         rafRef.current = requestAnimationFrame(() => {
             rafRef.current = null;
             const el = scrollRef.current;
-            if (!el || suppressScrollEmit.current) return;
+            if (!el) return;
+            paintItems();
+            if (suppressScrollEmit.current) return;
             const i = Math.max(0, Math.min(values.length - 1, Math.round(el.scrollLeft / ITEM_WIDTH)));
             if (i !== centerIndex) {
                 setCenterIndex(i);
@@ -111,7 +160,7 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
     return (
         <div className="relative" data-swipe-ignore>
             <div
-                className="pointer-events-none absolute left-1/2 top-1 bottom-1 w-[2px] -translate-x-1/2 bg-emerald-500/30 rounded-full z-10"
+                className="pointer-events-none absolute left-1/2 top-1 bottom-1 w-[2px] -translate-x-1/2 bg-emerald-500/40 rounded-full z-10"
             />
             <div
                 ref={scrollRef}
@@ -120,17 +169,16 @@ const WeightWheel: React.FC<WeightWheelProps> = ({ kgValue, unit, onChange }) =>
                 className="flex overflow-x-auto no-scrollbar snap-x snap-mandatory"
                 style={{ touchAction: 'pan-x' }}
             >
-                <div className="flex-shrink-0" style={{ width: 'calc(50% - 24px)' }} />
+                <div className="flex-shrink-0" style={{ width: PAD_WIDTH }} />
                 {values.map((v, i) => (
                     <WheelItem
                         key={`${unit}-${v}`}
                         display={formatDisplay(v)}
-                        active={i === centerIndex}
                         index={i}
                         onSelect={handleSelect}
                     />
                 ))}
-                <div className="flex-shrink-0" style={{ width: 'calc(50% - 24px)' }} />
+                <div className="flex-shrink-0" style={{ width: PAD_WIDTH }} />
             </div>
         </div>
     );

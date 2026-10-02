@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import type { ActiveExercise, WorkoutSet, Exercise, UserProfile } from '@/shared/types';
-import { Trash2, Check, Plus, Timer, Hourglass, Info, Zap, TrendingUp, Activity, X, Clock, Target, Sparkles, Save, Scale, Calculator } from 'lucide-react';
+import { Trash2, Check, Plus, Timer, Hourglass, Info, Zap, TrendingUp, Activity, X, Clock, Target, Sparkles, Save, Scale, Calculator, MoreHorizontal } from 'lucide-react';
 import VideoPlayer from '@/features/exercise/components/VideoPlayer';
 import { getExerciseTips, getExerciseRecommendation } from '@/features/ai/services/geminiService';
 import HistoricalDataQueryService from '@/features/ai/services/HistoricalDataQueryService';
@@ -80,6 +80,10 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
     className = '',
 }) => {
     const bottomRef = useRef<HTMLDivElement>(null);
+    /** Timestamp of the last scroll on the cards list, for the dock mis-tap guard */
+    const lastScrollAt = useRef(0);
+    const [showMoreMenu, setShowMoreMenu] = useState(false);
+    const [confirmClear, setConfirmClear] = useState(false);
     const [now, setNow] = useState(Date.now());
     const [expandedExerciseId, setExpandedExerciseId] = useState<string | null>(null);
     const [dragDistance, setDragDistance] = useState<Record<string, number>>({});
@@ -283,6 +287,19 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         onExerciseUpdate(exerciseId, { ...exercise, sets: updatedSets });
     };
 
+    /**
+     * Mis-tap guard for the docked action bar. When the cards list is
+     * scrolling or gliding, a finger that comes down on the dock is almost
+     * always an accidental touchdown, not an intentional press. Swallow any
+     * dock tap that lands within 300ms after the last scroll event.
+     */
+    const guardDockTap = (e: React.MouseEvent) => {
+        if (Date.now() - lastScrollAt.current < 300) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    };
+
     if (exercises.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-full p-8 text-center">
@@ -311,22 +328,27 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                             {formatDuration(workoutDuration)}
                         </span>
                     </div>
-                    <div className="flex items-center gap-2.5 text-[11px] text-slate-400 whitespace-nowrap">
-                        <span className="flex items-center gap-1" title="Sets">
-                            <Target size={11} className="text-emerald-400" />
-                            <span className="text-white font-bold">{workoutStats.completedSets}/{workoutStats.totalSets}</span>
+                    {/* Inline stats: Volume is the metric the user tracks most,
+                        so it is bigger and highlighted; the rest stay muted. */}
+                    <div className="flex items-center gap-2.5 text-[11px] whitespace-nowrap">
+                        <span className="flex items-center gap-1 text-slate-500" title="Sets">
+                            <Target size={11} />
+                            <span className="font-semibold text-slate-400">{workoutStats.completedSets}/{workoutStats.totalSets}</span>
                         </span>
-                        <span className="flex items-center gap-1" title="Volume">
-                            <Zap size={11} className="text-blue-400" />
-                            <span className="text-white font-bold">{Math.round(workoutStats.totalVolume)}kg</span>
+                        <span
+                            className="flex items-center gap-1 rounded-md bg-emerald-500/10 border border-emerald-500/25 px-1.5 py-0.5"
+                            title="Volume (total weight lifted)"
+                        >
+                            <Zap size={12} className="text-emerald-400" />
+                            <span className="text-[13px] font-black text-emerald-300">{Math.round(workoutStats.totalVolume)}kg</span>
                         </span>
-                        <span className="flex items-center gap-1" title="Reps">
-                            <TrendingUp size={11} className="text-purple-400" />
-                            <span className="text-white font-bold">{workoutStats.totalReps}</span>
+                        <span className="flex items-center gap-1 text-slate-500" title="Reps">
+                            <TrendingUp size={11} />
+                            <span className="font-semibold text-slate-400">{workoutStats.totalReps}</span>
                         </span>
-                        <span className="flex items-center gap-1" title="Muscle groups">
-                            <Activity size={11} className="text-rose-400" />
-                            <span className="text-white font-bold">{workoutStats.muscleGroups.length}</span>
+                        <span className="flex items-center gap-1 text-slate-500" title="Muscle groups">
+                            <Activity size={11} />
+                            <span className="font-semibold text-slate-400">{workoutStats.muscleGroups.length}</span>
                         </span>
                     </div>
                 </div>
@@ -345,8 +367,13 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                 </div>
             </div>
 
-            {/* Exercise Cards */}
-            <div className="flex-1 min-h-0 overflow-auto space-y-4 px-4 pb-44">
+            {/* Exercise Cards. overscroll-contain stops the rubber-band from
+                chaining to the outer page scroller, so the header above can
+                never be bounced out of view by an over-scroll. */}
+            <div
+                className="flex-1 min-h-0 overflow-auto overscroll-contain space-y-4 px-4 pb-44"
+                onScroll={() => { lastScrollAt.current = Date.now(); }}
+            >
                 {exercises.map((exercise, exIndex) => {
                     const timer = timers[exercise.id];
                     const isTimerRunning = timer?.targetTime ? timer.targetTime > now : false;
@@ -738,37 +765,73 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                 })}
             </div>
 
-            {/* Docked bottom action bar: sits just above the tab nav, far away
-                from system notifications and top popups that used to block
-                the Finish / Clear buttons. */}
+            {/* Docked bottom action bar, just above the tab nav.
+                Mis-tap protection has three layers:
+                1. guardDockTap swallows taps that land within 300ms after a
+                   scroll/fling (a touchdown while content glides underneath)
+                2. Secondary actions live behind one More tap instead of
+                   sitting next to Finish as hot targets
+                3. Clear All is destructive, so it asks for a second
+                   confirming tap inside the menu. All labels stay English,
+                   icons where text would be too long. */}
             <div
                 className="fixed left-0 right-0 z-40 px-4 pointer-events-none"
                 style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
             >
-                <div className="max-w-md mx-auto flex items-center gap-2 bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl p-2 shadow-2xl pointer-events-auto">
-                    {onSaveAsRoutine && (
+                <div
+                    className="max-w-md mx-auto flex items-center gap-2 bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl p-2 shadow-2xl pointer-events-auto"
+                    onClickCapture={guardDockTap}
+                >
+                    <div className="relative">
                         <button
-                            onClick={onSaveAsRoutine}
-                            className="p-2.5 rounded-xl bg-blue-500/15 text-blue-400 hover:bg-blue-500/25 transition-colors"
-                            title="Save as Routine"
+                            onClick={() => { setShowMoreMenu(v => !v); setConfirmClear(false); }}
+                            className={`p-3 rounded-xl border transition-colors ${showMoreMenu ? 'bg-slate-700 text-white border-slate-600' : 'bg-slate-800 text-slate-300 border-slate-700'
+                                }`}
+                            title="More actions"
                             style={{ touchAction: 'manipulation' }}
                         >
-                            <Save size={18} />
+                            <MoreHorizontal size={18} />
                         </button>
-                    )}
-                    {onClearAllExercises && (
-                        <button
-                            onClick={onClearAllExercises}
-                            className="p-2.5 rounded-xl bg-red-500/15 text-red-400 hover:bg-red-500/25 transition-colors"
-                            title="Clear All Exercises"
-                            style={{ touchAction: 'manipulation' }}
-                        >
-                            <Trash2 size={18} />
-                        </button>
-                    )}
+                        {showMoreMenu && (
+                            <div className="absolute bottom-full left-0 mb-2 w-48 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl overflow-hidden">
+                                {onSaveAsRoutine && (
+                                    <button
+                                        onClick={() => { setShowMoreMenu(false); onSaveAsRoutine(); }}
+                                        className="w-full flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-blue-400 hover:bg-slate-800"
+                                        style={{ touchAction: 'manipulation' }}
+                                    >
+                                        <Save size={15} /> Save as Routine
+                                    </button>
+                                )}
+                                {onClearAllExercises && (
+                                    confirmClear ? (
+                                        <button
+                                            onClick={() => { setShowMoreMenu(false); setConfirmClear(false); onClearAllExercises(); }}
+                                            className="w-full flex items-center gap-2 px-3 py-2.5 text-sm font-bold text-white bg-red-600"
+                                            style={{ touchAction: 'manipulation' }}
+                                        >
+                                            <Trash2 size={15} /> Tap to Confirm
+                                        </button>
+                                    ) : (
+                                        <button
+                                            onClick={() => {
+                                                setConfirmClear(true);
+                                                window.setTimeout(() => setConfirmClear(false), 3000);
+                                            }}
+                                            className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-red-400 hover:bg-slate-800 ${onSaveAsRoutine ? 'border-t border-slate-800' : ''
+                                                }`}
+                                            style={{ touchAction: 'manipulation' }}
+                                        >
+                                            <Trash2 size={15} /> Clear All
+                                        </button>
+                                    )
+                                )}
+                            </div>
+                        )}
+                    </div>
                     <button
-                        onClick={onFinishWorkout}
-                        className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
+                        onClick={() => { setShowMoreMenu(false); onFinishWorkout?.(); }}
+                        className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all"
                         style={{ touchAction: 'manipulation' }}
                     >
                         <Check size={18} /> Finish Workout
