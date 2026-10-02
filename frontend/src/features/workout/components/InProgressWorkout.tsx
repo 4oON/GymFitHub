@@ -18,6 +18,8 @@ import {
     round2,
 } from '../utils/weightUnitUtils';
 import WeightWheel from './WeightWheel';
+import NumericKeypad from './NumericKeypad';
+import type { KeypadKey } from './NumericKeypad';
 
 /** Storage key for per-exercise weight unit preferences (kg default, lb opt-in) */
 const WEIGHT_UNIT_PREFS_KEY = 'zenfit_weight_unit_prefs';
@@ -84,6 +86,16 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
     const lastScrollAt = useRef(0);
     const [showMoreMenu, setShowMoreMenu] = useState(false);
     const [confirmClear, setConfirmClear] = useState(false);
+    /** In-app numeric keypad target (null = closed). Replaces the system
+        keyboard, which is a full QWERTY layout on iOS WebViews. */
+    const [keypadTarget, setKeypadTarget] = useState<{
+        exerciseId: string;
+        setId: string;
+        field: 'weight' | 'reps';
+        allowDecimal: boolean;
+        title: string;
+    } | null>(null);
+    const [keypadBuffer, setKeypadBuffer] = useState('');
     const [now, setNow] = useState(Date.now());
     const [expandedExerciseId, setExpandedExerciseId] = useState<string | null>(null);
     const [dragDistance, setDragDistance] = useState<Record<string, number>>({});
@@ -285,6 +297,48 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         );
 
         onExerciseUpdate(exerciseId, { ...exercise, sets: updatedSets });
+    };
+
+    /** Open the in-app numeric keypad for a set field. */
+    const openKeypad = (
+        exerciseId: string,
+        setId: string,
+        field: 'weight' | 'reps',
+        currentValue: number,
+        allowDecimal: boolean,
+        title: string
+    ) => {
+        setKeypadBuffer(currentValue > 0 ? String(currentValue) : '');
+        setKeypadTarget({ exerciseId, setId, field, allowDecimal, title });
+    };
+
+    /** Route a keypad press: edit the buffer live and commit immediately. */
+    const handleKeypadKey = (key: KeypadKey) => {
+        const t = keypadTarget;
+        if (!t) return;
+        if (key === 'done') { setKeypadTarget(null); return; }
+        if (key === 'clear') {
+            setKeypadBuffer('');
+            handleSetUpdate(t.exerciseId, t.setId, t.field, 0);
+            return;
+        }
+        if (key === 'back') {
+            setKeypadBuffer(prev => {
+                const next = prev.slice(0, -1);
+                handleSetUpdate(t.exerciseId, t.setId, t.field, next ? parseFloat(next) : 0);
+                return next;
+            });
+            return;
+        }
+        if (key === '.' && !t.allowDecimal) return;
+        setKeypadBuffer(prev => {
+            if (prev.replace('.', '').length >= 4) return prev; // cap at 4 digits
+            if (key === '.' && prev.includes('.')) return prev;
+            if (key === '.' && prev === '') return '0.';
+            const next = prev + key;
+            handleSetUpdate(t.exerciseId, t.setId, t.field, parseFloat(next));
+            return next;
+        });
     };
 
     /**
@@ -709,31 +763,38 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                         </div>
                                                     </>
                                                 ) : (
-                                                    <input
-                                                        type="number"
+                                                    <button
+                                                        type="button"
                                                         data-swipe-ignore
-                                                        value={set.weight || ''}
-                                                        placeholder={rec ? `${rec.weight}` : "0"}
-                                                        className="w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500"
-                                                        onChange={e => {
-                                                            const v = parseFloat(e.target.value);
-                                                            handleSetUpdate(exercise.id, set.id, 'weight', isNaN(v) ? 0 : v);
-                                                        }}
-                                                    />
+                                                        onClick={() => openKeypad(exercise.id, set.id, 'weight', set.weight, true, `Weight (kg) - Set ${setIndex + 1}`)}
+                                                        className="w-full bg-slate-900 border border-slate-700 rounded-md py-1.5 text-center text-sm font-bold text-white placeholder-slate-500 active:border-emerald-500 transition-colors"
+                                                        style={{ touchAction: 'manipulation' }}
+                                                    >
+                                                        {set.weight > 0 ? set.weight : <span className="text-slate-500">{rec ? rec.weight : '0'}</span>}
+                                                    </button>
                                                 )}
                                             </div>
                                             <div className="col-span-3">
-                                                <input
-                                                    type="number"
+                                                <button
+                                                    type="button"
                                                     data-swipe-ignore
-                                                    value={set.reps || ''}
-                                                    placeholder={rec ? rec.reps.split('-')[0] : (() => {
-                                                    const typeInfo = ExerciseIdentificationService.getExerciseTypeInfo(exerciseDetails);
-                                                    return typeInfo.trackingMode === 'duration' ? 'Sec' : '0';
-                                                })()}
-                                                    className="w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500"
-                                                    onChange={e => handleSetUpdate(exercise.id, set.id, 'reps', parseFloat(e.target.value))}
-                                                />
+                                                    onClick={() => openKeypad(
+                                                        exercise.id,
+                                                        set.id,
+                                                        'reps',
+                                                        set.reps,
+                                                        false,
+                                                        `${typeInfo.trackingMode === 'duration' ? 'Duration (sec)' : 'Reps'} - Set ${setIndex + 1}`
+                                                    )}
+                                                    className="w-full bg-slate-900 border border-slate-700 rounded-md py-1.5 text-center text-sm font-bold text-white active:border-emerald-500 transition-colors"
+                                                    style={{ touchAction: 'manipulation' }}
+                                                >
+                                                    {set.reps > 0 ? set.reps : (
+                                                        <span className="text-slate-500">
+                                                            {rec ? rec.reps.split('-')[0] : (typeInfo.trackingMode === 'duration' ? 'Sec' : '0')}
+                                                        </span>
+                                                    )}
+                                                </button>
                                             </div>
                                             <div className="col-span-2 flex justify-center">
                                                 <button
@@ -765,6 +826,26 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                 })}
             </div>
 
+            {/* In-app numeric keypad: replaces the dock slot while a field is
+                being edited. It is not a real input, so iOS never brings up
+                the system keyboard nor scrolls the page to reveal it. */}
+            {keypadTarget && (
+                <div
+                    className="fixed left-0 right-0 z-40 px-4 pointer-events-none"
+                    style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
+                >
+                    <div className="max-w-md mx-auto pointer-events-auto" onClickCapture={guardDockTap}>
+                        <NumericKeypad
+                            title={keypadTarget.title}
+                            value={keypadBuffer}
+                            allowDecimal={keypadTarget.allowDecimal}
+                            onKey={handleKeypadKey}
+                            onClose={() => setKeypadTarget(null)}
+                        />
+                    </div>
+                </div>
+            )}
+
             {/* Docked bottom action bar, just above the tab nav.
                 Mis-tap protection has three layers:
                 1. guardDockTap swallows taps that land within 300ms after a
@@ -773,7 +854,9 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                    sitting next to Finish as hot targets
                 3. Clear All is destructive, so it asks for a second
                    confirming tap inside the menu. All labels stay English,
-                   icons where text would be too long. */}
+                   icons where text would be too long.
+                Hidden while the numeric keypad owns this screen slot. */}
+            {!keypadTarget && (
             <div
                 className="fixed left-0 right-0 z-40 px-4 pointer-events-none"
                 style={{ bottom: 'calc(5.5rem + env(safe-area-inset-bottom))' }}
@@ -838,6 +921,7 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                     </button>
                 </div>
             </div>
+            )}
 
             <div ref={bottomRef} />
         </div>

@@ -2617,6 +2617,12 @@ export const MainApp: React.FC = () => {
 
 
 
+  // The active workout view fills the screen and manages its own inner scroll
+  // area. The outer <main> must not scroll then: a scrollable outer page is
+  // what let iOS scroll the workout header out of view (e.g. when an input
+  // was focused and the webview scrolled it above the keyboard).
+  const isActiveWorkoutView = currentScreen === AppScreen.WORKOUT && activeWorkout.length > 0;
+
   const renderContent = () => {
     switch (currentScreen) {
       case AppScreen.HOME:
@@ -2825,11 +2831,12 @@ export const MainApp: React.FC = () => {
           </div>
         )}
 
-        <main className="absolute inset-0 overflow-y-auto pt-safe">
+        <main className={`absolute inset-0 pt-safe ${isActiveWorkoutView ? 'overflow-hidden' : 'overflow-y-auto'}`}>
           <div className="absolute top-0 left-0 w-full h-96 bg-emerald-900/5 rounded-b-[3rem] pointer-events-none blur-3xl" />
           {renderContent()}
-          {/* 底部导航栏占位（含 safe-area） */}
-          <div className="h-24" />
+          {/* 底部导航栏占位（含 safe-area）；训练进行页不需要，否则外层页面
+              会多出约 96px 可滚动距离，页眉会被顶出屏幕 */}
+          {!isActiveWorkoutView && <div className="h-24" />}
         </main>
 
         <div className="fixed bottom-0 left-0 right-0 z-50 pointer-events-none bg-slate-950/90 backdrop-blur-xl border-t border-slate-800/50 pb-safe-nav">
