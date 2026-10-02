@@ -8,6 +8,19 @@ import SwipeableCard from './SwipeableCard';
 import { VolumeCalculationService } from '../services/VolumeCalculationService';
 import { ExerciseIdentificationService } from '../services/ExerciseIdentificationService';
 import { iOSStorage } from '@/services/iOSStorageService';
+import type { WeightUnit } from '../utils/weightUnitUtils';
+import {
+    LB_PRESETS,
+    lbToKg,
+    kgToLb,
+    snapLbToPreset,
+    displayWeight,
+    formatKgHint,
+    round1,
+} from '../utils/weightUnitUtils';
+
+/** Storage key for per-exercise weight unit preferences (kg default, lb opt-in) */
+const WEIGHT_UNIT_PREFS_KEY = 'zenfit_weight_unit_prefs';
 
 interface InProgressWorkoutProps {
     /** Current workout session exercises */
@@ -88,6 +101,36 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         }
     });
 
+    /**
+     * Per-exercise weight unit preference (dumbbell exercises only).
+     * kg is the default; lb is an opt-in toggle rendered inconspicuously
+     * inside the weight input. Internally everything stays kg.
+     */
+    const [weightUnits, setWeightUnits] = useState<Record<string, WeightUnit>>(() => {
+        try {
+            return JSON.parse(iOSStorage.getItem(WEIGHT_UNIT_PREFS_KEY) || '{}');
+        } catch {
+            return {};
+        }
+    });
+
+    const getUnit = (exercise: ActiveExercise): WeightUnit =>
+        weightUnits[exercise.exerciseId] || 'kg';
+
+    const toggleUnit = (exercise: ActiveExercise) => {
+        const key = exercise.exerciseId;
+        const next: WeightUnit = getUnit(exercise) === 'kg' ? 'lb' : 'kg';
+        setWeightUnits(prev => {
+            const updated = { ...prev, [key]: next };
+            try {
+                iOSStorage.setItem(WEIGHT_UNIT_PREFS_KEY, JSON.stringify(updated));
+            } catch {
+                // Storage unavailable (e.g. iOS private mode): keep in-memory only
+            }
+            return updated;
+        });
+    };
+
     useEffect(() => {
         const interval = setInterval(() => setNow(Date.now()), 1000);
         return () => clearInterval(interval);
@@ -152,27 +195,26 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         const reps = parseInt(rec.reps.split('-')[0]);
         const exercise = exercises[exerciseIndex];
 
-        // Clear existing sets first
-        const clearedSets = exercise.sets.map(set => ({ ...set, weight: 0, reps: 0, completed: false }));
-
-        // Add sets to match recommendation count
-        const setsNeeded = rec.sets;
-        const currentSetsCount = exercise.sets.length;
-
-        if (currentSetsCount < setsNeeded) {
-            // Need to add more sets
-            const updatedExercise = { ...exercise, sets: clearedSets };
-            onExerciseUpdate(exercise.id, updatedExercise);
-
-            // Add additional sets
-            for (let i = currentSetsCount; i < setsNeeded; i++) {
-                onAddSet(exercise.id);
-            }
-        } else {
-            // Just update existing sets
-            onExerciseUpdate(exercise.id, { ...exercise, sets: clearedSets });
+        // AI recommendation is in kg. If the user prefers lb for this dumbbell
+        // exercise, snap the recommendation to the nearest available lb plate
+        // before converting back to kg for storage.
+        const unit = getUnit(exercise);
+        let recWeightKg = rec.weight;
+        if (unit === 'lb') {
+            recWeightKg = lbToKg(snapLbToPreset(kgToLb(rec.weight)));
         }
 
+        // Rebuild the set list to match the recommended set count,
+        // pre-filled with the (possibly converted) recommended weight.
+        const targetCount = Math.max(rec.sets, 1);
+        const newSets = Array.from({ length: targetCount }, (_, i) => ({
+            ...(exercise.sets[i] || { id: `${exercise.id}-set-${Date.now()}-${i}` }),
+            weight: recWeightKg,
+            reps,
+            completed: false,
+        }));
+
+        onExerciseUpdate(exercise.id, { ...exercise, sets: newSets });
         setExpandedExerciseId(null);
     };
 
@@ -239,6 +281,22 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
         );
 
         onExerciseUpdate(exerciseId, { ...exercise, sets: updatedSets });
+    };
+
+    /**
+     * Apply an imperial preset (lb) to the most relevant set:
+     * the last empty set if any, otherwise the last set.
+     * Stored value is converted to kg.
+     */
+    const applyLbPreset = (exercise: ActiveExercise, lb: number) => {
+        if (exercise.sets.length === 0) return;
+        const target = [...exercise.sets].reverse().find(s => !s.weight || s.weight === 0)
+            || exercise.sets[exercise.sets.length - 1];
+        const weightKg = lbToKg(lb);
+        const updatedSets = exercise.sets.map(set =>
+            set.id === target.id ? { ...set, weight: weightKg } : set
+        );
+        onExerciseUpdate(exercise.id, { ...exercise, sets: updatedSets });
     };
 
     if (exercises.length === 0) {
@@ -373,6 +431,9 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                     const tips = exerciseTips[exercise.id];
                     const rec = recommendations[exercise.id];
                     const hist = exerciseHistory[exercise.exerciseId];
+                    const typeInfo = ExerciseIdentificationService.getExerciseTypeInfo(exerciseDetails);
+                    const isDumbbellExercise = typeInfo.weightInputMode === 'dumbbell_per_side';
+                    const weightUnit = getUnit(exercise);
 
                     return (
                         <SwipeableCard
@@ -549,7 +610,9 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                     const isAssisted = typeInfo.weightInputMode === 'assisted_subtraction';
                                                     const userWeight = userProfile?.weight || 70;
                                                     const actualResistance = isAssisted ? Math.max(0, userWeight - rec.weight) : rec.weight;
-                                                    
+                                                    const unit = getUnit(exercise);
+                                                    const isDumbbell = typeInfo.weightInputMode === 'dumbbell_per_side';
+
                                                     return (
                                                         <>
                                                             <span className="text-lg font-bold text-white">{rec.sets} × {rec.reps}{isDuration ? 's' : ''}</span>
@@ -559,10 +622,15 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                                     <span className="text-2xl font-black text-emerald-400">{rec.weight}kg <span className="text-sm font-normal text-slate-400">assist</span></span>
                                                                     <span className="text-xs text-blue-400">Actual: {actualResistance}kg ({userWeight} - {rec.weight})</span>
                                                                 </div>
-                                                            ) : typeInfo.weightInputMode === 'dumbbell_per_side' ? (
+                                                            ) : isDumbbell ? (
                                                                 <div className="flex flex-col">
                                                                     <span className="text-2xl font-black text-emerald-400">{rec.weight}kg <span className="text-sm font-normal text-slate-400">per dumbbell</span></span>
                                                                     <span className="text-xs text-amber-400">Total: {rec.weight * 2}kg (each side)</span>
+                                                                    {unit === 'lb' && (
+                                                                        <span className="text-[10px] text-slate-500">
+                                                                            ≈ {round1(kgToLb(rec.weight))} lb per dumbbell · nearest plate {snapLbToPreset(kgToLb(rec.weight))} lb
+                                                                        </span>
+                                                                    )}
                                                                 </div>
                                                             ) : (
                                                                 <span className="text-2xl font-black text-emerald-400">{rec.weight}kg</span>
@@ -608,41 +676,53 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                 {/* Exercise Input Mode Hints */}
                                 {exerciseDetails && (
                                     <div className="mb-3 px-2">
-                                        {(() => {
-                                            const typeInfo = ExerciseIdentificationService.getExerciseTypeInfo(exerciseDetails);
-                                            return (
-                                                <>
-                                                    {typeInfo.weightInputMode === 'dumbbell_per_side' && (
-                                                        <div className="flex items-center gap-2 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
-                                                            <Scale size={14} />
-                                                            <span>Enter weight of ONE dumbbell (total = x2)</span>
-                                                        </div>
-                                                    )}
-                                                    {typeInfo.weightInputMode === 'assisted_subtraction' && (
-                                                        <div className="flex items-center gap-2 text-xs text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-lg px-3 py-2">
-                                                            <Calculator size={14} />
-                                                            <span>Assistance weight: Actual = Bodyweight - Assistance</span>
-                                                        </div>
-                                                    )}
-                                                    {typeInfo.trackingMode === 'duration' && (
-                                                        <div className="flex items-center gap-2 text-xs text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-2">
-                                                            <Timer size={14} />
-                                                            <span>Time-based: Enter duration in seconds</span>
-                                                        </div>
-                                                    )}
-                                                </>
-                                            );
-                                        })()}
+                                        {isDumbbellExercise && (
+                                            <div className="flex items-center gap-2 text-xs text-amber-400 bg-amber-500/10 border border-amber-500/20 rounded-lg px-3 py-2">
+                                                <Scale size={14} />
+                                                <span>
+                                                    {weightUnit === 'lb'
+                                                        ? 'Enter ONE dumbbell in lb, auto-saved as kg (total = x2)'
+                                                        : 'Enter weight of ONE dumbbell (total = x2)'}
+                                                </span>
+                                            </div>
+                                        )}
+                                        {typeInfo.weightInputMode === 'assisted_subtraction' && (
+                                            <div className="flex items-center gap-2 text-xs text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-lg px-3 py-2">
+                                                <Calculator size={14} />
+                                                <span>Assistance weight: Actual = Bodyweight - Assistance</span>
+                                            </div>
+                                        )}
+                                        {typeInfo.trackingMode === 'duration' && (
+                                            <div className="flex items-center gap-2 text-xs text-purple-400 bg-purple-500/10 border border-purple-500/20 rounded-lg px-3 py-2">
+                                                <Timer size={14} />
+                                                <span>Time-based: Enter duration in seconds</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Imperial dumbbell quick-select chips (only in lb mode) */}
+                                {isDumbbellExercise && weightUnit === 'lb' && (
+                                    <div className="mb-3 px-2">
+                                        <div className="flex gap-1.5 overflow-x-auto no-scrollbar py-1">
+                                            {LB_PRESETS.map(lb => (
+                                                <button
+                                                    key={lb}
+                                                    onClick={() => applyLbPreset(exercise, lb)}
+                                                    className="flex-shrink-0 px-2.5 py-1.5 rounded-full text-[11px] font-bold border border-slate-700 bg-slate-800/70 text-slate-300 active:scale-95 transition-all"
+                                                    style={{ touchAction: 'manipulation' }}
+                                                >
+                                                    {lb}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                                 <div className="grid grid-cols-10 gap-2 mb-2 px-2 text-xs font-medium text-slate-500 uppercase text-center">
                                     <div className="col-span-2">Set</div>
-                                    <div className="col-span-3">kg</div>
+                                    <div className="col-span-3">{isDumbbellExercise ? weightUnit : 'kg'}</div>
                                     <div className="col-span-3">
-                                        {(() => {
-                                            const typeInfo = ExerciseIdentificationService.getExerciseTypeInfo(exerciseDetails);
-                                            return typeInfo.trackingMode === 'duration' ? 'Sec' : 'Reps';
-                                        })()}
+                                        {typeInfo.trackingMode === 'duration' ? 'Sec' : 'Reps'}
                                     </div>
                                     <div className="col-span-2">✓</div>
                                 </div>
@@ -662,13 +742,43 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
                                                 </button>
                                             </div>
                                             <div className="col-span-3">
-                                                <input
-                                                    type="number"
-                                                    value={set.weight || ''}
-                                                    placeholder={rec ? `${rec.weight}` : "0"}
-                                                    className="w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500"
-                                                    onChange={e => handleSetUpdate(exercise.id, set.id, 'weight', parseFloat(e.target.value))}
-                                                />
+                                                <div className="relative">
+                                                    <input
+                                                        type="number"
+                                                        value={isDumbbellExercise ? (displayWeight(set.weight, weightUnit) || '') : (set.weight || '')}
+                                                        placeholder={isDumbbellExercise && weightUnit === 'lb' && rec
+                                                            ? `${round1(kgToLb(rec.weight))}`
+                                                            : rec ? `${rec.weight}` : "0"}
+                                                        className={`w-full bg-slate-900 border border-slate-700 rounded-md text-center py-1.5 text-white focus:border-emerald-500 focus:outline-none text-sm font-bold placeholder-slate-500 ${isDumbbellExercise ? 'pr-7' : ''}`}
+                                                        onChange={e => {
+                                                            const v = parseFloat(e.target.value);
+                                                            if (isNaN(v)) {
+                                                                handleSetUpdate(exercise.id, set.id, 'weight', 0);
+                                                            } else if (isDumbbellExercise && weightUnit === 'lb') {
+                                                                // User types lb; store kg internally
+                                                                handleSetUpdate(exercise.id, set.id, 'weight', lbToKg(v));
+                                                            } else {
+                                                                handleSetUpdate(exercise.id, set.id, 'weight', v);
+                                                            }
+                                                        }}
+                                                    />
+                                                    {isDumbbellExercise && (
+                                                        <button
+                                                            onClick={() => toggleUnit(exercise)}
+                                                            className={`absolute right-1 top-1/2 -translate-y-1/2 px-1.5 py-1 rounded text-[10px] font-bold uppercase transition-colors ${weightUnit === 'lb' ? 'text-amber-400' : 'text-slate-500 hover:text-slate-300'
+                                                                }`}
+                                                            style={{ touchAction: 'manipulation' }}
+                                                            title="Tap to switch kg/lb"
+                                                        >
+                                                            {weightUnit}
+                                                        </button>
+                                                    )}
+                                                </div>
+                                                {isDumbbellExercise && weightUnit === 'lb' && set.weight > 0 && (
+                                                    <div className="text-[10px] text-slate-500 text-center mt-0.5 leading-none">
+                                                        ≈ {formatKgHint(set.weight)}
+                                                    </div>
+                                                )}
                                             </div>
                                             <div className="col-span-3">
                                                 <input
