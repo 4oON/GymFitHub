@@ -226,9 +226,12 @@ const InProgressWorkout: React.FC<InProgressWorkoutProps> = ({
 
     const formatDuration = (seconds: number) => {
         if (seconds >= 3600) {
-            // Compact decimal-hours format (1.4h) so the clock never collides
-            // with the stats cluster on narrow screens.
-            return `${(seconds / 3600).toFixed(1)}h`;
+            // hh:mm digital-clock format (1:24 = 1h 24m). Users read clock
+            // faces, not decimals, and it stays narrow enough to never
+            // collide with the stats cluster on small screens.
+            const hours = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            return `${hours}:${mins.toString().padStart(2, '0')}`;
         }
         const mins = Math.floor(seconds / 60);
         return `${mins}m`;
