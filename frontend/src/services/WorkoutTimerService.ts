@@ -28,7 +28,7 @@ export interface TimerFinishEvent {
 
 export interface WorkoutTimerPlugin {
   /** 启动/重置一个休息计时器 */
-  startRest(options: { exerciseId: string; exerciseName?: string; duration?: number }): Promise<{ exerciseId: string; remaining: number }>;
+  startRest(options: { exerciseId: string; exerciseName?: string; duration?: number; setNumber?: number }): Promise<{ exerciseId: string; remaining: number }>;
   /** 手动结束某个计时器 */
   finishRest(options: { exerciseId: string }): Promise<{ exerciseId: string; finished: boolean }>;
   /** 结束全部计时器 */
@@ -52,10 +52,10 @@ const WorkoutTimer = registerPlugin<WorkoutTimerPlugin>('WorkoutTimer');
 export const WorkoutTimerService = {
   isNative: Capacitor.isNativePlatform(),
 
-  async startRest(exerciseId: string, exerciseName: string, duration: number): Promise<void> {
+  async startRest(exerciseId: string, exerciseName: string, duration: number, setNumber: number = 1): Promise<void> {
     if (!Capacitor.isNativePlatform()) return;
     try {
-      await WorkoutTimer.startRest({ exerciseId, exerciseName, duration });
+      await WorkoutTimer.startRest({ exerciseId, exerciseName, duration, setNumber });
     } catch (e) {
       console.warn('[WorkoutTimer] startRest failed:', e);
     }
@@ -79,12 +79,14 @@ export const WorkoutTimerService = {
     }
   },
 
-  async requestPermission(): Promise<void> {
-    if (!Capacitor.isNativePlatform()) return;
+  async requestPermission(): Promise<{ granted: boolean }> {
+    if (!Capacitor.isNativePlatform()) return { granted: false };
     try {
-      await WorkoutTimer.requestPermission();
+      const result = await WorkoutTimer.requestPermission();
+      return { granted: result.granted };
     } catch (e) {
       console.warn('[WorkoutTimer] requestPermission failed:', e);
+      return { granted: false };
     }
   },
 
